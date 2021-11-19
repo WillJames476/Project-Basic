@@ -11,7 +11,8 @@
  *      accounts system added
  * version 1.6:
  *      months date checking added, now out of date tasks will
- *      be removed from the list
+ *      be removed from the list, bug fixed where when making new account
+ *      two files are created when it is inteded to be only one
 */
 
 /*
@@ -62,7 +63,7 @@ std::string Accounts::account_login(const std::string& account_name, const std::
 {
     std::map<std::string ,std::string>::iterator z = accounts.find(account_name);
 
-    if(z!= accounts.end() && z->second == account_password) return "users/"+ z->second +".txt";
+    if(z!= accounts.end() && z->second == account_password) return "users/"+ z->first +".txt";
     return NULL;
 }
 
@@ -264,16 +265,19 @@ void Task_list::sort_by_date()
 
 void Task_list::remove_oudated_tasks()
 {
-    sort_by_date();
-
-    while(this->task_list.back().get_dates().tm_mon < current_date->tm_mon ||
-    this->task_list.back().get_dates().tm_mon == current_date->tm_mon && 
-    this->task_list.back().get_dates().tm_mday < current_date->tm_mday)
+    if(!this->task_list.empty())
     {
-        this->task_list.pop_back();
-    }
+        sort_by_date();
 
-    std::reverse(this->task_list.begin(), this->task_list.end());
+        while(this->task_list.back().get_dates().tm_mon < current_date->tm_mon ||
+        this->task_list.back().get_dates().tm_mon == current_date->tm_mon && 
+        this->task_list.back().get_dates().tm_mday < current_date->tm_mday)
+        {
+            this->task_list.pop_back();
+        }
+
+        std::reverse(this->task_list.begin(), this->task_list.end());
+    }
 }
 
 /*
