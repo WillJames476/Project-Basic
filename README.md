@@ -1,7 +1,10 @@
 # Todolist
 A basic todolist app, with acount management
 
+Prerequisites
+1.g++
+
 how to run
-1. set the todolist to executable permision or compile the todlist.cpp
+1. compile the todlist.cpp
 2. run the todolist file
 3. enjoy
