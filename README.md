@@ -1,7 +1,7 @@
 # Todolist
 A basic todolist app, with acount management
 
-Prerequisites
+#Prerequisites
 1.g++
 
 how to run
