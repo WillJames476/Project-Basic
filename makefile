@@ -1,2 +1,2 @@
-make: todolist.cpp task_list.cpp tasks.cpp io.cpp accounts.cpp
-	g++ todolist.cpp task_list.cpp tasks.cpp io.cpp accounts.cpp -o todolist -g
+make: src/todolist.cpp src/task_list.cpp src/tasks.cpp src/io.cpp src/accounts.cpp
+	g++ src/todolist.cpp src/task_list.cpp src/tasks.cpp src/io.cpp src/accounts.cpp -o todolist -g
