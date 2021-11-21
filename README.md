@@ -7,6 +7,6 @@ A basic todolist app, with acount management
 # how to run
 1. clone the repository
 2. goto the directory of the repository 
-3. type make on your terminal
-4. run the todolist file
+3. type make install on your terminal
+4. type make compile on your terminal
 5. enjoy
