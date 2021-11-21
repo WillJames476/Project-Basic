@@ -10,4 +10,5 @@ A basic todolist app, with acount management
 3. type make install on your terminal
 4. type make compile on your terminal
 
-# Uniinstalling
+# Uninstalling
+..
