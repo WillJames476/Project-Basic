@@ -5,6 +5,8 @@ A basic todolist app, with acount management
 1.g++
 
 # how to run
-1. compile the todlist.cpp
-2. run the todolist file
-3. enjoy
+1. clone the repository
+2. goto the directory of the repository 
+3. type make on your terminal
+4. run the todolist file
+5. enjoy
