@@ -19,6 +19,7 @@ class Task_list
         void load_task_from_file(const std::string &file_to_load_at);
         void sort_by_date();
         void remove_oudated_tasks();
+        void print_task_for_this_day();
 };
 
 #endif

@@ -83,10 +83,22 @@ void Task_list::remove_oudated_tasks()
     {
         auto test = constants::current_date;
 
-        task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
+        task_list.erase(std::remove_if(this->task_list.begin(), this->task_list.end(),
         [test](auto z)
-        {return z.get_dates().tm_mon < test->tm_mon ||
-            z.get_dates().tm_mon == test->tm_mon && 
-            z.get_dates().tm_mday < test->tm_mday;}));
+        {return (z.get_dates().tm_mon < test->tm_mon) ||
+            (z.get_dates().tm_mon == test->tm_mon && 
+            z.get_dates().tm_mday < test->tm_mday);}));
     }
+}
+
+void Task_list::print_task_for_this_day()
+{
+    std::for_each(this->task_list.begin(), 
+        std::upper_bound(this->task_list.begin(), this->task_list.end()
+        ,constants::current_date,
+        [](auto z, auto x)
+        {return x.get_dates().tm_mday == z->tm_mday &&
+        x.get_dates().tm_mon == z->tm_mday;})
+    ,[](auto f)
+    {f.print_task();});
 }

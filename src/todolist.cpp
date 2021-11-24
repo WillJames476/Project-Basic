@@ -2,7 +2,7 @@
  * todolist v1.6
  * by: William James Landicho
  * date started: November 4 2021
- * date last updated : November 18 2021
+ * date last updated : November 24 2021
  * 
  * version 1.0:
  *      basic task_management (deletion and addition of task),
@@ -13,6 +13,8 @@
  *      months date checking added, now out of date tasks will
  *      be removed from the list, bug fixed where when making new account
  *      two files are created when it is inteded to be only one
+ *      added a feature where tou can only view tasks that is only on the
+ *      current date
 */
 
 /*
@@ -20,6 +22,7 @@
 */
 #include <iostream>
 #include <string>
+#include <sstream>
 
 #include "constants.h"
 #include "accounts.h"
@@ -31,6 +34,7 @@
 */
 void add_task_incrementally(const std::string &task_name, std::tm time_start, Task_list &task_list, int day_increment);
 void add_task_manager(Task_list &task_list);
+void print_task_menu(Task_list& task_list);
 void remove_task_manager(Task_list& task_list);
 void task_manager(const std::string& user_file);
 std::string accounts_manager(const std::string& accounts_file);
@@ -89,7 +93,6 @@ void task_manager(const std::string& user_file)
 {
     Task_list task_list;
     std::string menu_choice;
-    std::tm date_input;
     bool menu_replay = true;
 
     task_list.load_task_from_file(user_file);
@@ -98,9 +101,9 @@ void task_manager(const std::string& user_file)
     while(menu_replay)
     {
         std::cout << "\n==========================================\n"
-                  << "1\tadd item to task_list\n"
+                  << "1\tadd item to tasklist\n"
                   << "2\tdelete item from task_list\n"
-                  << "3\tview all tasks\n"
+                  << "3\tview task list\n"
                   << "4\texit the program\n"
                   << "enter your chocie here: ";
         std::getline(std::cin, menu_choice);
@@ -114,7 +117,7 @@ void task_manager(const std::string& user_file)
                 remove_task_manager(task_list);
                 break;
             case '3':
-                task_list.print_task_list();
+                print_task_menu(task_list);
                 break;
             case '4':
                 menu_replay = false;
@@ -204,3 +207,25 @@ void remove_task_manager(Task_list& task_list)
     }
 }
 
+void print_task_menu(Task_list& task_list)
+{
+    std::string menu_choice;
+
+    std::cout << "1\tview tasks for this day\n"
+              << "2\tview all tasks\n"
+              << "enter you choice here: ";
+    std::getline(std::cin, menu_choice);
+
+    switch(menu_choice.at(0))
+    {
+        case '1':
+            task_list.print_task_for_this_day();
+            break;
+        case '2':
+            task_list.print_task_list();
+            break;
+        default:
+            std::cerr << "invalid entry\n";
+            break;
+    }
+}

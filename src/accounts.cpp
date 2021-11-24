@@ -1,5 +1,6 @@
 #include "accounts.h"
 #include <fstream>
+#include <iostream>
 
 void Accounts::new_account(const std::string& account_name, const std::string &account_password, const bool is_new)
 {
@@ -10,10 +11,18 @@ void Accounts::new_account(const std::string& account_name, const std::string &a
 
 std::string Accounts::account_login(const std::string& account_name, const std::string &account_password)
 {
-    std::map<std::string ,std::string>::iterator z = accounts.find(account_name);
+    if(!accounts.empty())
+    {
+        auto z = accounts.find(account_name);
 
-    if(z!= accounts.end() && z->second == account_password) return "users/"+ z->first +".txt";
-    return NULL;
+        if(z!= accounts.end() && z->second == account_password) return "users/"+ z->first +".txt";
+        return nullptr;
+    }
+    else
+    {
+        std::cerr << "accounts list empty, try make install on terminal or register a user\n";
+        return nullptr;
+    }
 }
 
 void Accounts::make_new_file(const std::string& account_name)
