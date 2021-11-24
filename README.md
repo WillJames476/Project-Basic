@@ -11,4 +11,4 @@ A basic todolist app, with acount management
 4. type make compile on your terminal
 
 # Uninstalling
-..
+1. delete the folder repo
