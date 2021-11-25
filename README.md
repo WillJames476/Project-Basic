@@ -2,7 +2,7 @@
 * A basic todolist app, with acount management
 
 # Prerequisites
-1. g++
+* g++
 
 # Instalation
 1. clone the repository
