@@ -97,8 +97,7 @@ void Task_list::print_task_for_this_day()
         std::upper_bound(this->task_list.begin(), this->task_list.end()
         ,constants::current_date,
         [](auto z, auto x)
-        {return x.get_dates().tm_mday == z->tm_mday &&
-        x.get_dates().tm_mon == z->tm_mday;})
+        {return x.get_dates().tm_mday == z->tm_mday;})
     ,[](auto f)
     {f.print_task();});
 }
