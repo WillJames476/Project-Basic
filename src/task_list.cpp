@@ -93,11 +93,14 @@ void Task_list::remove_oudated_tasks()
 
 void Task_list::print_task_for_this_day()
 {
+    auto temp = constants::current_date;
+    std::array<const std::tm*, 1>test{temp};
+
     std::for_each(this->task_list.begin(), 
-        std::upper_bound(this->task_list.begin(), this->task_list.end()
-        ,constants::current_date,
+        std::find_first_of(this->task_list.begin(), this->task_list.end()
+        ,test.begin(),test.end(),
         [](auto z, auto x)
-        {return x.get_dates().tm_mday == z->tm_mday;})
+        {return x->tm_mday != z.get_dates().tm_mday;})
     ,[](auto f)
     {f.print_task();});
 }
