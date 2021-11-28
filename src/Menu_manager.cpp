@@ -51,7 +51,8 @@ std::string accounts_manager(const std::string& accounts_file)
 }
 
 void add_task_incrementally(const std::string &task_name, 
-std::tm time_start, Task_list &task_list, int day_increment)
+std::tm time_start, Task_list &task_list, int day_increment,
+bool is_daily)
 {
     const int RESETTER = time_start.tm_mday;
     for(;time_start.tm_mon <= 11; time_start.tm_mon++)
@@ -60,7 +61,9 @@ std::tm time_start, Task_list &task_list, int day_increment)
         {
             task_list.add_task_to_task_list(task_name, time_start);
         }
-        time_start.tm_mday = RESETTER; //resets day for next month
+
+        if(is_daily) time_start.tm_mday = 1;
+        else time_start.tm_mday = RESETTER; //resets day for next month
     }
 }
 
@@ -85,13 +88,16 @@ void add_task_manager(Task_list &task_list)
             task_list.add_task_to_task_list(task_name, task_due);
             break;
         case '2':
-            add_task_incrementally(task_name, task_due, task_list, 1);
+            add_task_incrementally(task_name, task_due, task_list, 
+            1 ,true);
             break;
         case '3':
-            add_task_incrementally(task_name, task_due, task_list, 7);
+            add_task_incrementally(task_name, task_due, task_list, 
+            7, false);
             break;
         case '4':
-            add_task_incrementally(task_name, task_due, task_list, 31);
+            add_task_incrementally(task_name, task_due, task_list, 
+            31, false);
             break;
         default:
             std::cerr << "Invalid entry!!!\n";

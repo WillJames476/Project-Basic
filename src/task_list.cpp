@@ -48,16 +48,14 @@ void Task_list::load_task_from_file(const std::string& file_to_load_at)
     line_accumulator;
     std::tm date_accumulator;
 
-    while(std::getline(archived_file, line_accumulator, '\n'))
+    while(archived_file >> line_accumulator)
     {
         replace_char_with(line_accumulator, ',', ' ');
         std::istringstream(line_accumulator) >> task_name_accumulator
         >> date_accumulator.tm_mon >> date_accumulator.tm_mday;
 
         replace_char_with(task_name_accumulator, '-',' ');
-        add_task_to_task_list
-        (task_name_accumulator
-        , date_accumulator);
+        add_task_to_task_list(task_name_accumulator, date_accumulator);
     }
 
     archived_file.close();
