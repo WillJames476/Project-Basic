@@ -1,5 +1,8 @@
 # Todolist
 * A basic todolist app, with acount management
+* disclaimer this program's account system does
+  minimal security measures, it is highly recomended
+  to use burner accounts
 
 # Prerequisites
 * g++
