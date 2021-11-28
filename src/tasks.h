@@ -11,7 +11,7 @@ class Task
         std::tm task_time_due;
     public:
         bool test_var(const std::string task_name, const std::tm &task_time_due);
-        std::string get_task_name()const;
+        std::string get_task_name();
         std::string stringify_time_due();
         std::string get_time_integral();
         std::time_t get_task_time();

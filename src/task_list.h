@@ -10,7 +10,6 @@ class Task_list
     private:
         std::vector <Task>task_list;
     public:
-        std::string replace_all_instance_of_space_on_string(char character_to_replace,char character_replacement, std::string string_modifiy);
         void add_task_to_task_list(const std::string& task_name,const std::tm &task_date_due);
         void print_task_list();
         void remove_task_from_task_list(const std::string&task_name, const std::tm& task_date);

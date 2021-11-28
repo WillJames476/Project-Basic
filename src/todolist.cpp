@@ -25,9 +25,12 @@
 #include <sstream>
 
 #include "constants.h"
-#include "accounts.h"
+#include "Users_list.h"
 #include "task_list.h"
 #include "io.h"
+
+
+#include "User.h"
 
 /*
  * funtcion prototypes
@@ -41,20 +44,14 @@ std::string accounts_manager(const std::string& accounts_file);
 
 int main()
 {
-    std::string file_of_the_user;
-    file_of_the_user = accounts_manager("users/users.txt");
-
-    if(!file_of_the_user.empty())
-    {
-        task_manager(file_of_the_user);
-    }
-
+    std::string file_of_the_user{accounts_manager("users/users.csv")};
+    if(!file_of_the_user.empty())task_manager(file_of_the_user);
     return 0;
 }
 
 std::string accounts_manager(const std::string& accounts_file)
 {
-    Accounts accounts;
+    Users_list accounts;
     std::string menu_choice, user_file;
     bool menu_replay = true;
 
@@ -64,20 +61,28 @@ std::string accounts_manager(const std::string& accounts_file)
     {
         std::cout << "\n=================================\n"
                   << "1\tadd a user\n"
-                  << "2\tuser login\n"
-                  << "3\texit program\n"
+                  << "2\tremove a user\n"
+                  << "3\tuser login\n"
+                  << "4\texit program\n"
                   << "enter your choice here: ";
         std::getline(std::cin, menu_choice);
 
         switch (menu_choice.at(0))
         {
             case '1':
-                accounts.new_account(extract_allpha_string_from_user("user name"), extract_allpha_string_from_user("password"), true);
+                accounts.new_account
+                (extract_allpha_string_from_user("user name"), 
+                extract_allpha_string_from_user("password"), true);
                 break;
             case '2':
-                user_file = accounts.account_login(extract_allpha_string_from_user("user name"), extract_allpha_string_from_user("password"));
+                accounts.remove_account
+                (extract_allpha_string_from_user("user name"), 
+                extract_allpha_string_from_user("password"));
                 break;
             case '3':
+                user_file = accounts.account_login(extract_allpha_string_from_user("user name"), extract_allpha_string_from_user("password"));
+                break;
+            case '4':
                 menu_replay = false;
                 break;
             default:
@@ -166,7 +171,8 @@ void add_task_manager(Task_list &task_list)
     }
 }
 
-void add_task_incrementally(const std::string &task_name, std::tm time_start, Task_list &task_list, int day_increment)
+void add_task_incrementally(const std::string &task_name, 
+std::tm time_start, Task_list &task_list, int day_increment)
 {
     const int RESETTER = time_start.tm_mday;
     for(;time_start.tm_mon <= 11; time_start.tm_mon++)

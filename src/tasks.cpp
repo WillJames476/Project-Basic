@@ -20,7 +20,7 @@ bool Task::test_var(const std::string task_name, const std::tm &task_time_due)
     this->task_time_due.tm_mday == task_time_due.tm_mday;
 }
 
-std::string Task::get_task_name() const
+std::string Task::get_task_name() 
 {
     return this->task_name;
 }

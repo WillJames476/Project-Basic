@@ -62,3 +62,11 @@ void get_a_date_from_user(std::tm& to_return)
     to_return.tm_mon= get_a_time_from_user("month", constants::current_date->tm_mon, 11);
     to_return.tm_mday = get_a_time_from_user("day", constants::current_date->tm_mday, constants::months_ceiling[constants::current_date->tm_mon]);
 }
+
+void replace_char_with(std::string& to_modify, char to_replace, 
+char replacement)
+{
+    std::replace_if(to_modify.begin(), to_modify.end(),
+    [to_replace](auto test)
+    {return to_replace == test;},replacement);
+}
