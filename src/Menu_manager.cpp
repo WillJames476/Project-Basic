@@ -109,8 +109,6 @@ void remove_task_manager(Task_list& task_list)
 {
     std::string menu_choice, task_name;
     std::tm task_due;
-    int deletion_status = 0;
-
     std::cout << "1\tan instance of task_name\n"
               << "2\tall instance of task name\n"
               << "enter your choice here: ";
@@ -125,7 +123,8 @@ void remove_task_manager(Task_list& task_list)
             task_list.remove_task_from_task_list(task_name, task_due);
             break;
         case '2':
-            while(deletion_status != -1)task_list.remove_task_from_task_list(task_name, deletion_status);
+            while(task_list.is_existing(task_name))
+            task_list.remove_task_from_task_list(task_name);
             break;
         default:
             std::cerr << "Invalid entry!!!\n";

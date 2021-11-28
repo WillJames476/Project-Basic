@@ -18,20 +18,11 @@ void Task_list::remove_task_from_task_list(const std::string& task_name, const s
     [task_name, task_date](auto test)
     {return test.test_var(task_name, task_date);}));
 }
-
-void Task_list::remove_task_from_task_list(const std::string& task_name_to_remove, int &status)
+void Task_list::remove_task_from_task_list(const std::string& task_name)
 {
-    auto i = std::find_if(task_list.begin(), task_list.end(), 
-    [task_name_to_remove](auto test)
-    {return test.get_task_name() == task_name_to_remove;});
-
-    if(i != task_list.end())
-    {
-        this->task_list.erase(i);
-        return;
-    }
-
-    status = -1;
+    task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
+    [task_name](auto test)
+    {return test.get_task_name() == task_name;}));
 }
 
 void Task_list::print_task_list()
@@ -112,4 +103,11 @@ void Task_list::print_task_for_this_day()
         {return x->tm_mday != z.get_dates().tm_mday;})
     ,[](auto f)
     {f.print_task();});
+}
+
+bool Task_list::is_existing(const std::string& task_name)
+{
+    return std::any_of(this->task_list.begin(), this->task_list.end(),
+    [task_name](auto x)
+    {return x.get_task_name() == task_name;});
 }
