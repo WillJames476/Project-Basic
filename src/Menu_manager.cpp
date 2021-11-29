@@ -1,10 +1,10 @@
 #include <iostream>
 #include <sstream>
 
-#include "Users_list.h"
+#include "Account/Users_list.h"
 #include "Menu_manager.h"
 #include "io.h"
-#include "constants.h"
+#include "Todolist/constants.h"
 
 void user_account_management(std::string& account_name,
 Users_list& users)
@@ -30,14 +30,14 @@ Users_list& users)
                 (extract_allpha_string_from_user("user to comunicate with"));
                 break;
             case '2':
+                users.print_communication_line(account_name);
+                //account_name
                 break;
             case '3':
                 menu_replay = false;
                 break;
         }
     }
-
-    account_name ={};
 }
 
 std::string accounts_manager(const std::string& accounts_file)

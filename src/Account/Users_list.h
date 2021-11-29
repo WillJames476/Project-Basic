@@ -19,6 +19,7 @@ class Users_list
         std::vector<std::string> account_login(const std::string& account_name, 
         const std::string& account_password) const;
         void add_communication_line(const std::string& user_name);
+        void print_communication_line(const std::string& user_name);
         void save_accounts_to_a_file(const std::string& accounts_file);
         void load_accounts_from_file(const std::string& accounts_file);
 };

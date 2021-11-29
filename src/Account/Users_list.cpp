@@ -1,10 +1,11 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <sstream>
 
 #include "Users_list.h"
 #include "User.h"
-#include "io.h"
+#include "../io.h"
 
 void make_new_file(const std::string& account_name)
 {
@@ -50,6 +51,19 @@ void Users_list::add_communication_line(const std::string& user_name)
     auto x = this->users.find(user_name);
     
     if(x != this->users.end())x->second->add_communication_line(user_name);
+}
+
+void Users_list::print_communication_line(const std::string& user_name)
+{
+    auto x = this->users.find(user_name);
+
+    if(x != this->users.end())
+    {
+        auto z = x->second->get_lines();
+        std::ostringstream accessibles;
+        for(auto y : z)accessibles << y << '\n';
+        std::cout << accessibles.str();
+    }
 }
 
 void Users_list::load_accounts_from_file(const std::string& accounts_file)
