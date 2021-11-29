@@ -5,7 +5,7 @@
   to use burner accounts
 
 # Prerequisites
-* g++
+* c++17 compliant compiler
 
 # Instalation
 1. clone the repository
