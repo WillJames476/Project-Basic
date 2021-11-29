@@ -18,6 +18,8 @@ class Users_list
         const std::string& account_password);
         std::string account_login(const std::string& account_name, 
         const std::string& account_password) const;
+        std::vector<std::string> get_communication_line
+        (const std::string& user_name) const;
         void add_communication_line(const std::string& user_name);
         void print_communication_line(const std::string& user_name);
         void save_accounts_to_a_file(const std::string& accounts_file);

@@ -66,6 +66,14 @@ void Users_list::print_communication_line(const std::string& user_name)
     }
 }
 
+std::vector<std::string> Users_list::get_communication_line(const std::string& user_name) const
+{
+    auto x = this->users.find(user_name);
+    
+    if(x != this->users.end())return x->second->get_lines();
+    return std::vector<std::string>();
+}
+
 void Users_list::load_accounts_from_file(const std::string& accounts_file)
 {
     std::ifstream file_to_read(accounts_file);

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-
+#include <algorithm>
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
@@ -29,9 +29,13 @@ Users_list& users)
                 (extract_allpha_string_from_user("user to comunicate with"));
                 break;
             case '2':
-                users.print_communication_line(account_name);
-                //account_name
-                break;
+                {
+                    users.print_communication_line(account_name);
+                    auto x = users.get_communication_line(account_name);
+                    account_name = x[std::distance(x.begin(),
+                    std::find(x.begin(), x.end(), account_name))];
+                    break;
+                }
             case '3':
                 menu_replay = false;
                 break;
@@ -82,7 +86,7 @@ std::string accounts_manager(const std::string& accounts_file)
         }
     }
     accounts.save_accounts_to_a_file(accounts_file);
-    user_account_management(user_file, accounts);
+    if(!user_file.empty())user_account_management(user_file, accounts);
     return user_file;
 }
 

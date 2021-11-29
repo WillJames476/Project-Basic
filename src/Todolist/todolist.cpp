@@ -29,6 +29,6 @@ int main()
 {
     std::string file_of_the_user{accounts_manager("users/users.csv")};
     if(!file_of_the_user.empty())task_manager
-    ( "users/" + file_of_the_user + ".txt");
+    ( "users/" + file_of_the_user + ".csv");
    return 0;
 }
