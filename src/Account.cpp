@@ -11,7 +11,7 @@ Account::Account(const std::pair<std::string, std::string>& creds)
 {
 
 }
-std::pair<std::string, std::string> Account::get_credential()
+std::pair<std::string, std::string> Account::get_credential() const
 {
     return this->credentials;
 }

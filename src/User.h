@@ -15,7 +15,7 @@ class User
         const std::initializer_list<std::string>& fields);
         bool is_same_credential(const std::string& account_name, 
         const std::string& account_pass);
-        std::pair<std::string ,std::string> get_credential();
+        std::pair<std::string ,std::string> get_credential() const;
 };
 
 #endif

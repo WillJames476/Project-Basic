@@ -20,7 +20,7 @@ const std::string& account_pass)
     return x.first == account_name && x.second == account_pass;
 }
 
-std::pair<std::string, std::string> User::get_credential()
+std::pair<std::string, std::string> User::get_credential() const
 {
     return this->account.get_credential();
 }

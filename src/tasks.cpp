@@ -20,12 +20,12 @@ bool Task::test_var(const std::string task_name, const std::tm &task_time_due)
     this->task_time_due.tm_mday == task_time_due.tm_mday;
 }
 
-std::string Task::get_task_name() 
+std::string Task::get_task_name() const
 {
     return this->task_name;
 }
 
-std::string Task::get_time_integral()
+std::string Task::get_time_integral() const
 {   
     std::stringstream tm_getter;
     tm_getter << this->task_time_due.tm_mon << " " << this->task_time_due.tm_mday;

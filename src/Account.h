@@ -10,7 +10,7 @@ class Account
     public:
         Account(const std::string& user_name, const std::string& user_pass);
         Account(const std::pair<std::string, std::string>& creds);
-        std::pair<std::string, std::string> get_credential();
+        std::pair<std::string, std::string> get_credential()const ;
 };
 
 #endif
