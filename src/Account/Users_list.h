@@ -16,7 +16,7 @@ class Users_list
         const std::string& account_password, const bool is_new);
         void remove_account(const std::string& account_name,
         const std::string& account_password);
-        std::vector<std::string> account_login(const std::string& account_name, 
+        std::string account_login(const std::string& account_name, 
         const std::string& account_password) const;
         void add_communication_line(const std::string& user_name);
         void print_communication_line(const std::string& user_name);

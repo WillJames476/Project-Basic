@@ -42,8 +42,7 @@ Users_list& users)
 std::string accounts_manager(const std::string& accounts_file)
 {
     Users_list accounts;
-    std::string menu_choice, chosen_user_file;
-    std::vector<std::string> user_file;
+    std::string menu_choice, user_file;
     bool menu_replay = true;
 
     accounts.load_accounts_from_file(accounts_file);
@@ -71,7 +70,9 @@ std::string accounts_manager(const std::string& accounts_file)
                 extract_allpha_string_from_user("password"));
                 break;
             case '3':
-                user_file = accounts.account_login(extract_allpha_string_from_user("user name"), extract_allpha_string_from_user("password"));
+                user_file = accounts.account_login
+                (extract_allpha_string_from_user("user name"), 
+                extract_allpha_string_from_user("password"));
                 break;
             case '4':
                 menu_replay = false;
@@ -81,7 +82,7 @@ std::string accounts_manager(const std::string& accounts_file)
         }
     }
     accounts.save_accounts_to_a_file(accounts_file);
-    user_account_management(chosen_user_file, accounts);
-    return chosen_user_file;
+    user_account_management(user_file, accounts);
+    return user_file;
 }
 
