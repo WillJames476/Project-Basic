@@ -8,7 +8,8 @@
 std::string accounts_manager(const std::string& accounts_file)
 {
     Users_list accounts;
-    std::string menu_choice, user_file;
+    std::string menu_choice;
+    std::vector<std::string> user_file;
     bool menu_replay = true;
 
     accounts.load_accounts_from_file(accounts_file);
@@ -47,7 +48,7 @@ std::string accounts_manager(const std::string& accounts_file)
     }
     accounts.save_accounts_to_a_file(accounts_file);
 
-    return user_file;
+    return "users/" + user_file.back() + ".csv";
 }
 
 void add_task_incrementally(const std::string &task_name, 

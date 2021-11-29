@@ -1,7 +1,7 @@
 #include "User.h"
 
 User::User(const std::pair<std::string, std::string>& credentials)
-:account(credentials), lines(std::initializer_list<std::string>())
+:account(credentials), lines({credentials.first})
 {
     
 }
@@ -23,4 +23,9 @@ const std::string& account_pass)
 std::pair<std::string, std::string> User::get_credential() const
 {
     return this->account.get_credential();
+}
+
+std::vector<std::string> User::get_lines() const
+{
+    return this->lines.get_communication_lines();
 }
