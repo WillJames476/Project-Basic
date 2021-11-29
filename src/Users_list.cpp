@@ -17,7 +17,7 @@ const std::string &account_password, const bool is_new)
 {
     this->users.insert
     (std::make_pair(account_name, std::make_shared<User>
-    (account_name,account_password)));
+    (std::make_pair(account_name,account_password))));
 
     if(is_new)make_new_file(account_name);
 }

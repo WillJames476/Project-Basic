@@ -9,6 +9,7 @@ class Account
         std::pair<std::string, std::string> credentials;
     public:
         Account(const std::string& user_name, const std::string& user_pass);
+        Account(const std::pair<std::string, std::string>& creds);
         std::pair<std::string, std::string> get_credential();
 };
 

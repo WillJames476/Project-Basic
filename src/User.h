@@ -2,13 +2,17 @@
 #define USER_H
 
 #include "Account.h"
+#include "Communication_lines.h"
 
 class User
 {
     private:
         Account account;
+        Communication_lines lines;
     public:
-        User(const std::string& user_name, const std::string& user_pass);
+        User(const std::pair<std::string, std::string>& credentials);
+        User(const std::pair<std::string, std::string>& credentials,
+        const std::initializer_list<std::string>& fields);
         bool is_same_credential(const std::string& account_name, 
         const std::string& account_pass);
         std::pair<std::string ,std::string> get_credential();
