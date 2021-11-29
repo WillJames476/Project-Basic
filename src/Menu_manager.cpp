@@ -1,14 +1,49 @@
 #include <iostream>
+#include <sstream>
 
 #include "Users_list.h"
 #include "Menu_manager.h"
 #include "io.h"
 #include "constants.h"
 
+void user_account_management(std::string& account_name,
+Users_list& users)
+{
+    bool menu_replay{true};
+
+    while(menu_replay)
+    {
+        std::ostringstream menu;
+        menu << "\n===============================\n"
+            << "1\tadd a communication line\n"
+            << "2\tchoose what user file to acces\n"
+            << "3\texit account communications chooser\n"
+            << "enter your choice here: ";
+        std::cout << menu.str();
+        std::string menu_choice;
+        std::getline(std::cin, menu_choice);
+
+        switch(menu_choice.at(0))
+        {
+            case '1':
+                users.add_communication_line
+                (extract_allpha_string_from_user("user to comunicate with"));
+                break;
+            case '2':
+                break;
+            case '3':
+                menu_replay = false;
+                break;
+        }
+    }
+
+    account_name ={};
+}
+
 std::string accounts_manager(const std::string& accounts_file)
 {
     Users_list accounts;
-    std::string menu_choice;
+    std::string menu_choice, chosen_user_file;
     std::vector<std::string> user_file;
     bool menu_replay = true;
 
@@ -47,8 +82,8 @@ std::string accounts_manager(const std::string& accounts_file)
         }
     }
     accounts.save_accounts_to_a_file(accounts_file);
-
-    return "users/" + user_file.back() + ".csv";
+    user_account_management(chosen_user_file, accounts);
+    return chosen_user_file;
 }
 
 void add_task_incrementally(const std::string &task_name, 

@@ -29,3 +29,8 @@ std::vector<std::string> User::get_lines() const
 {
     return this->lines.get_communication_lines();
 }
+
+void User::add_communication_line(const std::string& user_name)
+{
+    this->lines.add_to_list(user_name);
+}

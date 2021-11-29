@@ -17,6 +17,7 @@ class User
         const std::string& account_pass);
         std::pair<std::string ,std::string> get_credential() const;
         std::vector<std::string> get_lines() const;
+        void add_communication_line(const std::string& user_name);
 };
 
 #endif

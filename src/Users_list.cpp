@@ -45,6 +45,12 @@ const std::string &account_password) const
     return {};
 }
 
+void Users_list::add_communication_line(const std::string& user_name)
+{
+    auto x = this->users.find(user_name);
+    
+    if(x != this->users.end())x->second->add_communication_line(user_name);
+}
 
 void Users_list::load_accounts_from_file(const std::string& accounts_file)
 {
