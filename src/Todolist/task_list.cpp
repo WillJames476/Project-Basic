@@ -6,11 +6,18 @@
 #include "task_list.h"
 #include "constants.h"
 #include "../Utilities/io.h"
+#include "tasks.h"
 
 void Task_list::add_task_to_task_list(const std::string& task_name, const std::tm &task_date_due)
 {
     task_list.push_back(Task(task_name, task_date_due));
 }
+
+void Task_list::add_task_to_task_list(const Task& task)
+{
+    task_list.push_back(task);
+}
+
 
 void Task_list::remove_task_from_task_list(const std::string& task_name, const std::tm& task_date)
 {
@@ -35,18 +42,15 @@ void Task_list::print_task_list()
 void Task_list::load_from_file(const std::string& file_to_load_at)
 {
     std::ifstream archived_file(file_to_load_at);
-    std::string file_contents_accumulator, task_name_accumulator, 
-    line_accumulator;
-    std::tm date_accumulator;
+    std::string line_accumulator;
 
     while(archived_file >> line_accumulator)
     {
         replace_char_with(line_accumulator, ',', ' ');
-        std::istringstream(line_accumulator) >> task_name_accumulator
-        >> date_accumulator.tm_mon >> date_accumulator.tm_mday;
-
-        replace_char_with(task_name_accumulator, '-',' ');
-        add_task_to_task_list(task_name_accumulator, date_accumulator);
+        replace_char_with(line_accumulator, '-',' ');
+        Task temp;
+        std::istringstream(line_accumulator) >> temp;
+        add_task_to_task_list(temp);
     }
 
     archived_file.close();
@@ -57,15 +61,7 @@ void Task_list::save_to_file(const std::string& file_to_save_at)
     std::ofstream archive_here(file_to_save_at);
     std::ostringstream string_saver;
 
-    for(auto i : this->task_list)
-    {
-        auto x {i.get_task_name()}, y{i.get_time_integral()};
-        replace_char_with(x, ' ','-');
-        replace_char_with(y, ' ',',');
-
-        string_saver << x
-        << "," << y << '\n';
-    }
+    for(auto i : this->task_list)string_saver << i;
     archive_here << string_saver.str();
     archive_here.close();
 }

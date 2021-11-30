@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ctime>
+#include <iostream>
 
 class Task
 {
@@ -10,6 +11,7 @@ class Task
         std::string task_name;
         std::tm task_time_due;
     public:
+        Task();
         bool test_var(const std::string task_name, const std::tm &task_time_due);
         std::string get_task_name() const;
         std::string stringify_time_due() const;
@@ -18,6 +20,9 @@ class Task
         Task(const std::string& task_name, const std::tm& task_time_due);
         void print_task();
         std::tm get_dates();
+        
+        friend std::ostream& operator<<(std::ostream& out, const Task& task);
+        friend std::istream& operator>>(std::istream& in,Task& task);
 };
 
 #endif

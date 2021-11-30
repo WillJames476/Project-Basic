@@ -1,6 +1,12 @@
 #include "tasks.h"
 #include <iostream>
 #include <iomanip>
+#include <sstream>
+
+Task::Task()
+{
+
+}
 
 Task::Task(const std::string& task_name, const std::tm& task_time_due)
 {
@@ -10,7 +16,10 @@ Task::Task(const std::string& task_name, const std::tm& task_time_due)
 
 void Task::print_task()
 {
-    std::cout << "task name: " << task_name << "\t task due: " <<  std::put_time(&this->task_time_due, "%b, %d") << '\n';
+    std::ostringstream to_print;
+    to_print << "task name: " << task_name 
+    << "\t task due: " <<  std::put_time(&this->task_time_due, "%b, %d") << '\n';
+    std::cout << to_print.str();
 }
 
 bool Task::test_var(const std::string task_name, const std::tm &task_time_due)
@@ -40,4 +49,18 @@ std::time_t Task::get_task_time()
 std::tm Task::get_dates()
 {
     return this->task_time_due;
+}
+
+std::ostream& operator<<(std::ostream& out,const Task& task)
+{
+    out << task.task_name << "," 
+    << task.task_time_due.tm_mon << ","  
+    << task.task_time_due.tm_mday << '\n';
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, Task& task)
+{
+    in >> task.task_name >> task.task_time_due.tm_mon >> task.task_time_due.tm_mday;
+    return in;
 }

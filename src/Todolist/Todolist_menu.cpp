@@ -18,7 +18,7 @@ bool is_daily)
         }
 
         if(is_daily) time_start.tm_mday = 1;
-        else time_start.tm_mday = RESETTER; //resets day for next month
+        else time_start.tm_mday = RESETTER;
     }
 }
 
