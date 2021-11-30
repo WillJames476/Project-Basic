@@ -21,7 +21,7 @@ class Task
         void print_task();
         std::tm get_dates();
         
-        friend std::ostream& operator<<(std::ostream& out, const Task& task);
+        friend std::ostream& operator<<(std::ostream& out,Task& task);
         friend std::istream& operator>>(std::istream& in,Task& task);
 };
 

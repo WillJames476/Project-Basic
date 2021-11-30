@@ -47,7 +47,6 @@ void Task_list::load_from_file(const std::string& file_to_load_at)
     while(archived_file >> line_accumulator)
     {
         replace_char_with(line_accumulator, ',', ' ');
-        replace_char_with(line_accumulator, '-',' ');
         Task temp;
         std::istringstream(line_accumulator) >> temp;
         add_task_to_task_list(temp);

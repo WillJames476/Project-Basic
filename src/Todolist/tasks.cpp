@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include "../Utilities/io.h"
+
 Task::Task()
 {
 
@@ -51,8 +53,9 @@ std::tm Task::get_dates()
     return this->task_time_due;
 }
 
-std::ostream& operator<<(std::ostream& out,const Task& task)
+std::ostream& operator<<(std::ostream& out,Task& task)
 {
+    replace_char_with(task.task_name, ' ', '-');
     out << task.task_name << "," 
     << task.task_time_due.tm_mon << ","  
     << task.task_time_due.tm_mday << '\n';
@@ -62,5 +65,6 @@ std::ostream& operator<<(std::ostream& out,const Task& task)
 std::istream& operator>>(std::istream& in, Task& task)
 {
     in >> task.task_name >> task.task_time_due.tm_mon >> task.task_time_due.tm_mday;
+    replace_char_with(task.task_name,'-',' ');
     return in;
 }

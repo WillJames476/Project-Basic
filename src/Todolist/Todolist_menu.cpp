@@ -34,7 +34,7 @@ void add_task_manager(Task_list &task_list)
               << "enter your choice here: ";
     std::getline(std::cin, menu_choice);
 
-    task_name = get_string("task name", string_predicates("AlphaSpace"));
+    task_name = get_string("enter the task name here: ", string_predicates("AlphaSpace"));
     get_a_date_from_user(task_due);
 
     switch (menu_choice.at(0))
