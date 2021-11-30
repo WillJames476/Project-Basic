@@ -13,13 +13,10 @@ account_program = account
 task_program = todolist
 
 install: 
-	mkdir users && touch users/users.csv && mkdir tmp && touch tmp/transmitter.txt | echo essentials installed!!
+	mkdir users && touch users/users.csv && mkdir tmp | echo essentials installed!!
 
-account:
+login:
 	$(compiler) $(accounts) $(accounts1) $(accounts2) $(misc) $(flags) $(account_program) 
 
 task: 
 	$(compiler) $(task) $(misc) $(flags) $(task_program)
-
-run:
-	./todolist

@@ -29,6 +29,5 @@ int main()
 {
     std::string file_of_the_user{receive_data()};
     if(!file_of_the_user.empty())task_manager("users/"+ file_of_the_user + ".csv");
-    transmit_data(file_of_the_user);
     return 0;
 }

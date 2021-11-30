@@ -11,7 +11,13 @@
 1. clone the repository
 2. goto the directory of the repository 
 3. type make install on your terminal
-4. type make compile on your terminal
+4. type make login on your terminal
+5. type make task on your terminal
+
+# Usage
+1. type ./account on your terminal
+2. opena another terminal and got to the same directory
+3. type ./todolist on that terminal
 
 # Uninstalling
 1. delete the folder repo
