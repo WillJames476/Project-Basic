@@ -5,8 +5,9 @@
 #include <map>
 #include <memory>
 #include "User.h"
+#include "../Utilities/File_management.h"
 
-class Users_list
+class Users_list : public File_management
 {
     private:
         std::map<std::string, std::shared_ptr<User>> users;
@@ -22,8 +23,8 @@ class Users_list
         (const std::string& user_name) const;
         void add_communication_line(const std::string& user_name);
         void print_communication_line(const std::string& user_name);
-        void save_accounts_to_a_file(const std::string& accounts_file);
-        void load_accounts_from_file(const std::string& accounts_file);
+        void save_to_file(const std::string& accounts_file);
+        void load_from_file(const std::string& accounts_file);
 };
 
 #endif

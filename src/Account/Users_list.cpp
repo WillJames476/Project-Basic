@@ -74,7 +74,7 @@ std::vector<std::string> Users_list::get_communication_line(const std::string& u
     return std::vector<std::string>();
 }
 
-void Users_list::load_accounts_from_file(const std::string& accounts_file)
+void Users_list::load_from_file(const std::string& accounts_file)
 {
     std::ifstream file_to_read(accounts_file);
     std::string user_name_accumulator, password_accumulator, line_accumulator;
@@ -90,7 +90,7 @@ void Users_list::load_accounts_from_file(const std::string& accounts_file)
     file_to_read.close();
 }
 
-void Users_list::save_accounts_to_a_file(const std::string& accounts_file)
+void Users_list::save_to_file(const std::string& accounts_file)
 {
     std::ofstream file_archiver(accounts_file);
     std::string string_to_give_to_file;

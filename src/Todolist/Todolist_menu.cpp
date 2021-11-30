@@ -116,7 +116,7 @@ void task_manager(const std::string& user_file)
     std::string menu_choice;
     bool menu_replay = true;
 
-    task_list.load_task_from_file(user_file);
+    task_list.load_from_file(user_file);
     task_list.remove_oudated_tasks();
 
     while(menu_replay)
@@ -149,5 +149,5 @@ void task_manager(const std::string& user_file)
         }
     }
 
-    task_list.save_task_to_file(user_file);
+    task_list.save_to_file(user_file);
 }

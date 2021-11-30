@@ -5,6 +5,16 @@
 #include "Account_menu.h"
 #include "../Utilities/io.h"
 
+void search_communication_lines(std::string& account_name, Users_list& users)
+{
+    std::string to_search = extract_allpha_string_from_user("enter the name here: ");
+    auto x = users.get_communication_line(account_name);
+    auto comm_line =  std::find(x.begin(), x.end(), to_search);
+
+    if(comm_line == x.end())return;
+    account_name = x[std::distance(x.begin(),comm_line)];
+}
+
 void user_account_management(std::string& account_name,
 Users_list& users)
 {
@@ -26,16 +36,12 @@ Users_list& users)
         {
             case '1':
                 users.add_communication_line
-                (extract_allpha_string_from_user("user to comunicate with"));
+                (extract_allpha_string_from_user("user to comunicate with: "));
                 break;
             case '2':
-                {
-                    users.print_communication_line(account_name);
-                    auto x = users.get_communication_line(account_name);
-                    account_name = x[std::distance(x.begin(),
-                    std::find(x.begin(), x.end(), account_name))];
-                    break;
-                }
+                users.print_communication_line(account_name);
+                search_communication_lines(account_name,users);
+                break;
             case '3':
                 menu_replay = false;
                 break;
@@ -49,7 +55,7 @@ std::string accounts_manager(const std::string& accounts_file)
     std::string menu_choice, user_file;
     bool menu_replay = true;
 
-    accounts.load_accounts_from_file(accounts_file);
+    accounts.load_from_file(accounts_file);
 
     while(menu_replay)
     {
@@ -85,7 +91,7 @@ std::string accounts_manager(const std::string& accounts_file)
                 break;
         }
     }
-    accounts.save_accounts_to_a_file(accounts_file);
+    accounts.save_to_file(accounts_file);
     if(!user_file.empty())user_account_management(user_file, accounts);
     return user_file;
 }

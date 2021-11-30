@@ -32,7 +32,7 @@ void Task_list::print_task_list()
 }
 
 
-void Task_list::load_task_from_file(const std::string& file_to_load_at)
+void Task_list::load_from_file(const std::string& file_to_load_at)
 {
     std::ifstream archived_file(file_to_load_at);
     std::string file_contents_accumulator, task_name_accumulator, 
@@ -52,7 +52,7 @@ void Task_list::load_task_from_file(const std::string& file_to_load_at)
     archived_file.close();
 }
 
-void Task_list::save_task_to_file(const std::string& file_to_save_at)
+void Task_list::save_to_file(const std::string& file_to_save_at)
 {
     std::ofstream archive_here(file_to_save_at);
     std::ostringstream string_saver;
