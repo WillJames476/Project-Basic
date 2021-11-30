@@ -7,7 +7,7 @@
 
 void search_communication_lines(std::string& account_name, Users_list& users)
 {
-    std::string to_search = extract_allpha_string_from_user("enter the name here: ");
+    std::string to_search = get_string("enter the name here: ",string_predicates("Default"));
     auto x = users.get_communication_line(account_name);
     auto comm_line =  std::find(x.begin(), x.end(), to_search);
 
@@ -36,7 +36,7 @@ Users_list& users)
         {
             case '1':
                 users.add_communication_line
-                (extract_allpha_string_from_user("user to comunicate with: "));
+                (get_string("user to comunicate with: ", string_predicates("Default")));
                 break;
             case '2':
                 users.print_communication_line(account_name);
@@ -71,18 +71,18 @@ std::string accounts_manager(const std::string& accounts_file)
         {
             case '1':
                 accounts.new_account
-                (extract_allpha_string_from_user("user name"), 
-                extract_allpha_string_from_user("password"));
+                (get_string("enter the user name here: ", string_predicates("Default")), 
+                get_string("enter the password here:", string_predicates("Default")));
                 break;
             case '2':
                 accounts.remove_account
-                (extract_allpha_string_from_user("user name"), 
-                extract_allpha_string_from_user("password"));
+                (get_string("enter the user name here: ", string_predicates("Default")), 
+                get_string("enter the password here: ", string_predicates("Default")));
                 break;
             case '3':
                 user_file = accounts.account_login
-                (extract_allpha_string_from_user("user name"), 
-                extract_allpha_string_from_user("password"));
+                (get_string("enter the user name here: ", string_predicates("Default")), 
+                get_string("enter the password here: ", string_predicates("Default")));
                 break;
             case '4':
                 menu_replay = false;

@@ -2,40 +2,38 @@
 #include <iostream>
 #include <algorithm>
 #include <ctime>
+#include <unordered_map>
+#include <functional>
 #include "../Todolist/constants.h"
 
-std::string extract_alpha_space_string_from_user(const std::string &request)
+std::function<bool(char)> string_predicates(const std::string& protocol)
 {
-    std::string output;
-    bool verified = false;
+    std::unordered_map<std::string, std::function<bool(char)>> predicates;
 
-    while(!verified)
-    {
-        std::cout << "entert the " << request << " here: ";
-        std::getline(std::cin, output);
+    predicates.insert(std::make_pair("Default", 
+    [](char test){return isalpha(test);}));
+    predicates.insert(std::make_pair("AlphaSpace",
+    [](char test){return isalpha(test) || isspace(test);}));
 
-        if(std::all_of(output.begin(), output.end(),
-        [](char to_test){return isalpha(to_test) || isspace(to_test);})) verified = true;
-    }
-
-    return output;
+    auto x = predicates.find(protocol);
+    if(x == predicates.end()) return predicates.find("Default")->second;
+    return x->second;
 }
 
-std::string extract_allpha_string_from_user(const std::string &request)
+std::string get_string(const std::string& request, std::function<bool(char)> predicate)
 {
-    std::string output;
+    std::string user_input;
     bool verified = false;
 
     while(!verified)
     {
-        std::cout << "enter the " << request << " here: ";
-        std::getline(std::cin, output);
+        std::cout << request;
+        std::getline(std::cin, user_input);
 
-        if(std::all_of(output.begin(), output.end(),
-        [](char to_test){return isalpha(to_test);})) verified = true;
+        if(std::all_of(user_input.begin(), user_input.end(), predicate))verified = true;
     }
 
-    return output;
+    return user_input;
 }
 
 int get_a_time_from_user(const std::string& request, int min_range, int max_range)
