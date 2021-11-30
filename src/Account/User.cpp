@@ -13,6 +13,13 @@ const std::initializer_list<std::string>& fields)
 
 }
 
+User::User(const std::pair<std::string, std::string>& credentials, 
+const std::vector<std::string>& fields)
+:account(credentials.first, credentials.second),lines(fields)
+{
+
+}
+
 bool User::is_same_credential(const std::string& account_name, 
 const std::string& account_pass)
 {

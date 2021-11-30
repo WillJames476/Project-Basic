@@ -14,7 +14,10 @@ class Users_list : public File_management
     public:
         friend void make_new_file(const std::string& account_name);
         void new_account(const std::string& account_name,
-        const std::string& account_password, const bool is_new);
+        const std::string& account_password);
+        void new_account(const std::string& account_name, 
+        const std::string &account_password,
+        const std::vector<std::string>& lines);
         void remove_account(const std::string& account_name,
         const std::string& account_password);
         std::string account_login(const std::string& account_name, 

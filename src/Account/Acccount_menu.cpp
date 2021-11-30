@@ -72,7 +72,7 @@ std::string accounts_manager(const std::string& accounts_file)
             case '1':
                 accounts.new_account
                 (extract_allpha_string_from_user("user name"), 
-                extract_allpha_string_from_user("password"), true);
+                extract_allpha_string_from_user("password"));
                 break;
             case '2':
                 accounts.remove_account

@@ -7,6 +7,13 @@ Communication_lines::Communication_lines(const std::initializer_list<std::string
 
 }
 
+Communication_lines::Communication_lines(const std::vector<std::string>& lines)
+: communication_lines{lines}
+{
+
+}
+
+
 void Communication_lines::add_to_list(const std::string& line_to_add)
 {
     if(std::none_of(this->communication_lines.begin(), 
