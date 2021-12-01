@@ -89,7 +89,7 @@ std::string communication_line_menu(std::string& file_name)
     bool menu_replay{true};
     const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.csv"};
 
-    load_from_file(permanent_file_name,comms);
+    load_from_file(file_name, comms);
     while(menu_replay)
     {
         communication_line_control_flow

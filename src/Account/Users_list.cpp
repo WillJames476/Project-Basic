@@ -66,6 +66,11 @@ const std::string &account_password) const
     return {};
 }
 
+bool Users_list::does_account_exists(const std::string& account_name) const
+{
+    return this->users.find(account_name) != this->users.end();
+}
+
 void Users_list::load_from_file(const std::string& accounts_file)
 {
     std::ifstream file_to_read(accounts_file);

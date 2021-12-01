@@ -1,12 +1,13 @@
 #include <iostream>
 #include <algorithm>
+#include <filesystem>
 #include "Communication_line.h"
 
 void Communication_lines::add_to_list(const std::initializer_list<std::string>& fields)
 {
     std::vector<std::string> datas;
     for(auto x : fields)datas.push_back(x);
-    this->communication_lines.insert(datas[0]);
+    if(std::filesystem::exists("users/" + datas[0]))this->communication_lines.insert(datas[0]);
 }
 
 void Communication_lines::remove_from_list(const std::initializer_list<std::string>& fields)
