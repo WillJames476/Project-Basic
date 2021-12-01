@@ -16,7 +16,6 @@ void transmit_data(const std::string& data_to_transfer)
     int transmission = open("tmp/cows", O_WRONLY);
     write(transmission,make,32);
     close(transmission);
-    std::cout << transmission << '\n';
 }
 
 std::string receive_data()

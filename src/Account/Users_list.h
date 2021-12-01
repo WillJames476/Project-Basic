@@ -4,30 +4,21 @@
 #include <string>
 #include <map>
 #include <memory>
-#include "User.h"
+
+#include "Account.h"
 #include "../Utilities/File_management.h"
 
 class Users_list : public File_management
 {
     private:
-        std::map<std::string, std::shared_ptr<User>> users;
+        std::map<std::string, std::shared_ptr<Account>> users;
     public:
-        friend void make_new_file(const std::string& account_name);
-        void new_account(const std::string& account_name,
-        const std::string& account_password);
-        void new_account(const std::string& account_name, 
-        const std::string &account_password,
-        const std::vector<std::string>& lines);
-        void remove_account(const std::string& account_name,
-        const std::string& account_password);
-        std::string account_login(const std::string& account_name, 
-        const std::string& account_password) const;
-        std::vector<std::string> get_communication_line
-        (const std::string& user_name) const;
-        void add_communication_line(const std::string& user_name);
-        void print_communication_line(const std::string& user_name);
+        void add_to_list(const std::initializer_list<std::string>& credentials);
+        void remove_from_list(const std::initializer_list<std::string>& crdentials);
+        std::string account_login(const std::string& account_name, const std::string& account_password) const;
         void save_to_file(const std::string& accounts_file);
         void load_from_file(const std::string& accounts_file);
+        friend void make_new_file(const std::string& account_name);
 };
 
 #endif
