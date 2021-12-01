@@ -8,8 +8,10 @@
 
 void make_new_file(const std::string& account_name)
 {
-    std::ofstream file_to_make("users/" + account_name + "/" + account_name + ".csv");
-    file_to_make.close();
+    std::ofstream file_to_make1("users/" + account_name + "/" + account_name + ".csv");
+    std::ofstream file_to_make2("users/" + account_name + "/" + account_name + "_comms.csv");
+    file_to_make1.close();
+    file_to_make2.close();
 }
 
 void Users_list::add_to_list(const std::initializer_list<std::string>& credentials)

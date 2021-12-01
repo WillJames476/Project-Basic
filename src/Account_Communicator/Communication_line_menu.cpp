@@ -1,4 +1,5 @@
 #include <sstream>
+#include <fstream>
 #include "Communication_line.h"
 #include "Communication_line_menu.h"
 #include "../Utilities/io.h"
@@ -28,17 +29,17 @@ std::string& file_name, bool& menu_replay)
             string_predicates("Default"))}});
             break;
         case '2':
-            comms.print_list();
+            std::cout << comms;
             comms.remove_from_list
             ({get_string("enter the name of user here: ",
             string_predicates("Default"))});
             break;
         case '3':
-            comms.print_list();
+            std::cout << comms;
             break;
         case '4':
             {
-                comms.print_list();
+                std::cout << comms;
                 auto new_val{comms.get_item_from_list
                 ({get_string("enter the name of user here: ",
                 string_predicates("Default"))})};
@@ -52,16 +53,48 @@ std::string& file_name, bool& menu_replay)
     return file_name;
 }
 
+void load_from_file(const std::string& file_name, Communication_lines&lines)
+{
+    lines.add_to_list({file_name});
+
+    try
+    {   
+        std::ifstream file_to_load(file_name);
+        file_to_load >> lines;
+        file_to_load.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << "File not found / input corrupted\n";
+    }    
+}
+
+void save_to_file(const std::string& file_name, const Communication_lines& lines)
+{
+    try
+    {   
+        std::ofstream file_to_load(file_name);
+        file_to_load << lines;
+        file_to_load.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << "File not found / input corrupted\n";
+    }
+}
+
 std::string communication_line_menu(std::string& file_name)
 {
     Communication_lines comms;
     bool menu_replay{true};
+    const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.csv"};
 
+    load_from_file(permanent_file_name,comms);
     while(menu_replay)
     {
         communication_line_control_flow
         (comms,get_menu_choice(),file_name, menu_replay);
     }
-
+    save_to_file(permanent_file_name,comms);
     return file_name;
 }

@@ -28,7 +28,15 @@ std::string Communication_lines::get_item_from_list
     return std::string();
 }
 
-void Communication_lines::print_list()
+std::ostream& operator<<(std::ostream& out,const Communication_lines& lines)
 {
-    for(auto x : this->communication_lines)std::cout << x << '\n';
+    for(auto x : lines.communication_lines){out << x << '\n';}
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, Communication_lines& lines)
+{
+    std::string accounts;
+    while(in >> accounts)lines.add_to_list({accounts});
+    return in;
 }
