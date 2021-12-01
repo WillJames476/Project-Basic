@@ -4,8 +4,8 @@
 
 int main()
 {
-    //std::string user{receive_data()};
+    std::string user{"ingrid"};
     //transmit_data(user);
-    std::cout << communication_line_menu("ingrid") << '\n';
+    std::cout << communication_line_menu(user) << '\n';
     return 0;
 }
