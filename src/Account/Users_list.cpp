@@ -20,7 +20,19 @@ void Users_list::add_to_list(const std::initializer_list<std::string>& credentia
     this->users.insert
     (std::make_pair(data[0], std::make_shared<Account>
     (std::make_pair(data[0], data[1]))));
-    make_new_file(data[0]);
+}
+
+void Users_list::add_to_list(const std::initializer_list<std::string>& credentials,
+bool is_new)
+{
+    std::vector<std::string> data;
+    for(auto s : credentials)data.push_back(s);
+
+    this->users.insert
+    (std::make_pair(data[0], std::make_shared<Account>
+    (std::make_pair(data[0], data[1]))));
+
+    if(is_new)make_new_file(data[0]);
 }
 
 void Users_list::remove_from_list(const std::initializer_list<std::string>& credentials)
@@ -28,7 +40,12 @@ void Users_list::remove_from_list(const std::initializer_list<std::string>& cred
     std::vector<std::string> data;
     for(auto s : credentials)data.push_back(s);
     auto x = this->users.find(data[0]);
-    if(x->second->get_credential().second == data[1]) this->users.erase(x);
+
+    if(x->second->get_credential().second == data[1])
+    { 
+        this->users.erase(x);
+        std::filesystem::remove(std::filesystem::path(x->first + ".csv"));
+    }
 }
 
 
@@ -55,7 +72,7 @@ void Users_list::load_from_file(const std::string& accounts_file)
         std::istringstream(line_accumulator) >> user_name_accumulator 
         >> password_accumulator >> communication_lines_accumulator;
 
-        add_to_list({user_name_accumulator, password_accumulator});
+        add_to_list({user_name_accumulator, password_accumulator},false);
     }
 
     file_to_read.close();

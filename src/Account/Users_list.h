@@ -14,6 +14,7 @@ class Users_list : public File_management
         std::map<std::string, std::shared_ptr<Account>> users;
     public:
         void add_to_list(const std::initializer_list<std::string>& credentials);
+        void add_to_list(const std::initializer_list<std::string>& credentials, bool is_new);
         void remove_from_list(const std::initializer_list<std::string>& crdentials);
         std::string account_login(const std::string& account_name, const std::string& account_password) const;
         void save_to_file(const std::string& accounts_file);

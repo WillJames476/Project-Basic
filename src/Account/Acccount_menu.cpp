@@ -28,7 +28,7 @@ std::string accounts_manager(const std::string& accounts_file)
             case '1':
                 accounts.add_to_list
                 ({get_string("enter the user name here: ", string_predicates("Default")), 
-                get_string("enter the password here:", string_predicates("Default"))});
+                get_string("enter the password here:", string_predicates("Default"))},true);
                 break;
             case '2':
                 accounts.remove_from_list
@@ -50,4 +50,3 @@ std::string accounts_manager(const std::string& accounts_file)
     accounts.save_to_file(accounts_file);
     return user_file;
 }
-
