@@ -8,7 +8,7 @@
 
 void make_new_file(const std::string& account_name)
 {
-    std::ofstream file_to_make("users/" + account_name + ".csv");
+    std::ofstream file_to_make("users/" + account_name + "/" + account_name + ".csv");
     file_to_make.close();
 }
 
@@ -32,7 +32,11 @@ bool is_new)
     (std::make_pair(data[0], std::make_shared<Account>
     (std::make_pair(data[0], data[1]))));
 
-    if(is_new)make_new_file(data[0]);
+    if(is_new)
+    {
+        std::filesystem::create_directory("users/" + data[0]);
+        make_new_file(data[0]);
+    }
 }
 
 void Users_list::remove_from_list(const std::initializer_list<std::string>& credentials)
@@ -41,10 +45,10 @@ void Users_list::remove_from_list(const std::initializer_list<std::string>& cred
     for(auto s : credentials)data.push_back(s);
     auto x = this->users.find(data[0]);
 
-    if(x->second->get_credential().second == data[1])
+    if(x != this->users.end() && x->second->get_credential().second == data[1])
     { 
         this->users.erase(x);
-        std::filesystem::remove(std::filesystem::path(x->first + ".csv"));
+        std::filesystem::remove_all("users/" +data[0]);
     }
 }
 
