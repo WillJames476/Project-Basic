@@ -2,12 +2,12 @@
 #define COMMUNICATION_LINES_H
 
 #include<string>
-#include<unordered_set>
+#include<unordered_map>
 
 class Communication_lines
 {
     private:
-        std::unordered_set<std::string>communication_lines;
+        std::unordered_map<std::string, bool>communication_lines;
     public:
         void add_to_list(const std::initializer_list<std::string>& fields);
         void remove_from_list(const std::initializer_list<std::string>& fields);

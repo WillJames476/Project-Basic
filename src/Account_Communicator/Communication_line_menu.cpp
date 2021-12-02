@@ -11,11 +11,10 @@ char get_menu_choice()
          << "1\tadd a communication line\n"
          << "2\tremove a communication line\n"
          << "3\tview all communication line\n"
-         << "4\tacces a communication line\n"
-         << "5\texit communication sector\n"
+         << "4\tacces a communication line and exit\n"
          << "enter you choice here: ";
     
-    return get_integral<char>(menu.str(),'0','6');
+    return get_integral<char>(menu.str(),'0','5');
 }
 
 std::string communication_line_control_flow(Communication_lines& comms, char menu_choice,
@@ -25,8 +24,8 @@ std::string& file_name, bool& menu_replay)
     {
         case '1':
             comms.add_to_list
-            ({{get_string("enter the name of user here: ",
-            string_predicates("Default"))}});
+            ({get_string("enter the name of user here: ",
+            string_predicates("Default")),"0"});
             break;
         case '2':
             std::cout << comms;
@@ -44,10 +43,8 @@ std::string& file_name, bool& menu_replay)
                 ({get_string("enter the name of user here: ",
                 string_predicates("Default"))})};
                 if(new_val != std::string()) file_name = new_val;
+                menu_replay = false;
             }  
-            break;
-        case '5':
-            menu_replay = false;
             break;
     }
     return file_name;
@@ -55,8 +52,6 @@ std::string& file_name, bool& menu_replay)
 
 void load_from_file(const std::string& file_name, Communication_lines&lines)
 {
-    lines.add_to_list({file_name});
-
     try
     {   
         std::ifstream file_to_load(file_name);
@@ -87,9 +82,9 @@ std::string communication_line_menu(std::string& file_name)
 {
     Communication_lines comms;
     bool menu_replay{true};
-    const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.csv"};
+    const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.txt"};
 
-    load_from_file(file_name, comms);
+    load_from_file(permanent_file_name, comms);
     while(menu_replay)
     {
         communication_line_control_flow

@@ -7,7 +7,7 @@ accounts = src/Account/Users_list.cpp src/Account/Account.cpp
 accounts1 = src/Account/Acccount_menu.cpp src/Account/Main.cpp
 
 com_lines = src/Account_Communicator/Main.cpp src/Account_Communicator/Communication_line_menu.cpp
-com_lines1 = src/Account_Communicator/Communication_line.cpp 
+com_lines1 = src/Account_Communicator/Communication_line.cpp
 task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp src/Todolist/Todolist_menu.cpp
 
 account_program = account
