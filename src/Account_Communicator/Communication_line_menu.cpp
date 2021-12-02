@@ -61,7 +61,8 @@ std::string communication_line_menu(std::string& file_name)
     bool menu_replay{true};
     const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.txt"},
     permanent_user{file_name};
-
+    
+    comms.add_to_list({permanent_user,"1"});
     load_from_file(permanent_file_name, comms);
     while(menu_replay)
     {
