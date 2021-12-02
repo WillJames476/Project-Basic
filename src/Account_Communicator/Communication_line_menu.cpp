@@ -11,14 +11,15 @@ char get_menu_choice()
          << "1\tadd a communication line\n"
          << "2\tremove a communication line\n"
          << "3\tview all communication line\n"
-         << "4\tacces a communication line and exit\n"
+         << "4\talter other user's permission on your files\n"
+         << "5\tacces a communication line and exit\n"
          << "enter you choice here: ";
     
-    return get_integral<char>(menu.str(),'0','5');
+    return get_integral<char>(menu.str(),'0','6');
 }
 
 std::string communication_line_control_flow(Communication_lines& comms, char menu_choice,
-std::string& file_name, bool& menu_replay)
+std::string& file_name, bool& menu_replay, const std::string& permanent_user)
 {
     switch(menu_choice)
     {
@@ -37,12 +38,16 @@ std::string& file_name, bool& menu_replay)
             std::cout << comms;
             break;
         case '4':
+            comms.alter_permission
+            (permanent_user,get_string("enter the name of user here: ",
+            string_predicates("Default")));
+            break;
+        case '5':
             {
                 std::cout << comms;
-                auto new_val{comms.get_item_from_list
+                file_name = comms.get_item_from_list
                 ({get_string("enter the name of user here: ",
-                string_predicates("Default"))})};
-                if(new_val != std::string()) file_name = new_val;
+                string_predicates("Default"))});
                 menu_replay = false;
             }  
             break;
@@ -50,45 +55,18 @@ std::string& file_name, bool& menu_replay)
     return file_name;
 }
 
-void load_from_file(const std::string& file_name, Communication_lines&lines)
-{
-    try
-    {   
-        std::ifstream file_to_load(file_name);
-        file_to_load >> lines;
-        file_to_load.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << "File not found / input corrupted\n";
-    }    
-}
-
-void save_to_file(const std::string& file_name, const Communication_lines& lines)
-{
-    try
-    {   
-        std::ofstream file_to_load(file_name);
-        file_to_load << lines;
-        file_to_load.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << "File not found / input corrupted\n";
-    }
-}
-
 std::string communication_line_menu(std::string& file_name)
 {
     Communication_lines comms;
     bool menu_replay{true};
-    const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.txt"};
+    const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.txt"},
+    permanent_user{file_name};
 
     load_from_file(permanent_file_name, comms);
     while(menu_replay)
     {
         communication_line_control_flow
-        (comms,get_menu_choice(),file_name, menu_replay);
+        (comms,get_menu_choice(),file_name, menu_replay, permanent_user);
     }
     save_to_file(permanent_file_name,comms);
     return file_name;
