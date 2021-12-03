@@ -25,3 +25,6 @@ task:
 
 comm_lines:
 	$(compiler) $(com_lines) $(com_lines1) $(misc) $(flags) $(commline_program)
+
+build:
+	make login && make task && make comm_lines

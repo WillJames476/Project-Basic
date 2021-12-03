@@ -23,22 +23,25 @@ bool is_daily)
     }
 }
 
-void add_task_manager(Task_list &task_list)
+char add_task_menu()
 {
-    std::string menu_choice, task_name;
+    std::ostringstream menu;
+    menu << "1\tone time occurence\n"
+        << "2\tdaily\n"
+        << "3\tweekly\n"
+        << "4\tmonthly\n"
+        << "enter your choice here: ";
+    return get_integral<char>(menu.str(), '0' ,'5');
+}
+
+void add_task_control_flow(Task_list& task_list, char menu_choice)
+{
+    std::string task_name{get_string("enter the task name here: ", 
+    string_predicates("AlphaSpace"))};
     std::tm task_due;
-
-    std::cout << "1\tone time occurence\n"
-              << "2\tdaily\n"
-              << "3\tweekly\n"
-              << "4\tmonthly\n"
-              << "enter your choice here: ";
-    std::getline(std::cin, menu_choice);
-
-    task_name = get_string("enter the task name here: ", string_predicates("AlphaSpace"));
     get_a_date_from_user(task_due);
 
-    switch (menu_choice.at(0))
+    switch (menu_choice)
     {
         case '1':
             task_list.add_to_list({task_name, std::to_string(task_due.tm_mon), 
@@ -56,24 +59,30 @@ void add_task_manager(Task_list &task_list)
             add_task_incrementally(task_name, task_due, task_list, 
             31, false);
             break;
-        default:
-            std::cerr << "Invalid entry!!!\n";
-            break;
     }
 }
 
-void remove_task_manager(Task_list& task_list)
+void add_task(Task_list &task_list)
 {
-    std::string menu_choice, task_name;
+    add_task_control_flow(task_list, add_task_menu());
+}
+
+char remove_task_menu()
+{
+    std::ostringstream menu;
+    menu << "1\tan instance of task_name\n"
+        << "2\tall instance of task name\n"
+        << "enter your choice here: ";
+    return get_integral<char>(menu.str(), '0', '3');
+}
+
+void remove_task_control_flow(Task_list& task_list, char menu_choice)
+{
     std::tm task_due;
-    std::cout << "1\tan instance of task_name\n"
-              << "2\tall instance of task name\n"
-              << "enter your choice here: ";
-    std::getline(std::cin, menu_choice);
+    std::string task_name{get_string("enter the task name here: ",
+    string_predicates("AlphaSpace"))};
 
-    task_name = get_string("enter the task name here: ",string_predicates("AlphaSpace"));
-
-    switch (menu_choice.at(0))
+    switch (menu_choice)
     {
         case '1':
             get_a_date_from_user(task_due);
@@ -84,22 +93,26 @@ void remove_task_manager(Task_list& task_list)
             while(task_list.is_existing(task_name))
             task_list.remove_all_from_list(task_name);
             break;
-        default:
-            std::cerr << "Invalid entry!!!\n";
-            break;
     }
 }
 
-void print_task_menu(Task_list& task_list)
+void remove_task(Task_list& task_list)
 {
-    std::string menu_choice;
+    remove_task_control_flow(task_list, remove_task_menu());
+}
 
-    std::cout << "1\tview tasks for this day\n"
-              << "2\tview all tasks\n"
-              << "enter you choice here: ";
-    std::getline(std::cin, menu_choice);
+char print_task_menu()
+{
+    std::ostringstream menu;
+    menu << "1\tview tasks for this day\n"
+        << "2\tview all tasks\n"
+        << "enter you choice here: ";
+    return get_integral<char>(menu.str(), '0', '3');
+}
 
-    switch(menu_choice.at(0))
+void print_task_control_flow(Task_list& task_list, char menu_choice)
+{
+    switch(menu_choice)
     {
         case '1':
             task_list.print_task_for_this_day();
@@ -107,8 +120,42 @@ void print_task_menu(Task_list& task_list)
         case '2':
             task_list.print_task_list();
             break;
-        default:
-            std::cerr << "invalid entry\n";
+    }
+}
+
+void print_task(Task_list& task_list)
+{
+    print_task_control_flow(task_list, print_task_menu());
+}
+
+char task_manager_menu()
+{
+    std::ostringstream menu;
+    menu << "\n==========================================\n"
+        << "1\tadd item to tasklist\n"
+        << "2\tdelete item from task_list\n"
+        << "3\tview task list\n"
+        << "4\texit the program\n"
+        << "enter your chocie here: ";
+    return get_integral<char>(menu.str(), '0', '5');
+}
+
+void task_manager_control_flow(Task_list& task_list,
+char menu_choice, bool& menu_replay)
+{
+    switch(menu_choice)
+    {
+        case '1':
+            add_task(task_list);
+            break;
+        case '2':
+            remove_task(task_list);
+            break;
+        case '3':
+            print_task(task_list);
+            break;
+        case '4':
+            menu_replay = false;
             break;
     }
 }
@@ -116,40 +163,15 @@ void print_task_menu(Task_list& task_list)
 void task_manager(const std::string& user_file)
 {
     Task_list task_list;
-    std::string menu_choice;
-    bool menu_replay = true;
+    bool menu_replay{true};
 
     task_list.load_from_file(user_file);
     task_list.remove_oudated_tasks();
 
     while(menu_replay)
     {
-        std::cout << "\n==========================================\n"
-                  << "1\tadd item to tasklist\n"
-                  << "2\tdelete item from task_list\n"
-                  << "3\tview task list\n"
-                  << "4\texit the program\n"
-                  << "enter your chocie here: ";
-        std::getline(std::cin, menu_choice);
-        
-        switch(menu_choice.at(0))
-        {
-            case '1':
-                add_task_manager(task_list);
-                break;
-            case '2':
-                remove_task_manager(task_list);
-                break;
-            case '3':
-                print_task_menu(task_list);
-                break;
-            case '4':
-                menu_replay = false;
-                break;
-            default:
-                std::cerr << "Invalid entry\n";
-                break;
-        }
+       task_manager_control_flow(task_list, task_manager_menu(),
+       menu_replay);
     }
 
     task_list.save_to_file(user_file);

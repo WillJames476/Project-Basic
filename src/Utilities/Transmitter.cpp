@@ -23,6 +23,7 @@ std::string receive_data()
     char datas[32];
     int transmission = open("tmp/cows", O_RDONLY);
     read(transmission, datas, 32);
+    remove("tmp/cows");
     close(transmission);
     return datas;
 }
