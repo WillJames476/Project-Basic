@@ -3,8 +3,9 @@
 
 #include<string>
 #include<unordered_map>
+#include "../Utilities/List_management.h"
 
-class Communication_lines
+class Communication_lines : public List_management
 {
     private:
         std::unordered_map<std::string, bool>communication_lines;

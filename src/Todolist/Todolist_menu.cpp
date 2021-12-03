@@ -14,7 +14,8 @@ bool is_daily)
     {
         for(;time_start.tm_mday <= constants::months_ceiling[time_start.tm_mon];time_start.tm_mday+= day_increment)
         {
-            task_list.add_task_to_task_list(task_name, time_start);
+            task_list.add_to_list({task_name, 
+            std::to_string(time_start.tm_mon), std::to_string(time_start.tm_mday)});
         }
 
         if(is_daily) time_start.tm_mday = 1;
@@ -40,7 +41,8 @@ void add_task_manager(Task_list &task_list)
     switch (menu_choice.at(0))
     {
         case '1':
-            task_list.add_task_to_task_list(task_name, task_due);
+            task_list.add_to_list({task_name, std::to_string(task_due.tm_mon), 
+            std::to_string(task_due.tm_mday)});
             break;
         case '2':
             add_task_incrementally(task_name, task_due, task_list, 
@@ -75,11 +77,12 @@ void remove_task_manager(Task_list& task_list)
     {
         case '1':
             get_a_date_from_user(task_due);
-            task_list.remove_task_from_task_list(task_name, task_due);
+            task_list.remove_from_list({task_name, std::to_string(task_due.tm_mon),
+            std::to_string(task_due.tm_mday)});
             break;
         case '2':
             while(task_list.is_existing(task_name))
-            task_list.remove_task_from_task_list(task_name);
+            task_list.remove_all_from_list(task_name);
             break;
         default:
             std::cerr << "Invalid entry!!!\n";

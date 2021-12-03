@@ -53,18 +53,19 @@ std::tm Task::get_dates()
     return this->task_time_due;
 }
 
+bool operator==(const Task& task,const std::string& to_compare)
+{
+    return task.task_name == to_compare;
+}
+
 std::ostream& operator<<(std::ostream& out,Task& task)
 {
-    replace_char_with(task.task_name, ' ', '-');
-    out << task.task_name << "," 
-    << task.task_time_due.tm_mon << ","  
-    << task.task_time_due.tm_mday << '\n';
+    out << task.task_name << " " << task.task_time_due.tm_mon << " " << task.task_time_due.tm_mday << '\n';
     return out;
 }
 
 std::istream& operator>>(std::istream& in, Task& task)
 {
     in >> task.task_name >> task.task_time_due.tm_mon >> task.task_time_due.tm_mday;
-    replace_char_with(task.task_name,'-',' ');
     return in;
 }

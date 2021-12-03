@@ -8,9 +8,14 @@
 #include "../Utilities/io.h"
 #include "tasks.h"
 
-void Task_list::add_task_to_task_list(const std::string& task_name, const std::tm &task_date_due)
+void Task_list::add_to_list(const std::initializer_list<std::string>& fields)
 {
-    task_list.push_back(Task(task_name, task_date_due));
+    std::tm temp;
+    std::vector<std::string> datas;
+    for(auto x : fields)datas.push_back(x);
+    temp.tm_mon = std::stoi(datas[1]);
+    temp.tm_mday = std::stoi(datas[2]);
+    task_list.push_back(Task(datas[0], temp));
 }
 
 void Task_list::add_task_to_task_list(const Task& task)
@@ -19,17 +24,22 @@ void Task_list::add_task_to_task_list(const Task& task)
 }
 
 
-void Task_list::remove_task_from_task_list(const std::string& task_name, const std::tm& task_date)
+void Task_list::remove_from_list(const std::initializer_list<std::string>& fields)
 {
+    std::tm temp;
+    std::vector<std::string> datas;
+    for(auto x : fields)datas.push_back(x);
+    temp.tm_mon = std::stoi(datas[1]);
+    temp.tm_mday = std::stoi(datas[2]);
+
     task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
-    [task_name, task_date](auto test)
-    {return test.test_var(task_name, task_date);}));
+    [&](auto test)
+    {return test.test_var(datas[0], temp);}));
 }
-void Task_list::remove_task_from_task_list(const std::string& task_name)
+void Task_list::remove_all_from_list(const std::string& task_name)
 {
     task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
-    [task_name](auto test)
-    {return test.get_task_name() == task_name;}));
+    [task_name](auto test){return test == task_name;}));
 }
 
 void Task_list::print_task_list()
@@ -42,15 +52,9 @@ void Task_list::print_task_list()
 void Task_list::load_from_file(const std::string& file_to_load_at)
 {
     std::ifstream archived_file(file_to_load_at);
-    std::string line_accumulator;
+    Task temp;
 
-    while(archived_file >> line_accumulator)
-    {
-        replace_char_with(line_accumulator, ',', ' ');
-        Task temp;
-        std::istringstream(line_accumulator) >> temp;
-        add_task_to_task_list(temp);
-    }
+    while(archived_file >> temp)add_task_to_task_list(temp);
 
     archived_file.close();
 }
