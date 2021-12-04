@@ -35,4 +35,4 @@ conversation:
 	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
 
 build:
-	make login && make task && make comm_lines
+	make login && make task && make comm_lines && make conversation

@@ -5,14 +5,15 @@
   to use burner accounts
 
 # Prerequisites
-* c++17 compliant compiler
+* c++20 compliant compiler
+* unix-like systems / posix compliant systems
 
 # Instalation
 1. clone the repository
 2. goto the directory of the repository 
 3. type make install on your terminal
-4. type make login on your terminal
-5. type make task on your terminal
+4. type make build on your terminal
+5. enjoy
 
 # Usage
 1. open two terminal on the same directory where this repo is
@@ -38,6 +39,12 @@
 * Task manager (executable as ./todolist)
   - todolist application of the repo
   - can add / remove tasks
-  - expects inputs from either ./account or ./commline and outputs nothing
-  - other users can alter an account list as long as he/she has a communication line
-    to that user
+  - expects inputs and produce output
+  - other users can alter an account list as long as he/she has communication
+    line to that user
+
+* Chats (executable as ./chat)
+  - can chat with other registered users of this program as long as you are
+    have a verified communication line with the user you are trying to communicate with
+  - can send and view messages
+  - a expects input and can produce output
