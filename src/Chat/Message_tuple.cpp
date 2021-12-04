@@ -2,7 +2,14 @@
 #include <sstream>
 #include <iostream>
 #include <array>
+
+#include "../Utilities/io.h"
 #include "Message_tuple.h"
+
+Message_tuple::Message_tuple()
+{
+
+}
 
 Message_tuple::Message_tuple(const std::initializer_list<std::string>& fields)
 {
@@ -22,16 +29,20 @@ void Message_tuple::print_message()
 
 std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)
 {
+    std::string modified_message{std::get<1>(fields.message)};
+    replace_char_with(modified_message, ' ', '-');
+
     out << std::get<0>(fields.message) 
-    << " " << std::get<1>(fields.message) 
+    << " " << modified_message
     << " " << std::get<2>(fields.message) << '\n';
     return out;
 }
 std::istream& operator>>(std::istream& in, Message_tuple& fields)
 {
     std::array<std::string, 3> datas;
-    in >> datas[1] >> datas[2] >> datas[3];
-    fields.message = std::move(std::make_tuple(datas[1], datas[2], std::stol(datas[3])));
+    in >> datas[0] >> datas[1] >> datas[2];
+    replace_char_with(datas[1], '-',' ');
+    fields.message = std::make_tuple(datas[0], datas[1], std::stol(datas[2]));
     return in;
 }
 

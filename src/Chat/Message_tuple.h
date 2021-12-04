@@ -11,6 +11,7 @@ class Message_tuple
     private:
         std::tuple<std::string, std::string, std::time_t> message;
     public:
+        Message_tuple();
         Message_tuple(const std::initializer_list<std::string>& fields);
         void print_message();
         

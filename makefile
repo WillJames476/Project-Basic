@@ -12,6 +12,7 @@ com_lines1 = src/Account_Communicator/Communication_line.cpp
 task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp src/Todolist/Todolist_menu.cpp
 
 chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
+chat1 = src/Chat/Message_menu.cpp
 
 account_program = account
 task_program = todolist
@@ -31,7 +32,7 @@ comm_lines:
 	$(compiler) $(com_lines) $(com_lines1) $(misc) $(flags) $(commline_program)
 
 conversation:
-	$(compiler) $(chat) $(flags) $(chat_program)
+	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
 
 build:
 	make login && make task && make comm_lines

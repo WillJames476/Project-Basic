@@ -31,6 +31,7 @@ std::ostream& operator<<(std::ostream& out, const Message_list& field)
 std::istream& operator>>(std::istream& in, Message_list& field)
 {
     Message_tuple to_receive{};
-    while(in >> to_receive)field.messages.push_back(to_receive);
+    while(in >> to_receive)
+    field.messages.push_back(to_receive);
     return in;
 }
