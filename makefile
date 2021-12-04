@@ -11,7 +11,7 @@ com_lines1 = src/Account_Communicator/Communication_line.cpp
 
 task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp src/Todolist/Todolist_menu.cpp
 
-chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp
+chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
 
 account_program = account
 task_program = todolist

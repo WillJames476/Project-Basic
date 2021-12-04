@@ -1,7 +1,7 @@
 #ifndef MESSAGE_TUPLE_H
 #define MESSAGE_TUPLE_H
 
-#include <chrono>
+#include <iostream>
 #include <ctime>
 #include <tuple>
 #include <string>
@@ -9,10 +9,13 @@
 class Message_tuple
 {
     private:
-        std::tuple<std::string, std::string, std::chrono::month_day> message;
+        std::tuple<std::string, std::string, std::time_t> message;
     public:
         Message_tuple(const std::initializer_list<std::string>& fields);
-        void print_message();    
+        void print_message();
+        
+        friend std::ostream& operator<<(std::ostream& out, const Message_tuple& fields);
+        friend std::istream& operator>>(std::istream& in, Message_tuple& fields);
 };
 
 #endif
