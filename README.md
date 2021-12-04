@@ -19,10 +19,10 @@
 1. open two terminal on the same directory where this repo is
 2. lauch programs on the first terminal then launch you second program on the other terminal and vice versa
 3. alternate between these terminal
-4. press ctrl + z when you are done
+4. run exit program when you are done
 
 # Uninstalling
-1. delete the folder repo
+1. type make uninstall on the terminal
 
 # Applications on this repo
 * Account manager (executable as ./account)
@@ -48,3 +48,8 @@
     have a verified communication line with the user you are trying to communicate with
   - can send and view messages
   - a expects input and can produce output
+
+* Exit (executable as ./exit)
+  - exits the program gracefully
+  - removes pipes
+  - only receives input

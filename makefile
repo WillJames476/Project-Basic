@@ -14,13 +14,19 @@ task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp s
 chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
 chat1 = src/Chat/Message_menu.cpp
 
+exit = src/Exit/Main.cpp
+
 account_program = account
 task_program = todolist
 commline_program = commline
 chat_program = chat
+exit_program = exit
 
 install: 
 	mkdir users && touch users/users.csv && mkdir tmp | echo essentials installed!!
+
+uninstall:
+	rm -rf *
 
 login:
 	$(compiler) $(accounts) $(accounts1) $(misc) $(flags) $(account_program) 
@@ -34,5 +40,8 @@ comm_lines:
 conversation:
 	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
 
+exiter:
+	$(compiler) $(exit) $(misc) $(flags) $(exit_program)
+
 build:
-	make login && make task && make comm_lines && make conversation
+	make login && make task && make comm_lines && make conversation && make exiter

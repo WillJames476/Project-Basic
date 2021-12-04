@@ -70,5 +70,6 @@ std::string communication_line_menu(std::string& file_name)
         (comms,get_menu_choice(),file_name, menu_replay, permanent_user);
     }
     save_to_file(permanent_file_name,comms);
+    file_name += " " + permanent_user;
     return file_name;
 }
