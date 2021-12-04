@@ -34,3 +34,8 @@ std::istream& operator>>(std::istream& in, Message_tuple& fields)
     fields.message = std::move(std::make_tuple(datas[1], datas[2], std::stol(datas[3])));
     return in;
 }
+
+bool operator< (const Message_tuple& first, const Message_tuple& last)
+{
+    return std::get<2>(first.message) < std::get<2>(last.message);
+}
