@@ -18,12 +18,6 @@ void Task_list::add_to_list(const std::initializer_list<std::string>& fields)
     task_list.push_back(Task(datas[0], temp));
 }
 
-void Task_list::add_task_to_task_list(const Task& task)
-{
-    task_list.push_back(task);
-}
-
-
 void Task_list::remove_from_list(const std::initializer_list<std::string>& fields)
 {
     std::tm temp;
@@ -36,6 +30,7 @@ void Task_list::remove_from_list(const std::initializer_list<std::string>& field
     [&](auto test)
     {return test.test_var(datas[0], temp);}));
 }
+
 void Task_list::remove_all_from_list(const std::string& task_name)
 {
     task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
@@ -46,27 +41,6 @@ void Task_list::print_task_list()
 {
     std::for_each(this->task_list.begin(), this->task_list.end(),
     [](Task task){task.print_task();});
-}
-
-
-void Task_list::load_from_file(const std::string& file_to_load_at)
-{
-    std::ifstream archived_file(file_to_load_at);
-    Task temp;
-
-    while(archived_file >> temp)add_task_to_task_list(temp);
-
-    archived_file.close();
-}
-
-void Task_list::save_to_file(const std::string& file_to_save_at)
-{
-    std::ofstream archive_here(file_to_save_at);
-    std::ostringstream string_saver;
-
-    for(auto i : this->task_list)string_saver << i;
-    archive_here << string_saver.str();
-    archive_here.close();
 }
 
 void Task_list::sort_by_date()
@@ -109,4 +83,17 @@ bool Task_list::is_existing(const std::string& task_name)
     return std::any_of(this->task_list.begin(), this->task_list.end(),
     [task_name](auto x)
     {return x.get_task_name() == task_name;});
+}
+
+std::ostream& operator<<(std::ostream& out, const Task_list& tasks)
+{
+   for(auto x : tasks.task_list) out << x;
+   return out;
+}
+
+std::istream& operator>>(std::istream& in, Task_list& tasks)
+{
+    Task temp{};
+    while(in >> temp)tasks.task_list.push_back(temp);
+    return in;
 }

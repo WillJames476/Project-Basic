@@ -54,7 +54,7 @@ void load_from_file(const std::string& file_name, Communication_lines& lines)
     }
     catch(std::exception &s)
     {
-        std::cerr << "file not founed / data corrupted\n";
+        std::cerr << s.what();
     }
 }
 
@@ -68,7 +68,7 @@ void save_to_file(const std::string& file_name, const Communication_lines& lines
     }
     catch(std::exception &s)
     {
-        std::cerr << "File not found / data corruption\n";
+        std::cerr << s.what();
     }
 }
 

@@ -1,9 +1,39 @@
 #include <string>
 #include <iostream>
+#include <fstream>
+
 #include "Todolist_menu.h"
 #include "task_list.h"
 #include "constants.h"
 #include "../Utilities/io.h"
+
+void load_from_file(const std::string& file_name, Task_list& tasks)
+{
+    try
+    {
+        std::ifstream file_to_read(file_name);
+        file_to_read >> tasks;
+        file_to_read.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << s.what();
+    }
+}
+
+void save_to_file(const std::string& file_name, const Task_list& tasks)
+{
+    try
+    {
+        std::ofstream file_to_read(file_name);
+        file_to_read << tasks;
+        file_to_read.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << s.what();
+    }
+}
 
 void add_task_incrementally(const std::string &task_name, 
 std::tm time_start, Task_list &task_list, int day_increment,
@@ -165,7 +195,7 @@ void task_manager(const std::string& user_file)
     Task_list task_list;
     bool menu_replay{true};
 
-    task_list.load_from_file(user_file);
+    load_from_file(user_file, task_list);
     task_list.remove_oudated_tasks();
 
     while(menu_replay)
@@ -173,6 +203,5 @@ void task_manager(const std::string& user_file)
        task_manager_control_flow(task_list, task_manager_menu(),
        menu_replay);
     }
-
-    task_list.save_to_file(user_file);
+    save_to_file(user_file, task_list);
 }

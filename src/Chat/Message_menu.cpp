@@ -16,7 +16,7 @@ void save_to_file(const std::string& file_name, Message_list& messages)
     }
     catch(std::exception &s)
     {
-        std::cerr << "File not found \\ Input mismatch\n";
+        std::cerr << s.what();
     } 
 }
 
@@ -30,7 +30,7 @@ void load_from_file(const std::string& file_name, Message_list& messages)
     }
     catch(std::exception &s)
     {
-        std::cerr << "File not found \\ Input mismatch\n";
+        std::cerr << s.what();
     }
 }
 
