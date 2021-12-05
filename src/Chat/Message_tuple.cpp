@@ -21,7 +21,7 @@ Message_tuple::Message_tuple(const std::initializer_list<std::string>& fields)
 void Message_tuple::print_message()
 {
     std::ostringstream to_print;
-    to_print << std::get<0>(this->message) << " " 
+    to_print << std::get<0>(this->message) << ">" 
     << std::get<1>(this->message) << " "
     << std::asctime(std::localtime(&std::get<2>(this->message))) << '\n';
     std::cout << to_print.str();

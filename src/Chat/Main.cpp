@@ -10,9 +10,9 @@ int main()
     std::array<std::string, 2> users;
     std::istringstream(receive_data()) >> users[0] >> users[1];
 
-    if(!users[0].empty())
+    if(!users[0].empty() && users.size() == 2)
     {
-        message("users/senna/senna_chats.txt", users[1]);
+        message("users/" + users[0] + "/"+ users[0] + "_chats.txt", users[1]);
         transmit_data(users[0] + " " + users[1]);
     }
     return 0;

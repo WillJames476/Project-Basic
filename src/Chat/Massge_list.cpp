@@ -19,7 +19,7 @@ void Message_list::remove_from_list(const std::initializer_list<std::string>& fi
 void Message_list::print_list()
 {
     std::for_each(this->messages.begin(), this->messages.end(),
-    [](auto subject){std::cout << subject;});
+    [](auto subject){subject.print_message();});
 }
 
 std::ostream& operator<<(std::ostream& out, const Message_list& field)
