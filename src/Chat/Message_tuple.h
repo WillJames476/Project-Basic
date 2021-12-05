@@ -14,7 +14,8 @@ class Message_tuple
         Message_tuple();
         Message_tuple(const std::initializer_list<std::string>& fields);
         void print_message();
-        
+        std::string get_name();
+
         friend bool operator< (const Message_tuple& first, const Message_tuple& last);
         friend std::ostream& operator<<(std::ostream& out, const Message_tuple& fields);
         friend std::istream& operator>>(std::istream& in, Message_tuple& fields);

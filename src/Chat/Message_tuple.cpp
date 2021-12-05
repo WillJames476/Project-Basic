@@ -27,6 +27,11 @@ void Message_tuple::print_message()
     std::cout << to_print.str();
 }
 
+std::string Message_tuple::get_name()
+{
+    return std::get<0>(this->message);
+}
+
 std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)
 {
     std::string modified_message{std::get<1>(fields.message)};

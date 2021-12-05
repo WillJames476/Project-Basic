@@ -1,12 +1,17 @@
 #include <iostream>
+#include <sstream>
 
 #include "Communication_line_menu.h"
 #include "../Utilities/Transmitter.h"
 
 int main()
 {
-    std::string user{receive_data()};
+    std::string user{receive_data()},acesed_user{};
+    
     if(!user.empty())
-    {transmit_data(communication_line_menu(user));}
+    {
+        std::istringstream(user) >> acesed_user;
+        transmit_data(communication_line_menu(acesed_user));
+    }
     return 0;
 }

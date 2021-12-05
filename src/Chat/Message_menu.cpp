@@ -47,7 +47,7 @@ char menu_choice, bool& menu_replay)
             (std::chrono::system_clock::now()))});
             break;
         case '2':
-            messages.print_list();
+            messages.print_list(acessor);
             break;
         case '3':
             menu_replay = false;

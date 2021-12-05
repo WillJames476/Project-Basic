@@ -6,6 +6,6 @@
 int main()
 {
     std::string user{accounts_manager("users/users.csv")};
-    transmit_data(user);
+    transmit_data(user + " " + user);
     return 0;
 }
