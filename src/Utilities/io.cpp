@@ -4,6 +4,7 @@
 #include <ctime>
 #include <unordered_map>
 #include <functional>
+
 #include "../Todolist/constants.h"
 
 std::function<bool(char)> string_predicates(const std::string& protocol)
