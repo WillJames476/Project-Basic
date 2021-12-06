@@ -19,7 +19,7 @@ class Task
         std::time_t get_task_time();
         Task(const std::string& task_name, const std::tm& task_time_due);
         void print_task();
-        std::tm get_dates();
+        std::tm get_dates() const;
         
         friend bool operator==(const Task& task,const std::string& to_compare);
         friend std::ostream& operator<<(std::ostream& out,Task& task);

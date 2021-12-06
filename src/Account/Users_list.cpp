@@ -80,7 +80,7 @@ void Users_list::save_to_file(const std::string& accounts_file)
     std::ofstream file_archiver(accounts_file);
     std::string string_to_give_to_file;
 
-    for(auto z : this->users)
+    for(auto& z : this->users)
     {
         auto x = z.second->get_credential();
         string_to_give_to_file += x.first + "," + x.second +"\n";

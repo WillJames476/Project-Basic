@@ -14,7 +14,7 @@ Message_tuple::Message_tuple()
 Message_tuple::Message_tuple(const std::initializer_list<std::string>& fields)
 {
     std::vector<std::string> datas;
-    for(auto x : fields)datas.push_back(x);
+    for(auto& x : fields)datas.push_back(x);
     this->message = std::make_tuple(datas[0], datas[1], std::stol(datas[2]));
 }
 

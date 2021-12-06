@@ -50,7 +50,7 @@ int get_a_time_from_user(const std::string& request, int min_range, int max_rang
         std::getline(std::cin, string_input);
 
         if(std::all_of(string_input.begin(), string_input.end(),
-        [](char to_test){return isdigit(to_test);}))
+        [](const char& to_test){return isdigit(to_test);}))
         {
             if(std::stoi(string_input) >= min_range && std::stoi(string_input) <= max_range)verified = true;
         }  
@@ -68,6 +68,6 @@ void replace_char_with(std::string& to_modify, char to_replace,
 char replacement)
 {
     std::replace_if(to_modify.begin(), to_modify.end(),
-    [to_replace](auto test)
+    [to_replace](auto& test)
     {return to_replace == test;},replacement);
 }

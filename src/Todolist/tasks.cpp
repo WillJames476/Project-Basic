@@ -48,7 +48,7 @@ std::time_t Task::get_task_time()
     return std::mktime(&this->task_time_due);
 }
 
-std::tm Task::get_dates()
+std::tm Task::get_dates() const
 {
     return this->task_time_due;
 }
