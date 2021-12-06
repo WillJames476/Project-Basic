@@ -43,7 +43,7 @@ std::string Task::get_time_integral() const
     return tm_getter.str();
 }
 
-std::time_t Task::get_task_time()
+std::time_t Task::get_task_time() 
 {
     return std::mktime(&this->task_time_due);
 }
