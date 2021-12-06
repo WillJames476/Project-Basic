@@ -14,7 +14,7 @@ task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp s
 chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
 chat1 = src/Chat/Message_menu.cpp
 
-exit = src/Exit/Main.cpp
+exit = src/Exit/Main.cpp src/loging/loger.cpp
 
 account_program = account
 task_program = todolist
