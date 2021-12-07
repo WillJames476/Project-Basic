@@ -49,7 +49,13 @@
   - can send and view messages
   - a expects input and can produce output
 
+* Contacts book (executable as ./cbook)
+  - can add and remove a contact info of a user has as long as you are permitted
+  - view the contacts that a user has
+  - expects input and can produce output
+  
 * Exit (executable as ./exit)
   - exits the program gracefully
   - removes pipes
   - only receives input
+  - logs the users to a file
