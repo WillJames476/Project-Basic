@@ -13,7 +13,7 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
         case '1':
             accounts.add_to_list
             ({get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here:", string_predicates("Default")),"1"});
+            get_string("enter the password here:", string_predicates("Default"))});
             break;
         case '2':
             accounts.remove_from_list

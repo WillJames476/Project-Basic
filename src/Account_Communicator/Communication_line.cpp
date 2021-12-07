@@ -48,7 +48,7 @@ void load_from_file(const std::string& file_name, Communication_lines& lines)
 {
     try
     {
-        std::ifstream file_to_load(file_name);
+        std::fstream file_to_load(file_name, std::ios_base::in);
         file_to_load >> lines;
         file_to_load.close();
     }
@@ -62,7 +62,7 @@ void save_to_file(const std::string& file_name, const Communication_lines& lines
 {
     try
     {
-        std::ofstream file_to_save(file_name);
+        std::fstream file_to_save(file_name, std::ios_base::out);
         file_to_save << lines;
         file_to_save.close();
     }

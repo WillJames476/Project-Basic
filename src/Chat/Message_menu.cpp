@@ -10,7 +10,7 @@ void save_to_file(const std::string& file_name, Message_list& messages)
 {
     try
     {
-        std::ofstream file_to_read(file_name);
+        std::fstream file_to_read(file_name, std::ios_base::out);
         file_to_read << messages;
         file_to_read.close();
     }
@@ -24,7 +24,7 @@ void load_from_file(const std::string& file_name, Message_list& messages)
 {
     try
     {
-        std::ifstream file_to_read(file_name);
+        std::fstream file_to_read(file_name, std::ios_base::in);
         file_to_read >> messages;
         file_to_read.close();
     }

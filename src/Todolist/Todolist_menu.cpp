@@ -11,7 +11,7 @@ void load_from_file(const std::string& file_name, Task_list& tasks)
 {
     try
     {
-        std::ifstream file_to_read(file_name);
+        std::fstream file_to_read(file_name, std::ios_base::in);
         file_to_read >> tasks;
         file_to_read.close();
     }
@@ -25,7 +25,7 @@ void save_to_file(const std::string& file_name, const Task_list& tasks)
 {
     try
     {
-        std::ofstream file_to_read(file_name);
+        std::fstream file_to_read(file_name, std::ios_base::out);
         file_to_read << tasks;
         file_to_read.close();
     }
