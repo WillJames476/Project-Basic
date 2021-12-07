@@ -14,7 +14,7 @@ task = src/Todolist/Main.cpp src/Todolist/task_list.cpp src/Todolist/tasks.cpp s
 chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
 chat1 = src/Chat/Message_menu.cpp
 
-cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp
+cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp src/ContactBook/Contacts_book_menu.cpp
 
 exit = src/Exit/Main.cpp src/loging/loger.cpp
 
@@ -44,7 +44,7 @@ conversation:
 	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
 
 contacts:
-	$(compiler) $(cbooks) $(flags) $(contacts_program)
+	$(compiler) $(cbooks) $(misc) $(flags) $(contacts_program)
 
 exiter:
 	$(compiler) $(exit) $(misc) $(flags) $(exit_program)

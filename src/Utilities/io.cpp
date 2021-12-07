@@ -17,6 +17,8 @@ std::function<bool(char)> string_predicates(const std::string& protocol)
     [](char test){return isalpha(test) || isspace(test);}));
     predicates.insert(std::make_pair("Message",
     [](char test){return isprint(test) || isspace(test) || iscntrl(test);}));
+    predicates.insert(std::make_pair("Contact",
+    [](char test){return isdigit(test);}));
 
     auto x = predicates.find(protocol);
     if(x == predicates.end()) return predicates.find("Default")->second;
