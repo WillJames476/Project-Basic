@@ -1,8 +1,38 @@
 #include <sstream>
+#include <fstream>
 
 #include "Contacts_book_menu.h"
 #include "Contacts_list.h"
 #include "../Utilities/io.h"
+
+void load_from_file(const std::string& file_name, Contacts_list& contacts)
+{
+    try
+    {
+        std::fstream file_to_load(file_name, std::ios_base::in);
+        file_to_load >> contacts;
+        file_to_load.close();
+    }
+    catch(std::exception& s)
+    {
+        std::cerr << s.what();
+    }
+}
+
+void save_to_file(const std::string& file_name, Contacts_list& contacts)
+{
+    try
+    {
+        std::fstream file_to_load(file_name, std::ios_base::out);
+        file_to_load << contacts;
+        file_to_load.close();
+    }
+    catch(std::exception& s)
+    {
+        std::cerr << s.what();
+    }
+}
+
 
 void contacts_book_control_flow(Contacts_list& contacts ,char menu_choice, 
 bool& menu_replay)
@@ -50,14 +80,18 @@ char contacts_book_menu()
     return get_integral<char>(menu.str(), '0' ,'6');
 }
 
-void contacts_book()
+void contacts_book(const std::string& file_name)
 {
     Contacts_list contacts{};
     bool menu_replay{true};
+
+    load_from_file(file_name, contacts);
 
     while(menu_replay)
     {
         contacts_book_control_flow(contacts, contacts_book_menu()
         , menu_replay);
     }
+
+    save_to_file(file_name, contacts);
 }
