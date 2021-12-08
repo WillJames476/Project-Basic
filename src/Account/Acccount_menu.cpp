@@ -1,9 +1,39 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <fstream>
+
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
+
+void load_from_file(const std::string& accounts_file, Users_list& users)
+{
+    try
+    {
+        std::fstream file_to_read(accounts_file, std::ios_base::in);
+        file_to_read >> users;
+        file_to_read.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << s.what();
+    }
+}
+
+void save_to_file(const std::string& accounts_file, const Users_list& users)
+{
+    try
+    {
+        std::fstream file_archiver(accounts_file, std::ios_base::out);
+        file_archiver << users;
+        file_archiver.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << s.what();
+    }
+}
 
 void accounts_manager_control_flow(std::string& user_file, 
 char menu_choice,bool& menu_replay, Users_list &accounts)
@@ -49,7 +79,7 @@ std::string accounts_manager(const std::string& accounts_file)
     std::string menu_choice, user_file;
     bool menu_replay{true};
 
-    accounts.load_from_file(accounts_file);
+    load_from_file(accounts_file, accounts);
 
     while(menu_replay)
     {
@@ -57,6 +87,6 @@ std::string accounts_manager(const std::string& accounts_file)
         menu_replay, accounts);
     }
 
-    accounts.save_to_file(accounts_file);
+    save_to_file(accounts_file, accounts);
     return user_file;
 }

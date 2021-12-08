@@ -2,13 +2,13 @@
 
 #include "Account.h"
 
-Account::Account(const std::string& user_name, const std::string& user_pass)
-: credentials{std::make_pair(user_name, user_pass)}
+Account::Account()
 {
+
 }
 
-Account::Account(const std::pair<std::string, std::string>& creds)
-: credentials{creds}
+Account::Account(const std::string& user_name, const std::string& user_pass)
+: credentials{std::make_pair(user_name, user_pass)}
 {
 }
 
@@ -19,7 +19,7 @@ std::pair<std::string, std::string> Account::get_credential() const
 
 std::ostream& operator<<(std::ostream& out, const Account& account)
 {
-    out << account.credentials.first << account.credentials.second << '\n';
+    out << account.credentials.first << " " << account.credentials.second << '\n';
     return out;
 }
 

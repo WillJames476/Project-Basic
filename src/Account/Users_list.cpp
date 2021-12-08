@@ -17,8 +17,7 @@ void Users_list::add_to_list(const std::initializer_list<std::string>& credentia
     for(auto s : credentials)data.push_back(s);
 
     this->users.insert
-    (std::make_pair(data[0], std::make_shared<Account>
-    (std::make_pair(data[0], data[1]))));
+    (std::make_pair(data[0], std::make_shared<Account>(data[0], data[1])));
 
     if(std::stoi(data[2]))make_new_directory(data[0]);
 }
@@ -48,44 +47,16 @@ const std::string &account_password) const
     return {};
 }
 
-void Users_list::load_from_file(const std::string& accounts_file)
+std::ostream& operator<<(std::ostream& out, const Users_list& user)  
 {
-    try
-    {
-        std::fstream file_to_read(accounts_file, std::ios_base::in);
-        std::string user_name_accumulator, password_accumulator;
-
-        while(file_to_read >> user_name_accumulator >> password_accumulator)
-        {
-            add_to_list({user_name_accumulator, password_accumulator, "0"});
-        }
-
-        file_to_read.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
+    for(const auto& to_give : user.users) out << *to_give.second;
+    return out;
 }
 
-void Users_list::save_to_file(const std::string& accounts_file)
+std::istream& operator>>(std::istream& in, Users_list& user)
 {
-    try
-    {
-        std::fstream file_archiver(accounts_file, std::ios_base::out);
-        std::string string_to_give_to_file;
-
-        for(const auto& z : this->users)
-        {
-            auto x = z.second->get_credential();
-            string_to_give_to_file += x.first + " " + x.second +"\n";
-        }
-
-        file_archiver << string_to_give_to_file;
-        file_archiver.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
+    Account temp{};
+    while(in >> temp)user.add_to_list
+    ({temp.get_credential().first, temp.get_credential().second, "0"});
+    return in;
 }
