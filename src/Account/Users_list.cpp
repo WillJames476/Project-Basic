@@ -53,15 +53,10 @@ void Users_list::load_from_file(const std::string& accounts_file)
     try
     {
         std::fstream file_to_read(accounts_file, std::ios_base::in);
-        std::string user_name_accumulator, password_accumulator, line_accumulator,
-        communication_lines_accumulator;
+        std::string user_name_accumulator, password_accumulator;
 
-        while(std::getline(file_to_read, line_accumulator))
+        while(file_to_read >> user_name_accumulator >> password_accumulator)
         {
-            replace_char_with(line_accumulator,',', ' ');
-            std::istringstream(line_accumulator) >> user_name_accumulator 
-            >> password_accumulator >> communication_lines_accumulator;
-
             add_to_list({user_name_accumulator, password_accumulator, "0"});
         }
 
@@ -83,7 +78,7 @@ void Users_list::save_to_file(const std::string& accounts_file)
         for(const auto& z : this->users)
         {
             auto x = z.second->get_credential();
-            string_to_give_to_file += x.first + "," + x.second +"\n";
+            string_to_give_to_file += x.first + " " + x.second +"\n";
         }
 
         file_archiver << string_to_give_to_file;

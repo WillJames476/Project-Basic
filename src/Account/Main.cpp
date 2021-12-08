@@ -5,7 +5,7 @@
 
 int main()
 {
-    std::string user{accounts_manager("users/users.csv")};
+    std::string user{accounts_manager("users/users.txt")};
     transmit_data(user + " " + user);
     return 0;
 }

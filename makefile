@@ -25,6 +25,9 @@ chat_program = chat
 exit_program = exit
 contacts_program = cbook
 
+build:
+	make login && make task && make comm_lines && make conversation && make exiter && make contacts
+
 install: 
 	mkdir users && touch users/users.csv && mkdir tmp | echo essentials installed!!
 
@@ -48,6 +51,3 @@ contacts:
 
 exiter:
 	$(compiler) $(exit) $(misc) $(flags) $(exit_program)
-
-build:
-	make login && make task && make comm_lines && make conversation && make exiter && make contacts
