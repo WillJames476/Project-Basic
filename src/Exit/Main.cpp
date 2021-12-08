@@ -14,6 +14,7 @@ int main()
 
     std::istringstream(received_data) >> datas[0] >> datas[1];
     std::cout << received_data << " " << "exiting program\n";
-    add_to_log({datas[0], datas[1]});
+
+    if(!datas[0].empty())add_to_log({datas[0], datas[1]});
     return 0;
 }
