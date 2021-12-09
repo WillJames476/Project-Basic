@@ -16,7 +16,7 @@ chat1 = src/Chat/Message_menu.cpp
 
 cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp src/ContactBook/Contacts_book_menu.cpp
 
-exit = src/Exit/Main.cpp src/loging/loger.cpp
+exit = src/Exit/Main.cpp src/loging/loger.cpp src/Exit/Exitui.cpp
 
 account_program = account
 task_program = todolist
@@ -50,4 +50,4 @@ contacts:
 	$(compiler) $(cbooks) $(misc) $(flags) $(contacts_program)
 
 exiter:
-	$(compiler) $(exit) $(misc) $(flags) $(exit_program)
+	$(compiler) $(exit) $(misc) -lncurses $(flags) $(exit_program)

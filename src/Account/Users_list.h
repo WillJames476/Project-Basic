@@ -2,7 +2,7 @@
 #define ACCOUNTS_H
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <iostream>
 
@@ -12,7 +12,7 @@
 class Users_list : public List_management
 {
     private:
-        std::map<std::string, std::shared_ptr<Account>> users;
+        std::unordered_map<std::string, std::shared_ptr<Account>> users;
     public:
         void add_to_list(const std::initializer_list<std::string>& credentials);
         void remove_from_list(const std::initializer_list<std::string>& crdentials);
