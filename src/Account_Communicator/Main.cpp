@@ -6,12 +6,7 @@
 
 int main()
 {
-    std::string user{receive_data()},acesed_user{};
-    
-    if(!user.empty())
-    {
-        std::istringstream(user) >> acesed_user;
-        transmit_data(communication_line_menu(acesed_user));
-    }
+    std::array<std::string,2> user{receive_data()};
+    if(!user[0].empty())transmit_data(communication_line_menu(user[0]));
     return 0;
 }

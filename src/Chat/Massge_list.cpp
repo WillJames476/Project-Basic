@@ -18,10 +18,7 @@ void Message_list::remove_from_list(const std::initializer_list<std::string>& fi
 
 void Message_list::print_list(const std::string& name_of_user)
 {
-    for(auto& x : this->messages)
-    {
-        if(x.get_name() == name_of_user)x.print_message();   
-    }
+    for(auto& x : this->messages)if(x.get_name() == name_of_user)x.print_message();   
 }
 
 std::ostream& operator<<(std::ostream& out, const Message_list& field)

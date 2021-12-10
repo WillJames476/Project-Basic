@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <sstream>
+
 #include "Transmitter.h"
 
 void transmit_data(const std::string& data_to_transfer)
@@ -18,12 +20,16 @@ void transmit_data(const std::string& data_to_transfer)
     close(transmission);
 }
 
-std::string receive_data()
+std::array<std::string,2> receive_data()
 {
     char datas[32];
     int transmission = open("tmp/cows", O_RDONLY);
     read(transmission, datas, 32);
     remove("tmp/cows");
     close(transmission);
-    return datas;
+
+    std::array<std::string,2> strings_to_return;
+    std::istringstream(datas) >> strings_to_return[0] >> strings_to_return[1];
+    
+    return strings_to_return;
 }

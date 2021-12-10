@@ -11,10 +11,7 @@
 
 int main()
 {
-    std::string received_data{receive_data()};
-    std::array<std::string,2>datas;
-
-    std::istringstream(received_data) >> datas[0] >> datas[1];
+    std::array<std::string,2>datas{receive_data()};
     initscr();
     noecho();
     exit_ui(datas[0] + " " + datas[1]);
