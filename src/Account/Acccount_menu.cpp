@@ -64,7 +64,7 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
 char accounts_manager_menu()
 {
     std::ostringstream menu;
-    menu << "\n=================================\n"
+    menu  << "\n=================================\n"
           << "1\tadd a user\n"
           << "2\tremove a user\n"
           << "3\tuser login\n"

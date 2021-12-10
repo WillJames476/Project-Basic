@@ -6,6 +6,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iostream>
+#include <curses.h>
 
 template <typename T>
 T get_integral(const std::string& request, T min, T max)

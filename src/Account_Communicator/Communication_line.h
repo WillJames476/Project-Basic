@@ -14,6 +14,7 @@ class Communication_lines : public List_management
         void remove_from_list(const std::initializer_list<std::string>& fields);
         std::string get_item_from_list(const std::initializer_list<std::string>& fields) const;
         void alter_permission(const std::string& user_current, const std::string& user_target);
+        
         friend void load_from_file(const std::string& file_name, Communication_lines& lines);
         friend void save_to_file(const std::string& file_name, const Communication_lines& lines);
         friend std::ostream& operator<<(std::ostream& out,const Communication_lines& lines);
