@@ -2,16 +2,19 @@
 #include <chrono>
 #include <fstream>
 #include <filesystem>
+#include <array>
 
 #include "Message_list.h"
 #include "Message_menu.h"
 #include "../Utilities/io.h"
 
-void save_to_file(const std::string& file_name, Message_list& messages)
+void save_to_file(const std::array<std::string, 2>& file_name, 
+Message_list& messages)
 {
     try
     {
-        std::fstream file_to_read(file_name, std::ios_base::out);
+        std::fstream file_to_read("users/" + file_name[0] + "/chats/" 
+        + file_name[0] + "_" + file_name[1] + ".txt", std::ios_base::out);
         file_to_read << messages;
         file_to_read.close();
     }
@@ -21,11 +24,18 @@ void save_to_file(const std::string& file_name, Message_list& messages)
     } 
 }
 
-void load_from_file(const std::string& file_name, Message_list& messages)
+void load_from_file(const std::array<std::string, 2>& file_name, 
+Message_list& messages)
 {
+    if(!std::filesystem::exists("users/" + file_name[0] + "/chats"))
+    {
+        std::filesystem::create_directory("users/" + file_name[0] + "/chats");
+    }
+
     try
     {
-        std::fstream file_to_read(file_name, std::ios_base::in);
+        std::fstream file_to_read("users/" + file_name[0] + "/chats/" 
+        + file_name[0] + "_" + file_name[1] + ".txt", std::ios_base::in);
         file_to_read >> messages;
         file_to_read.close();
     }
@@ -35,8 +45,8 @@ void load_from_file(const std::string& file_name, Message_list& messages)
     }
 }
 
-void message_control_flow(Message_list& messages, const std::string& acessor,
-char menu_choice, bool& menu_replay)
+void message_control_flow(Message_list& messages, const Message_list& temp, 
+const std::string& acessor, char menu_choice, bool& menu_replay)
 {
     switch(menu_choice)
     {
@@ -48,7 +58,7 @@ char menu_choice, bool& menu_replay)
             (std::chrono::system_clock::now()))});
             break;
         case '2':
-            messages.print_list(acessor);
+            std::cout << temp;
             break;
         case '3':
             menu_replay = false;
@@ -67,18 +77,20 @@ char message_menu()
     return get_integral<char>(menu.str(), '0', '4');
 }
 
-void message(const std::string& file_name, const std::string& accesor)
+void message(const std::array<std::string,2>& users)
 {
-    Message_list subject{};
+    Message_list subject{}, second{}, temp{};
     bool menu_replay{true};
 
-    load_from_file(file_name, subject);
-
-    while(menu_replay)
+    load_from_file({users[0], users[1]}, subject);
+    load_from_file({users[1],users[0]}, second);
+    
+    while(menu_replay)    
     {
-        message_control_flow(subject, accesor, message_menu(),
+        temp = subject + second;
+        message_control_flow(subject,temp, users[0], message_menu(),
         menu_replay);
     }
 
-    save_to_file(file_name, subject);
+    save_to_file({users[0],users[1]}, subject);
 }

@@ -21,6 +21,16 @@ void Message_list::print_list(const std::string& name_of_user)
     for(auto& x : this->messages)if(x.get_name() == name_of_user)x.print_message();   
 }
 
+Message_list operator+(const Message_list& first, const Message_list& second)
+{
+    Message_list temp{};
+    for(auto received : first.messages)temp.messages.push_back(received);
+    for(auto received : second.messages)temp.messages.push_back(received);
+    std::sort(temp.messages.begin(), temp.messages.end());
+
+    return temp;
+}
+
 std::ostream& operator<<(std::ostream& out, const Message_list& field)
 {
     for(auto& send : field.messages) out << send;

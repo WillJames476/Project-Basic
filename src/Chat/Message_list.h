@@ -14,6 +14,7 @@ class Message_list : public List_management
         void remove_from_list(const std::initializer_list<std::string>& fields);
         void print_list(const std::string& user_name);
 
+        friend Message_list operator+(const Message_list& first, const Message_list& second);
         friend std::ostream& operator<<(std::ostream& out,const Message_list& field);
         friend std::istream& operator>>(std::istream& in, Message_list& field);
 };  

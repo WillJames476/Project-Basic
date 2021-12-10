@@ -12,6 +12,7 @@ class Message_tuple
         std::tuple<std::string, std::string, std::time_t> message;
     public:
         Message_tuple();
+        Message_tuple(const Message_tuple& copy) = default;
         Message_tuple(const std::initializer_list<std::string>& fields);
         void print_message();
         std::string get_name();

@@ -2,7 +2,8 @@
 #define MESSAGE_MENU_H
 
 #include <string>
+#include <array>
 
-void message(const std::string& file_name, const std::string& accesor);
+void message(const std::array<std::string,2>& users);
 
 #endif
