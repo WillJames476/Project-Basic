@@ -15,7 +15,7 @@ void add_to_log(const std::initializer_list<std::string>& fields)
     try
     {
         std::fstream loging
-        ("users/" + datas[0] + "/" + datas[1] + "_logs.txt", std::ios_base::app);
+        ("users/" + datas[0] + "/" + datas[0] + "_logs.txt", std::ios_base::app);
 
         std::stringstream to_write;
         std::time_t current_time = std::chrono::system_clock::to_time_t

@@ -88,7 +88,7 @@ void message(const std::array<std::string,2>& users)
     while(menu_replay)    
     {
         temp = subject + second;
-        message_control_flow(subject,temp, users[0], message_menu(),
+        message_control_flow(subject,temp, users[1], message_menu(),
         menu_replay);
     }
 
