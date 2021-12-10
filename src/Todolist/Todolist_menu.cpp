@@ -120,7 +120,6 @@ void remove_task_control_flow(Task_list& task_list, char menu_choice)
             std::to_string(task_due.tm_mday)});
             break;
         case '2':
-            while(task_list.is_existing(task_name))
             task_list.remove_all_from_list(task_name);
             break;
     }
@@ -148,7 +147,7 @@ void print_task_control_flow(Task_list& task_list, char menu_choice)
             task_list.print_task_for_this_day();
             break;
         case '2':
-            task_list.print_task_list();
+            std::cout << task_list;
             break;
     }
 }

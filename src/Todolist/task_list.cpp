@@ -28,21 +28,18 @@ void Task_list::remove_from_list(const std::initializer_list<std::string>& field
     temp.tm_mon = std::stoi(datas[1]);
     temp.tm_mday = std::stoi(datas[2]);
 
-    task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
-    [&](auto test)
-    {return test.test_var(datas[0], temp);}));
+    Task tmp{datas[0], temp};
+
+    task_list.erase(std::remove(task_list.begin(), task_list.end(), tmp));
 }
 
 void Task_list::remove_all_from_list(const std::string& task_name)
 {
-    task_list.erase(std::remove_if(task_list.begin(), task_list.end(),
-    [task_name](const auto& test){return test == task_name;}));
-}
-
-void Task_list::print_task_list()
-{
-    std::for_each(this->task_list.begin(), this->task_list.end(),
-    [](Task& task){task.print_task();});
+    while(std::any_of(task_list.begin(), task_list.end(),
+    [&](auto task){return task == task_name;}))
+    {
+        task_list.erase(std::remove(task_list.begin(), task_list.end(), task_name));
+    }
 }
 
 void Task_list::sort_by_date()
@@ -77,14 +74,7 @@ void Task_list::print_task_for_this_day()
         [](const auto& z,const auto& x)
         {return x->tm_mday != z.get_dates().tm_mday;})
     ,[](auto f)
-    {f.print_task();});
-}
-
-bool Task_list::is_existing(const std::string& task_name) const
-{
-    return std::any_of(this->task_list.begin(), this->task_list.end(),
-    [&](auto& x)
-    {return x.get_task_name() == task_name;});
+    {std::cout << f;});
 }
 
 std::ostream& operator<<(std::ostream& out, const Task_list& tasks)

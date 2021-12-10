@@ -12,9 +12,7 @@ class Task_list : public List_management
     private:
         std::vector <Task>task_list;
     public:
-        bool is_existing(const std::string& task_name) const;
         void add_to_list(const std::initializer_list<std::string>& fields);
-        void print_task_list();
         void remove_from_list(const std::initializer_list<std::string>& fields);
         void remove_all_from_list(const std::string& task_name);
         void sort_by_date();
