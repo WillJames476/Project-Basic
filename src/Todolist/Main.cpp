@@ -13,7 +13,7 @@ int main()
 
     if(!datas[0].empty() && std::filesystem::exists("users/" + datas[0]))
     {
-        task_manager("users/"+ datas[0] + "/" + datas[0] + "_tasks.txt");
+        task_manager(datas);
         transmit_data(datas[0] + " " + datas[1]);
     }
     
