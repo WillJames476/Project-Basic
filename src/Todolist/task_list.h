@@ -5,14 +5,13 @@
 #include <vector>
 #include <string>
 
-#include "../Utilities/List_management.h"
-
-class Task_list : public List_management
+class Task_list
 {
     private:
         std::vector <Task>task_list;
     public:
-        void add_to_list(const std::initializer_list<std::string>& fields);
+        void add_to_list(const std::string& task_name, const std::tm& task_time, 
+        const std::string& task_giver);
         void remove_from_list(const std::initializer_list<std::string>& fields);
         void remove_all_from_list(const std::string& task_name);
         void sort_by_date();

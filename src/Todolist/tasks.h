@@ -9,10 +9,12 @@ class Task
 {
     private:    
         std::string task_name;
+        std::string task_giver;
         std::tm task_time_due;
     public:
-        Task();
-        Task(const std::string& task_name, const std::tm& task_time_due);
+        Task() = default;
+        Task(const std::string& name, const std::tm& task_due);
+        Task(const std::string& name,const std::string& giver, const std::tm& task_time_due);
         std::time_t get_task_time();
         std::tm get_dates() const;
         

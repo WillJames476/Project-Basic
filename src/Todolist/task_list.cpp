@@ -8,15 +8,10 @@
 #include "../Utilities/io.h"
 #include "tasks.h"
 
-void Task_list::add_to_list(const std::initializer_list<std::string>& fields)
+void Task_list::add_to_list(const std::string& task_name, const std::tm& task_time, 
+const std::string& task_giver)
 {
-    std::tm temp;
-    std::vector<std::string> datas;
-    for(const auto& x : fields)datas.push_back(x);
-
-    temp.tm_mon = std::stoi(datas[1]);
-    temp.tm_mday = std::stoi(datas[2]);
-    task_list.push_back(Task(datas[0], temp));
+    task_list.push_back(Task{task_name, task_giver,task_time});
 }
 
 void Task_list::remove_from_list(const std::initializer_list<std::string>& fields)

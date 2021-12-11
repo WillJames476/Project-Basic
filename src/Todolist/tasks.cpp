@@ -5,15 +5,17 @@
 
 #include "../Utilities/io.h"
 
-Task::Task()
-{
-
-}
-
 Task::Task(const std::string& name_given, const std::tm& due_given)
-: task_name{name_given}, task_time_due{due_given}
+: task_name{name_given},task_giver{}, task_time_due{due_given}
 {
 }
+
+Task::Task(const std::string& name_given,const std::string& giver,
+const std::tm& due_given)
+: task_name{name_given},task_giver{giver}, task_time_due{due_given}
+{
+}
+
 
 std::time_t Task::get_task_time() 
 {
@@ -39,12 +41,14 @@ bool operator==(const Task& task,const std::string& to_compare)
 
 std::ostream& operator<<(std::ostream& out,Task& task)
 {
-    out << task.task_name << " " << task.task_time_due.tm_mon << " " << task.task_time_due.tm_mday << '\n';
+    out << task.task_name << " " << task.task_time_due.tm_mon 
+    << " " << task.task_time_due.tm_mday << " " << task.task_giver<< '\n';
     return out;
 }
 
 std::istream& operator>>(std::istream& in, Task& task)
 {
-    in >> task.task_name >> task.task_time_due.tm_mon >> task.task_time_due.tm_mday;
+    in >> task.task_name >> task.task_time_due.tm_mon 
+    >> task.task_time_due.tm_mday >> task.task_giver;
     return in;
 }

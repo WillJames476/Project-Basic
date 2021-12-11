@@ -44,8 +44,7 @@ bool is_daily)
     {
         for(;time_start.tm_mday <= constants::months_ceiling[time_start.tm_mon];time_start.tm_mday+= day_increment)
         {
-            task_list.add_to_list({task_name, 
-            std::to_string(time_start.tm_mon), std::to_string(time_start.tm_mday)});
+            task_list.add_to_list(task_name, time_start, "nil");
         }
 
         if(is_daily) time_start.tm_mday = 1;
@@ -74,8 +73,7 @@ void add_task_control_flow(Task_list& task_list, char menu_choice)
     switch (menu_choice)
     {
         case '1':
-            task_list.add_to_list({task_name, std::to_string(task_due.tm_mon), 
-            std::to_string(task_due.tm_mday)});
+            task_list.add_to_list(task_name, task_due, "nil");
             break;
         case '2':
             add_task_incrementally(task_name, task_due, task_list, 
@@ -191,7 +189,7 @@ char menu_choice, bool& menu_replay)
 
 void task_manager(const std::string& user_file)
 {
-    Task_list task_list;
+    Task_list task_list{};
     bool menu_replay{true};
 
     load_from_file(user_file, task_list);
