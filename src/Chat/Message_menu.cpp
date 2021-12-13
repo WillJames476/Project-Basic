@@ -3,9 +3,10 @@
 #include <fstream>
 #include <filesystem>
 #include <array>
+#include <vector>
 
 #include "Message_list.h"
-#include "Message_menu.h"
+#include "Message_tuple.h"
 #include "../Utilities/io.h"
 
 void save_to_file(const std::array<std::string, 2>& file_name, 
@@ -80,7 +81,6 @@ void message(const std::array<std::string,2>& users)
 {
     Message_list subject{}, second{}, temp{};
     bool menu_replay{true};
-
     load_from_file({users[0], users[1]}, subject);
     load_from_file({users[1],users[0]}, second);
     

@@ -9,6 +9,7 @@ class Message_list
     private:
         std::vector<Message_tuple>messages;
     public:
+        Message_list() = default;
         void add_to_list(const std::string& user, const std::string& message,const long time);
 
         friend Message_list operator+(const Message_list& first, const Message_list& second);

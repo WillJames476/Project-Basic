@@ -10,10 +10,10 @@ const long time)
 Message_list operator+(const Message_list& first, const Message_list& second)
 {
     Message_list temp{};
-    for(auto received : first.messages)temp.messages.push_back(received);
-    for(auto received : second.messages)temp.messages.push_back(received);
-    std::sort(temp.messages.begin(), temp.messages.end());
+    std::merge(first.messages.begin(), first.messages.end(),
+    second.messages.begin(), second.messages.end(),std::back_inserter(temp.messages));
 
+    std::sort(temp.messages.begin(), temp.messages.end());
     return temp;
 }
 
