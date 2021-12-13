@@ -3,16 +3,16 @@
 
 #include<string>
 #include<unordered_map>
-#include "../Utilities/List_management.h"
 
-class Communication_lines : public List_management
+class Communication_lines 
 {
     private:
         std::unordered_map<std::string, bool>communication_lines;
     public:
-        void add_to_list(const std::initializer_list<std::string>& fields);
-        void remove_from_list(const std::initializer_list<std::string>& fields);
-        std::string get_item_from_list(const std::initializer_list<std::string>& fields) const;
+        Communication_lines() = default;
+        void add_to_list(const std::string& user, bool is_permitted);
+        void remove_from_list(const std::string& user_to_remove);
+        std::string get_item_from_list(const std::string& user_to_get) const;        
         void alter_permission(const std::string& user_current, const std::string& user_target);
         
         friend void load_from_file(const std::string& file_name, Communication_lines& lines);

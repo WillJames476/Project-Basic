@@ -12,7 +12,8 @@ char get_menu_choice()
          << "2\tremove a communication line\n"
          << "3\tview all communication line\n"
          << "4\talter other user's permission on your files\n"
-         << "5\tacces a communication line and exit\n"
+         << "5\tacces a communication line and exit the\n"
+         << " \tcommunication line sector\n"
          << "enter you choice here: ";
     
     return get_integral<char>(menu.str(),'0','6');
@@ -25,14 +26,14 @@ std::string& file_name, bool& menu_replay, const std::string& permanent_user)
     {
         case '1':
             comms.add_to_list
-            ({get_string("enter the name of user here: ",
-            string_predicates("Default")),"0"});
+            (get_string("enter the name of user here: ",
+            string_predicates("Default")), 0);
             break;
         case '2':
             std::cout << comms;
             comms.remove_from_list
-            ({get_string("enter the name of user here: ",
-            string_predicates("Default"))});
+            (get_string("enter the name of user here: ",
+            string_predicates("Default")));
             break;
         case '3':
             std::cout << comms;
@@ -46,8 +47,8 @@ std::string& file_name, bool& menu_replay, const std::string& permanent_user)
             {
                 std::cout << comms;
                 file_name = comms.get_item_from_list
-                ({get_string("enter the name of user here: ",
-                string_predicates("Default"))});
+                (get_string("enter the name of user here: ",
+                string_predicates("Default")));
                 menu_replay = false;
             }  
             break;
@@ -57,12 +58,12 @@ std::string& file_name, bool& menu_replay, const std::string& permanent_user)
 
 std::string communication_line_menu(std::string& file_name)
 {
-    Communication_lines comms;
+    Communication_lines comms{};
     bool menu_replay{true};
     const std::string permanent_file_name{"users/" + file_name + "/" + file_name + "_comms.txt"},
     permanent_user{file_name};
     
-    comms.add_to_list({permanent_user,"1"});
+    comms.add_to_list(permanent_user, 1);
     load_from_file(permanent_file_name, comms);
     while(menu_replay)
     {
