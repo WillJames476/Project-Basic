@@ -4,7 +4,6 @@
 #include "Todolist_menu.h"
 #include "task_list.h"
 #include "constants.h"
-#include "../Utilities/List_functionalities.h"
 #include "../Utilities/io.h"
 
 void load_from_file(const std::string& file_name, Task_list& tasks)

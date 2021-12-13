@@ -42,13 +42,13 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
     {
         case '1':
             accounts.add_to_list
-            ({get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here:", string_predicates("Default")),"1"});
+            (get_string("enter the user name here: ", string_predicates("Default")), 
+            get_string("enter the password here:" , string_predicates("Default")),"1");
             break;
         case '2':
             accounts.remove_from_list
-            ({get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here: ", string_predicates("Default"))});
+            (get_string("enter the user name here: ", string_predicates("Default")), 
+            get_string("enter the password here: ", string_predicates("Default")));
             break;
         case '3':
             user_file = accounts.account_login
@@ -68,7 +68,7 @@ char accounts_manager_menu()
           << "1\tadd a user\n"
           << "2\tremove a user\n"
           << "3\tuser login\n"
-          << "4\texit program\n"
+          << "4\texit login sector\n"
           << "enter your choice here: ";
     return get_integral<char>(menu.str(),'0','5');
 }

@@ -7,15 +7,14 @@
 #include <iostream>
 
 #include "Account.h"
-#include "../Utilities/List_management.h"
 
-class Users_list : public List_management
+class Users_list
 {
     private:
         std::unordered_map<std::string, std::shared_ptr<Account>> users;
     public:
-        void add_to_list(const std::initializer_list<std::string>& credentials);
-        void remove_from_list(const std::initializer_list<std::string>& crdentials);
+        void add_to_list(const std::string& user_name, const std::string& user_pass, bool is_new); 
+        void remove_from_list(const std::string& user_name, const std::string& user_pass);
         std::string account_login(const std::string& account_name, const std::string& account_password) const;
         
         friend void make_new_file(const std::string& account_name);
