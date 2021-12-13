@@ -41,10 +41,10 @@ bool& menu_replay)
     {
         case '1':
             contacts.add_to_list
-            ({get_string("enter the name here: ", 
+            (get_string("enter the name here: ", 
             string_predicates("Default")),
             get_string("enter the number here: ", 
-            string_predicates("Contact"))});
+            string_predicates("Contact")));
             break;
         case '2':
             contacts.remove_from_list
@@ -53,8 +53,8 @@ bool& menu_replay)
             break;
         case '3':
             std::cout << contacts.get_item_from_list
-            ({get_string("enter the name here: ",
-            string_predicates("Default"))});
+            (get_string("enter the name here: ",
+            string_predicates("Default")));
             break;
         case '4':
             std::cout << contacts;
