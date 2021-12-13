@@ -11,25 +11,10 @@ Message_tuple::Message_tuple()
 
 }
 
-Message_tuple::Message_tuple(const std::initializer_list<std::string>& fields)
+Message_tuple::Message_tuple(const std::string& user, const std::string& message,
+const long time)
 {
-    std::vector<std::string> datas;
-    for(auto& x : fields)datas.push_back(x);
-    this->message = std::make_tuple(datas[0], datas[1], std::stol(datas[2]));
-}
-
-void Message_tuple::print_message()
-{
-    std::ostringstream to_print;
-    to_print << std::get<0>(this->message) << ">" 
-    << std::get<1>(this->message) << " "
-    << std::asctime(std::localtime(&std::get<2>(this->message))) << '\n';
-    std::cout << to_print.str();
-}
-
-std::string Message_tuple::get_name()
-{
-    return std::get<0>(this->message);
+    this->message = std::make_tuple(user, message, time);
 }
 
 std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)

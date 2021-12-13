@@ -1,24 +1,10 @@
 #include <algorithm>
 #include "Message_list.h"
 
-void Message_list::add_to_list(const std::initializer_list<std::string>& fields)
+void Message_list::add_to_list(const std::string& user, const std::string& message,
+const long time)
 {
-    std::vector<std::string> datas;
-    for(const auto& x : fields)datas.push_back(x);
-    this->messages.push_back(Message_tuple({datas[0], datas[1], datas[2]}));
-}
-
-void Message_list::remove_from_list(const std::initializer_list<std::string>& fields)
-{
-    std::vector<std::string> datas;
-    for(const auto& x : fields)datas.push_back(x);
-    auto x = Message_tuple{datas[0], datas[1], datas[2]};
-    this->messages.erase(std::upper_bound(this->messages.begin(), this->messages.end(), x));
-}
-
-void Message_list::print_list(const std::string& name_of_user)
-{
-    for(auto& x : this->messages)if(x.get_name() == name_of_user)x.print_message();   
+    this->messages.push_back(Message_tuple(user, message, time));
 }
 
 Message_list operator+(const Message_list& first, const Message_list& second)

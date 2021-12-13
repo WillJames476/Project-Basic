@@ -3,16 +3,13 @@
 
 #include <vector>
 #include "Message_tuple.h"
-#include "../Utilities/List_management.h"
 
-class Message_list : public List_management
+class Message_list
 {
     private:
         std::vector<Message_tuple>messages;
     public:
-        void add_to_list(const std::initializer_list<std::string>& fields);
-        void remove_from_list(const std::initializer_list<std::string>& fields);
-        void print_list(const std::string& user_name);
+        void add_to_list(const std::string& user, const std::string& message,const long time);
 
         friend Message_list operator+(const Message_list& first, const Message_list& second);
         friend std::ostream& operator<<(std::ostream& out,const Message_list& field);
