@@ -32,7 +32,7 @@ install:
 	mkdir users && touch users/users.csv && mkdir tmp | echo essentials installed!!
 
 uninstall:
-	rm -rf *
+	rm -rf users tmp account cbook chat comline exit src
 
 login:
 	$(compiler) $(accounts) $(accounts1) $(misc) $(flags) $(account_program) 
