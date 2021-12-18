@@ -7,8 +7,6 @@
 
 class Task_list
 {
-    private:
-        std::vector <Task>task_list;
     public:
         void add_to_list(const std::string& task_name, const std::tm& task_time, 
         const std::string& task_giver);
@@ -20,6 +18,9 @@ class Task_list
 
         friend std::ostream& operator<<(std::ostream& out,const Task_list& tasks);
         friend std::istream& operator>>(std::istream& in, Task_list& tasks);
-};      
+
+	private:
+		std::vector<Task> task_list;
+};
 
 #endif

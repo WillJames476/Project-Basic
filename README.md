@@ -1,5 +1,5 @@
-# Todolist
-* A basic todolist app, with acount management
+# Project Beginner
+* A basic set of applicatons.
 * disclaimer this program's account system does
   minimal security measures, it is highly recomended
   to use burner accounts
