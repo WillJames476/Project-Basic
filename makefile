@@ -15,6 +15,7 @@ chat = src/Chat/Main.cpp src/Chat/Message_tuple.cpp src/Chat/Massge_list.cpp
 chat1 = src/Chat/Message_menu.cpp
 
 cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp src/ContactBook/Contacts_book_menu.cpp
+cbooks1 = src/ContactBook/Contacts.cpp
 
 exit = src/Exit/Main.cpp src/loging/loger.cpp src/Exit/Exitui.cpp
 
@@ -47,7 +48,7 @@ conversation:
 	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
 
 contacts:
-	$(compiler) $(cbooks) $(misc) $(flags) $(contacts_program)
+	$(compiler) $(cbooks) $(cbooks1) $(misc) $(flags) $(contacts_program)
 
 exiter:
 	$(compiler) $(exit) $(misc) -lncurses $(flags) $(exit_program)
