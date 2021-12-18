@@ -1,4 +1,4 @@
-# Project Beginner
+# Project Basic
 * A basic set of applicatons.
 * disclaimer this program's account system does
   minimal security measures, it is highly recomended
