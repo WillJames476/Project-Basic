@@ -45,7 +45,9 @@ bool& menu_replay)
             (Contacts{get_string("enter the name here: ", 
             string_predicates("Default")),
             get_string("enter the number here: ", 
-            string_predicates("Contact")), "undefined"});
+            string_predicates("Contact")), 
+			get_string("enter the email here: ",
+			string_predicates("Email"))});
             break;
         case '2':
             contacts.remove_from_list

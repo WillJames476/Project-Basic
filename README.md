@@ -7,6 +7,7 @@
 # Prerequisites
 * c++20 compliant compiler
 * unix-like systems / posix compliant systems
+* ncurses
 
 # Instalation
 1. clone the repository

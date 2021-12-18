@@ -13,14 +13,11 @@ std::function<bool(char)> string_predicates(const std::string& protocol)
 {
     std::unordered_map<std::string, std::function<bool(char)>> predicates;
 
-    predicates.insert(std::make_pair("Default", 
-    [](char test){return isalpha(test);}));
-    predicates.insert(std::make_pair("AlphaSpace",
-    [](char test){return isalpha(test) || isspace(test);}));
-    predicates.insert(std::make_pair("Message",
-    [](char test){return isprint(test) || isspace(test) || iscntrl(test);}));
-    predicates.insert(std::make_pair("Contact",
-    [](char test){return isdigit(test);}));
+    predicates.insert(std::make_pair("Default", [](char test){return isalpha(test);}));
+    predicates.insert(std::make_pair("AlphaSpace",[](char test){return isalpha(test) || isspace(test);}));
+    predicates.insert(std::make_pair("Message",[](char test){return isprint(test) || isspace(test) || iscntrl(test);}));
+    predicates.insert(std::make_pair("Contact",[](char test){return isdigit(test);}));
+	predicates.insert(std::make_pair("Email",[](char test){return isprint(test);}));
 
     auto x = predicates.find(protocol);
     if(x == predicates.end()) return predicates.find("Default")->second;
