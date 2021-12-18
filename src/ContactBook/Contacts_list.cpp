@@ -15,15 +15,15 @@ void Contacts_list::remove_from_list(const std::string& name_to_erase)
 
 std::string Contacts_list::get_item_from_list(const std::string& name_to_find) const
 {
-    std::string string_to_return{};
+    std::ostringstream string_to_return{};
     auto item_iter = std::find(contacts_list.begin(), contacts_list.end(), name_to_find);
-	if(item_iter != contacts_list.end()) 
+
+	if(item_iter != contacts_list.end())
 	{
-		std::ostringstream(string_to_return) 
-		<< contacts_list[std::distance(contacts_list.begin(),item_iter)];
+		string_to_return << contacts_list[std::distance(contacts_list.begin(),item_iter)];
 	}
 
-	return string_to_return;
+	return string_to_return.str();
 }
 
 
