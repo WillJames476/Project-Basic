@@ -3,6 +3,7 @@
 
 #include "Contacts_book_menu.h"
 #include "Contacts_list.h"
+#include "Contacts.h"
 #include "../Utilities/io.h"
 
 void load_from_file(const std::string& file_name, Contacts_list& contacts)
@@ -41,10 +42,10 @@ bool& menu_replay)
     {
         case '1':
             contacts.add_to_list
-            (get_string("enter the name here: ", 
+            (Contacts{get_string("enter the name here: ", 
             string_predicates("Default")),
             get_string("enter the number here: ", 
-            string_predicates("Contact")));
+            string_predicates("Contact")), "undefined"});
             break;
         case '2':
             contacts.remove_from_list

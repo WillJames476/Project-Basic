@@ -9,11 +9,16 @@ Contacts::Contacts(const std::string& name, const std::string& number,
 {
 }
 
+bool operator== (const Contacts& left, const std::string& right)
+{
+	return std::get<0>(left.contact) == right;
+}
+
 std::ostream& operator<< (std::ostream& out, const Contacts& to_give)
 {
 	std::ostringstream extractor;
-	extractor << std::get<0>(to_give.contact)
-			<< std::get<1>(to_give.contact)
+	extractor << std::get<0>(to_give.contact) << " "
+			<< std::get<1>(to_give.contact) << " "
 			<< std::get<2>(to_give.contact) <<'\n';
 
 	out << extractor.str();

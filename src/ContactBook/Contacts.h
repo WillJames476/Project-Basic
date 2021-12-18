@@ -8,12 +8,13 @@
 class Contacts
 {
 	public:
-		Contacts();
+		Contacts() = default;
 		Contacts(const std::string& name, const std::string& number, 
 				const std::string& email);
-		Contacts& operator=(Contacts& to_copy) = default;
+		Contacts& operator=(const Contacts& to_copy) = default;
 		~Contacts() = default;
 
+		friend bool operator== (const Contacts& left, const std::string& right);
 		friend std::ostream& operator<<(std::ostream& out, const Contacts& to_give);
 		friend std::istream& operator>>(std::istream& in, Contacts& to_modify);
 
