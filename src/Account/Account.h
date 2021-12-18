@@ -6,8 +6,6 @@
 
 class Account
 {
-    private:
-        std::pair<std::string, std::string> credentials;
     public:
         Account();
         Account(const std::string& user_name, const std::string& user_pass);
@@ -15,6 +13,9 @@ class Account
 
         friend std::ostream& operator<<(std::ostream& out, const Account& acount);
         friend std::istream& operator>>(std::istream& in, Account& acount);
+
+	private:
+		std::pair<std::string, std::string> credentials;
 };
 
 #endif
