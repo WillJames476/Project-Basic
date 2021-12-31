@@ -6,11 +6,13 @@
 #include <sstream>
 #include <algorithm>
 #include <iostream>
-#include <curses.h>
+#include <type_traits>
 
 template <typename T>
 T get_integral(const std::string& request, T min, T max)
 {
+    static_assert(std::is_integral<T>::value, "type must be integral\n");
+
     T to_return;
     bool verified{false};
 
