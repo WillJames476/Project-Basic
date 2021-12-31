@@ -9,9 +9,13 @@ Contacts::Contacts(const std::string& name, const std::string& number,
 {
 }
 
-bool operator== (const Contacts& left, const std::string& right)
+bool operator== (const Contacts& right, const Contacts& left)
 {
-	return std::get<0>(left.contact) == right;
+	bool is_equal = std::get<0>(left.contact) == std::get<0>(right.contact) &&
+	std::get<1>(left.contact) == std::get<1>(right.contact) &&
+	std::get<2>(left.contact) == std::get<2>(right.contact);
+
+	return is_equal;
 }
 
 std::ostream& operator<< (std::ostream& out, const Contacts& to_give)

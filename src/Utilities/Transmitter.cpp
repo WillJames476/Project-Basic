@@ -20,7 +20,7 @@ void transmit_data(const std::string& data_to_transfer)
     
     if(write(transmission,make,32))
     {
-        std::cerr << strerror(errno);
+        std::cerr << strerror(errno) << '\n';
     }
     
     close(transmission);
@@ -33,7 +33,7 @@ std::array<std::string,2> receive_data()
     
     if(read(transmission, datas, 32))
     {
-        std::cerr << strerror(errno);
+        std::cerr << strerror(errno) << '\n';
     }
 
     remove("tmp/cows");

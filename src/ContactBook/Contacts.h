@@ -14,7 +14,7 @@ class Contacts
 		Contacts& operator=(const Contacts& to_copy) = default;
 		~Contacts() = default;
 
-		friend bool operator== (const Contacts& left, const std::string& right);
+		friend bool operator== (const Contacts& right, const Contacts& left);
 		friend std::ostream& operator<<(std::ostream& out, const Contacts& to_give);
 		friend std::istream& operator>>(std::istream& in, Contacts& to_modify);
 

@@ -3,29 +3,38 @@
 
 #include "Contacts_list.h"
 
-void Contacts_list::add_to_list(const Contacts& to_add)
+void Contacts_list::add_item(const Contacts& to_add)
 {
 	contacts_list.push_back(to_add);
 }
 
-void Contacts_list::remove_from_list(const std::string& name_to_erase)
+void Contacts_list::remove_item(const Contacts& to_remove)
 {
-	contacts_list.erase(std::find(contacts_list.begin(), contacts_list.end(), name_to_erase));
+	contacts_list.erase(std::find(contacts_list.begin(), contacts_list.end(), to_remove));
 }
 
-std::string Contacts_list::get_item_from_list(const std::string& name_to_find) const
+void Contacts_list::print_items()
 {
-    std::ostringstream string_to_return{};
-    auto item_iter = std::find(contacts_list.begin(), contacts_list.end(), name_to_find);
-
-	if(item_iter != contacts_list.end())
+	for(const auto& data : contacts_list)
 	{
-		string_to_return << contacts_list[std::distance(contacts_list.begin(),item_iter)];
+		std::cout << data;
+	}
+}
+
+Contacts Contacts_list::get_item(const std::initializer_list<std::string>& datas)
+{
+	int tracker = 0;
+	std::array<std::string, 3> retrieved;
+	
+	for(const auto& x : datas)
+	{
+		retrieved[tracker] = x;
+		++tracker;
 	}
 
-	return string_to_return.str();
+	return contacts_list[std::distance(contacts_list.end(),(std::find(contacts_list.begin(), contacts_list.end(), 
+	Contacts{retrieved[0], retrieved[1], retrieved[2]})))];
 }
-
 
 std::ostream& operator<<(std::ostream& out, const Contacts_list& list)
 {
