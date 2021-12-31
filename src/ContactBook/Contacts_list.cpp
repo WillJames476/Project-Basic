@@ -32,8 +32,29 @@ Contacts Contacts_list::get_item(const std::initializer_list<std::string>& datas
 		++tracker;
 	}
 
-	return contacts_list[std::distance(contacts_list.end(),(std::find(contacts_list.begin(), contacts_list.end(), 
-	Contacts{retrieved[0], retrieved[1], retrieved[2]})))];
+	auto item = std::find(contacts_list.begin(), contacts_list.end(), 
+	Contacts{retrieved[0], retrieved[1], retrieved[2]});
+
+	if(item != contacts_list.end())
+	{
+		return contacts_list[std::distance(contacts_list.begin(),(item))];
+	}
+
+	std::cerr << "item is not found\n";
+	return Contacts{};
+}
+
+Contacts Contacts_list::get_item(const Contacts& to_find) const
+{
+	auto item = std::find(contacts_list.begin(), contacts_list.end(), to_find);
+
+	if(item != contacts_list.end())
+	{
+		return contacts_list[std::distance(contacts_list.begin(), item)];
+	}
+
+	std::cerr << "item is not found\n";
+	return Contacts{};
 }
 
 std::ostream& operator<<(std::ostream& out, const Contacts_list& list)

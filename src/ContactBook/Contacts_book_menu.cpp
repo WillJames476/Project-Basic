@@ -34,7 +34,6 @@ void save_to_file(const std::string& file_name, Contacts_list& contacts)
     }
 }
 
-
 void contacts_book_control_flow(Contacts_list& contacts ,char menu_choice, 
 bool& menu_replay)
 {
@@ -60,7 +59,7 @@ bool& menu_replay)
             break;
         case '3':
             std::cout << contacts.get_item_from_list
-            ({get_string("enter the name here: ",
+            (Contacts{get_string("enter the name here: ",
             string_predicates("Default")),
             get_string("enter the number here: ", 
             string_predicates("Contact")),
