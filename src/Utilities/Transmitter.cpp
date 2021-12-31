@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <cstring>
 #include <sstream>
+#include <cerrno>
 
 #include "Transmitter.h"
 
@@ -19,7 +20,7 @@ void transmit_data(const std::string& data_to_transfer)
     
     if(write(transmission,make,32))
     {
-        std::cerr << "something unexpected happend\n";
+        std::cerr << strerror(errno);
     }
     
     close(transmission);
@@ -32,7 +33,7 @@ std::array<std::string,2> receive_data()
     
     if(read(transmission, datas, 32))
     {
-        std::cerr << "something unexpected happened\n";
+        std::cerr << strerror(errno);
     }
 
     remove("tmp/cows");
