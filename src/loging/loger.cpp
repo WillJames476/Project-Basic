@@ -7,11 +7,8 @@
 
 #include "loger.h"
 
-void add_to_log(const std::initializer_list<std::string>& fields)
+void add_to_log(const std::array<std::string,3>& datas)
 {
-    std::vector<std::string>datas;
-    for(auto persons : fields)datas.push_back(persons);
-
     try
     {
         std::fstream loging
@@ -22,7 +19,8 @@ void add_to_log(const std::initializer_list<std::string>& fields)
         (std::chrono::system_clock::now());
         
         to_write << datas[0] << " " << datas[1] << " "
-        << std::put_time(std::localtime(&current_time),"%OH-%m, %d-%B%") << '\n';
+        << std::put_time(std::localtime(&current_time),"%OH-%m, %d-%B%") 
+        << datas[2] << '\n';
 
         loging << to_write.str();
         loging.close();

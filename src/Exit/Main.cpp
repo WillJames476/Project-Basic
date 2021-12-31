@@ -16,6 +16,11 @@ int main()
     noecho();
     exit_ui(datas[0] + " " + datas[1]);
     endwin();
-    if(!datas[0].empty())add_to_log({datas[0], datas[1]});
+    
+    if(!datas[0].empty())
+    {
+        add_to_log({datas[0], datas[1], " exit sector"});
+    }
+
     return 0;
 }

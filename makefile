@@ -1,7 +1,7 @@
 compiler = g++
 flags = -Wall -Werror -Wextra -Wpedantic -O3 -std=c++2a -I -g -o 
 
-misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp
+misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp src/loging/loger.cpp
 
 accounts = src/Account/Users_list.cpp src/Account/Account.cpp 
 accounts1 = src/Account/Acccount_menu.cpp src/Account/Main.cpp
