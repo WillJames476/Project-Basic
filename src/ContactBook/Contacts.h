@@ -12,7 +12,8 @@ class Contacts
 		Contacts(const std::string& name, const std::string& number, 
 				const std::string& email);
 		Contacts& operator=(const Contacts& to_copy) = default;
-		~Contacts() = default;
+		~Contacts() = default;	
+		void print_item();
 
 		friend bool operator== (const Contacts& right, const Contacts& left);
 		friend std::ostream& operator<<(std::ostream& out, const Contacts& to_give);

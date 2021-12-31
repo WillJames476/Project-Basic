@@ -1,12 +1,23 @@
 #include <sstream>
 #include <array>
 
+
 #include "Contacts.h"
 
 Contacts::Contacts(const std::string& name, const std::string& number,
 					const std::string& email)
 : contact{name, number, email}
 {
+}
+
+void Contacts::print_item()
+{
+	std::ostringstream output;
+	output << "name: " << std::get<0>(contact) << ' '
+	<< "\tnumber: " << std::get<1>(contact) << ' '
+	<< "\temail: " << std::get<2>(contact) << '\n';
+
+	std::cout << output.str();
 }
 
 bool operator== (const Contacts& right, const Contacts& left)

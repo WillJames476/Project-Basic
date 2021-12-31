@@ -15,13 +15,13 @@ void Contacts_list::remove_item(const Contacts& to_remove)
 
 void Contacts_list::print_items()
 {
-	for(const auto& data : contacts_list)
+	for(auto& data : contacts_list)
 	{
-		std::cout << data;
+		data.print_item();
 	}
 }
 
-Contacts Contacts_list::get_item(const std::initializer_list<std::string>& datas)
+Contacts Contacts_list::get_item(const std::initializer_list<std::string>& datas) const
 {
 	int tracker = 0;
 	std::array<std::string, 3> retrieved;

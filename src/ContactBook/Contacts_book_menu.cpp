@@ -62,13 +62,13 @@ bool& menu_replay)
             std::cout << contacts.get_item_from_list
             ({get_string("enter the name here: ",
             string_predicates("Default")),
-            get_string("enter the number here", 
+            get_string("enter the number here: ", 
             string_predicates("Contact")),
             get_string("enter the email here: ",
             string_predicates("Email"))});
             break;
         case '4':
-            std::cout << contacts;
+            contacts.print_list();
             break;
         case '5':
             menu_replay = false;
