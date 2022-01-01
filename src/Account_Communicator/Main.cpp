@@ -11,7 +11,9 @@ int main()
 
     if(!user[0].empty())
     {
-        transmit_data(communication_line_menu(user[0]));
+        user[0] = communication_line_menu(user[0]);
+        transmit_data(user[0] + " " + user[1]);
+        add_to_log({user[0], user[1], " communication lines"});
     }
 
     return 0;

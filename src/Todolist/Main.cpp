@@ -6,6 +6,7 @@
 
 #include "Todolist_menu.h"
 #include "../Utilities/Transmitter.h"
+#include "../loging/loger.h"
 
 int main()
 {
@@ -15,6 +16,7 @@ int main()
     {
         task_manager(datas);
         transmit_data(datas[0] + " " + datas[1]);
+        add_to_log({datas[0], datas[1], "task sector"});
     }
     
     return 0;
