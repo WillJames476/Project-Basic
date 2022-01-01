@@ -3,6 +3,7 @@
 
 #include "Contacts_book_menu.h"
 #include "../Utilities/Transmitter.h"
+#include "../loging/loger.h"
 
 int main()
 {
@@ -12,6 +13,7 @@ int main()
     {
         contacts_book("users/"+ datas[0] + "/" + datas[0] + "_cbook.txt");
         transmit_data(datas[0] + datas[1]);
+        add_to_log({datas[0], datas[1], " contact books"});
     }
 
     return 0;

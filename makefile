@@ -17,7 +17,7 @@ chat1 = src/Chat/Message_menu.cpp
 cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp src/ContactBook/Contacts_book_menu.cpp
 cbooks1 = src/ContactBook/Contacts.cpp
 
-exit = src/Exit/Main.cpp src/loging/loger.cpp src/Exit/Exitui.cpp
+exit = src/Exit/Main.cpp src/Exit/Exitui.cpp
 
 account_program = account
 task_program = todolist
