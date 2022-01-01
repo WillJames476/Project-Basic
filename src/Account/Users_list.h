@@ -7,13 +7,14 @@
 #include <iostream>
 
 #include "Account.h"
+#include "../Utilities/List_crtp.h"
 
-class Users_list
+class Users_list : public List_crtp<Users_list, Account>
 {
     public:
-        void add_to_list(const std::string& user_name, const std::string& user_pass, bool is_new); 
-        void remove_from_list(const std::string& user_name, const std::string& user_pass);
-        std::string account_login(const std::string& account_name, const std::string& account_password) const;
+        void add_item(const std::initializer_list<std::string>&datas);
+        void remove_item(const Account& to_remove);
+        Account get_item(const Account& to_get);
 
         friend void make_new_file(const std::string& account_name);
         friend std::ostream& operator<<(std::ostream& out, const Users_list& user);

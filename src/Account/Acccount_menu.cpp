@@ -42,18 +42,19 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
     {
         case '1':
             accounts.add_to_list
-            (get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here:" , string_predicates("Default")),"1");
+            ({get_string("enter the user name here: ", string_predicates("Default")), 
+            get_string("enter the password here:" , string_predicates("Default")),"1"});
             break;
         case '2':
             accounts.remove_from_list
-            (get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here: ", string_predicates("Default")));
+            (Account{get_string("enter the user name here: ", string_predicates("Default")), 
+            get_string("enter the password here: ", string_predicates("Default"))});
             break;
         case '3':
-            user_file = accounts.account_login
-            (get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here: ", string_predicates("Default")));
+            user_file = accounts.get_item_from_list
+            (Account{get_string("enter the user name here: ", string_predicates("Default")), 
+            get_string("enter the password here: ", string_predicates("Default"))})
+            .get_credential().first;
             break;
         case '4':
             menu_replay = false;

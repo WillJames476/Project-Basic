@@ -8,6 +8,7 @@ class List_crtp
 {
 	public:
 		void add_to_list(const T& to_add);
+		void add_to_list(const std::initializer_list<std::string>& datas);
 
 		void remove_from_list(const T& to_remove);
 		void remove_from_list(const std::initializer_list<std::string>& datas);
@@ -22,6 +23,12 @@ template <typename X, typename T>
 void List_crtp<X, T>::add_to_list(const T& to_add)
 {
 	static_cast<X&>(*this).add_item(to_add);
+}
+
+template <typename X, typename T>
+void List_crtp<X, T>::add_to_list(const std::initializer_list<std::string>& datas)
+{
+	static_cast<X&>(*this).add_item(datas);
 }
 
 template <typename X, typename T>

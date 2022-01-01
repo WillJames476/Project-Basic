@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <sstream>
+#include <array>
 
 #include "Users_list.h"
 #include "../Utilities/io.h"
@@ -11,35 +12,49 @@ void make_new_directory(const std::string& user_name)
     std::filesystem::create_directory("users/"+ user_name);
 }
 
-void Users_list::add_to_list(const std::string& user_name, const std::string& user_pass,
-bool is_new)
+void Users_list::add_item(const std::initializer_list<std::string>& datas)
 {
-    this->users.insert(std::make_pair(user_name, 
-    std::make_shared<Account>(user_name, user_pass)));
+    int tracker = 0;
+    std::array<std::string, 3> retrieved_datas;
+    
+    for(const auto&x : datas)
+    {
+        retrieved_datas[tracker++] = x;
+    }
 
-    if(is_new)make_new_directory(user_name);
-}
+    this->users.insert(std::make_pair(retrieved_datas[0], 
+    std::make_shared<Account>(retrieved_datas[0], retrieved_datas[1])));
 
-void Users_list::remove_from_list(const std::string& user_name, const std::string& user_pass)
-{
-    auto x = this->users.find(user_name);
-
-    if(x != this->users.end() && x->second->get_credential().second == user_pass)
-    { 
-        this->users.erase(x);
-        std::filesystem::remove_all("users/" + user_name);
+    if(std::stoi(retrieved_datas[2]))
+    {
+        make_new_directory(retrieved_datas[0]);
     }
 }
 
-std::string Users_list::account_login(const std::string& account_name, 
-const std::string &account_password) const
+void Users_list::remove_item(const Account& to_remove)
 {
-    auto z = this->users.find(account_name);
+    auto credential = to_remove.get_credential();
+    auto location = users.find(credential.first);
 
-    if(z!= this->users.end() && 
-    z->second->get_credential().second == account_password) 
-    return z->first;
-    return {};
+    if(location != users.end() && 
+    credential.second == location->second->get_credential().second)
+    {
+        users.erase(location);
+        std::filesystem::remove_all("users/" + credential.first);
+    }
+}
+
+Account Users_list::get_item(const Account& to_get)
+{
+    auto credentials = to_get.get_credential();
+    auto location = users.find(credentials.first);
+
+    if(location != users.end())
+    {
+        location->second->get_credential().second == credentials.second;
+        return *location->second;
+    }
+    return Account{};
 }
 
 std::ostream& operator<<(std::ostream& out, const Users_list& user)  
@@ -52,6 +67,6 @@ std::istream& operator>>(std::istream& in, Users_list& user)
 {
     Account temp{};
     while(in >> temp)user.add_to_list
-    (temp.get_credential().first, temp.get_credential().second, "0");
+    ({temp.get_credential().first, temp.get_credential().second, "0"});
     return in;
 }
