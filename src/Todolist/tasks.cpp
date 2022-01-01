@@ -16,6 +16,10 @@ const std::tm& due_given)
 {
 }
 
+std::tuple<std::string, std::string, std::tm> Task::get_specifications() const
+{
+    return{task_name, task_giver, task_time_due};
+}
 
 std::time_t Task::get_task_time() 
 {
@@ -26,6 +30,18 @@ std::tm Task::get_dates() const
 {
     return this->task_time_due;
 }
+
+void Task::print_task()
+{
+    std::ostringstream output;
+
+    output << task_name << '|' 
+    << "\t" << task_giver << '|' 
+    << std::put_time(&task_time_due, "\t%B %d\n");
+
+    std::cout << output.str();
+}
+
 
 bool operator==(const Task& first, const Task& second)
 {

@@ -45,7 +45,7 @@ bool is_daily, const std::string& task_giver)
     {
         for(;time_start.tm_mday <= constants::months_ceiling[time_start.tm_mon];time_start.tm_mday+= day_increment)
         {
-            task_list.add_to_list(task_name, time_start, task_giver);
+            task_list.add_to_list(Task{task_name, task_giver, time_start});
         }
 
         if(is_daily) time_start.tm_mday = 1;
@@ -75,7 +75,7 @@ const std::string& task_giver)
     switch (menu_choice)
     {
         case '1':
-            task_list.add_to_list(task_name, task_due, task_giver);
+            task_list.add_to_list(Task{task_name, task_giver, task_due});
             break;
         case '2':
             add_task_incrementally(task_name, task_due, task_list, 
@@ -116,8 +116,7 @@ void remove_task_control_flow(Task_list& task_list, char menu_choice)
     {
         case '1':
             get_a_date_from_user(task_due);
-            task_list.remove_from_list({task_name, std::to_string(task_due.tm_mon),
-            std::to_string(task_due.tm_mday)});
+            task_list.remove_from_list(Task{task_name, "nil", task_due});
             break;
         case '2':
             task_list.remove_all_from_list(task_name);
@@ -147,7 +146,7 @@ void print_task_control_flow(Task_list& task_list, char menu_choice)
             task_list.print_task_for_this_day();
             break;
         case '2':
-            std::cout << task_list;
+            task_list.print_list();
             break;
     }
 }

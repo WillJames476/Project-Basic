@@ -2,30 +2,31 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 #include "task_list.h"
 #include "constants.h"
 #include "../Utilities/io.h"
 #include "tasks.h"
 
-void Task_list::add_to_list(const std::string& task_name, const std::tm& task_time, 
-const std::string& task_giver)
+void Task_list::add_item(const Task& to_add)
 {
-    task_list.push_back(Task{task_name, task_giver,task_time});
+    task_list.push_back(to_add);
 }
 
-void Task_list::remove_from_list(const std::initializer_list<std::string>& fields)
+void Task_list::remove_item(const Task& to_remove)
 {
-    std::tm temp;
-    std::vector<std::string> datas;
-    for(const auto& x : fields)datas.push_back(x);
+    task_list.erase(std::remove(task_list.begin(), task_list.end(), to_remove));
+}
 
-    temp.tm_mon = std::stoi(datas[1]);
-    temp.tm_mday = std::stoi(datas[2]);
+void Task_list::print_items()
+{
+    std::cout << "task name\ttask giver\ttime to acomplish\n";
 
-    Task tmp{datas[0], temp};
-
-    task_list.erase(std::remove(task_list.begin(), task_list.end(), tmp));
+    for(auto&x : task_list)
+    {
+        x.print_task();
+    }
 }
 
 void Task_list::remove_all_from_list(const std::string& task_name)
@@ -69,7 +70,7 @@ void Task_list::print_task_for_this_day()
         [](const auto& z,const auto& x)
         {return x->tm_mday != z.get_dates().tm_mday;})
     ,[](auto f)
-    {std::cout << f;});
+    {f.print_task();});
 }
 
 std::ostream& operator<<(std::ostream& out, const Task_list& tasks)

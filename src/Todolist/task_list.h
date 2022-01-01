@@ -1,19 +1,20 @@
 #ifndef TASK_LIST_H
 #define TASK_LIST_H
 
-#include "tasks.h"
 #include <vector>
 #include <string>
+#include "tasks.h"
+#include "../Utilities/List_crtp.h"
 
-class Task_list
+class Task_list : public List_crtp<Task_list, Task>
 {
     public:
-        void add_to_list(const std::string& task_name, const std::tm& task_time, 
-        const std::string& task_giver);
-        void remove_from_list(const std::initializer_list<std::string>& fields);
+        void add_item(const Task& to_add);
+        void remove_item(const Task& to_remove);
         void remove_all_from_list(const std::string& task_name);
         void sort_by_date();
         void remove_oudated_tasks();
+        void print_items();
         void print_task_for_this_day();
 
         friend std::ostream& operator<<(std::ostream& out,const Task_list& tasks);

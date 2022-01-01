@@ -9,13 +9,10 @@ class List_crtp
 	public:
 		void add_to_list(const T& to_add);
 		void add_to_list(const std::initializer_list<std::string>& datas);
-
 		void remove_from_list(const T& to_remove);
 		void remove_from_list(const std::initializer_list<std::string>& datas);
-
 		T get_item_from_list(const std::initializer_list<std::string>& datas);
 		T get_item_from_list(const T& to_find);
-
 		void print_list();
 };
 
