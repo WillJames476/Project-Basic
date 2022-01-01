@@ -46,19 +46,19 @@ Message_list& messages)
     }
 }
 
-void message_control_flow(Message_list& messages, const Message_list& temp, 
+void message_control_flow(Message_list& messages, Message_list& temp, 
 const std::string& acessor, char menu_choice, bool& menu_replay)
 {
     switch(menu_choice)
     {
         case '1':
             messages.add_to_list
-            (acessor, get_string
+            (Message_tuple{acessor, get_string
             ("enter the message here:", string_predicates("Message")),
-            std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+            std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())});
             break;
         case '2':
-            std::cout << temp;
+            temp.print_list();
             break;
         case '3':
             menu_replay = false;

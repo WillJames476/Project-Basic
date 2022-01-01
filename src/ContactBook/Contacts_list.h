@@ -12,7 +12,6 @@
 class Contacts_list : public List_crtp<Contacts_list, Contacts>
 {
     public:
-
         void add_item(const Contacts& to_add);
         void remove_item(const Contacts& to_remove);
         void print_items();
@@ -21,7 +20,7 @@ class Contacts_list : public List_crtp<Contacts_list, Contacts>
         
         friend std::ostream& operator<<(std::ostream& out, const Contacts_list& list);
         friend std::istream& operator>>(std::istream& in, Contacts_list& list);
-	  private:
+	private:
 		    std::vector<Contacts> contacts_list;
 };
 

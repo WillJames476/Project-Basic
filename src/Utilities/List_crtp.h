@@ -53,7 +53,6 @@ template <typename X, typename T>
 T List_crtp<X, T>::get_item_from_list(const T& to_find)
 {
 	return static_cast<X&>(*this).get_item(to_find);
-	//return to_find;
 }
 
 template <typename X, typename T>

@@ -1,10 +1,27 @@
 #include <algorithm>
+#include <sstream>
+#include <iomanip>
 #include "Message_list.h"
 
-void Message_list::add_to_list(const std::string& user, const std::string& message,
-const long time)
+void Message_list::add_item(const Message_tuple& to_add)
 {
-    this->messages.push_back(Message_tuple(user, message, time));
+    messages.push_back(to_add);
+}
+
+void Message_list::print_items()
+{
+    std::ostringstream output;
+
+    for(const auto&x : messages)
+    {
+        auto message = x.get_tuple();
+
+        output << "from: " << std::get<0>(message) << '\n' 
+        << "-> "<< std::get<1>(message) 
+        << std::put_time(std::localtime(&std::get<2>(message)), "-> %G\n\n" );
+    }
+
+    std::cout << output.str();
 }
 
 Message_list operator+(const Message_list& first, const Message_list& second)

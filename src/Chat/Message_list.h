@@ -3,12 +3,15 @@
 
 #include <vector>
 #include "Message_tuple.h"
+#include "../Utilities/List_crtp.h"
 
-class Message_list
+class Message_list : public List_crtp<Message_list, Message_tuple>
 {
     public:
         Message_list() = default;
-        void add_to_list(const std::string& user, const std::string& message,const long time);
+
+        void add_item(const Message_tuple& message);
+        void print_items();
 
         friend Message_list operator+(const Message_list& first, const Message_list& second);
         friend std::ostream& operator<<(std::ostream& out,const Message_list& field);

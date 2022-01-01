@@ -12,6 +12,7 @@ class Message_tuple
         Message_tuple();
         Message_tuple(const Message_tuple& copy) = default;
         Message_tuple(const std::string& user, const std::string& message,const long time);
+        std::tuple<std::string, std::string, std::time_t> get_tuple() const;
 
         friend bool operator< (const Message_tuple& first, const Message_tuple& last);
         friend std::ostream& operator<<(std::ostream& out, const Message_tuple& fields);

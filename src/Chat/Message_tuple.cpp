@@ -17,6 +17,11 @@ const long time)
     this->message = std::make_tuple(user, message, time);
 }
 
+std::tuple<std::string, std::string, std::time_t> Message_tuple::get_tuple() const
+{
+    return message;
+}
+
 std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)
 {
     std::string modified_message{std::get<1>(fields.message)};
