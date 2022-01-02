@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <iostream>
 #include <type_traits>
+#include <vector>
 
 template <typename T>
 T get_integral(const std::string& request, T min, T max)

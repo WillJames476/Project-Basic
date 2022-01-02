@@ -35,9 +35,29 @@ void save_to_file(const std::string& accounts_file, const Users_list& users)
     }
 }
 
+Account create_account(const std::vector<std::string>&requests,
+                        const std::vector<std::string>& predicates)
+{
+    int tracker{0};
+    std::array<std::string, 2>account_credentials;
+
+    while(tracker < static_cast<int>(account_credentials.size()))
+    {
+        account_credentials[tracker] = get_string(requests[tracker], 
+        string_predicates(predicates[tracker]));
+        tracker++;
+    }
+
+    return Account{account_credentials[0], account_credentials[1]};
+}
+
 void accounts_manager_control_flow(std::string& user_file, 
 char menu_choice,bool& menu_replay, Users_list &accounts)
 {
+    const std::vector<std::string> requests{"enter the username here: ",
+    "enter the password here: "};
+    const std::vector<std::string> predicates{"Default", "Default"};
+    
     switch (menu_choice)
     {
         case '1':
@@ -46,15 +66,11 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
             get_string("enter the password here:" , string_predicates("Default")),"1"});
             break;
         case '2':
-            accounts.remove_from_list
-            (Account{get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here: ", string_predicates("Default"))});
+            accounts.remove_from_list(create_account(requests, predicates));
             break;
         case '3':
             user_file = accounts.get_item_from_list
-            (Account{get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here: ", string_predicates("Default"))})
-            .get_credential().first;
+            (create_account(requests, predicates)).get_credential().first;
             break;
         case '4':
             menu_replay = false;
