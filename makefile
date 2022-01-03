@@ -1,5 +1,5 @@
 compiler = g++
-flags = -Wall -Werror -Wextra -Wpedantic -O3 -std=c++17 -I -g -o 
+flags = -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o 
 
 misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp src/loging/loger.cpp
 

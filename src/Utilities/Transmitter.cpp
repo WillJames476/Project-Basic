@@ -18,7 +18,7 @@ void transmit_data(const std::string& data_to_transfer)
     mkfifo("tmp/cows", 0777);
     int transmission = open("tmp/cows", O_WRONLY);
     
-    if(write(transmission,make,32))
+    if(write(transmission,make,32) == -1)
     {
         std::cerr << strerror(errno) << '\n';
     }
@@ -31,7 +31,7 @@ std::array<std::string,2> receive_data()
     char datas[32];
     int transmission = open("tmp/cows", O_RDONLY);
     
-    if(read(transmission, datas, 32))
+    if(read(transmission, datas, 32) == -1)
     {
         std::cerr << strerror(errno) << '\n';
     }
