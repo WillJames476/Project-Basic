@@ -30,7 +30,7 @@ contacts_program = cbook
 handler_program = handler
 
 build:
-	make login && make task && make comm_lines && make conversation && make exiter && make contacts
+	make login && make task && make comm_lines && make conversation && make exiter && make contacts && make handle
 
 install: 
 	mkdir users && touch users/users.txt && mkdir tmp | echo essentials installed!!
