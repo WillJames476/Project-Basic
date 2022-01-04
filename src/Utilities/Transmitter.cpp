@@ -15,8 +15,7 @@ void transmit_data(const std::string& data_to_transfer)
 {
     char make[32];
     strncpy(make,data_to_transfer.c_str(),31);
-    mkfifo("tmp/cows", 0777);
-    int transmission = open("tmp/cows", O_WRONLY);
+    int transmission = open("tmp/cows", O_RDWR);
     
     if(write(transmission,make,32) == -1)
     {
@@ -29,16 +28,16 @@ void transmit_data(const std::string& data_to_transfer)
 std::array<std::string,2> receive_data()
 {
     char datas[32];
-    int transmission = open("tmp/cows", O_RDONLY);
+    int transmission = open("tmp/cows", O_RDWR);
     
     if(read(transmission, datas, 32) == -1)
     {
         std::cerr << strerror(errno) << '\n';
     }
 
-    remove("tmp/cows");
     close(transmission);
-
+    mkfifo("tmp/cows", 0000);
+    
     std::array<std::string,2> strings_to_return;
     std::istringstream(datas) >> strings_to_return[0] >> strings_to_return[1];
     

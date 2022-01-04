@@ -17,6 +17,8 @@ chat1 = src/Chat/Message_menu.cpp
 cbooks = src/ContactBook/Main.cpp src/ContactBook/Contacts_list.cpp src/ContactBook/Contacts_book_menu.cpp
 cbooks1 = src/ContactBook/Contacts.cpp
 
+handlers = src/ProgramsHandler/main.cpp src/ProgramsHandler/handler_ui.cpp
+
 exit = src/Exit/Main.cpp src/Exit/Exitui.cpp
 
 account_program = account
@@ -25,6 +27,7 @@ commline_program = commline
 chat_program = chat
 exit_program = exit
 contacts_program = cbook
+handler_program = handler
 
 build:
 	make login && make task && make comm_lines && make conversation && make exiter && make contacts
@@ -49,6 +52,9 @@ conversation:
 
 contacts:
 	$(compiler) $(cbooks) $(cbooks1) $(misc) $(flags) $(contacts_program)
+
+handle:
+	$(compiler) $(handlers) $(misc) $(flags) $(handler_program)
 
 exiter:
 	$(compiler) $(exit) $(misc) -lncurses $(flags) $(exit_program)
