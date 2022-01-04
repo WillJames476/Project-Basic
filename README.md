@@ -17,15 +17,17 @@
 5. enjoy
 
 # Usage
-1. open two terminal on the same directory where this repo is
-2. lauch programs on the first terminal then launch you second program on the other terminal and vice versa
-3. alternate between these terminal
-4. run exit program when you are done
+1. type ./handler on the terminal and launch applications when asked by prompt
 
 # Uninstalling
 1. type make uninstall on the terminal
 
 # Applications on this repo
+* Handler (executable as ./handler)
+  - streamlines the process of using the applications
+  - expects no inputs and yields no outputs
+  - type an executable on it to excute a program
+
 * Account manager (executable as ./account)
   - The account manager of the program
   - expects no inputs and outputs a user to be accesed by other files
