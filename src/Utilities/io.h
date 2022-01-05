@@ -10,6 +10,14 @@
 #include <vector>
 #include <regex>
 
+namespace REGEX_PREDICATES
+{
+    const std::regex ALPHA("[A-za-z]+"), 
+                    DIGIT("[0-9]+"),
+                    ALNUM("[A-Za-z0-9]+"),
+                    COMMAND("^./[a-z]+");
+}
+
 template <typename T>
 T get_integral(const std::string& request, T min, T max)
 {

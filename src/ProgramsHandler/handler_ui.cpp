@@ -12,7 +12,7 @@ void handler_ui()
     while(user_command != "./exit")
     {
         user_command = get_string("enter the user command here: ", 
-        std::regex("./[a-z]+"));
+        REGEX_PREDICATES::COMMAND);
 
         std::system(user_command.c_str());
     }
