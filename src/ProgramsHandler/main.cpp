@@ -7,7 +7,7 @@
 int main()
 {
     mkfifo("tmp/cows", 0777);
-    system("./account");
+    std::system("./account");
     handler_ui();
     return 0;
 }
