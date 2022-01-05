@@ -8,6 +8,7 @@
 #include <iostream>
 #include <type_traits>
 #include <vector>
+#include <regex>
 
 template <typename T>
 T get_integral(const std::string& request, T min, T max)
@@ -30,6 +31,7 @@ T get_integral(const std::string& request, T min, T max)
     return to_return;
 }
 
+std::string get_string(const std::string& request, std::regex predicate);
 std::string get_string(const std::string& request, std::function<bool(char)> predicate);
 std::function<bool(char)>string_predicates(const std::string& protocol);
 void get_a_date_from_user(std::tm& to_return);

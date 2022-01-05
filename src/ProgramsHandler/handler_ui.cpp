@@ -12,11 +12,8 @@ void handler_ui()
     while(user_command != "./exit")
     {
         user_command = get_string("enter the user command here: ", 
-        string_predicates("Command"));
+        std::regex("./[a-z]+"));
 
-        if(std::regex_search(user_command, std::regex("./")))
-        {
-            std::system(user_command.c_str());
-        }
+        std::system(user_command.c_str());
     }
 }

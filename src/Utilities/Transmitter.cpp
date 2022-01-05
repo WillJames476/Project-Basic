@@ -34,9 +34,8 @@ std::array<std::string,2> receive_data()
     {
         std::cerr << strerror(errno) << '\n';
     }
-
+    
     close(transmission);
-    mkfifo("tmp/cows", 0000);
     
     std::array<std::string,2> strings_to_return;
     std::istringstream(datas) >> strings_to_return[0] >> strings_to_return[1];

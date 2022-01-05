@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <functional>
 #include <cstring>
+#include <regex>
 
 #include "../Todolist/constants.h"
 #include "io.h"
@@ -36,6 +37,22 @@ std::string get_string(const std::string& request, std::function<bool(char)> pre
         std::getline(std::cin, user_input);
 
         if(std::all_of(user_input.begin(), user_input.end(), predicate))verified = true;
+    }
+
+    return user_input;
+}
+
+std::string get_string(const std::string& request, std::regex predicate)
+{
+    std::string user_input{};
+    bool is_verified{false};
+
+    while(!is_verified)
+    {
+        std::cout << request;
+        std::getline(std::cin, user_input);
+
+        is_verified = std::regex_match(user_input, predicate);
     }
 
     return user_input;
