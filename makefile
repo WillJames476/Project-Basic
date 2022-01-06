@@ -1,7 +1,7 @@
 COMPILER = g++
 FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o
 
-BOOST = -I #your boost path here#
+BOOST = -I #eneter your boost's absolute path here#
 misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp src/loging/loger.cpp
 
 accounts = src/Account/Users_list.cpp src/Account/Account.cpp
@@ -34,7 +34,7 @@ build:
 	make login && make task && make comm_lines && make conversation && make exiter && make contacts && make handle
 
 install: 
-	mkdir users bin && touch users/users.txt && mkdir tmp && cd tmp && mkfifo cows && echo "NIL" > cows &| echo essentials installed!!
+	mkdir users bin && touch users/users.txt | echo essentials installed!!
 
 uninstall:
 	rm -rf users tmp account cbook chat comline exit src
@@ -43,19 +43,19 @@ login:
 	$(COMPILER) $(BOOST) $(accounts) $(accounts1) $(misc) $(FLAGS) $(account_program) 
 
 task: 
-	$(COMPILER) $(task) $(misc) $(FLAGS) $(task_program)
+	$(COMPILER) $(BOOST) $(task) $(misc) $(FLAGS) $(task_program)
 
 comm_lines:
-	$(COMPILER) $(com_lines) $(com_lines1) $(misc) $(FLAGS) $(commline_program)
+	$(COMPILER) $(BOOST) $(com_lines) $(com_lines1) $(misc) $(FLAGS) $(commline_program)
 
 conversation:
-	$(COMPILER) $(chat) $(chat1) $(misc) $(FLAGS) $(chat_program)
+	$(COMPILER) $(BOOST) $(chat) $(chat1) $(misc) $(FLAGS) $(chat_program)
 
 contacts:
-	$(COMPILER) $(cbooks) $(cbooks1) $(misc) $(FLAGS) $(contacts_program)
+	$(COMPILER) $(BOOST) $(cbooks) $(cbooks1) $(misc) $(FLAGS) $(contacts_program)
 
 handle:
-	$(COMPILER) $(handlers) $(misc) $(FLAGS) $(handler_program)
+	$(COMPILER) $(BOOST) $(handlers) $(misc) $(FLAGS) $(handler_program)
 
 exiter:
-	$(COMPILER) $(exit) $(misc) -lncurses $(FLAGS) $(exit_program)
+	$(COMPILER) $(BOOST) $(exit) $(misc) -lncurses $(FLAGS) $(exit_program)

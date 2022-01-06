@@ -6,15 +6,17 @@
 
 # Prerequisites
 * c++20 compliant compiler
-* unix-like systems / posix compliant systems
+* up to date boostc++ library
 * ncurses
 
 # Instalation
 1. clone the repository
-2. goto the directory of the repository 
-3. type make install on your terminal
-4. type make build on your terminal
-5. enjoy
+2. goto the directory of the repository
+3. enter the absolute path of boost library from your pc to the specified
+   comment on the makefile 
+4. type make install on your terminal
+5. type make build on your terminal
+6. enjoy
 
 # Usage
 1. type ./handler on the terminal and launch applications when asked by prompt
