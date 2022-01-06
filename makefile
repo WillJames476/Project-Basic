@@ -33,7 +33,7 @@ build:
 	make login && make task && make comm_lines && make conversation && make exiter && make contacts && make handle
 
 install: 
-	mkdir users && touch users/users.txt && mkdir tmp && cd tmp && mkfifo cows | echo essentials installed!!
+	mkdir users && touch users/users.txt && mkdir tmp && cd tmp && mkfifo cows && echo "NIL" > cows &| echo essentials installed!!
 
 uninstall:
 	rm -rf users tmp account cbook chat comline exit src
