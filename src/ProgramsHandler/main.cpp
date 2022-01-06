@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::system("./account");
+    std::system("bin/account");
     handler_ui();
     return 0;
 }

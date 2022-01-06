@@ -19,7 +19,7 @@ namespace REGEX_PREDICATES
                     DIGIT_NOSPACE("[0-9]+"),
                     ALNUM("[A-Za-z0-9 ]+"),
                     EMAIL("[_@a-zA-Z0-9]+.com"),
-                    COMMAND("^./[a-z]+");
+                    COMMAND("^/[a-z]+");
 }
 
 template <typename T>
