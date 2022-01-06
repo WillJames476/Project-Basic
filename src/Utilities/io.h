@@ -12,9 +12,13 @@
 
 namespace REGEX_PREDICATES
 {
-    const std::regex ALPHA("[A-za-z]+"), 
-                    DIGIT("[0-9]+"),
-                    ALNUM("[A-Za-z0-9]+"),
+    const std::regex ALPHA("[A-Za-z ]+"), 
+                    ALPHA_NOSPACE("[A-Za-z]+"),
+                    MESSAGE("[A-Za-z0-9, \n]+"),
+                    DIGIT("[0-9 ]+"),
+                    DIGIT_NOSPACE("[0-9]+"),
+                    ALNUM("[A-Za-z0-9 ]+"),
+                    EMAIL("[_@a-zA-Z0-9]+.com"),
                     COMMAND("^./[a-z]+");
 }
 

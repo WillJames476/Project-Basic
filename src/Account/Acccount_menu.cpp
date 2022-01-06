@@ -35,8 +35,7 @@ void save_to_file(const std::string& accounts_file, const Users_list& users)
     }
 }
 
-Account create_account(const std::vector<std::string>&requests,
-                        const std::vector<std::string>& predicates)
+Account create_account(const std::vector<std::string>&requests)
 {
     int tracker{0};
     std::array<std::string, 2>account_credentials;
@@ -44,7 +43,7 @@ Account create_account(const std::vector<std::string>&requests,
     while(tracker < static_cast<int>(account_credentials.size()))
     {
         account_credentials[tracker] = get_string(requests[tracker], 
-        string_predicates(predicates[tracker]));
+        REGEX_PREDICATES::ALPHA_NOSPACE);
         tracker++;
     }
 
@@ -62,15 +61,15 @@ char menu_choice,bool& menu_replay, Users_list &accounts)
     {
         case '1':
             accounts.add_to_list
-            ({get_string("enter the user name here: ", string_predicates("Default")), 
-            get_string("enter the password here:" , string_predicates("Default")),"1"});
+            ({get_string("enter the user name here: ", REGEX_PREDICATES::ALPHA_NOSPACE), 
+            get_string("enter the password here:" ,REGEX_PREDICATES::ALPHA_NOSPACE),"1"});
             break;
         case '2':
-            accounts.remove_from_list(create_account(requests, predicates));
+            accounts.remove_from_list(create_account(requests));
             break;
         case '3':
             user_file = accounts.get_item_from_list
-            (create_account(requests, predicates)).get_credential().first;
+            (create_account(requests)).get_credential().first;
             break;
         case '4':
             menu_replay = false;

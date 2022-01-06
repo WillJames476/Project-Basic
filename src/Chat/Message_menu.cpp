@@ -54,7 +54,7 @@ const std::string& acessor, char menu_choice, bool& menu_replay)
         case '1':
             messages.add_to_list
             (Message_tuple{acessor, get_string
-            ("enter the message here:", string_predicates("Message")),
+            ("enter the message here:", REGEX_PREDICATES::MESSAGE),
             std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())});
             break;
         case '2':

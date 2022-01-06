@@ -68,7 +68,7 @@ void add_task_control_flow(Task_list& task_list, char menu_choice,
 const std::string& task_giver)
 {
     std::string task_name{get_string("enter the task name here: ", 
-    string_predicates("AlphaSpace"))};
+    REGEX_PREDICATES::ALPHA)};
     std::tm task_due;
     get_a_date_from_user(task_due);
 
@@ -110,7 +110,7 @@ void remove_task_control_flow(Task_list& task_list, char menu_choice)
 {
     std::tm task_due;
     std::string task_name{get_string("enter the task name here: ",
-    string_predicates("AlphaSpace"))};
+    REGEX_PREDICATES::ALPHA)};
 
     switch (menu_choice)
     {

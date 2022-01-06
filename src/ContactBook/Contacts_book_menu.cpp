@@ -42,29 +42,29 @@ bool& menu_replay)
         case '1':
             contacts.add_to_list
             (Contacts{get_string("enter the name here: ", 
-            string_predicates("Default")),
+            REGEX_PREDICATES::ALPHA_NOSPACE),
             get_string("enter the number here: ", 
-            string_predicates("Contact")), 
+            REGEX_PREDICATES::DIGIT_NOSPACE), 
 			get_string("enter the email here: ",
-			string_predicates("Email"))});
+			REGEX_PREDICATES::EMAIL)});
             break;
         case '2':
             contacts.remove_from_list
             (Contacts{get_string("enter the name here: ",
-            string_predicates("Default")),
+            REGEX_PREDICATES::ALPHA_NOSPACE),
             get_string("enter the number here: ",
-            string_predicates("Contact")),
+            REGEX_PREDICATES::DIGIT_NOSPACE),
             get_string("enter the email here: ",
-            string_predicates("Email"))});
+            REGEX_PREDICATES::EMAIL)});
             break;
         case '3':
             std::cout << contacts.get_item_from_list
             (Contacts{get_string("enter the name here: ",
-            string_predicates("Default")),
+            REGEX_PREDICATES::ALPHA_NOSPACE),
             get_string("enter the number here: ", 
-            string_predicates("Contact")),
+            REGEX_PREDICATES::DIGIT_NOSPACE),
             get_string("enter the email here: ",
-            string_predicates("Email"))});
+            REGEX_PREDICATES::EMAIL)});
             break;
         case '4':
             contacts.print_list();

@@ -27,13 +27,13 @@ std::string& file_name, bool& menu_replay, const std::string& permanent_user)
         case '1':
             comms.add_to_list
             (get_string("enter the name of user here: ",
-            string_predicates("Default")), 0);
+            REGEX_PREDICATES::ALPHA_NOSPACE), 0);
             break;
         case '2':
             std::cout << comms;
             comms.remove_from_list
             (get_string("enter the name of user here: ",
-            string_predicates("Default")));
+            REGEX_PREDICATES::ALPHA_NOSPACE));
             break;
         case '3':
             std::cout << comms;
@@ -41,14 +41,14 @@ std::string& file_name, bool& menu_replay, const std::string& permanent_user)
         case '4':
             comms.alter_permission
             (permanent_user,get_string("enter the name of user here: ",
-            string_predicates("Default")));
+            REGEX_PREDICATES::ALPHA_NOSPACE));
             break;
         case '5':
             {
                 std::cout << comms;
                 file_name = comms.get_item_from_list
                 (get_string("enter the name of user here: ",
-                string_predicates("Default")));
+                REGEX_PREDICATES::ALPHA_NOSPACE));
                 menu_replay = false;
             }  
             break;
