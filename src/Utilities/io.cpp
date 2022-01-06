@@ -10,37 +10,6 @@
 #include "../Todolist/constants.h"
 #include "io.h"
 
-std::function<bool(char)> string_predicates(const std::string& protocol)
-{
-    std::unordered_map<std::string, std::function<bool(char)>> predicates;
-
-    predicates.insert(std::make_pair("Default", [](char test){return isalpha(test);}));
-    predicates.insert(std::make_pair("AlphaSpace",[](char test){return isalpha(test) || isspace(test);}));
-    predicates.insert(std::make_pair("Message",[](char test){return isprint(test) || isspace(test) || iscntrl(test);}));
-    predicates.insert(std::make_pair("Contact",[](char test){return isdigit(test);}));
-	predicates.insert(std::make_pair("Email",[](char test){return isprint(test);}));
-
-    auto x = predicates.find(protocol);
-    if(x == predicates.end()) return predicates.find("Default")->second;
-    return x->second;
-}
-
-std::string get_string(const std::string& request, std::function<bool(char)> predicate)
-{
-    std::string user_input;
-    bool verified{false};
-
-    while(!verified)
-    {
-        std::cout << request;
-        std::getline(std::cin, user_input);
-
-        if(std::all_of(user_input.begin(), user_input.end(), predicate))verified = true;
-    }
-
-    return user_input;
-}
-
 std::string get_string(const std::string& request, std::regex predicate)
 {
     std::string user_input{};

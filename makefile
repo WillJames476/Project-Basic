@@ -1,5 +1,5 @@
-compiler = g++
-flags = -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o 
+COMPILER = g++
+FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o
 
 misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp src/loging/loger.cpp
 
@@ -33,28 +33,28 @@ build:
 	make login && make task && make comm_lines && make conversation && make exiter && make contacts && make handle
 
 install: 
-	mkdir users && touch users/users.txt && mkdir tmp | echo essentials installed!!
+	mkdir users && touch users/users.txt && mkdir tmp && cd tmp && mkfifo cows | echo essentials installed!!
 
 uninstall:
 	rm -rf users tmp account cbook chat comline exit src
 
 login:
-	$(compiler) $(accounts) $(accounts1) $(misc) $(flags) $(account_program) 
+	$(COMPILER) $(accounts) $(accounts1) $(misc) $(FLAGS) $(account_program) 
 
 task: 
-	$(compiler) $(task) $(misc) $(flags) $(task_program)
+	$(COMPILER) $(task) $(misc) $(FLAGS) $(task_program)
 
 comm_lines:
-	$(compiler) $(com_lines) $(com_lines1) $(misc) $(flags) $(commline_program)
+	$(COMPILER) $(com_lines) $(com_lines1) $(misc) $(FLAGS) $(commline_program)
 
 conversation:
-	$(compiler) $(chat) $(chat1) $(misc) $(flags) $(chat_program)
+	$(COMPILER) $(chat) $(chat1) $(misc) $(FLAGS) $(chat_program)
 
 contacts:
-	$(compiler) $(cbooks) $(cbooks1) $(misc) $(flags) $(contacts_program)
+	$(COMPILER) $(cbooks) $(cbooks1) $(misc) $(FLAGS) $(contacts_program)
 
 handle:
-	$(compiler) $(handlers) $(misc) $(flags) $(handler_program)
+	$(COMPILER) $(handlers) $(misc) $(FLAGS) $(handler_program)
 
 exiter:
-	$(compiler) $(exit) $(misc) -lncurses $(flags) $(exit_program)
+	$(COMPILER) $(exit) $(misc) -lncurses $(FLAGS) $(exit_program)
