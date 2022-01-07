@@ -19,13 +19,13 @@
 6. enjoy
 
 # Usage
-1. type ./handler on the terminal and launch applications when asked by prompt
+1. type bin/handler on the terminal and launch applications when asked by prompt
 
 # Uninstalling
 1. type make uninstall on the terminal
 
 # Applications on this repo
-* Handler (executable as ./handler)
+* Handler (executable as bin/handler)
   - streamlines the process of using the applications
   - expects no inputs and yields no outputs
   - type an executable on it to excute a program

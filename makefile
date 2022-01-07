@@ -28,7 +28,7 @@ commline_program = bin/commline
 chat_program = bin/chat
 exit_program = bin/exit
 contacts_program = bin/cbook
-handler_program = handler
+handler_program = bin/handler
 
 build:
 	make login && make task && make comm_lines && make conversation && make exiter && make contacts && make handle
