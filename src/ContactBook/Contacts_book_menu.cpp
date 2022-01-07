@@ -6,34 +6,6 @@
 #include "Contacts.h"
 #include "../Utilities/io.h"
 
-void load_from_file(const std::string& file_name, Contacts_list& contacts)
-{
-    try
-    {
-        std::fstream file_to_load(file_name, std::ios_base::in);
-        file_to_load >> contacts;
-        file_to_load.close();
-    }
-    catch(std::exception& s)
-    {
-        std::cerr << s.what();
-    }
-}
-
-void save_to_file(const std::string& file_name, Contacts_list& contacts)
-{
-    try
-    {
-        std::fstream file_to_load(file_name, std::ios_base::out);
-        file_to_load << contacts;
-        file_to_load.close();
-    }
-    catch(std::exception& s)
-    {
-        std::cerr << s.what();
-    }
-}
-
 void contacts_book_control_flow(Contacts_list& contacts ,char menu_choice, 
 bool& menu_replay)
 {
@@ -95,7 +67,7 @@ void contacts_book(const std::string& file_name)
     Contacts_list contacts{};
     bool menu_replay{true};
 
-    load_from_file(file_name, contacts);
+    load_from_file<Contacts_list>(file_name, contacts);
 
     while(menu_replay)
     {
@@ -103,5 +75,5 @@ void contacts_book(const std::string& file_name)
         , menu_replay);
     }
 
-    save_to_file(file_name, contacts);
+    save_to_file<Contacts_list>(file_name, contacts);
 }

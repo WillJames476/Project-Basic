@@ -6,36 +6,6 @@
 #include "constants.h"
 #include "../Utilities/io.h"
 
-void load_from_file(const std::string& file_name, Task_list& tasks)
-{
-    try
-    {
-        std::fstream file_to_read("users/" + file_name + "/" + file_name + "_tasks.txt", 
-        std::ios_base::in);
-        file_to_read >> tasks;
-        file_to_read.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
-}
-
-void save_to_file(const std::string& file_name, const Task_list& tasks)
-{
-    try
-    {
-        std::fstream file_to_read("users/" + file_name + "/" + file_name + "_tasks.txt", 
-        std::ios_base::out);
-        file_to_read << tasks;
-        file_to_read.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
-}
-
 void add_task_incrementally(const std::string &task_name, 
 std::tm time_start, Task_list &task_list, int day_increment,
 bool is_daily, const std::string& task_giver)
@@ -192,8 +162,10 @@ void task_manager(const std::array<std::string,2>& access_descriptor)
 {
     Task_list task_list{};
     bool menu_replay{true};
+    std::string file_name{"users/" + access_descriptor[0] 
+    + "/" + access_descriptor[0] + "_tasks.txt"};
 
-    load_from_file(access_descriptor[0], task_list);
+    load_from_file<Task_list>(file_name, task_list);
     task_list.remove_oudated_tasks();
 
     while(menu_replay)
@@ -201,5 +173,6 @@ void task_manager(const std::array<std::string,2>& access_descriptor)
        task_manager_control_flow(task_list, task_manager_menu(),
        menu_replay, access_descriptor[1]);
     }
-    save_to_file(access_descriptor[0], task_list);
+
+    save_to_file<Task_list>(file_name, task_list);
 }

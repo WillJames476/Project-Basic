@@ -2,38 +2,11 @@
 #include <sstream>
 #include <algorithm>
 #include <fstream>
+#include <unordered_map>
 
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
-
-void load_from_file(const std::string& accounts_file, Users_list& users)
-{
-    try
-    {
-        std::fstream file_to_read(accounts_file, std::ios_base::in);
-        file_to_read >> users;
-        file_to_read.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
-}
-
-void save_to_file(const std::string& accounts_file, const Users_list& users)
-{
-    try
-    {
-        std::fstream file_archiver(accounts_file, std::ios_base::out);
-        file_archiver << users;
-        file_archiver.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    }
-}
 
 Account create_account(const std::vector<std::string>&requests)
 {
@@ -91,11 +64,11 @@ char accounts_manager_menu()
 
 std::string accounts_manager(const std::string& accounts_file)
 {
-    Users_list accounts;
-    std::string menu_choice, user_file;
+    Users_list accounts{};
+    std::string menu_choice{}, user_file{};
     bool menu_replay{true};
 
-    load_from_file(accounts_file, accounts);
+    load_from_file<Users_list>(accounts_file, accounts);
 
     while(menu_replay)
     {
@@ -103,6 +76,6 @@ std::string accounts_manager(const std::string& accounts_file)
         menu_replay, accounts);
     }
 
-    save_to_file(accounts_file, accounts);
+    save_to_file<Users_list>(accounts_file, accounts);
     return user_file;
 }

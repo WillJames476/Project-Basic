@@ -24,6 +24,8 @@ exit_program = $(BIN)/exit
 contacts_program = $(BIN)/cbook
 handler_program = $(BIN)/handler
 
+programs = $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
+
 $(account_program): $(Account) $(Utils) $(Log)  
 	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
@@ -46,10 +48,10 @@ $(exit_program): $(Exit) $(Utils) $(Log)
 	$(COMPILER) $(BOOST) $^ -lncurses $(FLAGS) $@
 
 build:
-	make $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
+	make $(programs)
 
 install: 
-	mkdir users $(BIN) && touch users/users.txt | echo essential files installed!!
+	mkdir users $(BIN) && touch users/users.txt 
 
 uninstall:
 	rm -rf $(Clean) $(SRC)

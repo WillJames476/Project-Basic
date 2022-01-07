@@ -9,17 +9,27 @@
 #include <type_traits>
 #include <vector>
 #include <regex>
+#include <fstream>
+
+namespace FEEDBACK_COLORS
+{
+    const std::string BASE  {"\u001b["},
+                      GOOD  {BASE + "32m"},
+                      BAD   {BASE + "31m"},
+                      RESET {BASE + "0m"};
+}
 
 namespace REGEX_PREDICATES
 {
-    const std::regex ALPHA("[A-Za-z ]+"), 
-                    ALPHA_NOSPACE("[A-Za-z]+"),
-                    MESSAGE("[A-Za-z0-9, \n]+"),
-                    DIGIT("[0-9 ]+"),
-                    DIGIT_NOSPACE("[0-9]+"),
-                    ALNUM("[A-Za-z0-9 ]+"),
-                    EMAIL("[_@a-zA-Z0-9]+.com"),
-                    COMMAND("^/[a-z]+");
+    const std::regex ALPHA         ("[A-Za-z ]+"), 
+                     ALPHA_NOSPACE ("[A-Za-z]+"),
+                     MESSAGE       ("[A-Za-z0-9, \n]+"),
+                     DIGIT         ("[0-9 ]+"),
+                     DIGIT_NOSPACE ("[0-9]+"),
+                     ALNUM         ("[A-Za-z0-9 ]+"),
+                     EMAIL         ("[_@a-zA-Z0-9]+.com"),
+                     APP_COMMAND   ("^--[a-z ]+"),
+                     COMMAND       ("^/[a-z]+");
 }
 
 template <typename T>
@@ -41,6 +51,48 @@ T get_integral(const std::string& request, T min, T max)
     }
 
     return to_return;
+}
+
+template <typename T>
+int save_to_file(const std::string& file_name, const T& to_modify)
+{
+    using namespace FEEDBACK_COLORS;
+
+    try
+    {
+        std::fstream file_archiver(file_name, std::ios_base::out);
+        file_archiver << to_modify;
+        file_archiver.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << BAD << s.what() << RESET;
+        return EXIT_FAILURE;    
+    }
+
+    std::clog << GOOD << "file operation suceeds success\n" << RESET;
+    return EXIT_SUCCESS;
+}
+
+template <typename T>
+int load_from_file(const std::string& file_name, T& to_modify)
+{
+    using namespace FEEDBACK_COLORS;
+
+    try
+    {
+        std::fstream file_archiver(file_name, std::ios_base::in);
+        file_archiver >> to_modify;
+        file_archiver.close();
+    }
+    catch(std::exception &s)
+    {
+        std::cerr << BAD << s.what() << RESET;
+        return EXIT_FAILURE;    
+    }
+
+    std::clog << GOOD << "file operation suceeds success\n" << RESET;
+    return EXIT_SUCCESS;
 }
 
 std::string get_string(const std::string& request, std::regex predicate);

@@ -9,22 +9,6 @@
 #include "Message_tuple.h"
 #include "../Utilities/io.h"
 
-void save_to_file(const std::array<std::string, 2>& file_name, 
-Message_list& messages)
-{
-    try
-    {
-        std::fstream file_to_read("users/" + file_name[0] + "/chats/" 
-        + file_name[0] + "_" + file_name[1] + ".txt", std::ios_base::out);
-        file_to_read << messages;
-        file_to_read.close();
-    }
-    catch(std::exception &s)
-    {
-        std::cerr << s.what();
-    } 
-}
-
 void load_from_file(const std::array<std::string, 2>& file_name, 
 Message_list& messages)
 {
@@ -91,5 +75,8 @@ void message(const std::array<std::string,2>& users)
         menu_replay);
     }
 
-    save_to_file({users[0],users[1]}, subject);
+    std::string chat_file_name{"users/" + users[0] + "/chats/" 
+    + users[0] + "_" + users[1] + ".txt"};
+    
+    save_to_file<Message_list>(chat_file_name, subject);
 }
