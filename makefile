@@ -1,7 +1,10 @@
 COMPILER = g++
 FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o
 
-BOOST = -I #eneter your boost's absolute path here#
+#BOOST = -I #eneter your boost's absolute path here#
+Bin = bin
+src = src
+
 misc = src/Utilities/io.cpp src/Utilities/Transmitter.cpp src/loging/loger.cpp
 
 accounts = src/Account/Users_list.cpp src/Account/Account.cpp
@@ -39,23 +42,23 @@ install:
 uninstall:
 	rm -rf users tmp account cbook chat comline exit src
 
-login:
-	$(COMPILER) $(BOOST) $(accounts) $(accounts1) $(misc) $(FLAGS) $(account_program) 
+$(account_program): $(accounts) $(accounts1) $(misc)  
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-task: 
-	$(COMPILER) $(BOOST) $(task) $(misc) $(FLAGS) $(task_program)
+$(task_program): $(task) $(misc)
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-comm_lines:
-	$(COMPILER) $(BOOST) $(com_lines) $(com_lines1) $(misc) $(FLAGS) $(commline_program)
+$(commline_program): $(com_lines) $(com_lines1) $(misc)
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-conversation:
-	$(COMPILER) $(BOOST) $(chat) $(chat1) $(misc) $(FLAGS) $(chat_program)
+$(chat_program): $(chat) $(chat1) $(misc)
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-contacts:
-	$(COMPILER) $(BOOST) $(cbooks) $(cbooks1) $(misc) $(FLAGS) $(contacts_program)
+$(contacts_program): $(cbooks) $(cbooks1) $(misc)
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-handle:
-	$(COMPILER) $(BOOST) $(handlers) $(misc) $(FLAGS) $(handler_program)
+$(handler_program): $(handlers) $(misc)
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
-exiter:
-	$(COMPILER) $(BOOST) $(exit) $(misc) -lncurses $(FLAGS) $(exit_program)
+$(exit_program): $(exit) $(misc)
+	$(COMPILER) $(BOOST) $^ -lncurses $(FLAGS) $@
