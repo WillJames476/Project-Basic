@@ -60,13 +60,15 @@ int save_to_file(const std::string& file_name, const T& to_modify)
 
     try
     {
-        std::fstream file_archiver(file_name, std::ios_base::out);
+        std::ofstream file_archiver(file_name);
         file_archiver << to_modify;
         file_archiver.close();
     }
-    catch(std::exception &s)
+    catch(std::exception &excpt)
     {
-        std::cerr << BAD << s.what() << RESET;
+        std::cerr << BAD 
+					<< excpt.what() 
+					<< RESET;
         return EXIT_FAILURE;    
     }
 
@@ -81,13 +83,15 @@ int load_from_file(const std::string& file_name, T& to_modify)
 
     try
     {
-        std::fstream file_archiver(file_name, std::ios_base::in);
+        std::ifstream file_archiver(file_name);
         file_archiver >> to_modify;
         file_archiver.close();
     }
-    catch(std::exception &s)
+    catch(std::exception &excpt)
     {
-        std::cerr << BAD << s.what() << RESET;
+        std::cerr << BAD 
+					<< excpt.what() 
+					<< RESET;
         return EXIT_FAILURE;    
     }
 
