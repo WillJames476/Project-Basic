@@ -12,7 +12,7 @@
 # Instalation
 1. clone the repository
 2. goto the directory of the repository
-3. enter the absolute path of boost library from your pc to the specified
+2-a.optional. enter the absolute path of boost library from your pc to the specified
    comment on the makefile 
 4. type make install on your terminal
 5. type make build on your terminal
