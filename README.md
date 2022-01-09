@@ -6,8 +6,13 @@
 
 # Prerequisites
 * c++20 compliant compiler
-* up to date boostc++ library
-* ncurses
+
+# Third party libraries used
+* This software includes third part open source software they are: 
+  1. Boost c++ library
+  2. ncurses
+  the Boost c++ library have their own license. Please see:
+  Boost/LICENSE or boost.org
 
 # Instalation
 1. clone the repository
