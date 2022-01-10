@@ -3,6 +3,7 @@
 #include <array>
 #include <sstream>
 #include <curses.h>
+#include <filesystem>
 
 #include "../Utilities/Transmitter.h"
 #include "../Utilities/io.h"
@@ -17,7 +18,7 @@ int main()
     exit_ui(datas[0] + " " + datas[1]);
     endwin();
     
-    if(!datas[0].empty())
+    if(!datas[0].empty() && std::filesystem::exists("users/" + datas[0]))
     {
         add_to_log({datas[0], datas[1], " exit sector"});
     }

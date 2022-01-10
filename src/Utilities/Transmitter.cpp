@@ -20,8 +20,7 @@ void transmit_data(const std::string& datas)
 	}
 	catch(interprocess_exception &except)
 	{
-		std::cerr << FEEDBACK_COLORS::BAD
-				<< except.what()
+		std::cerr << FEEDBACK_COLORS::BAD << except.what()
 			 	<< FEEDBACK_COLORS::RESET << '\n';
 	}
 }
@@ -44,9 +43,8 @@ std::array<std::string, 2> receive_data()
 	}
 	catch(interprocess_exception &except)
 	{
-		std::cerr << FEEDBACK_COLORS::BAD 
-					<< except.what()
-					<< FEEDBACK_COLORS::RESET <<'\n';
+		std::cerr << FEEDBACK_COLORS::BAD << except.what()
+				<< FEEDBACK_COLORS::RESET <<'\n';
 	}
 
 	return string_to_return_arr;

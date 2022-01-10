@@ -1,5 +1,6 @@
 #include <iostream>
-#include <sstream>
+#include <string>
+#include <filesystem>
 
 #include "Communication_line_menu.h"
 #include "../Utilities/Transmitter.h"
@@ -9,7 +10,7 @@ int main()
 {
     std::array<std::string,2> user{receive_data()};
 
-    if(!user[0].empty())
+    if(!user[0].empty() && std::filesystem::exists("users/" + user[0]))
     {
         user[0] = communication_line_menu(user[0]);
         transmit_data(user[0] + " " + user[1]);
