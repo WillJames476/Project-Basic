@@ -1,7 +1,7 @@
 COMPILER = g++
 FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o
 
-#BOOST = -I #eneter your boost's absolute path here if needed#
+BOOST = -lboost_program_options #-I #eneter your boost's absolute path here if needed#
 BIN = bin
 SRC = src
 Clean = clean

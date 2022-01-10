@@ -6,13 +6,13 @@
 void handler_ui()
 {
     std::string user_command{};
-
+    
     while(user_command != "/exit")
     {
         user_command = get_string("enter the user command here: ", 
         REGEX_PREDICATES::COMMAND);
 
-        std::string full_command{"bin/" + user_command};
+        std::string full_command{"bin"+user_command};
         std::system(full_command.c_str());
     }
 }
