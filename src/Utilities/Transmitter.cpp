@@ -20,7 +20,7 @@ void transmit_data(const std::string& datas)
 	}
 	catch(interprocess_exception &except)
 	{
-		std::cerr << FEEDBACK_COLORS::BAD 
+		std::cerr << FEEDBACK_COLORS::BAD
 				<< except.what()
 			 	<< FEEDBACK_COLORS::RESET << '\n';
 	}

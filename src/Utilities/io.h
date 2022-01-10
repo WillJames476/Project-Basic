@@ -21,7 +21,7 @@ namespace FEEDBACK_COLORS
 
 namespace REGEX_PREDICATES
 {
-    const std::regex ALPHA         ("[A-Za-z ]+"), 
+    const std::regex ALPHA         ("[A-Za-z ]+"),
                      ALPHA_NOSPACE ("[A-Za-z]+"),
                      MESSAGE       ("[A-Za-z0-9, \n]+"),
                      DIGIT         ("[0-9 ]+"),
@@ -66,10 +66,8 @@ int save_to_file(const std::string& file_name, const T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD 
-					<< excpt.what() 
-					<< RESET;
-        return EXIT_FAILURE;    
+        std::cerr << BAD << excpt.what() << RESET;
+        return EXIT_FAILURE;
     }
 
     std::clog << GOOD << "file operation suceeds success\n" << RESET;
@@ -89,10 +87,8 @@ int load_from_file(const std::string& file_name, T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD 
-					<< excpt.what() 
-					<< RESET;
-        return EXIT_FAILURE;    
+        std::cerr << BAD << excpt.what() << RESET;
+        return EXIT_FAILURE;
     }
 
     std::clog << GOOD << "file operation suceeds success\n" << RESET;
@@ -101,9 +97,9 @@ int load_from_file(const std::string& file_name, T& to_modify)
 
 std::string get_string(const std::string& request, std::regex predicate);
 void get_a_date_from_user(std::tm& to_return);
-int get_a_time_from_user(const std::string& request, 
+int get_a_time_from_user(const std::string& request,
 int min_range, int max_range);
-void replace_char_with(std::string& to_modify, char to_replace, 
+void replace_char_with(std::string& to_modify, char to_replace,
 char replacement);
 
 #endif

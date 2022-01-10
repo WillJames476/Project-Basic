@@ -8,7 +8,7 @@
 * c++20 compliant compiler
 
 # Third party libraries used
-* This software includes third part open source software they are: 
+* This software includes third party open source software they are: 
 1. Boost c++ library
 2. ncurses
 
@@ -17,12 +17,12 @@
 
 # Instalation
 1. clone the repository
-2. goto the directory of the repository
-2-a.optional. enter the absolute path of boost library from your pc to the specified
+2. goto the directory of the repository,
+   optional. enter the absolute path of boost library from your pc to the specified
    comment on the makefile 
-4. type make install on your terminal
-5. type make build on your terminal
-6. enjoy
+3. type make install on your terminal
+4. type make build on your terminal
+5. enjoy
 
 # Usage
 1. type bin/handler on the terminal and launch applications when asked by prompt
