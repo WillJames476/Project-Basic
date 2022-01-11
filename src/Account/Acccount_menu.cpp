@@ -4,29 +4,60 @@
 #include <fstream>
 #include <unordered_map>
 #include <boost/program_options.hpp>
+#include <regex>
 
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
 
+bool entry_predicates(const std::vector<std::string>& list)
+{
+    using namespace REGEX_PREDICATES;
+
+    for(const auto& datas : list)
+    {
+        if(!std::regex_match(datas, ALPHA_NOSPACE))
+        {
+            std::cerr << FEEDBACK_COLORS::BAD 
+                    << "input is invalid\n"
+                    << FEEDBACK_COLORS::RESET;
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void add_list(Users_list& accounts, const std::vector<std::string>& list)
 {
     assert(static_cast<int>(list.size()) == 2);
-    accounts.add_to_list({list[0], list[1], "1"});
+    
+    if(entry_predicates(list))
+    {
+        accounts.add_to_list({list[0], list[1], "1"});
+    }
 }
 
 void login(std::string& user_file,Users_list& accounts, 
             const std::vector<std::string>&list)
 {
     assert(static_cast<int>(list.size()) == 2);
-    user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
-    .get_credential().first;
+
+    if(entry_predicates(list))
+    {
+        user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
+        .get_credential().first;
+    }
 }
 
 void deletion(Users_list& accounts, const std::vector<std::string>& list)
 {
     assert(static_cast<int>(list.size()) == 2);
-    accounts.remove_from_list(Account({list[0], list[1]}));
+
+    if(entry_predicates(list))
+    {
+        accounts.remove_from_list(Account({list[0], list[1]}));
+    }
 }
 
 void cli_control_flow(std::string& user_file, Users_list& accounts, 
@@ -75,7 +106,9 @@ std::string account_manager_cli(int argc, char** argv, const std::string& accoun
     }
     catch(const error& excpt)
     {
-        std::cerr << excpt.what() << '\n';
+        std::cerr << FEEDBACK_COLORS::BAD << excpt.what() 
+                << " enter --help to see available commands\n"
+                << FEEDBACK_COLORS::RESET;
     }
 
     save_to_file<Users_list>(accounts_file, accounts);
