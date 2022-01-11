@@ -3,79 +3,81 @@
 #include <algorithm>
 #include <fstream>
 #include <unordered_map>
+#include <boost/program_options.hpp>
 
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
 
-Account create_account(const std::vector<std::string>&requests)
+void add_list(Users_list& accounts, const std::vector<std::string>& list)
 {
-    int tracker{0};
-    std::array<std::string, 2>account_credentials;
+    assert(static_cast<int>(list.size()) == 2);
+    accounts.add_to_list({list[0], list[1], "1"});
+}
 
-    while(tracker < static_cast<int>(account_credentials.size()))
+void login(std::string& user_file,Users_list& accounts, 
+            const std::vector<std::string>&list)
+{
+    assert(static_cast<int>(list.size()) == 2);
+    user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
+    .get_credential().first;
+}
+
+void deletion(Users_list& accounts, const std::vector<std::string>& list)
+{
+    assert(static_cast<int>(list.size()) == 2);
+    accounts.remove_from_list(Account({list[0], list[1]}));
+}
+
+void cli_control_flow(std::string& user_file, Users_list& accounts, 
+                    boost::program_options::variables_map& vm,
+                    boost::program_options::options_description& options)
+{
+    if(vm.count("create"))
     {
-        account_credentials[tracker] = get_string(requests[tracker], 
-        REGEX_PREDICATES::ALPHA_NOSPACE);
-        tracker++;
+        add_list(accounts,vm["create"].as<std::vector<std::string>>());
     }
-
-    return Account{account_credentials[0], account_credentials[1]};
-}
-
-void accounts_manager_control_flow(std::string& user_file, 
-char menu_choice,bool& menu_replay, Users_list &accounts)
-{
-    const std::vector<std::string> requests{"enter the username here: ",
-    "enter the password here: "};
-    const std::vector<std::string> predicates{"Default", "Default"};
-    
-    switch (menu_choice)
+    if(vm.count("login"))
     {
-        case '1':
-            accounts.add_to_list
-            ({get_string("enter the user name here: ", REGEX_PREDICATES::ALPHA_NOSPACE), 
-            get_string("enter the password here:" ,REGEX_PREDICATES::ALPHA_NOSPACE),"1"});
-            break;
-        case '2':
-            accounts.remove_from_list(create_account(requests));
-            break;
-        case '3':
-            user_file = accounts.get_item_from_list
-            (create_account(requests)).get_credential().first;
-            break;
-        case '4':
-            menu_replay = false;
-            break;
+        login(user_file, accounts, vm["login"].as<std::vector<std::string>>());
+    }
+    if(vm.count("delete"))
+    {
+        deletion(accounts,vm["delete"].as<std::vector<std::string>>());
+    }
+    if(vm.count("help"))
+    {
+        std::cout << options;
     }
 }
 
-char accounts_manager_menu()
+std::string account_manager_cli(int argc, char** argv, const std::string& accounts_file)
 {
-    std::ostringstream menu;
-    menu  << "\n=================================\n"
-          << "1\tadd a user\n"
-          << "2\tremove a user\n"
-          << "3\tuser login\n"
-          << "4\texit login sector\n"
-          << "enter your choice here: ";
-    return get_integral<char>(menu.str(),'0','5');
-}
+    using namespace boost::program_options;
 
-std::string accounts_manager(const std::string& accounts_file)
-{
     Users_list accounts{};
-    std::string menu_choice{}, user_file{};
-    bool menu_replay{true};
-
+    std::string user_file{};
     load_from_file<Users_list>(accounts_file, accounts);
 
-    while(menu_replay)
+    try
     {
-        accounts_manager_control_flow(user_file,accounts_manager_menu(),
-        menu_replay, accounts);
+        options_description options{"args"};
+        options.add_options()
+        ("login", value<std::vector<std::string>>()->composing()->multitoken()->zero_tokens(), "logs on an account")
+        ("create", value<std::vector<std::string>>()->composing()->multitoken()->zero_tokens(), "creates an account")
+        ("delete", value<std::vector<std::string>>()->composing()->multitoken(), "deletes an account")
+        ("help", "shows all the commands");
+
+        variables_map vm;
+        store(parse_command_line(argc, argv, options),vm);
+        notify(vm);
+        cli_control_flow(user_file, accounts, vm, options);
+    }
+    catch(const error& excpt)
+    {
+        std::cerr << excpt.what() << '\n';
     }
 
     save_to_file<Users_list>(accounts_file, accounts);
-    return user_file;
+    return user_file;   
 }

@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string accounts_manager(const std::string& accounts_file);
+std::string account_manager_cli(int argc, char** argv, const std::string& accounts_file);
 
 #endif

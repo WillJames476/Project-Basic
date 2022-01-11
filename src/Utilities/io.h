@@ -29,7 +29,7 @@ namespace REGEX_PREDICATES
                      ALNUM         ("[A-Za-z0-9 ]+"),
                      EMAIL         ("[_@a-zA-Z0-9]+.com"),
                      APP_COMMAND   ("^--[a-z ]+"),
-                     COMMAND       ("^/[a-z-0-9""]+");
+                     COMMAND       ("^/[a-z-0-9"" -]+");
 }
 
 template <typename T>

@@ -9,7 +9,7 @@ void handler_ui()
     
     while(user_command != "/exit")
     {
-        user_command = get_string("enter the user command here: ", 
+        user_command = get_string("enter the command here: ", 
         REGEX_PREDICATES::COMMAND);
 
         std::string full_command{"bin"+user_command};
