@@ -44,6 +44,10 @@ void add_to_chat(Message_list& subject
             subject.add_to_list(Message_tuple{accessor, fields[0],
             std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())});
         }
+        else
+        {
+            invalid_argument_error("-add");
+        }
     }
     else
     {

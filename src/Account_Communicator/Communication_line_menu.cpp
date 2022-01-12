@@ -19,6 +19,10 @@ void access_account(std::string& file_name
         {
             file_name = com.get_item_from_list(arguments[0]);
         }
+        else
+        {
+            invalid_argument_error("--access");
+        }
     }
     else
     {
@@ -38,10 +42,14 @@ void alter_permission(const std::string& permanent_user
         {
             comm.alter_permission(permanent_user, arguments[0]);
         }
+        else
+        {
+            invalid_argument_error("--alter");
+        }
     }
     else
     {
-        invalid_argument_quantity_error("--access", 1);
+        invalid_argument_quantity_error("--alter", 1);
     }
 }
 
@@ -56,6 +64,10 @@ void remove_account(Communication_lines& comm,
         {
             comm.remove_from_list(arguments[0]);
         }
+        else
+        {
+            invalid_argument_error("--delete");
+        }
     }
     else
     {
@@ -66,13 +78,22 @@ void remove_account(Communication_lines& comm,
 void add_account(Communication_lines& comm, 
                 const std::vector<std::string>& arguments)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(arguments.size()) == 1)
     {
-        comm.add_to_list(arguments[0], 0);
+        if(arguments_verify(arguments, {ALPHA_NOSPACE}))
+        {
+            comm.add_to_list(arguments[0], 0);
+        }
+        else
+        {
+            invalid_argument_error("--add");
+        }
     }
     else
     {
-        invalid_argument_quantity_error("--access", 1);
+        invalid_argument_quantity_error("--add", 1);
     }
 }
 

@@ -51,6 +51,16 @@ void invalid_argument_quantity_error(const std::string& command, int expected_si
     std::cerr << output.str();
 }
 
+void invalid_argument_error(const std::string& command)
+{
+    using namespace FEEDBACK_COLORS;
+    std::stringstream output;
+
+    output << BAD << command << " argumanets are invalid\n" << RESET;
+
+    std::cerr << output.str();
+}
+
 bool arguments_verify(const std::vector<std::string>& arguments,
                     const std::initializer_list<std::regex>& predicates)
 {
