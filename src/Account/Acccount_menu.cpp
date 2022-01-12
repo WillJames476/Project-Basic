@@ -22,6 +22,10 @@ void add_list(Users_list& accounts, const std::vector<std::string>& list)
         {
             accounts.add_to_list({list[0], list[1], "1"});
         }
+        else
+        {
+            invalid_argument_error("--create");
+        }
     }
     else
     {
@@ -41,6 +45,10 @@ void login(std::string& user_file,Users_list& accounts,
             user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
             .get_credential().first;
         }
+        else
+        {
+            invalid_argument_error("--login");
+        }
     }
     else
     {
@@ -57,6 +65,10 @@ void deletion(Users_list& accounts, const std::vector<std::string>& list)
         if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
         {
             accounts.remove_from_list(Account({list[0], list[1]}));
+        }
+        else
+        {
+            invalid_argument_error("--delete");
         }
     }
     else
