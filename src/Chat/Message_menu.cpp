@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <array>
 #include <vector>
+#include <boost/program_options.hpp>
 
 #include "Message_list.h"
 #include "Message_tuple.h"
@@ -30,49 +31,75 @@ Message_list& messages)
     }
 }
 
-void message_control_flow(Message_list& messages, Message_list& temp, 
-const std::string& acessor, char menu_choice, bool& menu_replay)
+void add_to_chat(Message_list& subject
+                ,const std::string& accessor
+                ,const std::vector<std::string>& fields)
 {
-    switch(menu_choice)
+    using namespace REGEX_PREDICATES;
+
+    if(static_cast<int>(fields.size()) == 1)
     {
-        case '1':
-            messages.add_to_list
-            (Message_tuple{acessor, get_string
-            ("enter the message here:", REGEX_PREDICATES::MESSAGE),
+        if(arguments_verify(fields, {MESSAGE}))
+        {
+            subject.add_to_list(Message_tuple{accessor, fields[0],
             std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())});
-            break;
-        case '2':
-            temp.print_list();
-            break;
-        case '3':
-            menu_replay = false;
-            break;
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--add", 1);       
     }
 }
 
-char message_menu()
+void message_control_flow_cli(Message_list& subject 
+                        ,const Message_list& second 
+                        ,Message_list& temp
+                        ,const std::string& accessor
+                        ,const boost::program_options::options_description& description
+                        ,const boost::program_options::variables_map& vm)
 {
-    std::ostringstream menu;
-    menu<< "\n============================\n"
-        << "1\tmake new message\n"
-        << "2\tview chat\n"
-        << "3\texit chat sector\n"
-        << "enter your choice here: ";
-    return get_integral<char>(menu.str(), '0', '4');
-}
-
-void message(const std::array<std::string,2>& users)
-{
-    Message_list subject{}, second{}, temp{};
-    bool menu_replay{true};
-    load_from_file({users[0], users[1]}, subject);
-    load_from_file({users[1],users[0]}, second);
-    
-    while(menu_replay)    
+    if(vm.count("add"))
+    {
+        add_to_chat(subject, accessor, vm["add"].as<std::vector<std::string>>());
+    }
+    else if(vm.count("view"))
     {
         temp = subject + second;
-        message_control_flow(subject,temp, users[1], message_menu(),
-        menu_replay);
+        temp.print_list();
+    }
+    else if(vm.count("help"))
+    {
+        std::cout << description;
+    }
+}
+
+void message_cli(int argc, char**argv, const std::array<std::string, 2>& users)
+{
+    using namespace boost::program_options;
+
+    Message_list subject {},
+                 second  {},
+                 temp    {};
+    load_from_file({users[0], users[1]}, subject);
+    load_from_file({users[1], users[0]}, second);
+
+    try
+    {
+        options_description options{"options"};
+        options.add_options()
+        ("add", value<std::vector<std::string>>()->multitoken()->composing()->zero_tokens(),
+        "add a new chat")
+        ("view", "views all your chats")
+        ("help", "prints all available flags and options");
+
+        variables_map vm;
+        store(parse_command_line(argc, argv, options), vm);
+        notify(vm);
+        message_control_flow_cli(subject, second, temp, users[1], options, vm);
+    }
+    catch(const error& excpt)
+    {
+        std::cerr << excpt.what() << '\n';
     }
 
     std::string chat_file_name{"users/" + users[0] + "/chats/" 
