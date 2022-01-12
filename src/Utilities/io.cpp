@@ -2,10 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <ctime>
-#include <unordered_map>
-#include <functional>
-#include <cstring>
 #include <regex>
+#include <sstream>
 
 #include "../Todolist/constants.h"
 #include "io.h"
@@ -41,4 +39,14 @@ char replacement)
     std::replace_if(to_modify.begin(), to_modify.end(),
     [to_replace](auto& test)
     {return to_replace == test;},replacement);
+}
+
+void invalid_argument_quantity_error(const std::string& command, int expected_size)
+{
+    using namespace FEEDBACK_COLORS;
+    std::stringstream output;
+
+    output << BAD << command << "exepcets " << expected_size << "arguments\n" << RESET;
+
+    std::cerr << output.str();
 }

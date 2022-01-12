@@ -10,6 +10,8 @@
 #include "Account_menu.h"
 #include "../Utilities/io.h"
 
+static const int EXPECTED_SIZE = 2;
+
 bool entry_predicates(const std::vector<std::string>& list)
 {
     using namespace REGEX_PREDICATES;
@@ -18,8 +20,7 @@ bool entry_predicates(const std::vector<std::string>& list)
     {
         if(!std::regex_match(datas, ALPHA_NOSPACE))
         {
-            std::cerr << FEEDBACK_COLORS::BAD 
-                    << "input is invalid\n"
+            std::cerr << FEEDBACK_COLORS::BAD << "input is invalid\n"
                     << FEEDBACK_COLORS::RESET;
             return false;
         }
@@ -30,33 +31,48 @@ bool entry_predicates(const std::vector<std::string>& list)
 
 void add_list(Users_list& accounts, const std::vector<std::string>& list)
 {
-    assert(static_cast<int>(list.size()) == 2);
-    
-    if(entry_predicates(list))
+    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        accounts.add_to_list({list[0], list[1], "1"});
+        if(entry_predicates(list))
+        {
+            accounts.add_to_list({list[0], list[1], "1"});
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--create", EXPECTED_SIZE);
     }
 }
 
-void login(std::string& user_file,Users_list& accounts, 
+void login(std::string& user_file,Users_list& accounts,
             const std::vector<std::string>&list)
 {
-    assert(static_cast<int>(list.size()) == 2);
-
-    if(entry_predicates(list))
+    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
-        .get_credential().first;
+        if(entry_predicates(list))
+        {
+            user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
+            .get_credential().first;
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--login", EXPECTED_SIZE);
     }
 }
 
 void deletion(Users_list& accounts, const std::vector<std::string>& list)
 {
-    assert(static_cast<int>(list.size()) == 2);
-
-    if(entry_predicates(list))
+    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        accounts.remove_from_list(Account({list[0], list[1]}));
+        if(entry_predicates(list))
+        {
+            accounts.remove_from_list(Account({list[0], list[1]}));
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--delete", EXPECTED_SIZE);
     }
 }
 
@@ -86,9 +102,9 @@ std::string account_manager_cli(int argc, char** argv, const std::string& accoun
 {
     using namespace boost::program_options;
 
-    Users_list accounts{};
-    std::string user_file{};
-    load_from_file<Users_list>(accounts_file, accounts);
+    Users_list accounts        {};
+    std::string user_file      {};
+    load_from_file<Users_list> (accounts_file, accounts);
 
     try
     {
