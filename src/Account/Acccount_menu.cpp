@@ -12,28 +12,13 @@
 
 static const int EXPECTED_SIZE = 2;
 
-bool entry_predicates(const std::vector<std::string>& list)
+void add_list(Users_list& accounts, const std::vector<std::string>& list)
 {
     using namespace REGEX_PREDICATES;
 
-    for(const auto& datas : list)
-    {
-        if(!std::regex_match(datas, ALPHA_NOSPACE))
-        {
-            std::cerr << FEEDBACK_COLORS::BAD << "input is invalid\n"
-                    << FEEDBACK_COLORS::RESET;
-            return false;
-        }
-    }
-
-    return true;
-}
-
-void add_list(Users_list& accounts, const std::vector<std::string>& list)
-{
     if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        if(entry_predicates(list))
+        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
         {
             accounts.add_to_list({list[0], list[1], "1"});
         }
@@ -47,9 +32,11 @@ void add_list(Users_list& accounts, const std::vector<std::string>& list)
 void login(std::string& user_file,Users_list& accounts,
             const std::vector<std::string>&list)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        if(entry_predicates(list))
+        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
         {
             user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
             .get_credential().first;
@@ -63,9 +50,11 @@ void login(std::string& user_file,Users_list& accounts,
 
 void deletion(Users_list& accounts, const std::vector<std::string>& list)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(list.size()) == EXPECTED_SIZE)
     {
-        if(entry_predicates(list))
+        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
         {
             accounts.remove_from_list(Account({list[0], list[1]}));
         }

@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string communication_line_menu(std::string& file_name);
+std::string communication_line_cli(int argc, char** argv, std::string& file_name);
 
 #endif

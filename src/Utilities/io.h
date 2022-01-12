@@ -94,6 +94,8 @@ int load_from_file(const std::string& file_name, T& to_modify)
     std::clog << GOOD << "file operation suceeds success\n" << RESET;
     return EXIT_SUCCESS;
 }
+
+bool arguments_verify(const std::vector<std::string>& arguments, const std::initializer_list<std::regex>& predicates);
 void invalid_argument_quantity_error(const std::string& command, int expected_size);
 std::string get_string(const std::string& request, std::regex predicate);
 void get_a_date_from_user(std::tm& to_return);

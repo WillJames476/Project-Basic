@@ -10,8 +10,8 @@
 
 std::string get_string(const std::string& request, std::regex predicate)
 {
-    std::string user_input{};
-    bool is_verified{false};
+    std::string user_input {};
+    bool is_verified       {false};
 
     while(!is_verified)
     {
@@ -26,7 +26,7 @@ std::string get_string(const std::string& request, std::regex predicate)
 
 void get_a_date_from_user(std::tm& to_return)
 {
-    to_return.tm_mon= get_integral<int>
+    to_return.tm_mon = get_integral<int>
     ("enter the month here: ", constants::current_date->tm_mon - 1, 12);
     to_return.tm_mday = get_integral<int>
     ("enter the day here: ", constants::current_date->tm_mday - 1, 
@@ -46,7 +46,25 @@ void invalid_argument_quantity_error(const std::string& command, int expected_si
     using namespace FEEDBACK_COLORS;
     std::stringstream output;
 
-    output << BAD << command << "exepcets " << expected_size << "arguments\n" << RESET;
+    output << BAD << command << " exepcets " << expected_size << " arguments\n" << RESET;
 
     std::cerr << output.str();
+}
+
+bool arguments_verify(const std::vector<std::string>& arguments,
+                    const std::initializer_list<std::regex>& predicates)
+{
+    int tracker {0};
+
+    for(const auto& x : predicates)
+    {
+        if(!std::regex_match(arguments[tracker], x))
+        {
+            return false;
+        }
+
+        ++tracker;
+    }
+
+    return true;
 }
