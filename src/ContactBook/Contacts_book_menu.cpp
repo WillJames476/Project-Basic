@@ -6,78 +6,37 @@
 #include "Contacts_list.h"
 #include "Contacts.h"
 #include "../Utilities/io.h"
+#include "../Utilities/extras.h"
 
 void search_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(fields.size()) == 3)
-    {
-        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
-        {
-            std::cout << list.get_item_from_list
-            (Contacts{fields[0], fields[1], fields[2]});
-        }
-        else
-        {
-            invalid_argument_error("--search");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--search", 3);
-    }
+    std::cout << list.get_item_from_list
+    (Contacts{fields[0], fields[1], fields[2]});
 }
 
 void remove_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
-    using namespace REGEX_PREDICATES;
+    list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});
 
-    if(static_cast<int>(fields.size()) == 3)
-    {
-        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
-        {
-            list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});
-        }
-        else
-        {
-            invalid_argument_error("--remove");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--remove", 3);
-    }
 }
 
 void add_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(fields.size()) == 3)
-    {
-        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
-        {
-            list.add_to_list(Contacts{fields[0], fields[1], fields[2]});
-        }
-        else
-        {
-            invalid_argument_error("--add");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--add", 3);
-    }
+    list.add_to_list(Contacts{fields[0], fields[1], fields[2]});
 }
 
 void contacts_book_control_flow_cli(Contacts_list& list
             ,const boost::program_options::variables_map& vm
             ,const boost::program_options::options_description& option)
 {
+    using namespace REGEX_PREDICATES;
+
+    const int  ARG_SIZE     {3};
+    const auto predicates = {ALPHA_NOSPACE, DIGIT_NOSPACE, EMAIL};
+
     if(vm.count("help"))
     {
         std::cout << option;
@@ -88,15 +47,18 @@ void contacts_book_control_flow_cli(Contacts_list& list
     }
     if(vm.count("add"))
     {
-        add_contact(list, vm["add"].as<std::vector<std::string>>());
+        apply_function<Contacts_list>(list, vm["add"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--add", predicates, &add_contact);
     }
     if(vm.count("remove"))
     {
-        remove_contact(list, vm["remove"].as<std::vector<std::string>>());
+        apply_function<Contacts_list>(list, vm["remove"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--remove", predicates, &remove_contact);
     }
     if(vm.count("search"))
     {
-        search_contact(list, vm["search"].as<std::vector<std::string>>());
+        apply_function<Contacts_list>(list, vm["search"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--search", predicates, &search_contact);
     }
 }
 
