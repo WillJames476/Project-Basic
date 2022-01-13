@@ -10,28 +10,67 @@
 void search_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(fields.size()) == 3)
     {
-        std::cout << list.get_item_from_list
-        (Contacts{fields[0], fields[1], fields[2]});
+        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
+        {
+            std::cout << list.get_item_from_list
+            (Contacts{fields[0], fields[1], fields[2]});
+        }
+        else
+        {
+            invalid_argument_error("--search");
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--search", 3);
     }
 }
 
 void remove_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(fields.size()) == 3)
     {
-        list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});
+        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
+        {
+            list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});
+        }
+        else
+        {
+            invalid_argument_error("--remove");
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--remove", 3);
     }
 }
 
 void add_contact(Contacts_list& list
     ,const std::vector<std::string>& fields)
 {
+    using namespace REGEX_PREDICATES;
+
     if(static_cast<int>(fields.size()) == 3)
     {
-        list.add_to_list(Contacts{fields[0], fields[1], fields[2]});
+        if(arguments_verify(fields, {ALPHA_NOSPACE, DIGIT, EMAIL}))
+        {
+            list.add_to_list(Contacts{fields[0], fields[1], fields[2]});
+        }
+        else
+        {
+            invalid_argument_error("--add");
+        }
+    }
+    else
+    {
+        invalid_argument_quantity_error("--add", 3);
     }
 }
 
