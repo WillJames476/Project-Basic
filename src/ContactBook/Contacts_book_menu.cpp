@@ -8,26 +8,6 @@
 #include "../Utilities/io.h"
 #include "../Utilities/extras.h"
 
-void search_contact(Contacts_list& list
-    ,const std::vector<std::string>& fields)
-{
-    std::cout << list.get_item_from_list
-    (Contacts{fields[0], fields[1], fields[2]});
-}
-
-void remove_contact(Contacts_list& list
-    ,const std::vector<std::string>& fields)
-{
-    list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});
-
-}
-
-void add_contact(Contacts_list& list
-    ,const std::vector<std::string>& fields)
-{
-    list.add_to_list(Contacts{fields[0], fields[1], fields[2]});
-}
-
 void contacts_book_control_flow_cli(Contacts_list& list
             ,const boost::program_options::variables_map& vm
             ,const boost::program_options::options_description& option)
@@ -47,18 +27,21 @@ void contacts_book_control_flow_cli(Contacts_list& list
     }
     if(vm.count("add"))
     {
-        apply_function<Contacts_list>(list, vm["add"].as<std::vector<std::string>>(),
-            ARG_SIZE , "--add", predicates, &add_contact);
+        apply_function<Contacts_list>(vm["add"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--add", predicates, [&](const auto& fields)
+            {list.add_to_list(Contacts{fields[0], fields[1], fields[2]});});
     }
     if(vm.count("remove"))
     {
-        apply_function<Contacts_list>(list, vm["remove"].as<std::vector<std::string>>(),
-            ARG_SIZE , "--remove", predicates, &remove_contact);
+        apply_function<Contacts_list>(vm["remove"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--remove", predicates, [&](const auto& fields)
+            {list.remove_from_list(Contacts{fields[0], fields[1], fields[2]});});
     }
     if(vm.count("search"))
     {
-        apply_function<Contacts_list>(list, vm["search"].as<std::vector<std::string>>(),
-            ARG_SIZE , "--search", predicates, &search_contact);
+        apply_function<Contacts_list>(vm["search"].as<std::vector<std::string>>(),
+            ARG_SIZE , "--search", predicates, [&](const auto& fields)
+            {std::cout << list.get_item_from_list(Contacts{fields[0], fields[1], fields[2]});});
     }
 }
 

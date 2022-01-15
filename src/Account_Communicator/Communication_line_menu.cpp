@@ -6,96 +6,7 @@
 #include "Communication_line.h"
 #include "Communication_line_menu.h"
 #include "../Utilities/io.h"
-
-void access_account(std::string& file_name
-                ,Communication_lines& com
-                ,const std::vector<std::string>& arguments)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(arguments.size()) == 1)
-    {
-        if(arguments_verify(arguments, {ALPHA_NOSPACE}))
-        {
-            file_name = com.get_item_from_list(arguments[0]);
-        }
-        else
-        {
-            invalid_argument_error("--access");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--access", 1);
-    }
-}   
-
-void alter_permission(const std::string& permanent_user
-                    ,Communication_lines& comm
-                    ,const std::vector<std::string>& arguments)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(arguments.size()) == 1)
-    {
-        if(arguments_verify(arguments, {ALPHA_NOSPACE}))
-        {
-            comm.alter_permission(permanent_user, arguments[0]);
-        }
-        else
-        {
-            invalid_argument_error("--alter");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--alter", 1);
-    }
-}
-
-void remove_account(Communication_lines& comm,
-                    const std::vector<std::string>& arguments)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(arguments.size()) == 1)
-    {
-        if(arguments_verify(arguments, {ALPHA_NOSPACE}))
-        {
-            comm.remove_from_list(arguments[0]);
-        }
-        else
-        {
-            invalid_argument_error("--delete");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--access", 1);
-    }
-}
-
-void add_account(Communication_lines& comm, 
-                const std::vector<std::string>& arguments)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(arguments.size()) == 1)
-    {
-        if(arguments_verify(arguments, {ALPHA_NOSPACE}))
-        {
-            comm.add_to_list(arguments[0], 0);
-        }
-        else
-        {
-            invalid_argument_error("--add");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--add", 1);
-    }
-}
+#include "../Utilities/extras.h"
 
 void communication_line_cli_control(const std::string& permanent_user
                                     ,std::string& file_name
@@ -103,6 +14,10 @@ void communication_line_cli_control(const std::string& permanent_user
                                     ,boost::program_options::options_description& desc
                                     ,boost::program_options::variables_map& vm)
 {
+    using namespace REGEX_PREDICATES;
+    const int FIELDS_SIZE   {1};
+    const auto PREDICATES = {ALPHA_NOSPACE};
+
     if(vm.count("help"))
     {
         std::cout << desc;
@@ -113,19 +28,28 @@ void communication_line_cli_control(const std::string& permanent_user
     }
     if(vm.count("add"))
     {
-        add_account(com, vm["add"].as<std::vector<std::string>>());
+        apply_function<Communication_lines>(vm["add"].as<std::vector<std::string>>(),
+            FIELDS_SIZE, "--add", PREDICATES,[&](const auto& fields)
+            {com.add_to_list(fields[0], 0);});
     }
     if(vm.count("delete"))
     {
-        remove_account(com, vm["delete"].as<std::vector<std::string>>());
+        apply_function<Communication_lines>(vm["delete"].as<std::vector<std::string>>(),
+            FIELDS_SIZE, "--delete", PREDICATES,[&](const auto& fields)
+            {com.remove_from_list(fields[0]);});
     }
     if(vm.count("alter"))
     {
-        alter_permission(permanent_user, com, vm["alter"].as<std::vector<std::string>>());
+        apply_function<Communication_lines>(vm["alter"].as<std::vector<std::string>>(),
+            FIELDS_SIZE, "--alter", PREDICATES,[&](const auto& fields)
+            {com.alter_permission(permanent_user, fields[0]);});
     }
     if(vm.count("access"))
     {
-        access_account(file_name, com, vm["access"].as<std::vector<std::string>>());
+        file_name = apply_function<Communication_lines, std::string>
+                        (vm["access"].as<std::vector<std::string>>()
+                        ,FIELDS_SIZE, "--access", PREDICATES, [&](const auto& fields)
+                        {return com.get_item_from_list(fields[0]);});
     }
 }
 

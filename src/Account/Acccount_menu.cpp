@@ -9,89 +9,38 @@
 #include "Users_list.h"
 #include "Account_menu.h"
 #include "../Utilities/io.h"
-
-static const int EXPECTED_SIZE = 2;
-
-void add_list(Users_list& accounts, const std::vector<std::string>& list)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
-    {
-        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
-        {
-            accounts.add_to_list({list[0], list[1], "1"});
-        }
-        else
-        {
-            invalid_argument_error("--create");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--create", EXPECTED_SIZE);
-    }
-}
-
-void login(std::string& user_file,Users_list& accounts,
-            const std::vector<std::string>&list)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
-    {
-        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
-        {
-            user_file = accounts.get_item_from_list(Account({list[0], list[1]}))
-            .get_credential().first;
-        }
-        else
-        {
-            invalid_argument_error("--login");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--login", EXPECTED_SIZE);
-    }
-}
-
-void deletion(Users_list& accounts, const std::vector<std::string>& list)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(list.size()) == EXPECTED_SIZE)
-    {
-        if(arguments_verify(list, {ALPHA_NOSPACE, ALPHA_NOSPACE}))
-        {
-            accounts.remove_from_list(Account({list[0], list[1]}));
-        }
-        else
-        {
-            invalid_argument_error("--delete");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--delete", EXPECTED_SIZE);
-    }
-}
+#include "../Utilities/extras.h"
 
 void cli_control_flow(std::string& user_file, Users_list& accounts, 
                     boost::program_options::variables_map& vm,
                     boost::program_options::options_description& options)
 {
+    using namespace REGEX_PREDICATES;
+    const auto PREDICATES = {ALPHA_NOSPACE, ALPHA_NOSPACE};
+    const int EXPECTED_SIZE {2};
+
     if(vm.count("create"))
     {
-        add_list(accounts,vm["create"].as<std::vector<std::string>>());
+        apply_function<Users_list>(vm["create"].as<std::vector<std::string>>()
+            ,EXPECTED_SIZE, "--create", PREDICATES,[&](const auto& fields)
+                {accounts.add_to_list({fields[0], fields[1], "1"});});
     }
     if(vm.count("login"))
     {
-        login(user_file, accounts, vm["login"].as<std::vector<std::string>>());
+        user_file = apply_function<Users_list, std::string>
+            (vm["login"].as<std::vector<std::string>>()
+            ,EXPECTED_SIZE, "--login", PREDICATES
+                ,[&](const auto& fields)
+                {
+                    return accounts.get_item_from_list
+                    (Account{fields[0], fields[1]}).get_credential().first;
+                });
     }
     if(vm.count("delete"))
     {
-        deletion(accounts,vm["delete"].as<std::vector<std::string>>());
+        apply_function<Users_list>(vm["delete"].as<std::vector<std::string>>()
+            ,EXPECTED_SIZE, "--delete", PREDICATES, [&](const auto& fields)
+                {accounts.remove_from_list(Account{fields[0], fields[1]});});
     }
     if(vm.count("help"))
     {

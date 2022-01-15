@@ -9,6 +9,7 @@
 #include "Message_list.h"
 #include "Message_tuple.h"
 #include "../Utilities/io.h"
+#include "../Utilities/extras.h"
 
 void load_from_file(const std::array<std::string, 2>& file_name, 
 Message_list& messages)
@@ -31,30 +32,6 @@ Message_list& messages)
     }
 }
 
-void add_to_chat(Message_list& subject
-                ,const std::string& accessor
-                ,const std::vector<std::string>& fields)
-{
-    using namespace REGEX_PREDICATES;
-
-    if(static_cast<int>(fields.size()) == 1)
-    {
-        if(arguments_verify(fields, {MESSAGE}))
-        {
-            subject.add_to_list(Message_tuple{accessor, fields[0],
-            std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())});
-        }
-        else
-        {
-            invalid_argument_error("-add");
-        }
-    }
-    else
-    {
-        invalid_argument_quantity_error("--add", 1);       
-    }
-}
-
 void message_control_flow_cli(Message_list& subject 
                         ,const Message_list& second 
                         ,Message_list& temp
@@ -62,9 +39,15 @@ void message_control_flow_cli(Message_list& subject
                         ,const boost::program_options::options_description& description
                         ,const boost::program_options::variables_map& vm)
 {
+    using namespace REGEX_PREDICATES;
+
     if(vm.count("add"))
     {
-        add_to_chat(subject, accessor, vm["add"].as<std::vector<std::string>>());
+        apply_function<Message_list>(vm["add"].as<std::vector<std::string>>()
+            , 1, "--add", {MESSAGE}, [&](auto fields)
+            {subject.add_to_list(Message_tuple{accessor, fields[0], 
+                std::chrono::system_clock::to_time_t
+                (std::chrono::system_clock::now())});});
     }
     else if(vm.count("view"))
     {
