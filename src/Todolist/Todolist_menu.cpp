@@ -32,8 +32,7 @@ bool is_daily, const std::string& task_giver)
     }
 }
 
-void task_manager_clintrl(Task_list& tasks
-    ,const std::string& accessor
+void task_manager_clintrl(Task_list& tasks ,const std::string& accessor
     ,const boost::program_options::options_description& options
     ,const boost::program_options::variables_map& vm)
 {
@@ -52,6 +51,18 @@ void task_manager_clintrl(Task_list& tasks
         apply_function<Task_list>(vm["delete"].as<std::vector<std::string>>()
             ,1, "--delete", {ALPHA}, [&](const auto& fields)
                 {tasks.remove_all_from_list(fields[0]);});
+    }
+    if(vm.count("deletesp"))
+    {
+        apply_function<Task_list>(vm["deletesp"].as<std::vector<std::string>>(),
+            3, "--deletesp", {ALPHA, MONTH, DATE}, [&](const auto& fields)
+                {
+                    std::tm date_specified;
+                    date_specified.tm_mon = std::stoi(fields[1]);
+                    date_specified.tm_mday = std::stoi(fields[2]);
+
+                    tasks.remove_from_list(Task{fields[0], date_specified});
+                });
     }
     if(vm.count("add"))
     {
@@ -90,7 +101,9 @@ void task_manager_cli(int argc, char** argv
         ("add", value<std::vector<std::string>>()->multitoken()->composing()->zero_tokens(),
             "adds a task to the task list")
         ("delete", value<std::vector<std::string>>()->multitoken()->composing()->zero_tokens(),
-            "removes a task/s to the task list")
+            "removes all task from the task list")
+        ("deletesp", value<std::vector<std::string>>()->multitoken()->composing()->zero_tokens(),
+            "deletes a specified task")
         ("view", "view all the tasks");
 
         variables_map vm;

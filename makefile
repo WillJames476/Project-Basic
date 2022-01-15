@@ -45,7 +45,7 @@ $(handler_program): $(Handler) $(Utils) $(Log)
 	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
 $(exit_program): $(Exit) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ -lncurses $(FLAGS) $@
+	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
 
 build:
 	make $(programs)

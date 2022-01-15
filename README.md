@@ -10,10 +10,8 @@
 # Third party libraries used
 * This software includes third party open source software they are: 
 1. Boost c++ library
-2. ncurses
-
-* the Boost c++ library have their own license. Please see:
-  Boost/LICENSE, https://github.com/boostorg/boost.git or www.boost.org
+  * the Boost c++ library have their own license. Please see:
+    Boost/LICENSE, https://github.com/boostorg/boost.git or www.boost.org
 
 # Instalation
 1. clone the repository
@@ -40,6 +38,11 @@
   - The account manager of the program
   - expects no inputs and outputs a user to be accesed by other files
   - can create and remove accounts
+  * available comands
+    - --help   [no-args]           shows all available commands
+    - --login  [string1, string2]  access an account to list      (username, password)
+    - --create [string1, string2]  adds a account to list         (username, password)
+    - --delete [string1, string2]  deletes an account to the list (username, password)
 
 * Account communications manager (executable to handler as /commline)
   - a way to communicate with other accounts

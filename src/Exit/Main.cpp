@@ -1,8 +1,5 @@
 #include <string>
-#include <iostream>
 #include <array>
-#include <sstream>
-#include <curses.h>
 #include <filesystem>
 
 #include "../Utilities/Transmitter.h"
@@ -13,10 +10,7 @@
 int main()
 {
     std::array<std::string,2>datas{receive_data()};
-    initscr();
-    noecho();
     exit_ui(datas[0] + " " + datas[1]);
-    endwin();
     
     if(!datas[0].empty() && std::filesystem::exists("users/" + datas[0]))
     {
