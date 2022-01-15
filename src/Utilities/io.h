@@ -26,11 +26,12 @@ namespace REGEX_PREDICATES
                      MESSAGE       ("[A-Za-z0-9, \n]+"),
                      DIGIT         ("[0-9 ]+"),
                      DIGIT_NOSPACE ("[0-9]+"),
-                     DAY           ("^3[0-1]|[12][0-9]|[0-9]$"),
+                     DATE          ("^3[0-1]|[12][0-9]|[0-9]$"),
                      MONTH         ("^1[0-2]+|[0-9]{1}+$"),
                      ALNUM         ("[A-Za-z0-9 ]+"),
                      EMAIL         ("[_@a-zA-Z0-9]+.com"),
                      APP_COMMAND   ("^--[a-z ]+"),
+                     BOOLEAN       ("^[0-1]$"),
                      COMMAND       ("^/[a-z-0-9"" -]+");
 }
 
