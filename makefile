@@ -5,6 +5,7 @@ BOOST = -lboost_program_options #-I #eneter your boost's absolute path here if n
 BIN = bin
 SRC = src
 Clean = clean
+CLIENT = client
 
 Utils = $(wildcard $(SRC)/Utilities/*.cpp)
 Log = $(wildcard $(SRC)/loging/*.cpp)
