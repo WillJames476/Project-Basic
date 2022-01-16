@@ -1,0 +1,2 @@
+SRC = src
+BIN = bin
