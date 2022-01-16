@@ -8,8 +8,8 @@
 
 #include "Message_list.h"
 #include "Message_tuple.h"
-#include "../Utilities/io.h"
-#include "../Utilities/extras.h"
+#include "../includes/io.h"
+#include "../includes/extras.h"
 
 void load_from_file(const std::array<std::string, 2>& file_name, 
 Message_list& messages)

@@ -4,6 +4,7 @@ FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g -o
 BOOST = -lboost_program_options #-I #eneter your boost's absolute path here if needed#
 BIN = bin
 SRC = src
+HDR = includes
 Clean = clean
 CLIENT = client
 
@@ -28,25 +29,25 @@ handler_program = $(BIN)/handler
 programs = $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
 
 $(account_program): $(Account) $(Utils) $(Log)  
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(task_program): $(Task) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(commline_program): $(Comm_line) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(chat_program): $(Chat) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(contacts_program): $(Cbook) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(handler_program): $(Handler) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 $(exit_program): $(Exit) $(Utils) $(Log)
-	$(COMPILER) $(BOOST) $^ $(FLAGS) $@
+	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) $@
 
 build:
 	make $(programs)

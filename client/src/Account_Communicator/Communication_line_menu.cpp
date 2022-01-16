@@ -5,8 +5,8 @@
 
 #include "Communication_line.h"
 #include "Communication_line_menu.h"
-#include "../Utilities/io.h"
-#include "../Utilities/extras.h"
+#include "../includes/io.h"
+#include "../includes/extras.h"
 
 void communication_line_cli_control(const std::string& permanent_user
                                     ,std::string& file_name

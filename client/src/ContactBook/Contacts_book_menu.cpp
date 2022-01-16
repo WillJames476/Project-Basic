@@ -5,8 +5,8 @@
 #include "Contacts_book_menu.h"
 #include "Contacts_list.h"
 #include "Contacts.h"
-#include "../Utilities/io.h"
-#include "../Utilities/extras.h"
+#include "../includes/io.h"
+#include "../includes/extras.h"
 
 void contacts_book_control_flow_cli(Contacts_list& list
             ,const boost::program_options::variables_map& vm
