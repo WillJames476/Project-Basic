@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include "loger.h"
+#include "../includes/loger.h"
 
 void add_to_log(const std::array<std::string,3>& datas)
 {

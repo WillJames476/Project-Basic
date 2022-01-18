@@ -4,7 +4,7 @@
 #include <regex>
 #include <sstream>
 
-#include "../includes/io.h"
+#include "io.h"
 
 std::string get_string(const std::string& request
     , std::regex predicate)
@@ -30,6 +30,24 @@ char replacement)
     {return to_replace == test;},replacement);
 }
 
+bool arguments_verify(const std::vector<std::string>& arguments,
+                    const std::initializer_list<std::regex>& predicates)
+{
+    int tracker {0};
+
+    for(const auto& x : predicates)
+    {
+        if(!std::regex_match(arguments[tracker], x))
+        {
+            return false;
+        }
+
+        ++tracker;
+    }
+
+    return true;
+}
+
 void invalid_argument_quantity_error(const std::string& command, int expected_size)
 {
     using namespace FEEDBACK_COLORS;
@@ -48,22 +66,4 @@ void invalid_argument_error(const std::string& command)
     output << BAD << command << " argumanets are invalid\n" << RESET;
 
     std::cerr << output.str();
-}
-
-bool arguments_verify(const std::vector<std::string>& arguments,
-                    const std::initializer_list<std::regex>& predicates)
-{
-    int tracker {0};
-
-    for(const auto& x : predicates)
-    {
-        if(!std::regex_match(arguments[tracker], x))
-        {
-            return false;
-        }
-
-        ++tracker;
-    }
-
-    return true;
 }

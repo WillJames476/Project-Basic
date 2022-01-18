@@ -5,8 +5,7 @@
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/containers/string.hpp>
 
-#include "../includes/io.h"
-#include "Transmitter.h"
+#include "io.h"
 
 void transmit_data(const std::string& datas)
 {
