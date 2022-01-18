@@ -1,5 +1,6 @@
 #include <array>
 #include <sstream>
+#include <algorithm>
 
 #include "Contacts_list.h"
 
