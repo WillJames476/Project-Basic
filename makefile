@@ -1,5 +1,5 @@
-COMPILER = g++
-FLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
+CXX = g++
+CXXFLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
 
 BOOST = -lboost_program_options #-I #eneter your boost's absolute path here if needed#
 BIN = bin
@@ -42,54 +42,54 @@ handler_program = $(BIN)/handler
 programs = $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
 
 $(account_program): $(Account_obj) $(Utils_obj) $(Log_obj)  
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(task_program): $(Task_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(commline_program): $(Comm_line_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(chat_program): $(Chat_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(contacts_program): $(Cbook_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(handler_program): $(Handler_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(exit_program): $(Exit_obj) $(Utils_obj) $(Log_obj)
-	$(COMPILER) $(BOOST) -I $(HDR) $^ $(FLAGS) -o $@
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
 $(Utils_obj): $(Utils)
-	$(COMPILER) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) -I $(HDR) -c $^ && $(move_obj)
 
 $(Log_obj): $(Log)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $< -o $@
 
 $(Account_obj): $(Account)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Comm_line_obj): $(Comm_line)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Task_obj): $(Task)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Chat_obj): $(Chat)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Cbook_obj): $(Cbook)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Handler_obj): $(Handler)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Exit_obj): $(Exit)
-	$(COMPILER) $(FLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
-build:
+all:
 	make $(programs)
 
 install: 
