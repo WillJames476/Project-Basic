@@ -1,2 +1,0 @@
-SRC = src
-BIN = bin
