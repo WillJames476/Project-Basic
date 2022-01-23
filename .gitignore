@@ -1,4 +1,4 @@
-client/users
-client/bin
-client/obj
+users/
+bin/
+obj/
 .vscode
