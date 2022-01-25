@@ -1,0 +1,15 @@
+.TH Handler 1 
+.SH NAME
+handler /- an environment to easily launch applications on this repo
+.SH SYNOPSIS
+\fB bin/handler
+.SH DESCRIPTION
+\fBhanlder\fP creates an environemnet to lauch applications
+.SH OPTIONS
+none
+.SH FILES
+none
+.SH "SEE ALSO"
+accounts(1)
+.SH BUGS
+may give segmentation fault if a program is launched twice

@@ -1,0 +1,19 @@
+.TH ACCOUNT 1
+.SH NAME
+account \- creates log-ins and deletes an account
+.SH SYPNOSIS
+\fBaccount\fP --create | --login | --remove username password
+\fBaccount\fP [--help] 
+.SH DESCRIPTION
+\fBaccount\fP manages the accounts that will be used by the
+man programs of this repository
+.SH OPTIONS
+.SH FILES
+.TP
+/users/, /users/accounts.txt
+the users directory and files
+.SH "SEE ALSO"
+handler(1)
+.SH BUGS
+when account is registered and the program is killed halfway 
+it cannot be deleted/ logged-in
