@@ -29,6 +29,9 @@
 1. type make uninstall on the terminal
 
 # Applications on this repo
+* for further information execute groff -Tascii -man documentation/application
+
+
 * Handler (executable as bin/handler)
   - streamlines the process of using the applications
   - expects no inputs and yields no outputs
@@ -38,12 +41,6 @@
   - The account manager of the program
   - expects no inputs and outputs a user to be accesed by other files
   - can create and remove accounts
-
-  * available commands
-    - --help   [no-args]           shows all available commands
-    - --login  [string1, string2]  access an account to list      (username, password)
-    - --create [string1, string2]  adds a account to list         (username, password)
-    - --delete [string1, string2]  deletes an account to the list (username, password)
 
 * Account communications manager (executable to handler as /commline)
   - a way to communicate with other accounts
@@ -88,12 +85,6 @@
   - can add and remove a contact info of a user has as long as you are permitted
   - view the contacts that a user has
   - expects input and can produce output
-  * availabale commands
-  - --help   [no-args] shows all availaba commands
-  - --add    [string1,string2m string3] adds a user to the communication line           (name, number,email)
-  - --remove [string1,string2, string3] deletes a contact from list (name, number email)
-  - --view   [no-args] view the user's communication line  
-  - --search [string1, string 2, string3] search the list with the given strings          (name, number, email)
 
 * Exit (executable to handler as /exit)
   - exits the program gracefully
