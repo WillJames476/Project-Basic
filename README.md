@@ -29,7 +29,7 @@
 1. type make uninstall on the terminal
 
 # Applications on this repo
-* for further information execute groff -Tascii -man documentation/application
+* for further information execute groff -Tascii -man documentation/(application of choice).man
 
 
 * Handler (executable as bin/handler)
@@ -47,14 +47,6 @@
   - can add / remove communication line between two users
   - a one way of communication
   - expects an input
-
-  * availabale commands
-  - --help   [no-args] shows all availaba commands
-  - --add    [string1] adds a user to the communication line           (username)
-  - --delete [string1] deletes a user the the communication line       (username)
-  - --alter  [string1] grants/revokes premission of other users to you (username)
-  - --view   [no-args] view the user's communication line  
-  - --access [string1] acces a user                                    (username)
 
 * Task manager (executable to handler as /todolist)
   - todolist application of the repo
