@@ -7,7 +7,23 @@ cbook \- manages the contacts of all the accounts
 \fBcbook\fP manages the contacts of all accounts,
 it can remove add and search the list that an account has
 .SH OPTIONS
+.TP
+\fB--add\fP
+adds a contact entry, requires three arguments, name, number , and email string
+.TP
+\fB--remove\fP
+removes a contact entry,requires three arguments, name, number , and email string
+.TP
+\fB--search\fP
+searches a specific entry, requires three arguments, name, number , and email string
+.TP
+\fB--view\fP
+views all the contacts that a user has
+.SH FILES
+.TP
+/users/user/cbook.txt
+the files storing all the contract entry a user has
 .SH "SEE ALSO"
-handler(1)
+handler(1), accounts(1)
 .SH BUGS
 no known bugs as of now
