@@ -1,0 +1,13 @@
+.TH cbook 1
+.SH NAME
+cbook \- manages the contacts of all the accounts
+.SH SYPNOSIS
+\fBcbook\fP --add name number email
+.SH DESCRIPTION
+\fBcbook\fP manages the contacts of all accounts,
+it can remove add and search the list that an account has
+.SH OPTIONS
+.SH "SEE ALSO"
+handler(1)
+.SH BUGS
+no known bugs as of now
