@@ -48,7 +48,9 @@ void cli_control_flow(std::string& user_file, Users_list& accounts,
     }
 }
 
-std::string account_manager_cli(int argc, char** argv, const std::string& accounts_file)
+std::string account_manager_cli(int argc
+                                ,char** argv
+                                ,const std::string& accounts_file)
 {
     using namespace boost::program_options;
 

@@ -6,7 +6,8 @@
 #include "../includes/Transmitter.h"
 #include "../includes/loger.h"
 
-int main(int argc, char** argv)
+int main(int argc
+        , char** argv)
 {
     std::array<std::string, 2> users{receive_data()};
     

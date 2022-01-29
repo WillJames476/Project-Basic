@@ -57,13 +57,15 @@ Account Users_list::get_item(const Account& to_get)
     return Account{};
 }
 
-std::ostream& operator<<(std::ostream& out, const Users_list& user)  
+std::ostream& operator<<(std::ostream& out
+                        , const Users_list& user)  
 {
     for(const auto& to_give : user.users) out << *to_give.second;
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Users_list& user)
+std::istream& operator>>(std::istream& in
+                        , Users_list& user)
 {
     Account temp{};
     while(in >> temp)user.add_to_list

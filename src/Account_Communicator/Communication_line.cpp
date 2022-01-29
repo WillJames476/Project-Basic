@@ -6,7 +6,8 @@
 #include "../includes/io.h"
 #include "Communication_line.h"
 
-void Communication_lines::add_to_list(const std::string& user, bool is_permitted)
+void Communication_lines::add_to_list(const std::string& user
+                                    , bool is_permitted)
 {
     if(std::filesystem::exists("users/" + user))
     this->communication_lines.insert(std::make_pair(user, is_permitted));
@@ -18,7 +19,7 @@ void Communication_lines::remove_from_list(const std::string& user_to_remove)
 }
 
 std::string Communication_lines::get_item_from_list
-(const std::string& user_to_get) const
+    (const std::string& user_to_get) const
 {
     auto set_iter = this->communication_lines.find(user_to_get);
 
@@ -27,8 +28,8 @@ std::string Communication_lines::get_item_from_list
     return std::string();
 }
 
-void Communication_lines::alter_permission(const std::string& user_curent, 
-const std::string& user_target)
+void Communication_lines::alter_permission(const std::string& user_curent
+                                        , const std::string& user_target)
 {
     std::cout << user_curent << user_target << '\n';
     Communication_lines temp{};
@@ -51,7 +52,8 @@ void load_from_file(const std::string& file_name, Communication_lines& lines)
     }
 }
 
-void save_to_file(const std::string& file_name, const Communication_lines& lines)
+void save_to_file(const std::string& file_name
+                , const Communication_lines& lines)
 {
     try
     {
@@ -65,8 +67,8 @@ void save_to_file(const std::string& file_name, const Communication_lines& lines
     }
 }
 
-void alter_boolean(const std::string& user_curent, 
-Communication_lines& user_target)
+void alter_boolean(const std::string& user_curent 
+                , Communication_lines& user_target)
 {
     auto map_iter = user_target.communication_lines.find(user_curent);
 
@@ -74,13 +76,15 @@ Communication_lines& user_target)
     {map_iter->second = map_iter->second ? false : true;}
 }
 
-std::ostream& operator<<(std::ostream& out,const Communication_lines& lines)
+std::ostream& operator<<(std::ostream& out
+                        , const Communication_lines& lines)
 {
     for(auto& x : lines.communication_lines){out << x.first << ' ' << x.second << '\n';}
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Communication_lines& lines)
+std::istream& operator>>(std::istream& in
+                        , Communication_lines& lines)
 {
     std::string accounts;
     bool verification;

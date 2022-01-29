@@ -4,8 +4,9 @@
 
 #include "Contacts.h"
 
-Contacts::Contacts(const std::string& name, const std::string& number,
-					const std::string& email)
+Contacts::Contacts(const std::string& name
+				, const std::string& number
+				, const std::string& email)
 : contact{name, number, email}
 {
 }
@@ -20,7 +21,8 @@ void Contacts::print_item()
 	std::cout << output.str();
 }
 
-bool operator== (const Contacts& right, const Contacts& left)
+bool operator== (const Contacts& right
+				, const Contacts& left)
 {
 	bool is_equal = std::get<0>(left.contact) == std::get<0>(right.contact) &&
 	std::get<1>(left.contact) == std::get<1>(right.contact) &&
@@ -29,7 +31,8 @@ bool operator== (const Contacts& right, const Contacts& left)
 	return is_equal;
 }
 
-std::ostream& operator<< (std::ostream& out, const Contacts& to_give)
+std::ostream& operator<<(std::ostream& out
+						, const Contacts& to_give)
 {
 	std::ostringstream extractor;
 	extractor << std::get<0>(to_give.contact) << " "
@@ -40,7 +43,8 @@ std::ostream& operator<< (std::ostream& out, const Contacts& to_give)
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, Contacts& to_give)
+std::istream& operator>>(std::istream& in
+						, Contacts& to_give)
 {
 	std::array<std::string,3> retreived_data;
 	in >> retreived_data[0] >> retreived_data[1] >> retreived_data[2];

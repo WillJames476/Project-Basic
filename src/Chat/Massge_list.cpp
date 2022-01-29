@@ -24,7 +24,8 @@ void Message_list::print_items()
     std::cout << output.str();
 }
 
-Message_list operator+(const Message_list& first, const Message_list& second)
+Message_list operator+(const Message_list& first
+                        , const Message_list& second)
 {
     Message_list temp{};
     std::merge(first.messages.begin(), first.messages.end(),
@@ -34,13 +35,15 @@ Message_list operator+(const Message_list& first, const Message_list& second)
     return temp;
 }
 
-std::ostream& operator<<(std::ostream& out, const Message_list& field)
+std::ostream& operator<<(std::ostream& out
+                        , const Message_list& field)
 {
     for(auto& send : field.messages) out << send;
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Message_list& field)
+std::istream& operator>>(std::istream& in
+                        , Message_list& field)
 {
     Message_tuple to_receive{};
     while(in >> to_receive)

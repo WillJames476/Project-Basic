@@ -8,9 +8,12 @@
 #include "../includes/io.h"
 #include "../includes/extras.h"
 
-void add_task_incrementally(const std::string &task_name, 
-std::tm time_start, Task_list &task_list, int day_increment,
-bool is_daily, const std::string& task_giver)
+void add_task_incrementally(const std::string &task_name
+                            , std::tm time_start
+                            , Task_list &task_list
+                            , int day_increment
+                            , bool is_daily
+                            , const std::string& task_giver)
 {
     if(day_increment != 0)
     {
@@ -32,9 +35,10 @@ bool is_daily, const std::string& task_giver)
     }
 }
 
-void task_manager_clintrl(Task_list& tasks ,const std::string& accessor
-    ,const boost::program_options::options_description& options
-    ,const boost::program_options::variables_map& vm)
+void task_manager_clintrl(Task_list& tasks 
+                        , const std::string& accessor
+                        , const boost::program_options::options_description& options
+                        , const boost::program_options::variables_map& vm)
 {
     using namespace REGEX_PREDICATES;
 
@@ -81,7 +85,8 @@ void task_manager_clintrl(Task_list& tasks ,const std::string& accessor
     }
 }
 
-void task_manager_cli(int argc, char** argv
+void task_manager_cli(int argc
+                    , char** argv
                     ,const std::array<std::string,2>& acces_descriptor)
 {
     using namespace boost::program_options;

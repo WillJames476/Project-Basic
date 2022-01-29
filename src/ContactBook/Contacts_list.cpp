@@ -58,14 +58,16 @@ Contacts Contacts_list::get_item(const Contacts& to_find) const
 	return Contacts{};
 }
 
-std::ostream& operator<<(std::ostream& out, const Contacts_list& list)
+std::ostream& operator<<(std::ostream& out
+						, const Contacts_list& list)
 {
     for(const auto& sub : list.contacts_list)
     {out << sub;}
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Contacts_list& list)
+std::istream& operator>>(std::istream& in
+						, Contacts_list& list)
 {
 	Contacts temp{};
     while(in >> temp){list.add_to_list(temp);}

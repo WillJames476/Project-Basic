@@ -11,8 +11,8 @@
 #include "../includes/io.h"
 #include "../includes/extras.h"
 
-void load_from_file(const std::array<std::string, 2>& file_name, 
-Message_list& messages)
+void load_from_file(const std::array<std::string, 2>& file_name
+                    , Message_list& messages)
 {
     if(!std::filesystem::exists("users/" + file_name[0] + "/chats"))
     {
@@ -33,11 +33,11 @@ Message_list& messages)
 }
 
 void message_control_flow_cli(Message_list& subject 
-                        ,const Message_list& second 
-                        ,Message_list& temp
-                        ,const std::string& accessor
-                        ,const boost::program_options::options_description& description
-                        ,const boost::program_options::variables_map& vm)
+                            , const Message_list& second 
+                            , Message_list& temp
+                            , const std::string& accessor
+                            , const boost::program_options::options_description& description
+                            , const boost::program_options::variables_map& vm)
 {
     using namespace REGEX_PREDICATES;
 
@@ -60,7 +60,9 @@ void message_control_flow_cli(Message_list& subject
     }
 }
 
-void message_cli(int argc, char**argv, const std::array<std::string, 2>& users)
+void message_cli(int argc
+                , char**argv
+                , const std::array<std::string, 2>& users)
 {
     using namespace boost::program_options;
 

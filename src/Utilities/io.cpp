@@ -7,7 +7,7 @@
 #include "io.h"
 
 std::string get_string(const std::string& request
-    , std::regex predicate)
+                    , std::regex predicate)
 {
     std::string output {};
     bool is_verified   {false};
@@ -22,16 +22,17 @@ std::string get_string(const std::string& request
     return output;
 }
 
-void replace_char_with(std::string& to_modify, char to_replace, 
-char replacement)
+void replace_char_with(std::string& to_modify
+                    , char to_replace
+                    , char replacement)
 {
     std::replace_if(to_modify.begin(), to_modify.end(),
     [to_replace](auto& test)
     {return to_replace == test;},replacement);
 }
 
-bool arguments_verify(const std::vector<std::string>& arguments,
-                    const std::initializer_list<std::regex>& predicates)
+bool arguments_verify(const std::vector<std::string>& arguments
+                    , const std::initializer_list<std::regex>& predicates)
 {
     int tracker {0};
 
@@ -48,7 +49,8 @@ bool arguments_verify(const std::vector<std::string>& arguments,
     return true;
 }
 
-void invalid_argument_quantity_error(const std::string& command, int expected_size)
+void invalid_argument_quantity_error(const std::string& command
+                                    , int expected_size)
 {
     using namespace FEEDBACK_COLORS;
     std::stringstream output;

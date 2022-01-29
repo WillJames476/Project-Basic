@@ -45,7 +45,9 @@ void contacts_book_control_flow_cli(Contacts_list& list
     }
 }
 
-void contacts_book_cli(int argc, char** argv, const std::string& file_name)
+void contacts_book_cli(int argc
+                    , char** argv
+                    , const std::string& file_name)
 {
     using namespace boost::program_options;
 

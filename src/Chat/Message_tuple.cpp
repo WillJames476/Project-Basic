@@ -11,8 +11,9 @@ Message_tuple::Message_tuple()
 
 }
 
-Message_tuple::Message_tuple(const std::string& user, const std::string& message,
-const long time)
+Message_tuple::Message_tuple(const std::string& user
+                            , const std::string& message
+                            , const long time)
 {
     this->message = std::make_tuple(user, message, time);
 }
@@ -22,7 +23,8 @@ std::tuple<std::string, std::string, std::time_t> Message_tuple::get_tuple() con
     return message;
 }
 
-std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)
+std::ostream& operator<<(std::ostream& out
+                        , const Message_tuple& fields)
 {
     std::string modified_message{std::get<1>(fields.message)};
     replace_char_with(modified_message, ' ', '-');
@@ -32,7 +34,8 @@ std::ostream& operator<<(std::ostream& out, const Message_tuple& fields)
     << " " << std::get<2>(fields.message) << '\n';
     return out;
 }
-std::istream& operator>>(std::istream& in, Message_tuple& fields)
+std::istream& operator>>(std::istream& in
+                        , Message_tuple& fields)
 {
     std::array<std::string, 3> datas;
     in >> datas[0] >> datas[1] >> datas[2];
@@ -41,7 +44,8 @@ std::istream& operator>>(std::istream& in, Message_tuple& fields)
     return in;
 }
 
-bool operator< (const Message_tuple& first, const Message_tuple& last)
+bool operator< (const Message_tuple& first
+                , const Message_tuple& last)
 {
     return std::get<2>(first.message) < std::get<2>(last.message);
 }

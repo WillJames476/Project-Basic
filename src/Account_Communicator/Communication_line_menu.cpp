@@ -53,7 +53,9 @@ void communication_line_cli_control(const std::string& permanent_user
     }
 }
 
-std::string communication_line_cli(int argc, char** argv, std::string& file_name)
+std::string communication_line_cli(int argc
+                                , char** argv
+                                , std::string& file_name)
 {
     using namespace boost::program_options;
 

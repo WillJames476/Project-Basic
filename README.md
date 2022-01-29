@@ -5,7 +5,10 @@
   to use burner accounts
 
 # Prerequisites
-* c++20 compliant compiler
+* g++ 11.2 and up to compile the source code
+* groff for documentation viewing
+* make to build the project
+* boost c++ library
 
 # Third party libraries used
 * This software includes third party open source software they are: 

@@ -73,13 +73,15 @@ void Task_list::print_task_for_this_day()
     {f.print_task();});
 }
 
-std::ostream& operator<<(std::ostream& out, const Task_list& tasks)
+std::ostream& operator<<(std::ostream& out
+                    , const Task_list& tasks)
 {
    for(auto x : tasks.task_list) out << x;
    return out;
 }
 
-std::istream& operator>>(std::istream& in, Task_list& tasks)
+std::istream& operator>>(std::istream& in
+                    , Task_list& tasks)
 {
     Task temp{};
     while(in >> temp)tasks.task_list.push_back(temp);

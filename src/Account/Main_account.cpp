@@ -4,7 +4,8 @@
 #include "../includes/Transmitter.h"
 #include "../includes/loger.h"
 
-int main(int argc, char** argv)
+int main(int argc
+        , char** argv)
 {
     std::string user{account_manager_cli(argc, argv,"users/users.txt")};
     transmit_data(user + " " + user);
