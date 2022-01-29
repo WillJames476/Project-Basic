@@ -10,6 +10,6 @@ none
 .SH FILES
 none
 .SH "SEE ALSO"
-accounts(1), cbook(1), commline(1)
+accounts(1), cbook(1), commline(1), chat(1)
 .SH BUGS
 may give segmentation fault if a program is launched twice

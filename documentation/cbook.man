@@ -24,6 +24,6 @@ views all the contacts that a user has
 /users/user/cbook.txt
 the files storing all the contract entry a user has
 .SH "SEE ALSO"
-handler(1), accounts(1), commline(1)
+handler(1), accounts(1), commline(1), chat(1)
 .SH BUGS
 no known bugs as of now

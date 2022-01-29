@@ -1,0 +1,26 @@
+.TH chat 1
+.SH NAME
+\fBchat\fP\- a way for wo users to communicate via text
+.SH SYNOPSIS
+\fBchat\fP --add text string
+.SH DESCRIPTION
+\fBchat\fP lets you communicate with other users, via text, you
+can view and chat with them, you can also send a message for yourself,
+do not to use the communication line if you wnat to cmmunicate with others
+.SH OPTIONS
+.TP
+\fB--add\fP
+adds a text string to the communication of two users, requires one argument
+a text string, do not to encapsulate the string with "" characters for long
+messages
+.TP
+\fB--view\fP
+views the chat history betwwen two users sorted by dates, requires no argements
+.SH FILES
+.TP
+/user/user1_user2chat.txt
+the txt file that stores the chat between two users
+.SH "SEE ALSO"
+handler(1), cbook(1), accounts(1)
+.SH BUGS
+no known bugs as of now

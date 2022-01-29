@@ -25,7 +25,7 @@ shows all available commands, requires no arguemnts
 /users/, /users/accounts.txt
 the users directory and files
 .SH "SEE ALSO"
-handler(1), cbook(1), commline(1)
+handler(1), cbook(1), commline(1), chat(1)
 .SH BUGS
 when account is registered and the program is killed halfway 
 it cannot be deleted/ logged-in
