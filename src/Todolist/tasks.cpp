@@ -76,6 +76,7 @@ std::istream& operator>>(std::istream& in
     in >> datas[0] >> datas[1] >> datas[2] >> datas[3];
     time.tm_mon = std::stoi(datas[1]);
     time.tm_mday = std::stoi(datas[2]);
-    task = Task(datas[0], datas[1], time);
+
+    task = Task(datas[0], datas[3], time);
     return in;
 }
