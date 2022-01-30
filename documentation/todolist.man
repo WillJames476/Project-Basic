@@ -12,7 +12,7 @@ tasks
 .TP
 \fB--add\fP
 adds a new task to the task list, requires three arguemnts:
-task day in integer, task month in integer, task name,
+task name ,task day in integer, task month in integer,
 task increment.
 .TP
 \fB--delete\fP

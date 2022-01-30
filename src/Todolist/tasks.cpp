@@ -64,13 +64,18 @@ std::ostream& operator<<(std::ostream& out
 {
     out << task.task_name << " " << task.task_time_due.tm_mon 
     << " " << task.task_time_due.tm_mday << " " << task.task_giver<< '\n';
+    
     return out;
 }
 
 std::istream& operator>>(std::istream& in
                         , Task& task)
 {
-    in >> task.task_name >> task.task_time_due.tm_mon 
-    >> task.task_time_due.tm_mday >> task.task_giver;
+    std::array<std::string, 4> datas;
+    std::tm time;
+    in >> datas[0] >> datas[1] >> datas[2] >> datas[3];
+    time.tm_mon = std::stoi(datas[1]);
+    time.tm_mday = std::stoi(datas[2]);
+    task = Task(datas[0], datas[1], time);
     return in;
 }

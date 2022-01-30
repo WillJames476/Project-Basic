@@ -51,11 +51,13 @@ void Task_list::remove_oudated_tasks()
     {
         auto test = constants::current_date;
 
-        task_list.erase(std::remove_if(this->task_list.begin(), this->task_list.end(),
-        [&](const auto& z)
-        {return (z.get_dates().tm_mon < test->tm_mon) ||
-            (z.get_dates().tm_mon == test->tm_mon && 
-            z.get_dates().tm_mday < test->tm_mday);}));
+        task_list.erase(std::remove_if(this->task_list.begin()
+            , this->task_list.end(),
+                [&](const auto& z)
+                {return (z.get_dates().tm_mon > test->tm_mon) 
+                    || (z.get_dates().tm_mon == test->tm_mon 
+                        && z.get_dates().tm_mday > test->tm_mday)
+                    ;}));
     }
 }
 
@@ -68,9 +70,9 @@ void Task_list::print_task_for_this_day()
         std::find_first_of(this->task_list.begin(), this->task_list.end()
         ,test.begin(),test.end(),
         [](const auto& z,const auto& x)
-        {return x->tm_mday != z.get_dates().tm_mday;})
-    ,[](auto f)
-    {f.print_task();});
+            {return x->tm_mday != z.get_dates().tm_mday;})
+            ,[](auto f)
+                {f.print_task();});
 }
 
 std::ostream& operator<<(std::ostream& out
