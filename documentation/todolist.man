@@ -1,0 +1,38 @@
+.TH todolist 1
+.SH NAME
+\fBTodolist\fP\- manages tasks given to a user
+.SH SYPNOSIS
+\fBTodolist\fP --add day month taskname increment
+.SH DESCRIPTION
+\fBTodolist\fP manages the tasks given to a user
+it cna be given by any user that the user permitted,
+even the user itself, it automatically removes outdated
+tasks
+.SH OPTIONS
+.TP
+\fB--add\fP
+adds a new task to the task list, requires three arguemnts:
+task day in integer, task month in integer, task name,
+task increment.
+.TP
+\fB--delete\fP
+deletes all instances of a given task name, requires one 
+arguemnt, task name.
+.TP
+\fB--deletesp\fP
+delete a specific task on the user list, requires three arguemnts:
+task name, task month in integer, and task date in integer.
+.TP
+\fB--view\fP
+views all the tasks a user has, requires no arguments.
+.TP
+\fB--help\fP
+shows all the possible flags, requires no arguments.
+.SH FILES
+.TP
+/usr/user_Tasks.txt
+the file that stores the user's tasks
+.SH "SEE ALSO"
+handler(1), cbook(1), accounts(1)
+.SH BUGS
+file reading is faulty
