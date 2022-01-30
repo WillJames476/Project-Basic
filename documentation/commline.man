@@ -31,6 +31,6 @@ prints all the possible commands to the console
 /users/user/commline.txt
 stores all the lines of communication the user has
 .SH "SEE ALSO"
-handler(1), cbook(1), accounts(1), chat(1)
+handler(1), cbook(1), accounts(1), chat(1), todolist(1)
 .SH BUGS
 no known bugs as of now

@@ -33,6 +33,6 @@ shows all the possible flags, requires no arguments.
 /usr/user_Tasks.txt
 the file that stores the user's tasks
 .SH "SEE ALSO"
-handler(1), cbook(1), accounts(1)
+handler(1), cbook(1), accounts(1), chat(1)
 .SH BUGS
 file reading is faulty

@@ -21,6 +21,6 @@ views the chat history betwwen two users sorted by dates, requires no argements
 /user/user1_user2chat.txt
 the txt file that stores the chat between two users
 .SH "SEE ALSO"
-handler(1), cbook(1), accounts(1)
+handler(1), cbook(1), accounts(1), chat(1), todolist(1)
 .SH BUGS
 no known bugs as of now

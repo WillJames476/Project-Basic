@@ -55,15 +55,7 @@
   - todolist application of the repo
   - can add / remove tasks
   - expects inputs and produce output
-  - other users can alter an account list as long as he/she has communication
-    line to that user
-  
-  * availabale commands
-  - --help [no-args] shows all availaba commands
-  - --add [string1, string2, string,3 string4] adds a task to the list (task name, task month, task date,         date     increment)
-  - --delete [string1] deletes all task of the gien name (task name)
-  - --deletesp [string1, string2,string3] delete task of given name, date, and month (task name, task month, task date)
-  - --view [no-args] view the user's task list      
+  - other users can alter an account list as long as he/she  has communication line to that user 
 
 * Chats (executable to handler as /chat)
   - can chat with other registered users of this program as long as you are
@@ -71,11 +63,6 @@
   - can send and view messages
   - a expects input and can produce output
   
-  * availabale commands
-  - --help   [no-args] shows all availaba commands
-  - --add    [string1] adds a user to the communication line (username, message)
-  - --view   [no-args] view the user's communication line  
-
 * Contacts book (executable to handler as /cbook)
   - can add and remove a contact info of a user has as long as you are permitted
   - view the contacts that a user has
