@@ -1,4 +1,9 @@
+#users dir
 users/
+
+#compiled objects and executables dirs
 bin/
 obj/
+
+#misc
 .vscode
