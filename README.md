@@ -22,7 +22,7 @@
    optional. enter the absolute path of boost library from your pc to the specified
    comment on the makefile 
 3. type make install on your terminal
-4. type make build on your terminal
+4. type make on your terminal
 5. enjoy
 
 # Usage

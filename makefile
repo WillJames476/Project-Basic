@@ -41,6 +41,18 @@ handler_program = $(BIN)/handler
 
 programs = $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
 
+all:
+	make $(programs)
+
+install: 
+	mkdir users $(BIN) $(OBJ) && touch users/users.txt 
+
+uninstall:
+	rm -rf $(Clean) $(SRC)
+
+$(Clean):
+	rm -rf $(BIN)/*
+
 $(account_program): $(Account_obj) $(Utils_obj) $(Log_obj)  
 	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
@@ -88,15 +100,3 @@ $(Handler_obj): $(Handler)
 
 $(Exit_obj): $(Exit)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
-
-all:
-	make $(programs)
-
-install: 
-	mkdir users $(BIN) $(OBJ) && touch users/users.txt 
-
-uninstall:
-	rm -rf $(Clean) $(SRC)
-
-$(Clean):
-	rm -rf $(BIN)/*
