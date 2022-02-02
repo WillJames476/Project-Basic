@@ -39,7 +39,15 @@ exit_program = $(BIN)/exit
 contacts_program = $(BIN)/cbook
 handler_program = $(BIN)/handler
 
-programs = $(account_program) $(task_program) $(commline_program) $(chat_program) $(contacts_program) $(handler_program) $(exit_program)
+define programs
+	$(account_program) \
+	$(task_program) \
+	$(commline_program) \
+	$(chat_program) \
+	$(contacts_program) \
+	$(handler_program) \
+	$(exit_program)
+endef
 
 all:
 	make $(programs)
