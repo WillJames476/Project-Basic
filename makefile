@@ -56,7 +56,7 @@ install:
 	mkdir users $(BIN) $(OBJ) && touch users/users.txt 
 
 uninstall:
-	rm -rf $(Clean) $(SRC)
+	rm -rf $(SRC) && $(Clean)
 
 $(Clean):
 	rm -rf $(BIN)/*
