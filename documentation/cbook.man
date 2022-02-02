@@ -2,7 +2,10 @@
 .SH NAME
 cbook \- manages the contacts of all the accounts
 .SH SYPNOSIS
-\fBcbook\fP --add name number email
+.TP
+\fBcbook\fP [--add | --remove | search] \fI[name] [number] [email]\fP
+.TP
+\fBcbook\fP [--help | --help]
 .SH DESCRIPTION
 \fBcbook\fP manages the contacts of all accounts,
 it can remove add and search the list that an account has
@@ -18,7 +21,7 @@ removes a contact entry,requires three arguments: name, number , and email strin
 searches a specific entry, requires three arguments: name, number , and email string
 .TP
 \fB--view\fP
-views all the contacts that a user has
+views all the contacts that a user has, requires no arguments
 .SH FILES
 .TP
 /users/user/cbook.txt

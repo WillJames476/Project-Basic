@@ -2,8 +2,10 @@
 .SH NAME
 account \- creates log-ins and deletes an account
 .SH SYPNOSIS
-\fBaccount\fP --create | --login | --remove username password
-\fBaccount\fP [--help] 
+.TP
+\fBaccount\fP [--create | --login | --remove] \fI[username] [password]\fP
+.TP
+\fBaccount\fP --help
 .SH DESCRIPTION
 \fBaccount\fP manages the accounts that will be used by the
 man programs of this repository
