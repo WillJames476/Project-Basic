@@ -2,7 +2,10 @@
 .SH NAME
 \fBchat\fP\- a way for wo users to communicate via text
 .SH SYNOPSIS
-\fBchat\fP --add text string
+.TP
+\fBchat\fP --add \fI[text] [string]\fP
+.TP
+\fBchat\fP [--help | --view]
 .SH DESCRIPTION
 \fBchat\fP lets you communicate with other users, via text, you
 can view and chat with them, you can also send a message for yourself,
@@ -16,6 +19,9 @@ messages
 .TP
 \fB--view\fP
 views the chat history betwwen two users sorted by dates, requires no argements
+.TP
+\fB--help\fP
+shows all available flags
 .SH FILES
 .TP
 /user/user1_user2chat.txt

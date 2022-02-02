@@ -2,7 +2,14 @@
 .SH NAME
 \fBTodolist\fP\- manages tasks given to a user
 .SH SYPNOSIS
-\fBTodolist\fP --add day month taskname increment
+.TP
+\fBTodolist\fP [--add] \fI[month] [date] [task name] [increment]\fP
+.TP
+\fBTodolist\fP [--deletesp] \fI[task name] [month] [date]\fP
+.TP
+\fBTodolist\fP [--delete] \fI[task name]\fP
+.TP
+\fBTodolist\fP [--help | --view]
 .SH DESCRIPTION
 \fBTodolist\fP manages the tasks given to a user
 it cna be given by any user that the user permitted,

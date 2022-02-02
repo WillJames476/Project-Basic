@@ -2,7 +2,10 @@
 .SH NAME
 \fBcommline \fP\-handles the communication between two users
 .SH SYNOPSIS
-\fBcommline \fP\--access account_name
+.TP
+\fBcommline \fP [--access | --delete | --alter | --delete | --add] \fI[account_name]\fP
+.TP
+\fBcommline\fP [--help | --view]
 .SH DESCRIPTION
 \fBcommline \fP\-handles the communication between two users by 
 the means of permisions, and account entries
