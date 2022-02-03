@@ -2,7 +2,7 @@
 .SH NAME
 handler /- an environment to easily launch applications on this repo
 .SH SYNOPSIS
-\fB bin/handler
+\fB bin/handler\fP
 .SH DESCRIPTION
 \fBhanlder\fP creates an environemnet to lauch applications
 .SH OPTIONS
