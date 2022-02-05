@@ -46,11 +46,11 @@ int save_to_file(const std::string& file_name, const T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD << excpt.what() << RESET;
+        std::cerr << BAD << excpt.what() << RESET << '\n';
         return EXIT_FAILURE;
     }
 
-    std::clog << GOOD << "file operation suceeds success\n" << RESET;
+    std::clog << GOOD << "file operation suceeds success\n" << RESET << '\n';
     return EXIT_SUCCESS;
 }
 
@@ -67,11 +67,11 @@ int load_from_file(const std::string& file_name, T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD << excpt.what() << RESET;
+        std::cerr << BAD << excpt.what() << RESET << '\n';
         return EXIT_FAILURE;
     }
 
-    std::clog << GOOD << "file operation suceeds success\n" << RESET;
+    std::clog << GOOD << "file operation suceeds success\n" << RESET << '\n';
     return EXIT_SUCCESS;
 }
 

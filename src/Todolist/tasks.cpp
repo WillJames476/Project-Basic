@@ -38,7 +38,7 @@ void Task::print_task()
 {
     std::ostringstream output;
     
-    output << boost::format("|%=15s%=15s%=15s|\n") 
+    output << boost::format("|%=15s|%=15s|%=15s|\n") 
         % task_name 
         % task_giver 
         % std::put_time(&task_time_due, "%B %d");
@@ -64,9 +64,12 @@ bool operator==(const Task& task
 std::ostream& operator<<(std::ostream& out
                         , Task& task)
 {
-    out << task.task_name << " " << task.task_time_due.tm_mon 
-    << " " << task.task_time_due.tm_mday << " " << task.task_giver<< '\n';
-    
+    out << boost::format("%s %d %d %s\n")
+        % task.task_name 
+        % task.task_time_due.tm_mon 
+        % task.task_time_due.tm_mday 
+        % task.task_giver;
+        
     return out;
 }
 
@@ -76,9 +79,11 @@ std::istream& operator>>(std::istream& in
     std::array<std::string, 4> datas;
     std::tm time;
     in >> datas[0] >> datas[1] >> datas[2] >> datas[3];
+
     time.tm_mon = std::stoi(datas[1]);
     time.tm_mday = std::stoi(datas[2]);
 
     task = Task(datas[0], datas[3], time);
+
     return in;
 }
