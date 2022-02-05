@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <regex>
 #include <sstream>
+#include <boost/format.hpp>
 
 #include "io.h"
 
@@ -55,7 +56,11 @@ void invalid_argument_quantity_error(const std::string& command
     using namespace FEEDBACK_COLORS;
     std::stringstream output;
 
-    output << BAD << command << " exepcets " << expected_size << " arguments\n" << RESET;
+    output << boost::format("%s%s expects: %d arguments%s\n") 
+        % BAD
+        % command 
+        % expected_size 
+        % RESET;
 
     std::cerr << output.str();
 }
@@ -65,7 +70,10 @@ void invalid_argument_error(const std::string& command)
     using namespace FEEDBACK_COLORS;
     std::stringstream output;
 
-    output << BAD << command << " argumanets are invalid\n" << RESET;
+    output << boost::format("%s%s arguments are invalid%s\n")
+        % BAD 
+        % command
+        % RESET;
 
     std::cerr << output.str();
 }
