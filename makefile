@@ -20,6 +20,7 @@ Chat = $(wildcard $(SRC)/Chat/*.cpp)
 Cbook = $(wildcard $(SRC)/ContactBook/*.cpp)
 Handler = $(wildcard $(SRC)/ProgramsHandler/*.cpp)
 Exit = $(wildcard $(SRC)/Exit/*.cpp)
+server_files = $(wildacrd $(SRC)/server/*.cpp)
 
 Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
 Log_obj = $(patsubst $(SRC)/loging/%.cpp, $(OBJ)/%.o, $(Log))
