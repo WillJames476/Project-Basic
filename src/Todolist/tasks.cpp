@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <boost/format.hpp>
 
 #include "../includes/io.h"
 
@@ -36,10 +37,11 @@ std::tm Task::get_dates() const
 void Task::print_task()
 {
     std::ostringstream output;
-
-    output << task_name << '|' 
-    << "\t" << task_giver << '|' 
-    << std::put_time(&task_time_due, "\t%B %d\n");
+    
+    output << boost::format("|%=15s%=15s%=15s|\n") 
+        % task_name 
+        % task_giver 
+        % std::put_time(&task_time_due, "%B %d");
 
     std::cout << output.str();
 }
