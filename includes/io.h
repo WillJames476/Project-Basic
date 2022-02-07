@@ -8,12 +8,13 @@
 #include <vector>
 #include <regex>
 #include <fstream>
+#include <boost/format.hpp>
 
 namespace FEEDBACK_COLORS
 {
     const std::string BASE  {"\u001b["},
-                      GOOD  {BASE + "32m"},
-                      BAD   {BASE + "31m"},
+                      GOOD  {BASE + "32m[SUCCESSFULL] "},
+                      BAD   {BASE + "31m[ERROR] "},
                       RESET {BASE + "0m"};
 }
 

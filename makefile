@@ -20,7 +20,8 @@ Chat = $(wildcard $(SRC)/Chat/*.cpp)
 Cbook = $(wildcard $(SRC)/ContactBook/*.cpp)
 Handler = $(wildcard $(SRC)/ProgramsHandler/*.cpp)
 Exit = $(wildcard $(SRC)/Exit/*.cpp)
-server_files = $(wildacrd $(SRC)/server/*.cpp)
+Client_files = $(wildcard $(SRC)/Client/*.cpp)
+Server_files = $(wildcard $(SRC)/Server/*.cpp)
 
 Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
 Log_obj = $(patsubst $(SRC)/loging/%.cpp, $(OBJ)/%.o, $(Log))
@@ -31,6 +32,8 @@ Chat_obj = $(patsubst $(SRC)/Chat/%.cpp, $(OBJ)/%.o, $(Chat))
 Cbook_obj = $(patsubst $(SRC)/ContactBook/%.cpp, $(OBJ)/%.o, $(Cbook))
 Handler_obj = $(patsubst $(SRC)/ProgramsHandler/%.cpp, $(OBJ)/%.o, $(Handler))
 Exit_obj = $(patsubst $(SRC)/Exit/%.cpp, $(OBJ)/%.o, $(Exit))
+Server_obj = $(patsubst $(SRC)/Server/%.cpp, $(OBJ)/%.o, $(Server_files))
+Client_obj = $(patsubst $(SRC)/Client/%.cpp, $(OBJ)/%.o, $(Client_files))
 
 account_program = $(BIN)/account
 task_program = $(BIN)/todolist
@@ -39,6 +42,8 @@ chat_program = $(BIN)/chat
 exit_program = $(BIN)/exit
 contacts_program = $(BIN)/cbook
 handler_program = $(BIN)/handler
+Server_program = $(BIN)/server
+Client_program = $(BIN)/client
 
 define programs
 	$(account_program) \
@@ -47,7 +52,9 @@ define programs
 	$(chat_program) \
 	$(contacts_program) \
 	$(handler_program) \
-	$(exit_program)
+	$(exit_program) \
+	$(Server_program) \
+	$(Client_program)
 endef
 
 all:
@@ -83,6 +90,12 @@ $(handler_program): $(Handler_obj) $(Utils_obj) $(Log_obj)
 $(exit_program): $(Exit_obj) $(Utils_obj) $(Log_obj)
 	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
 
+$(Server_program): $(Server_obj) $(Utils_obj)
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
+
+$(Client_program): $(Client_obj) $(Utils_obj)
+	$(CXX) $(BOOST) -I $(HDR) $^ $(CXXFLAGS) -o $@
+
 $(Utils_obj): $(Utils)
 	$(CXX) -I $(HDR) -c $^ && $(move_obj)
 
@@ -108,4 +121,10 @@ $(Handler_obj): $(Handler)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Exit_obj): $(Exit)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Server_obj): $(Server_files)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Client_obj): $(Client_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
