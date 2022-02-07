@@ -8,6 +8,7 @@
 #include <vector>
 #include <regex>
 #include <fstream>
+
 #include <boost/format.hpp>
 
 namespace FEEDBACK_COLORS
@@ -37,6 +38,7 @@ namespace REGEX_PREDICATES
 template <typename T>
 int save_to_file(const std::string& file_name, const T& to_modify)
 {
+    std::ios_base::sync_with_stdio(false);
     using namespace FEEDBACK_COLORS;
 
     try
@@ -47,17 +49,25 @@ int save_to_file(const std::string& file_name, const T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD << excpt.what() << RESET << '\n';
+        std::cerr << boost::format("%s %s %s\n")
+                    % BAD 
+                    % excpt.what() 
+                    % RESET;
+
         return EXIT_FAILURE;
     }
 
-    std::clog << GOOD << "file operation suceeds success\n" << RESET << '\n';
+    std::clog << boost::format("%s file operation suceeds\n%s") 
+                % GOOD 
+                % RESET;
+
     return EXIT_SUCCESS;
 }
 
 template <typename T>
 int load_from_file(const std::string& file_name, T& to_modify)
 {
+    std::ios_base::sync_with_stdio(false);
     using namespace FEEDBACK_COLORS;
 
     try
@@ -68,19 +78,34 @@ int load_from_file(const std::string& file_name, T& to_modify)
     }
     catch(std::exception &excpt)
     {
-        std::cerr << BAD << excpt.what() << RESET << '\n';
+        std::cerr << boost::format("%s %s %s\n")
+                    % BAD 
+                    % excpt.what() 
+                    % RESET;
+
         return EXIT_FAILURE;
     }
 
-    std::clog << GOOD << "file operation suceeds success\n" << RESET << '\n';
+    std::clog << boost::format("%s file operation suceeds%s\n") 
+                % GOOD 
+                % RESET;
+
     return EXIT_SUCCESS;
 }
 
-std::string get_string(const std::string& request, std::regex pattern);
+std::string get_string(const std::string& request
+                    , std::regex pattern);
+
 void invalid_argument_error(const std::string& command);
-bool arguments_verify(const std::vector<std::string>& arguments, const std::initializer_list<std::regex>& predicates);
-void invalid_argument_quantity_error(const std::string& command, int expected_size);
-void replace_char_with(std::string& to_modify, char to_replace,
-char replacement);
+
+bool arguments_verify(const std::vector<std::string>& arguments
+                    , const std::initializer_list<std::regex>& predicates);
+
+void invalid_argument_quantity_error(const std::string& command
+                                    , int expected_size);
+
+void replace_char_with(std::string& to_modify
+                    , char to_replace
+                    , char replacement);
 
 #endif
