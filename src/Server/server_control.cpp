@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "generic_view.h"
+#include "generic_file.h"
 
 void get_control(const std::string& message);
 void put_control(const std::string& message);
@@ -12,7 +13,7 @@ void delete_control(const std::string& message);
 std::string server_control(const std::string& message)
 {
     std::istringstream method_extract(message);
-    std::string method{}, to_return{}, post_extract{};
+    std::string method{}, to_return{message}, post_extract{};
 
     method_extract >> method;
     post_extract = method_extract.str();
@@ -50,9 +51,5 @@ void put_control(const std::string& message)
 
 void delete_control(const std::string& message)
 {
-    auto func = [](const auto& x){return x + "hello\n";};
-
-    view_raw<std::string, decltype(func)>("hello", func);
-
     std::cout << message;
 }

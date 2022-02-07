@@ -1,12 +1,17 @@
 #include <iostream>
+#include <vector>
+#include <string>
+
 #include <boost/asio.hpp>
 #include "../includes/server_utilities.h"
+
+std::string argv_flatener(int argc, char** argv);
 
 int main(int argc, char** argv)
 {
     std::ios_base::sync_with_stdio(false);
 
-    if(argc == 2)
+    if(argc > 2)
     {
         try
         {
@@ -17,7 +22,7 @@ int main(int argc, char** argv)
             boost::asio::ip::tcp::socket socket(io_context, boost::asio::ip::tcp::v4());
             socket.connect(make_endpoint(ip_addr, 80));
 
-            send_message(socket, error_code, "GET / HTTP/1.1\r\nConnection: close\r\n\r\n");
+            send_message(socket, error_code, argv_flatener(argc, argv));
             message = get_message(socket, error_code);
             std::cout << message;
 
@@ -30,4 +35,18 @@ int main(int argc, char** argv)
     }
 
     return 0;
+}
+
+std::string argv_flatener(int argc, char** argv)
+{
+    std::vector<std::string>arguments(argv + 2, argv + argc);
+
+    std::string flattened_args;
+
+    for(const auto& args : arguments)
+    {   
+        flattened_args += args + " ";
+    }
+
+    return flattened_args;
 }

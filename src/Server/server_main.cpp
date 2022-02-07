@@ -8,6 +8,7 @@
 
 #include "../includes/io.h"
 #include "../includes/server_utilities.h"
+#include "server_control.h"
 
 int main(int argc, char** argv)
 {
@@ -32,10 +33,11 @@ int main(int argc, char** argv)
                 acceptor.accept(client);
 
                 received = get_message(client, err_codes);
-                std::cout << received << '\n';
+                received = server_control(received);
                 send_message(client, err_codes, received);
 
                 client.close();
+                
                 break;
             }
 
