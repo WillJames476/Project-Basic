@@ -1,41 +1,34 @@
 #include "account_model.h"
 
-void Account_model::add_to_list(const Account& to_add)
+Account_model::Account_model(const std::string& account_name
+                , const std::string& account_password)
+    : account_username_string{account_name}
+    , account_password_string{account_password}
 {
-    accounts.emplace(std::make_pair(to_add.get_account_username()
-        ,std::make_shared<Account>(to_add)));
+    
 }
 
-void Account_model::remove_from_list(const Account& to_remove)
+std::string Account_model::get_account_password() const
 {
-    const auto username_string   {to_remove.get_account_username()};
-    const auto extracted_account {accounts.find(username_string)};
+    return  account_password_string;
+}
 
-    if(extracted_account != std::end(accounts))
-    {
-        bool is_match{to_remove == *extracted_account->second};
-
-        if(is_match)
-        {
-            accounts.erase(username_string);
-        }
-    }
-}   
-
-Account Account_model::get_item_from_list(const Account& to_find) const
+std::string Account_model::get_account_username() const
 {
-    const auto username_string   {to_find.get_account_username()};
-    const auto extracted_account {accounts.find(username_string)};
+    return  account_username_string;
+}
 
-    if(extracted_account != std::end(accounts))
-    {
-        bool is_match{to_find == *extracted_account->second};
+int Account_model::get_field_count() const
+{
+    return field_count;
+}
 
-        if(is_match)
-        {
-            return to_find;
-        }
-    }
-    
-    return Account{};
+bool operator== (const Account_model& first, const Account_model& second)
+{
+    bool is_username_same {first.account_username_string 
+                            == second.account_username_string}
+        , is_password_same{first.account_password_string 
+                            == second.account_password_string};
+
+    return is_username_same && is_password_same;
 }

@@ -102,7 +102,7 @@ $(Server_program): $(Server_obj) $(Utils_obj)
 $(Client_program): $(Client_obj) $(Utils_obj)
 	$(CXX) $(BOOST) $^ -o $@
 
-$(Tester_program): $(Tester_obj)
+$(Tester_program): $(Tester_obj) $(Server_obj)
 	$(CXX) $(BOOST) $^ -o $@
 
 $(Utils_obj): $(Utils)
@@ -136,4 +136,7 @@ $(Server_obj): $(Server_files)
 	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Client_obj): $(Client_files)
+	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Tester_obj): $(Tester_files)
 	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
