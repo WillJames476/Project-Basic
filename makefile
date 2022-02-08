@@ -16,10 +16,14 @@ Client_files = $(wildcard $(SRC)/Client/*.cpp)
 Server_files = $(wildcard $(SRC)/Server/*.cpp)
 Tester_files = $(wildcard $(SRC)/Tester/*.cpp)
 
+Account_files = $(wildcard $(SRC)/Account/*.cpp)
+
 Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
 Server_obj = $(patsubst $(SRC)/Server/%.cpp, $(OBJ)/%.o, $(Server_files))
 Client_obj = $(patsubst $(SRC)/Client/%.cpp, $(OBJ)/%.o, $(Client_files))
 Tester_obj = $(patsubst $(SRC)/Tester/%.cpp, $(OBJ)/%.o, $(Tester_files))
+
+Account_obj = $(patsubst $(SRC)/Account/%.cpp, $(OBJ)/%.o, $(Account_files))
 
 Server_program = $(BIN)/server
 Client_program = $(BIN)/client
@@ -45,7 +49,7 @@ move_obj:
 $(Clean):
 	rm -rf $(BIN)/* $(OBJ)/*
 
-$(Server_program): $(Server_obj) $(Utils_obj)
+$(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj)
 	$(CXX) $^ -o $@
 
 $(Client_program): $(Client_obj) $(Utils_obj)
@@ -64,4 +68,7 @@ $(Client_obj): $(Client_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Tester_obj): $(Tester_files)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Account_obj): $(Account_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
