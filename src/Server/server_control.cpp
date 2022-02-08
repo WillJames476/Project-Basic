@@ -34,22 +34,43 @@ std::string server_control(const std::string& message)
     return to_return;
 }
 
-void post_control(const std::string& message)
-{
-    std::cout << message;
-}
-
 void get_control(const std::string& message)
 {
-    std::cout << message;
+    if(message == "NULL")
+    {
+
+    }
 }
 
 void put_control(const std::string& message)
 {
-    std::cout << message;
+    std::string application{};
+    std::istringstream arguments(message);
+
+    arguments >> application;
+
+    if(application == "--account")
+    {
+        std::cout << arguments.str();
+    }
 }
 
 void delete_control(const std::string& message)
 {
-    std::cout << message;
+    if(message == "NULL")
+    {
+
+    }
+}
+
+void file_control(const std::string& mode)
+{
+    if(mode == "READ")
+    {
+
+    }
+    else if(mode == "WRITE")
+    {
+        
+    }
 }

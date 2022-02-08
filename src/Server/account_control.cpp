@@ -1,41 +1,61 @@
 #include "account_control.h"
+#include <algorithm>
+#include <array>
+#include <string>
 
-void Account_control::add_to_list(const Account_model& to_add)
+Account_control::Account_control(const Account_model& account_model)
+    : model{std::make_shared<Account_model>(account_model)}
 {
-    accounts.emplace(std::make_pair(to_add.get_account_username()
-        ,std::make_shared<Account_model>(to_add)));
+
 }
 
-void Account_control::remove_from_list(const Account_model& to_remove)
+std::string Account_control::add_to_list(const std::initializer_list<std::string>& fields) const
 {
-    const auto username_string   {to_remove.get_account_username()};
-    const auto extracted_account {accounts.find(username_string)};
+    std::string string_to_return{"unsuccessfull operation"};
 
-    if(extracted_account != std::end(accounts))
-    {
-        bool is_match{to_remove == *extracted_account->second};
-
-        if(is_match)
+    if(fields.size() == 2)
+    {   
+        auto datas = std::data(fields);
+        
+        if(model->add_to_list(*datas, *(datas + 1)))
         {
-            accounts.erase(username_string);
+            string_to_return = "succesfull operation";
         }
     }
-}   
+ 
+    return string_to_return;
+}
 
-Account_model Account_control::get_item_from_list(const Account_model& to_find) const
+std::string Account_control::remove_from_list(const std::initializer_list<std::string>& fields) const
 {
-    const auto username_string   {to_find.get_account_username()};
-    const auto extracted_account {accounts.find(username_string)};
+    std::string string_to_return{"unsuccessfull operation"};
 
-    if(extracted_account != std::end(accounts))
+    if(fields.size() == 2)
     {
-        bool is_match{to_find == *extracted_account->second};
+        auto datas = std::data(fields);
 
-        if(is_match)
+        if(model->remove_from_list(*datas, *(datas + 1)))
         {
-            return to_find;
+            string_to_return = "sucessfull operation";
         }
     }
-    
-    return Account_model{};
+
+    return string_to_return;
+}
+
+std::string Account_control::get_from_list(const std::initializer_list<std::string>& fields) const
+{
+    std::string string_to_return{"unsuccessfull operation"};
+
+    if(fields.size() == 2)
+    {
+        auto datas = std::data(fields);
+
+        if(model->get_item_from_list(*datas, *(datas + 1)))
+        {
+            string_to_return = *datas + " " + *(datas + 1);
+        }
+    }
+
+    return string_to_return;
 }

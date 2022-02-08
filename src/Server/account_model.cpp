@@ -1,34 +1,52 @@
 #include "account_model.h"
 
-Account_model::Account_model(const std::string& account_name
-                , const std::string& account_password)
-    : account_username_string{account_name}
-    , account_password_string{account_password}
+bool Account_model::add_to_list(const std::string& username
+                                , const std::string password)
 {
+    if(accounts.find(username) == std::end(accounts))
+    {
+        accounts.emplace(std::make_pair(username, password));
+        
+        return true;
+    }
+
+    return false;
+}
+
+bool Account_model::remove_from_list(const std::string& username
+                                    , const std::string password)
+{
+    const auto extracted_account {accounts.find(username)};
+
+    if(extracted_account != std::end(accounts))
+    {
+        bool is_match{password == extracted_account->second};
+
+        if(is_match)
+        {
+            accounts.erase(username);
+            
+            return true;
+        }
+    }
+
+    return false;
+}   
+
+bool Account_model::get_item_from_list(const std::string& username
+                                        , const std::string password) const
+{
+    const auto extracted_account {accounts.find(username)};
+
+    if(extracted_account != std::end(accounts))
+    {
+        bool is_match{password == extracted_account->second};
+
+        if(is_match)
+        {
+            return true;
+        }
+    }
     
-}
-
-std::string Account_model::get_account_password() const
-{
-    return  account_password_string;
-}
-
-std::string Account_model::get_account_username() const
-{
-    return  account_username_string;
-}
-
-int Account_model::get_field_count() const
-{
-    return field_count;
-}
-
-bool operator== (const Account_model& first, const Account_model& second)
-{
-    bool is_username_same {first.account_username_string 
-                            == second.account_username_string}
-        , is_password_same{first.account_password_string 
-                            == second.account_password_string};
-
-    return is_username_same && is_password_same;
+    return false;
 }
