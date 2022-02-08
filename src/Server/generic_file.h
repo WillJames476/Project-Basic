@@ -7,51 +7,39 @@
 #include <fstream>
 #include <iostream>
 
-template<typename T, typename func_read, typename func_write>
+template<typename T>
 struct Generic_file
 {
     public:
-        Generic_file(const T& target
-                    , func_read& read_func
-                    , const func_write& write_func);
-        ~Generic_file();
+        Generic_file(const std::shared_ptr<T>& target);
 
-        void save_file();
-        void read_file();
+        template<typename X, typename write_func>
+        friend void save_file(const X& object
+                        , const write_func& function);
+
+        template<typename Y, typename read_func>
+        friend void read_file(Y& to_modify
+                        , const read_func& function);
 
     private:
         std::shared_ptr<T> object;
-
-        func_read output_function;
-        func_write input_function;
-
-        std::string file_path{};
-        std::fstream file_to_use;
+        std::string file_path{"accounts.txt"};
 };
 
-template <typename T, typename func_read, typename func_write>
-Generic_file<T, func_read, func_write>::Generic_file(const T& target
-                                                , func_read& read_function
-                                                , const func_write& write_function)
-    : object{std::make_shared<T>(target)}
-        , output_function{read_function}
-        , input_function(write_function)
+template <typename T>
+Generic_file<T>::Generic_file(const std::shared_ptr<T>& target)
+    : object{target}
 {
-
 }
 
-template <typename T, typename func_read, typename func_write>
-Generic_file<T, func_read, func_write>::~Generic_file()
-{
-    file_to_use.close();
-}
-
-template <typename T, typename func_read, typename func_write>
-void Generic_file<T, func_read, func_write>::save_file()
+template <typename X, typename write_func>
+void save_file(const X& object, const write_func& function)
 {
     try
     {
-        file_to_use << input_function(object);
+        auto file_to_use{std::ofstream(object.file_path)};
+        file_to_use << function(object.object);
+        file_to_use.close();
     }
     catch(const std::exception &excpt)
     {
@@ -59,16 +47,14 @@ void Generic_file<T, func_read, func_write>::save_file()
     }
 }
 
-template <typename T, typename func_read, typename func_write>
-void Generic_file<T, func_read, func_write>::read_file()
+template <typename Y, typename read_func>
+void read_file(Y& to_modify, const read_func& function)
 {
     try
     {
-        file_to_use = std::fstream(file_path
-                                , std::ios_base::in 
-                                    | std::ios_base::out);
-
-        output_function(object);
+        auto file_to_use{std::ifstream(to_modify.file_path)};
+        function(file_to_use, to_modify.object);
+        file_to_use.close();
     }
     catch(const std::exception &excpt)
     {

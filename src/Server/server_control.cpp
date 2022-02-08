@@ -7,6 +7,8 @@
 #include "generic_file.h"
 #include "model_agregate.h"
 #include "control_agregate.h"
+#include "file_agregates.h"
+
 
 std::string get_control(const std::string& message
                 , const Control_agregate& controls);
@@ -17,10 +19,16 @@ std::string put_control(const std::string& message
 std::string delete_control(const std::string& message
                     , const Control_agregate& controls);
 
+void file_control(const std::string& mode
+                , File_agregate& file);
+
 std::string server_control(const std::string& message)
 {
     Model_agregate models{};
     Control_agregate controls{models};
+    File_agregate files{models};
+
+    file_control("READ", files);
 
     std::istringstream method_extract(message);
     std::string method{}, to_return{message}, post_extract{};
@@ -41,6 +49,8 @@ std::string server_control(const std::string& message)
         to_return = delete_control(post_extract, controls);
     }
 
+    file_control("WRITE", files);
+
     return to_return;
 }
 
@@ -54,7 +64,7 @@ std::string get_control(const std::string& message
 
     if(application == "--account")
     {
-        application = controls.account.add_to_list({"hello", "hi"});
+        application = controls.account.get_from_list({"hello", "hi"});
     }
 
     return application;
@@ -70,7 +80,7 @@ std::string put_control(const std::string& message
 
     if(application == "--account")
     {
-        application = controls.account.get_from_list({"hello", "hi"});
+        application = controls.account.add_to_list({"hello", "hi"});
     }
 
     return application;
@@ -92,14 +102,15 @@ std::string delete_control(const std::string& message
     return application;
 }
 
-void file_control(const std::string& mode)
+void file_control(const std::string& mode
+                , File_agregate& file)
 {
     if(mode == "READ")
     {
-
+        file.read_all();
     }
     else if(mode == "WRITE")
     {
-        
+        file.save_all();
     }
 }
