@@ -8,7 +8,7 @@
 class Account_control
 {
     public:
-        Account_control(const Account_model& model);
+        Account_control(const std::shared_ptr<Account_model>& model);
 
         std::string add_to_list(const std::initializer_list<std::string>& fields) const;
         std::string remove_from_list(const std::initializer_list<std::string>& fields) const;

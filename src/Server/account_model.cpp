@@ -50,3 +50,9 @@ bool Account_model::get_item_from_list(const std::string& username
     
     return false;
 }
+
+
+std::unordered_map<std::string, std::string>Account_model::get_accounts() const
+{
+    return accounts;
+}

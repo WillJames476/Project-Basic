@@ -3,8 +3,8 @@
 #include <array>
 #include <string>
 
-Account_control::Account_control(const Account_model& account_model)
-    : model{std::make_shared<Account_model>(account_model)}
+Account_control::Account_control(const std::shared_ptr<Account_model>& account_model)
+    : model{account_model}
 {
 
 }
