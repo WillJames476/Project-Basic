@@ -46,22 +46,22 @@ $(Clean):
 	rm -rf $(BIN)/* $(OBJ)/*
 
 $(Server_program): $(Server_obj) $(Utils_obj)
-	$(CXX) $(BOOST) $^ -o $@
+	$(CXX) $^ -o $@
 
 $(Client_program): $(Client_obj) $(Utils_obj)
-	$(CXX) $(BOOST) $^ -o $@
+	$(CXX) $^ -o $@
 
 $(Tester_program): $(Tester_obj) $(Server_obj)
-	$(CXX) $(BOOST) $^ -o $@
+	$(CXX) $^ -o $@
 
 $(Utils_obj): $(Utils)
-	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Server_obj): $(Server_files)
-	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Client_obj): $(Client_files)
-	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Tester_obj): $(Tester_files)
-	$(CXX) $(BOOST) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
