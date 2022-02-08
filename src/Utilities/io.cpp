@@ -51,11 +51,11 @@ bool arguments_verify(const std::vector<std::string>& arguments
     return true;
 }
 
-void invalid_argument_quantity_error(const std::string& command
+std::string invalid_argument_quantity_error(const std::string& command
                                     , int expected_size)
 {
     using namespace FEEDBACK_COLORS;
-    std::stringstream output;
+    std::ostringstream output{};
 
     output << boost::format("%s%s expects: %d arguments%s\n") 
         % BAD
@@ -63,10 +63,10 @@ void invalid_argument_quantity_error(const std::string& command
         % expected_size 
         % RESET;
 
-    std::cerr << output.str();
+    return output.str();
 }
 
-void invalid_argument_error(const std::string& command)
+std::string invalid_argument_error(const std::string& command)
 {
     using namespace FEEDBACK_COLORS;
     std::stringstream output;
@@ -76,5 +76,5 @@ void invalid_argument_error(const std::string& command)
         % command
         % RESET;
 
-    std::cerr << output.str();
+    return output.str();
 }

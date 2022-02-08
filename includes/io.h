@@ -35,73 +35,15 @@ namespace REGEX_PREDICATES
                      COMMAND       ("^/[a-z-0-9"" -]+");
 }
 
-template <typename T>
-int save_to_file(const std::string& file_name, const T& to_modify)
-{
-    std::ios_base::sync_with_stdio(false);
-    using namespace FEEDBACK_COLORS;
-
-    try
-    {
-        std::ofstream file_archiver(file_name);
-        file_archiver << to_modify;
-        file_archiver.close();
-    }
-    catch(std::exception &excpt)
-    {
-        std::cerr << boost::format("%s %s %s\n")
-                    % BAD 
-                    % excpt.what() 
-                    % RESET;
-
-        return EXIT_FAILURE;
-    }
-
-    std::clog << boost::format("%s file operation suceeds\n%s") 
-                % GOOD 
-                % RESET;
-
-    return EXIT_SUCCESS;
-}
-
-template <typename T>
-int load_from_file(const std::string& file_name, T& to_modify)
-{
-    std::ios_base::sync_with_stdio(false);
-    using namespace FEEDBACK_COLORS;
-
-    try
-    {
-        std::ifstream file_archiver(file_name);
-        file_archiver >> to_modify;
-        file_archiver.close();
-    }
-    catch(std::exception &excpt)
-    {
-        std::cerr << boost::format("%s %s %s\n")
-                    % BAD 
-                    % excpt.what() 
-                    % RESET;
-
-        return EXIT_FAILURE;
-    }
-
-    std::clog << boost::format("%s file operation suceeds%s\n") 
-                % GOOD 
-                % RESET;
-
-    return EXIT_SUCCESS;
-}
-
 std::string get_string(const std::string& request
                     , std::regex pattern);
 
-void invalid_argument_error(const std::string& command);
+std::string invalid_argument_error(const std::string& command);
 
 bool arguments_verify(const std::vector<std::string>& arguments
                     , const std::initializer_list<std::regex>& predicates);
 
-void invalid_argument_quantity_error(const std::string& command
+std::string invalid_argument_quantity_error(const std::string& command
                                     , int expected_size);
 
 void replace_char_with(std::string& to_modify

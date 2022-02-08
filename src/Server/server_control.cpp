@@ -11,6 +11,7 @@ std::string server_control(const std::string& message)
     Model_agregate models{};
     Control_agregate controls{models};
     File_agregate files{models};
+
     file_control("READ", files);
 
     std::istringstream method_extract(message);
@@ -31,6 +32,6 @@ std::string server_control(const std::string& message)
     }
 
     file_control("WRITE", files);
-
+    
     return to_return;
 }
