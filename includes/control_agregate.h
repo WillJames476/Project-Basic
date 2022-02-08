@@ -1,7 +1,7 @@
 #ifndef CONTROL_AGREGATE_H
 #define CONTROL_AGREGATE_H
 
-#include "account_control.h"
+#include "../src/Account/account_control.h"
 #include "model_agregate.h"
 
 struct Control_agregate
