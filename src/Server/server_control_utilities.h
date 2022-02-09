@@ -3,6 +3,8 @@
 
 #include <sstream>
 #include <vector>
+
+#include "io.h"
 #include "control_agregate.h"
 #include "file_agregates.h"
 
@@ -18,11 +20,33 @@ std::string delete_control(std::istringstream& message
 void file_control(const std::string& mode
                 , File_agregate& file);
 
-std::string apply_function(const std::string& applciation
+template <typename T, typename X, typename V>
+std::string apply_function(const X& application
                         , const std::vector<std::string>& list
+                        , const V& regex_predicates
                         , size_t expected_size
                         , const Control_agregate& controls
-                        , std::string(*applier)
-                            (const Control_agregate& ,const std::vector<std::string>&));
+                        , const T& function)
+{
+    std::string feedback{};
+
+    if(expected_size == list.size())
+    {
+        if(arguments_verify(list, regex_predicates))
+        {
+            feedback = function(controls, list);
+        }
+        else
+        {
+            feedback = invalid_argument_error(application);
+        }
+    }   
+    else
+    {
+        feedback = invalid_argument_quantity_error(application, expected_size);
+    }
+
+    return feedback;
+}
 
 #endif

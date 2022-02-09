@@ -13,10 +13,12 @@
 
 namespace FEEDBACK_COLORS
 {
-    const std::string BASE  {"\u001b["},
-                      GOOD  {BASE + "32m[SUCCESSFULL] "},
-                      BAD   {BASE + "31m[ERROR] "},
-                      RESET {BASE + "0m"};
+    const std::string BASE              {"\u001b["},
+                      GOOD              {BASE + "32m[SUCCESSFULL] "},
+                      BAD               {BASE + "31m[ERROR] "},
+                      RESET             {BASE + "0m"},
+                      OPERATION_FAILURE {BAD + "operation failure" + RESET},
+                      OPERATION_SUCESS  {GOOD + "operation suceeds" + RESET};
 }
 
 namespace REGEX_PREDICATES

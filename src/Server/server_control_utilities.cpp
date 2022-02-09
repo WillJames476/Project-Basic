@@ -3,7 +3,14 @@
 
 #include "control_agregate.h"
 #include "file_agregates.h"
-#include "io.h"
+#include "server_control_utilities.h"
+
+namespace ARGS_REGEX
+{
+    using namespace REGEX_PREDICATES;
+
+    const auto ACCOUNT = {ALPHA_NOSPACE, ALPHA_NOSPACE};
+}
 
 std::vector<std::string> extract_args(std::istringstream& message)
 {
@@ -18,34 +25,6 @@ std::vector<std::string> extract_args(std::istringstream& message)
     return to_return;
 }
 
-std::string apply_function(const std::string& application
-                        , const std::vector<std::string>& list
-                        , size_t expected_size
-                        , const Control_agregate& controls
-                        , std::string(*applier)
-                            (const Control_agregate& ,const std::vector<std::string>&))
-{
-    std::string feedback{};
-
-    if(expected_size == list.size())
-    {
-        if(true)
-        {
-            feedback = applier(controls, list);
-        }
-        else
-        {
-            feedback = invalid_argument_error(application);
-        }
-    }   
-    else
-    {
-        feedback = invalid_argument_quantity_error(application, expected_size);
-    }
-
-    return feedback;
-}
-
 std::string get_control(std::istringstream& message
                 , const Control_agregate& controls)
 {
@@ -55,8 +34,9 @@ std::string get_control(std::istringstream& message
 
     if(application == "--account")
     {
-        application = apply_function(application, args 
-                        , 2, controls 
+        application = apply_function(application, args
+                        , ARGS_REGEX::ACCOUNT  
+                        , 2, controls
                         , [](const auto& x, const auto& y)
                             {return x.account.get_from_list({y[0], y[1]});});
     }
@@ -73,7 +53,8 @@ std::string put_control(std::istringstream& message
 
     if(application == "--account")
     {
-        application = apply_function(application, args 
+        application = apply_function(application, args
+                        , ARGS_REGEX::ACCOUNT
                         , 2, controls 
                         , [](const auto& x, const auto& y)
                             {return x.account.add_to_list({y[0], y[1]});});
@@ -91,7 +72,8 @@ std::string delete_control(std::istringstream& message
 
     if(application == "--account")
     {
-        application = apply_function(application, args 
+        application = apply_function(application, args
+                        , ARGS_REGEX::ACCOUNT  
                         , 2, controls 
                         , [](const auto& x, const auto& y)
                             {return x.account.remove_from_list({y[0], y[1]});});
