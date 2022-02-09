@@ -14,3 +14,9 @@ bool Commline_model::is_permitted(const std::string& accessor, const std::string
 {
     return commlines.find(accessor)->second->is_permitted(accessed);
 }
+
+std::unordered_map<std::string, std::shared_ptr<Permission_table>>  
+    Commline_model::get_commlines() const
+{
+    return commlines;
+}

@@ -57,7 +57,7 @@ $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
 $(Client_program): $(Client_obj) $(Utils_obj)
 	$(CXX) $^ -o $@
 
-$(Tester_program): $(Tester_obj) $(Server_obj)
+$(Tester_program): $(Tester_obj) $(Commline_obj)
 	$(CXX) $^ -o $@
 
 $(Utils_obj): $(Utils)
