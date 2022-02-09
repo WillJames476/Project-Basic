@@ -11,7 +11,8 @@ template<typename T>
 struct Generic_file
 {
     public:
-        Generic_file(const std::shared_ptr<T>& target);
+        Generic_file(const std::shared_ptr<T>& target
+                    , const std::string& file_name);
 
         template<typename X, typename write_func>
         friend void save_file(const X& object
@@ -23,12 +24,13 @@ struct Generic_file
 
     private:
         std::shared_ptr<T> object;
-        std::string file_path{"accounts.txt"};
+        std::string file_path{};
 };
 
 template <typename T>
-Generic_file<T>::Generic_file(const std::shared_ptr<T>& target)
-    : object{target}
+Generic_file<T>::Generic_file(const std::shared_ptr<T>& target
+                            , const std::string& file_name)
+    : object{target}, file_path{file_name}
 {
 }
 

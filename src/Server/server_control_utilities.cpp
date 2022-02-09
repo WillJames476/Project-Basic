@@ -57,7 +57,10 @@ std::string put_control(std::istringstream& message
                         , ARGS_REGEX::ACCOUNT
                         , 2, controls 
                         , [](const auto& x, const auto& y)
-                            {return x.account.add_to_list({y[0], y[1]});});
+                            {
+                                x.commline.add_to_list({y[0]});
+                                return x.account.add_to_list({y[0], y[1]});
+                            });
     }
 
     return application;
@@ -76,7 +79,10 @@ std::string delete_control(std::istringstream& message
                         , ARGS_REGEX::ACCOUNT  
                         , 2, controls 
                         , [](const auto& x, const auto& y)
-                            {return x.account.remove_from_list({y[0], y[1]});});
+                            {
+                                x.commline.remove_from_list({y[0]});
+                                return x.account.remove_from_list({y[0], y[1]});
+                            });
     }
 
     return application;
