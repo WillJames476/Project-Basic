@@ -13,8 +13,15 @@ class Commline_model
         Commline_model() = default;
 
         void add_to_list(const std::string& name);
+
+        void add_to_list_acess(const std::string& name
+                                , const std::string& to_acess
+                                , const bool permission);
         
         void remove_from_list(const std::string& name);
+
+        void remove_from_list_acess(const std::string& name
+                                    , const std::string& to_acess);
 
         bool is_permitted(const std::string& acessor
                         , const std::string& accessed);

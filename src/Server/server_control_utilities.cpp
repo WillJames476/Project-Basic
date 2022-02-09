@@ -9,7 +9,9 @@ namespace ARGS_REGEX
 {
     using namespace REGEX_PREDICATES;
 
-    const auto ACCOUNT = {ALPHA_NOSPACE, ALPHA_NOSPACE};
+    std::initializer_list<std::regex>
+        ACCOUNT{ALPHA_NOSPACE, ALPHA_NOSPACE},
+        COMMLINE{ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE};
 }
 
 std::vector<std::string> extract_args(std::istringstream& message)
@@ -40,6 +42,10 @@ std::string get_control(std::istringstream& message
                         , [](const auto& x, const auto& y)
                             {return x.account.get_from_list({y[0], y[1]});});
     }
+    else if(application == "--commline")
+    {
+
+    }
 
     return application;
 }
@@ -62,6 +68,16 @@ std::string put_control(std::istringstream& message
                                 return x.account.add_to_list({y[0], y[1]});
                             });
     }
+    else if(application == "--commline")
+    {
+        application = apply_function(application, args
+                        , ARGS_REGEX::COMMLINE
+                        , 3 ,controls
+                        , [](const auto& x, const auto& y)
+                            {
+                                return x.commline.add_to_list_access({y[0],y[2], "0"});
+                            });
+    }
 
     return application;
 }
@@ -82,6 +98,16 @@ std::string delete_control(std::istringstream& message
                             {
                                 x.commline.remove_from_list({y[0]});
                                 return x.account.remove_from_list({y[0], y[1]});
+                            });
+    }
+    else if(application == "--commline")
+    {
+        application = apply_function(application, args
+                        , ARGS_REGEX::COMMLINE
+                        , 3 ,controls
+                        , [](const auto& x, const auto& y)
+                            {
+                                return x.commline.remove_from_list_access({y[0],y[2],"0"});
                             });
     }
 

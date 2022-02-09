@@ -10,8 +10,13 @@ class Commline_control
         Commline_control(const std::shared_ptr<Commline_model>& model);
 
         void add_to_list(const std::initializer_list<std::string>& fields) const;
-        void remove_from_list(const std::initializer_list<std::string>& fields) const;
         
+        std::string add_to_list_access(const std::initializer_list<std::string>& fields) const;
+
+        void remove_from_list(const std::initializer_list<std::string>& fields) const;
+
+        std::string remove_from_list_access(const std::initializer_list<std::string>& fields) const;
+       
     private:
         std::shared_ptr<Commline_model> model_ptr;
 };
