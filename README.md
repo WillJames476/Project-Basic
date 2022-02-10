@@ -19,7 +19,7 @@
   * the Boost c++ library have their own license. Please see:
     Boost/LICENSE, https://github.com/boostorg/boost.git or www.boost.org
 
-# Instalation
+# Build instructions
 1. clone the repository
 2. goto the directory of the repository,
    optional. enter the absolute path of boost library from your pc to the specified
