@@ -22,13 +22,17 @@ std::string server_control(const std::string& message)
     {
         to_return = get_control(method_extract, controls);
     }
-    else if(method == "PUT")
+    else if(method == "POST")
     {
-        to_return = put_control(method_extract, controls);
+        to_return = post_control(method_extract, controls);
     }
     else if(method == "DELETE")
     {
         to_return = delete_control(method_extract, controls);
+    }
+    else if(method == "PUT")
+    {
+        to_return = put_control(method_extract, controls);
     }
 
     file_control("WRITE", files);

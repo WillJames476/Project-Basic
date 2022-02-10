@@ -50,7 +50,7 @@ std::string get_control(std::istringstream& message
     return application;
 }
 
-std::string put_control(std::istringstream& message
+std::string post_control(std::istringstream& message
                         , const Control_agregate& controls)
 {
     std::string application{};
@@ -128,6 +128,30 @@ std::string delete_control(std::istringstream& message
                                 }
 
                                 return to_return_str;
+                            });
+    }
+
+    return application;
+}
+
+std::string put_control(std::istringstream& message
+                        , const Control_agregate& controls)
+{
+    std::string application{};
+    message >> application;
+    auto args{extract_args(message)};
+
+    if(application == "--commline")
+    {
+        application = apply_function(application, args
+                        , ARGS_REGEX::COMMLINE
+                        , 3, controls
+                        , [](const auto& x, const auto& y)
+                            {
+                                bool is_logged_in{x.account.get_from_list({y[0], y[1]})
+                                    != "unsuccessfull operation"};
+                                    
+                                return is_logged_in ? "sucess" : "fail";
                             });
     }
 

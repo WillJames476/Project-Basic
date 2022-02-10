@@ -11,10 +11,13 @@
 std::string get_control(std::istringstream& message
                 , const Control_agregate& controls);
 
-std::string put_control(std::istringstream& message
+std::string post_control(std::istringstream& message
                     , const Control_agregate& controls);
 
 std::string delete_control(std::istringstream& message
+                    , const Control_agregate& controls);
+
+std::string put_control(std::istringstream& message
                     , const Control_agregate& controls);
 
 void file_control(const std::string& mode
