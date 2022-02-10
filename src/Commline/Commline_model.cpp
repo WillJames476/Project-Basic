@@ -33,9 +33,25 @@ void Commline_model::remove_from_list_acess(const std::string& account_name
     }
 }
 
-bool Commline_model::is_permitted(const std::string& accessor, const std::string& accessed)
+bool Commline_model::is_permitted(const std::string& accessor
+                                , const std::string& accessed)
 {
     return commlines.find(accessor)->second->is_permitted(accessed);
+}
+
+bool Commline_model::modify_permission(const std::string& accessor
+                            , const std::string& target
+                            , const bool new_permission)const
+{
+    auto table_ptr{commlines.find(accessor)};
+
+    if(table_ptr != std::end(commlines))
+    {
+        table_ptr->second->modify_permission(target, new_permission);
+        return true;
+    }
+
+    return false;
 }
 
 std::unordered_map<std::string, std::shared_ptr<Permission_table>>  

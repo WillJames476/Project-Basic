@@ -26,6 +26,10 @@ class Commline_model
         bool is_permitted(const std::string& acessor
                         , const std::string& accessed);
         
+        bool modify_permission(const std::string& acessor
+                            , const std::string& target
+                            , const bool new_permission)const;
+
         std::unordered_map<std::string, std::shared_ptr<Permission_table>> 
             get_commlines() const;
         

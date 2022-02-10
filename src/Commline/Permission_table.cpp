@@ -42,3 +42,16 @@ bool Permission_table::is_permitted(const std::string& name) const
 
     return is_existing ? name_location->second : false;
 }
+
+bool Permission_table::modify_permission(const std::string& name, bool new_value)
+{
+    auto name_location{permission_table.find(name)};
+
+    if(name_location != std::end(permission_table))
+    {
+        name_location->second = new_value;
+        return true;
+    }
+
+    return false;
+}

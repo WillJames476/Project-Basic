@@ -150,8 +150,10 @@ std::string put_control(std::istringstream& message
                             {
                                 bool is_logged_in{x.account.get_from_list({y[0], y[1]})
                                     != "unsuccessfull operation"};
-                                    
-                                return is_logged_in ? "sucess" : "fail";
+
+                                return is_logged_in ? 
+                                    x.commline.modify_permission({y[0], y[2]}) 
+                                    : "fail";
                             });
     }
 

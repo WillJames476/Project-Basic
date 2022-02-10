@@ -20,6 +20,8 @@ class Permission_table
 
         bool is_permitted(const std::string& name) const;
 
+        bool modify_permission(const std::string& name, const bool new_value);
+
     private:
         std::unordered_map<std::string, bool> permission_table;
 };

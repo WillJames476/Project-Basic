@@ -16,6 +16,8 @@ class Commline_control
         void remove_from_list(const std::initializer_list<std::string>& fields) const;
 
         std::string remove_from_list_access(const std::initializer_list<std::string>& fields) const;
+
+        std::string modify_permission(const std::initializer_list<std::string>& fields) const;
        
     private:
         std::shared_ptr<Commline_model> model_ptr;

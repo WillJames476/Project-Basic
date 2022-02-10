@@ -41,3 +41,14 @@ std::string Commline_control::remove_from_list_access(const std::initializer_lis
 
     return std::string{"done"};
 }
+
+std::string Commline_control::modify_permission(const std::initializer_list<std::string>& fields) const
+{
+    auto strings_ptr{std::data(fields)};
+
+    model_ptr->modify_permission(*(strings_ptr + 0)
+                            , *(strings_ptr + 1)
+                            , true);
+
+    return std::string{};
+}
