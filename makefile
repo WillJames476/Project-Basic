@@ -1,7 +1,6 @@
 CXX = g++
 CXXFLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
 
-BOOST = -lboost_program_options #-I #eneter your boost's absolute path here if needed#
 BIN = bin
 SRC = src
 OBJ = obj
@@ -54,10 +53,10 @@ $(Clean):
 $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
 	$(CXX) $^ -o $@
 
-$(Client_program): $(Client_obj) $(Utils_obj)
+$(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
 	$(CXX) $^ -o $@
 
-$(Tester_program): $(Tester_obj) $(Commline_obj)
+$(Tester_program): $(Tester_obj) $(Commline_obj) $(Utils_obj)
 	$(CXX) $^ -o $@
 
 $(Utils_obj): $(Utils)
