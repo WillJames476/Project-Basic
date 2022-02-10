@@ -33,6 +33,11 @@ bool Account_model::remove_from_list(const std::string& username
     return false;
 }   
 
+bool Account_model::get_is_account_existing(const std::string& username) const
+{
+    return accounts.find(username) == std::end(accounts) ? false : true;
+}
+
 bool Account_model::get_item_from_list(const std::string& username
                                         , const std::string password) const
 {
@@ -50,7 +55,6 @@ bool Account_model::get_item_from_list(const std::string& username
     
     return false;
 }
-
 
 std::unordered_map<std::string, std::string>Account_model::get_accounts() const
 {

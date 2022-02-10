@@ -15,6 +15,8 @@ class Account_model
         bool remove_from_list(const std::string& username
                             , const std::string password);
 
+        bool get_is_account_existing(const std::string& username) const;
+
         bool get_item_from_list(const std::string& username
                             , const std::string password) const;
 

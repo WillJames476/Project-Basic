@@ -75,7 +75,16 @@ std::string put_control(std::istringstream& message
                         , 3 ,controls
                         , [](const auto& x, const auto& y)
                             {
-                                return x.commline.add_to_list_access({y[0],y[2], "0"});
+                                std::string to_return_str{};
+                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
+                                    != "unsuccessfull operation"};
+
+                                if(is_loged_in)
+                                {
+                                    to_return_str = x.commline.add_to_list_access({y[0],y[2], "0"});
+                                }
+
+                                return to_return_str;
                             });
     }
 
@@ -107,7 +116,16 @@ std::string delete_control(std::istringstream& message
                         , 3 ,controls
                         , [](const auto& x, const auto& y)
                             {
-                                return x.commline.remove_from_list_access({y[0],y[2],"0"});
+                                std::string to_return_str{};
+                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
+                                    != "unsuccessfull operation"};
+
+                                if(is_loged_in)
+                                {
+                                    to_return_str = x.commline.remove_from_list_access({y[0],y[2], "0"});
+                                }
+
+                                return to_return_str;
                             });
     }
 

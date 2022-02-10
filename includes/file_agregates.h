@@ -46,7 +46,6 @@ struct File_agregate
                     to_return += y.first + '\n';
                 }
 
-                std::cout << "to return" << to_return;
                 return to_return;
             }};
 
