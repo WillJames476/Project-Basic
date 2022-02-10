@@ -76,10 +76,12 @@ std::string put_control(std::istringstream& message
                         , [](const auto& x, const auto& y)
                             {
                                 std::string to_return_str{};
-                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
-                                    != "unsuccessfull operation"};
 
-                                if(is_loged_in)
+                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
+                                    != "unsuccessfull operation"}
+                                    , is_user_existing{x.account.is_user_existing(y[2])};
+
+                                if(is_loged_in && is_user_existing)
                                 {
                                     to_return_str = x.commline.add_to_list_access({y[0],y[2], "0"});
                                 }

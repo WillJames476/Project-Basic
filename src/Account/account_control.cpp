@@ -59,3 +59,8 @@ std::string Account_control::get_from_list(const std::initializer_list<std::stri
 
     return string_to_return;
 }
+
+bool Account_control::is_user_existing(const std::string& username) const
+{
+    return model->get_is_account_existing(username);
+}
