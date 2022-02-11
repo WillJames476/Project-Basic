@@ -75,18 +75,13 @@ std::string post_control(std::istringstream& message
                         , 3 ,controls
                         , [](const auto& x, const auto& y)
                             {
-                                std::string to_return_str{};
-
                                 bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
-                                    != "unsuccessfull operation"}
+                                        != "unsuccessfull operation"}
                                     , is_user_existing{x.account.is_user_existing(y[2])};
 
-                                if(is_loged_in && is_user_existing)
-                                {
-                                    to_return_str = x.commline.add_to_list_access({y[0],y[2], "0"});
-                                }
-
-                                return to_return_str;
+                                return is_loged_in && is_user_existing ?
+                                    x.commline.add_to_list_access({y[0], y[2], "0"})
+                                    : std::string{};
                             });
     }
 
@@ -118,16 +113,12 @@ std::string delete_control(std::istringstream& message
                         , 3 ,controls
                         , [](const auto& x, const auto& y)
                             {
-                                std::string to_return_str{};
                                 bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
-                                    != "unsuccessfull operation"};
+                                        != "unsuccessfull operation"};
 
-                                if(is_loged_in)
-                                {
-                                    to_return_str = x.commline.remove_from_list_access({y[0],y[2], "0"});
-                                }
-
-                                return to_return_str;
+                                return is_loged_in ?
+                                    x.commline.remove_from_list_access({y[0], y[2], "0"})
+                                    : std::string{};
                             });
     }
 
@@ -149,9 +140,10 @@ std::string put_control(std::istringstream& message
                         , [](const auto& x, const auto& y)
                             {
                                 bool is_logged_in{x.account.get_from_list({y[0], y[1]})
-                                    != "unsuccessfull operation"};
+                                        != "unsuccessfull operation"}
+                                    , is_user_existing{x.account.is_user_existing(y[2])};
 
-                                return is_logged_in ? 
+                                return is_logged_in && is_user_existing ? 
                                     x.commline.modify_permission({y[0], y[2]}) 
                                     : "fail";
                             });
