@@ -17,6 +17,7 @@ Tester_files = $(wildcard $(SRC)/Tester/*.cpp)
 
 Account_files = $(wildcard $(SRC)/Account/*.cpp)
 Commline_files = $(wildcard $(SRC)/Commline/*.cpp)
+Todolist_files = $(wildcard $(SRC)/Todolist/*.cpp)
 
 Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
 Server_obj = $(patsubst $(SRC)/Server/%.cpp, $(OBJ)/%.o, $(Server_files))
@@ -25,6 +26,7 @@ Tester_obj = $(patsubst $(SRC)/Tester/%.cpp, $(OBJ)/%.o, $(Tester_files))
 
 Account_obj = $(patsubst $(SRC)/Account/%.cpp, $(OBJ)/%.o, $(Account_files))
 Commline_obj = $(patsubst $(SRC)/Commline/%.cpp, $(OBJ)/%.o, $(Commline_files))
+Todolist_obj = $(patsubst $(SRC)/Todolist/%.cpp, $(OBJ)/%.o, $(Todolist_files))
 
 Server_program = $(BIN)/server
 Client_program = $(BIN)/client
@@ -56,7 +58,7 @@ $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
 $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
 	$(CXX) $^ -o $@
 
-$(Tester_program): $(Tester_obj) $(Commline_obj) $(Utils_obj)
+$(Tester_program): $(Tester_obj) $(Todolist_obj)
 	$(CXX) $^ -o $@
 
 $(Utils_obj): $(Utils)
@@ -75,4 +77,7 @@ $(Account_obj): $(Account_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Commline_obj): $(Commline_files)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Todolist_obj): $(Todolist_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
