@@ -64,8 +64,17 @@ std::string post_control(std::istringstream& message
                         , 2, controls 
                         , [](const auto& x, const auto& y)
                             {
-                                x.commline.add_to_list({y[0]});
-                                return x.account.add_to_list({y[0], y[1]});
+                                std::string feedback_string
+                                        {x.account.add_to_list({y[0], y[1]})};
+                                bool is_register_verified{feedback_string 
+                                    == "succesfull operation"};
+
+                                    if(is_register_verified)
+                                    {
+                                        x.commline.add_to_list({y[0]});
+                                    }
+
+                                return feedback_string;
                             });
     }
     else if(application == "--commline")
@@ -102,8 +111,17 @@ std::string delete_control(std::istringstream& message
                         , 2, controls 
                         , [](const auto& x, const auto& y)
                             {
-                                x.commline.remove_from_list({y[0]});
-                                return x.account.remove_from_list({y[0], y[1]});
+                                std::string operation_output
+                                    {x.account.remove_from_list({y[0], y[1]})};
+                                bool is_deletion_successfull{operation_output 
+                                        == "succesfull operation"};
+
+                                    if(is_deletion_successfull)
+                                    {
+                                        x.commline.remove_from_list({y[0]});
+                                    }
+
+                                return operation_output;
                             });
     }
     else if(application == "--commline")
