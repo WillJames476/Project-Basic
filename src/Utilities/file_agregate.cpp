@@ -4,8 +4,8 @@
 #include "../includes/file_agregates.h"
 
 File_agregate::File_agregate(const Model_agregate& models)
-        : account{Generic_file<Account_model>{models.account, "accounts.txt"}}
-        , commline{Generic_file<Commline_model>{models.commline, "commline.txt"}}
+        : account{Generic_file<Account_model>{models.account, "data/accounts.txt"}}
+        , commline{Generic_file<Commline_model>{models.commline, "data/commline.txt"}}
 {
 
 }

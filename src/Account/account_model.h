@@ -20,6 +20,8 @@ class Account_model
         bool get_item_from_list(const std::string& username
                             , const std::string password) const;
 
+        std::pair<std::string, std::string>get_account(const std::string& username) const;
+
         std::unordered_map<std::string, std::string> get_accounts() const;
         
     private:
