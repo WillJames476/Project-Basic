@@ -72,6 +72,7 @@ std::string post_control(std::istringstream& message
                                     if(is_register_verified)
                                     {
                                         x.commline.add_to_list({y[0]});
+                                        x.todolist.add_to_list({y[0]});
                                     }
 
                                 return feedback_string;
@@ -119,6 +120,7 @@ std::string delete_control(std::istringstream& message
                                     if(is_deletion_successfull)
                                     {
                                         x.commline.remove_from_list({y[0]});
+                                        x.todolist.remove_from_list({y[0]});
                                     }
 
                                 return operation_output;

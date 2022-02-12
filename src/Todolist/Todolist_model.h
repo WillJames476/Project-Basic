@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <memory>
 
 #include "Task.h"
 
@@ -29,6 +30,7 @@ class Todolist_model
                             , const std::string& account_source);
 
         std::vector<Task> get_item_from_list(const std::string& account_name) const;
+        std::unordered_map<std::string, std::vector<Task>> get_tasks() const;
 
     private:
         std::unordered_map<std::string, std::vector<Task>> tasks;

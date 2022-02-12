@@ -3,12 +3,10 @@
 #include <iostream>
 #include <memory>
 
-#include "../Todolist/Task.h"
+#include "../Todolist/Todolist_model.h"
+#include "../Todolist/Todolist_control.h"
 
 int main()
 {
-    Task task{"make some bread", "slim"};
-
-    std::cout << task.task_name_str << " " << task.task_giver_str << '\n';
     return 0;
 }
