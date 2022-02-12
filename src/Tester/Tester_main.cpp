@@ -9,6 +9,6 @@ int main()
 {
     Task task{"make some bread", "slim"};
 
-    std::cout << task.get_task_name() << " " << task.get_task_giver() << '\n';
+    std::cout << task.task_name_str << " " << task.task_giver_str << '\n';
     return 0;
 }
