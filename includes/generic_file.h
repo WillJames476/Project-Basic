@@ -45,7 +45,7 @@ void save_file(const X& object, const write_func& function)
     }
     catch(const std::exception &excpt)
     {
-        std::cout << excpt.what() << '\n';
+        std::cout << excpt.what() << " " << object.file_path << '\n';
     }
 }
 
@@ -60,7 +60,7 @@ void read_file(Y& to_modify, const read_func& function)
     }
     catch(const std::exception &excpt)
     {
-        std::cout << excpt.what() << '\n';
+        std::cout << excpt.what() << " " << to_modify.file_path << '\n';
     }
 }
 

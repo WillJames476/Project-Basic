@@ -55,7 +55,7 @@ $(Clean):
 $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
 	$(CXX) $^ -o $@
 
-$(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj)
+$(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
 	$(CXX) $^ -o $@
 
 $(Tester_program): $(Tester_obj) $(Todolist_obj)

@@ -6,8 +6,8 @@
 File_agregate::File_agregate(const Model_agregate& models)
         : account{Generic_file<Account_model>{models.account, "data/accounts.txt"}}
         , commline{Generic_file<Commline_model>{models.commline, "data/commline.txt"}}
+        , todolist{Generic_file<Todolist_model>{models.todolist, "data/todolist.txt"}}
 {
-
 }
 
 void File_agregate::save_all()
@@ -43,8 +43,28 @@ void File_agregate::save_all()
             return to_return.str();
         }};
 
+    auto todolist_write{[](auto& x)
+        {
+            std::ostringstream to_return{};
+
+            for(const auto& z : x->get_tasks())
+            {
+                to_return << z.first << '\n';
+
+                for(const auto& y : z.second)
+                {
+                    to_return << y.task_name_str << " " << y.task_giver_str << ' ';
+                }
+
+                to_return << "END\n";
+            }
+
+            return to_return.str();
+        }};
+
     save_file(account, account_write);
     save_file(commline, commline_write);
+    save_file(todolist, todolist_write);
 }
 
 void File_agregate::read_all()
@@ -91,6 +111,22 @@ void File_agregate::read_all()
             }
         }};
 
+    auto todolist_read{[](auto& x, auto& y)
+        {
+            std::string account_name;
+
+            while(x >> account_name)
+            {
+                y->add_to_list(account_name);
+
+                while(account_name != "END")
+                {
+                    x >> account_name;
+                }
+            }
+        }};
+
     read_file(account, account_read);
     read_file(commline, commline_read);
+    read_file(todolist, todolist_read);
 }   

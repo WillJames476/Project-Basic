@@ -21,7 +21,7 @@ class Todolist_model
 
         void remove_from_list(const std::string& account_name);
 
-        void remove_to_list_task(const std::string& account_target
+        void remove_from_list_task(const std::string& account_target
                             , const std::string& task_name
                             , const std::string& account_source);
         
