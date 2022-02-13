@@ -3,8 +3,7 @@ bin/
 obj/
 
 #sample docs
-accounts.txt
-commline.txt
+data/
 
 #misc
 .vscode
