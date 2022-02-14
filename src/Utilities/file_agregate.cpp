@@ -53,7 +53,7 @@ void File_agregate::save_all()
 
                 for(const auto& y : z.second)
                 {
-                    to_return << y.task_name_str << " " << y.task_giver_str << ' ';
+                    to_return << y.task_name_str << " " << y.task_giver_str << '\n';
                 }
 
                 to_return << "END\n";
@@ -113,16 +113,34 @@ void File_agregate::read_all()
 
     auto todolist_read{[](auto& x, auto& y)
         {
-            std::string account_name;
+            std::string 			  account_name     {}
+									, extracted_string {};
+			std::vector<std::string>  string_stack     {};			
 
-            while(x >> account_name)
+            while(x >> extracted_string)
             {
-                y->add_to_list(account_name);
+                y->add_to_list(extracted_string);
+				account_name = extracted_string;
 
-                while(account_name != "END")
+                while(extracted_string != "END")
                 {
-                    x >> account_name;
-                }
+                    x >> extracted_string;
+
+					if(extracted_string != "END")
+					{
+						string_stack.push_back(extracted_string);
+					}
+
+					if(extracted_string.size() == 2)
+					{
+						y->add_to_list_task(account_name
+											, string_stack[0]
+											, string_stack[1]);
+
+						string_stack.erase(std::begin(string_stack)
+										, std::end(string_stack));
+					}
+				}
             }
         }};
 
