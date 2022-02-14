@@ -12,7 +12,7 @@ namespace ARGS_REGEX
     std::initializer_list<std::regex>
         ACCOUNT    {ALPHA_NOSPACE, ALPHA_NOSPACE}
         , COMMLINE {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE}
-		, TASK     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE};
+		, TASK     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE_S};
 }
 
 std::vector<std::string> extract_args(std::istringstream& message)
@@ -107,9 +107,11 @@ std::string post_control(std::istringstream& message
 										{
 											bool is_loged_in{x.account.get_from_list({y[0], y[1]})
 													!= "unsuccessfull operation"}
-												, is_user_existing{x.account.is_user_existing(y[2])};
+												, is_user_existing  {x.account.is_user_existing(y[2])}
+												, is_user_permitted {x.commline.is_user_permitted
+																		({y[0], y[2]})};
 
-											return is_loged_in && is_user_existing ?
+											return is_loged_in && is_user_existing && is_user_permitted ?
 													x.todolist.add_to_list_task({y[0], y[3] , y[2]})
 													: std::string{};
 										});
@@ -169,10 +171,11 @@ std::string delete_control(std::istringstream& message
 									, [](const auto& x, const auto& y)
 										{
 											bool is_loged_in{x.account.get_from_list({y[0], y[1]})
-													!= "unsuccessdull operation"};
+													!= "unsuccessfull operation"}
+												, is_permitted{x.commline.is_user_permitted({y[0], y[2]})};
 
-											return is_loged_in ?
-												x.todolist.remove_from_list_task({y[0], y[3], y[3]})
+											return is_loged_in && is_permitted ?
+												x.todolist.remove_from_list_task({y[0], y[3], y[2]})
 												: std::string{};
 										});
 	}

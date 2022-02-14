@@ -52,3 +52,11 @@ std::string Commline_control::modify_permission(const std::initializer_list<std:
 
     return std::string{};
 }
+
+bool Commline_control::is_user_permitted(const std::initializer_list<std::string>& fields) const
+{
+	auto strings_ptr{std::data(fields)};
+
+	return model_ptr->is_permitted(*(strings_ptr + 0)
+								, *(strings_ptr + 1));
+}

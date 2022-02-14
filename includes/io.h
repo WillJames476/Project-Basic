@@ -23,18 +23,19 @@ namespace FEEDBACK_COLORS
 
 namespace REGEX_PREDICATES
 {
-    const std::regex ALPHA         ("[A-Za-z ]+"),
-                     ALPHA_NOSPACE ("[A-Za-z]+"),
-                     MESSAGE       ("[A-Za-z0-9, \n]+"),
-                     DIGIT         ("[0-9 ]+"),
-                     DIGIT_NOSPACE ("[0-9]+"),
-                     DATE          ("^3[0-1]|[12][0-9]|[0-9]$"),
-                     MONTH         ("^1[0-2]+|[0-9]{1}+$"),
-                     ALNUM         ("[A-Za-z0-9 ]+"),
-                     EMAIL         ("[_@a-zA-Z0-9]+.com"),
-                     APP_COMMAND   ("^--[a-z ]+"),
-                     BOOLEAN       ("^[0-1]$"),
-                     COMMAND       ("^/[a-z-0-9"" -]+");
+    const std::regex ALPHA           ("[A-Za-z ]+"),
+                     ALPHA_NOSPACE   ("[A-Za-z]+"),
+					 ALPHA_NOSPACE_S ("[A-Za-z-_]+"),
+                     MESSAGE         ("[A-Za-z0-9, \n]+"),
+                     DIGIT           ("[0-9 ]+"),
+                     DIGIT_NOSPACE   ("[0-9]+"),
+                     DATE            ("^3[0-1]|[12][0-9]|[0-9]$"),
+                     MONTH           ("^1[0-2]+|[0-9]{1}+$"),
+                     ALNUM           ("[A-Za-z0-9 ]+"),
+                     EMAIL           ("[_@a-zA-Z0-9]+.com"),
+                     APP_COMMAND     ("^--[a-z ]+"),
+                     BOOLEAN         ("^[0-1]$"),
+                     COMMAND         ("^/[a-z-0-9"" -]+");
 }
 
 std::string get_string(const std::string& request
