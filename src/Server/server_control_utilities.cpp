@@ -10,8 +10,9 @@ namespace ARGS_REGEX
     using namespace REGEX_PREDICATES;
 
     std::initializer_list<std::regex>
-        ACCOUNT{ALPHA_NOSPACE, ALPHA_NOSPACE},
-        COMMLINE{ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE};
+        ACCOUNT    {ALPHA_NOSPACE, ALPHA_NOSPACE}
+        , COMMLINE {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE}
+		, TASK     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE};
 }
 
 std::vector<std::string> extract_args(std::istringstream& message)
@@ -46,6 +47,9 @@ std::string get_control(std::istringstream& message
     {
 
     }
+	else if(application == "--todolist")
+	{
+	}
 
     return application;
 }
@@ -94,6 +98,22 @@ std::string post_control(std::istringstream& message
                                     : std::string{};
                             });
     }
+	else if(application == "--todolist")
+	{
+		application = apply_function(application, args
+									, ARGS_REGEX::TASK
+									, 4, controls
+									, [](const auto& x, const auto& y)
+										{
+											bool is_loged_in{x.account.get_from_list({y[0], y[1]})
+													!= "unsuccessfull operation"}
+												, is_user_existing{x.account.is_user_existing(y[2])};
+
+											return is_loged_in && is_user_existing ?
+													x.todolist.add_to_list_task({y[0], y[3] , y[2]})
+													: std::string{};
+										});
+	}
 
     return application;
 }
@@ -141,6 +161,21 @@ std::string delete_control(std::istringstream& message
                                     : std::string{};
                             });
     }
+	else if(application == "--todolist")
+	{
+		application = apply_function(application, args
+									, ARGS_REGEX::TASK
+									, 4, controls
+									, [](const auto& x, const auto& y)
+										{
+											bool is_loged_in{x.account.get_from_list({y[0], y[1]})
+													!= "unsuccessdull operation"};
+
+											return is_loged_in ?
+												x.todolist.remove_from_list_task({y[0], y[3], y[3]})
+												: std::string{};
+										});
+	}
 
     return application;
 }

@@ -36,6 +36,6 @@ std::string server_control(const std::string& message)
     }
 
     file_control("WRITE", files);
-    
+
     return to_return;
 }

@@ -18,23 +18,26 @@ int main(int argc, char** argv)
 {
     std::ios_base::sync_with_stdio(false);
 
-    if(argc == 2)
+    if(argc == 3)
     {
         try
         {
-            std::string message{}, ip_addr{*(argv + 1)};
-            boost::asio::io_context io_context{};
+			const int         PORT    {std::stoi(*(argv + 2))};
+			const std::string IP_ADDR {*(argv + 1)};
 
+            std::string message{};
+
+            boost::asio::io_context io_context{};
             boost::asio::ip::tcp::acceptor acceptor{io_context
-                , make_endpoint(ip_addr, 80)};
+                , make_endpoint(IP_ADDR, PORT)};
 
             boost::system::error_code err_codes;
             communication_handler(io_context, err_codes, acceptor);
-            
+
             acceptor.close();
         }
         catch(std::exception& excpt)
-        {   
+        {
             std::cerr << excpt.what();
         }
     }
