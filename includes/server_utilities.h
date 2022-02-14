@@ -5,7 +5,7 @@
 #include <boost/asio.hpp>
 
 boost::asio::ip::tcp::endpoint make_endpoint(const std::string& ip_addr
-                                            ,const int port_number);
+                                            ,const unsigned short port_number);
 
 std::string get_message(boost::asio::ip::tcp::socket& socket
                         , boost::system::error_code& error_codes);

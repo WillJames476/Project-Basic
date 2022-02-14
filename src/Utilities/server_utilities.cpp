@@ -13,18 +13,18 @@ void error_check(const boost::system::error_code& error_codes)
     {
         std::cout.sync_with_stdio(false);
         std::cout << boost::format("%s%s%s\n")
-            % BAD 
+            % BAD
             % error_codes.message()
             % RESET;
     }
 }
 
 boost::asio::ip::tcp::endpoint make_endpoint(const std::string& ip_addr
-                                            ,const int port_number)
+                                            ,const unsigned short port_number)
 {
     boost::asio::ip::tcp::endpoint endpoint{
         boost::asio::ip::address::from_string(ip_addr)
-        , boost::asio::ip::port_type(port_number)};
+        , port_number};
 
     return endpoint;
 }
