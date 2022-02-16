@@ -4,6 +4,7 @@
 #include "control_agregate.h"
 #include "file_agregates.h"
 #include "server_control_utilities.h"
+#include "view_agregate.h"
 
 namespace ARGS_REGEX
 {
@@ -29,27 +30,28 @@ std::vector<std::string> extract_args(std::istringstream& message)
 }
 
 std::string get_control(std::istringstream& message
-                , const Control_agregate& controls)
+					   , const View_agregate& view)
 {
     std::string application{};
     message >> application;
-    auto args{extract_args(message)};
+	auto args{extract_args(message)};
 
     if(application == "--account")
     {
-        application = apply_function(application, args
-                        , ARGS_REGEX::ACCOUNT  
-                        , 2, controls
-                        , [](const auto& x, const auto& y)
-                            {return x.account.get_from_list({y[0], y[1]});});
+		application = apply_function(application, args
+									, ARGS_REGEX::ACCOUNT
+									, 2, view
+									, [](const auto& x, const auto& y)
+										{
+											return x.account.send_formatted(y[0]);
+										});
     }
-    else if(application == "--commline")
+    else if(application == "--commlines")
     {
-
     }
-	else if(application == "--todolist")
-	{
-	}
+    else if(application == "-- todolist")
+    {
+    }
 
     return application;
 }

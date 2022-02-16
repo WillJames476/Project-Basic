@@ -3,14 +3,16 @@
 
 #include "model_agregate.h"
 #include "control_agregate.h"
+#include "view_agregate.h"
 #include "file_agregates.h"
 #include "server_control_utilities.h"
 
 std::string server_control(const std::string& message)
 {
-    Model_agregate models{};
-    Control_agregate controls{models};
-    File_agregate files{models};
+    Model_agregate models     {};
+    Control_agregate controls {models};
+	View_agregate view        {models};
+    File_agregate files       {models};
 
     file_control("READ", files);
 
@@ -20,7 +22,7 @@ std::string server_control(const std::string& message)
 
     if(method == "GET")
     {
-        to_return = get_control(method_extract, controls);
+        to_return = get_control(method_extract, view);
     }
     else if(method == "POST")
     {
@@ -32,7 +34,7 @@ std::string server_control(const std::string& message)
     }
     else if(method == "PUT")
     {
-        to_return = put_control(method_extract, controls);
+        to_return = put_control(method_extract,controls);
     }
 
     file_control("WRITE", files);
