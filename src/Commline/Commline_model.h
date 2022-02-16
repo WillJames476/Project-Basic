@@ -17,7 +17,7 @@ class Commline_model
         void add_to_list_acess(const std::string& name
                                 , const std::string& to_acess
                                 , const bool permission);
-        
+
         void remove_from_list(const std::string& name);
 
         void remove_from_list_acess(const std::string& name
@@ -25,16 +25,18 @@ class Commline_model
 
         bool is_permitted(const std::string& acessor
                         , const std::string& accessed);
-        
+
         bool modify_permission(const std::string& acessor
                             , const std::string& target
                             , const bool new_permission)const;
 
-        std::unordered_map<std::string, std::shared_ptr<Permission_table>> 
+		std::shared_ptr<Permission_table> get_permission_table(const std::string& name) const;
+
+        std::unordered_map<std::string, std::shared_ptr<Permission_table>>
             get_commlines() const;
-        
+
     private:
         std::unordered_map<std::string, std::shared_ptr<Permission_table>> commlines;
-};  
+};
 
 #endif

@@ -52,8 +52,20 @@ std::string get_control(std::istringstream& message
 													: std::string{"failure"};
 										});
     }
-    else if(application == "--commlines")
+    else if(application == "--commline")
     {
+		application = apply_function(application, args
+									, ARGS_REGEX::ACCOUNT
+									, 2 , view
+									, [&](const auto& x, const auto& y)
+										{
+											bool is_user_verified{control.account.get_from_list({y[0], y[1]})
+													!= "unsuccessfull operation"};
+
+											return is_user_verified ?
+													x.commline.send_formatted(y[0])
+													: std::string{"failure"};
+										});
     }
     else if(application == "-- todolist")
     {

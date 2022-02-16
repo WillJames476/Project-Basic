@@ -54,6 +54,11 @@ bool Commline_model::modify_permission(const std::string& accessor
     return false;
 }
 
+std::shared_ptr<Permission_table> Commline_model::get_permission_table(const std::string& account) const
+{
+	return commlines.find(account)->second;
+}
+
 std::unordered_map<std::string, std::shared_ptr<Permission_table>>  
     Commline_model::get_commlines() const
 {
