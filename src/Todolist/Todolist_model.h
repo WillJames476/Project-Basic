@@ -24,7 +24,7 @@ class Todolist_model
         void remove_from_list_task(const std::string& account_target
                             , const std::string& task_name
                             , const std::string& account_source);
-        
+
         bool task_exists(const std::string& account_target
                             , const std::string& task_name
                             , const std::string& account_source);

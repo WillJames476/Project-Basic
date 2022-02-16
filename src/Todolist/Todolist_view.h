@@ -2,12 +2,16 @@
 #define TODOLIST_VIEW_H
 
 #include <memory>
+#include <string>
+
 #include "Todolist_model.h"
 
-class Todolist_model
+class Todolist_view
 {
     public:
-        Todolist_model(const Todolist_model& model);
+        Todolist_view(const std::shared_ptr<Todolist_model>& model);
+
+		std::string send_formatted(const std::string& account_name) const;
 
     private:
         std::shared_ptr<Todolist_model> model_ptr;
