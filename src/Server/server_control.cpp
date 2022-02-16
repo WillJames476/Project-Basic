@@ -22,7 +22,7 @@ std::string server_control(const std::string& message)
 
     if(method == "GET")
     {
-        to_return = get_control(method_extract, view);
+        to_return = get_control(method_extract, view, controls);
     }
     else if(method == "POST")
     {

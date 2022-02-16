@@ -10,7 +10,8 @@
 #include "view_agregate.h"
 
 std::string get_control(std::istringstream& message
-                , const View_agregate& controls);
+                , const View_agregate& view
+				, const Control_agregate& controls);
 
 std::string post_control(std::istringstream& message
                     , const Control_agregate& controls);

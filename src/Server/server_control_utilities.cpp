@@ -30,7 +30,8 @@ std::vector<std::string> extract_args(std::istringstream& message)
 }
 
 std::string get_control(std::istringstream& message
-					   , const View_agregate& view)
+					   , const View_agregate& view
+					   , const Control_agregate& control)
 {
     std::string application{};
     message >> application;
@@ -41,9 +42,14 @@ std::string get_control(std::istringstream& message
 		application = apply_function(application, args
 									, ARGS_REGEX::ACCOUNT
 									, 2, view
-									, [](const auto& x, const auto& y)
+									, [&](const auto& x, const auto& y)
 										{
-											return x.account.send_formatted(y[0]);
+											bool is_user_verified{control.account.get_from_list({y[0], y[1]})
+													!= "unsuccessfull operation"};
+
+											return is_user_verified ?
+													x.account.send_formatted(y[0])
+													: std::string{"failure"};
 										});
     }
     else if(application == "--commlines")
@@ -97,7 +103,7 @@ std::string post_control(std::istringstream& message
 
                                 return is_loged_in && is_user_existing ?
                                     x.commline.add_to_list_access({y[0], y[2], "0"})
-                                    : std::string{};
+                                    : std::string{"failure"};
                             });
     }
 	else if(application == "--todolist")
@@ -115,7 +121,7 @@ std::string post_control(std::istringstream& message
 
 											return is_loged_in && is_user_existing && is_user_permitted ?
 													x.todolist.add_to_list_task({y[0], y[3] , y[2]})
-													: std::string{};
+													: std::string{"fialure"};
 										});
 	}
 
@@ -162,7 +168,7 @@ std::string delete_control(std::istringstream& message
 
                                 return is_loged_in ?
                                     x.commline.remove_from_list_access({y[0], y[2], "0"})
-                                    : std::string{};
+                                    : std::string{"failure"};
                             });
     }
 	else if(application == "--todolist")
