@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "account_model.h"
+#include "../Interfaces/View_interface.h"
 
 class Account_view
 {
