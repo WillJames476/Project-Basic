@@ -27,13 +27,11 @@
 3. type make install on your terminal
 4. type make on your terminal
 5. enjoy
-   
+ 
 # Uninstalling
 1. type make uninstall on the terminal
 
 # Applications on this repo
-* for further information execute groff -Tascii -man documentation/(application of choice).man
-
 * Client(executable as bin/client)
   - the client side application of the program
 
