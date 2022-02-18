@@ -131,7 +131,7 @@ void File_agregate::read_all()
 						string_stack.push_back(extracted_string);
 					}
 
-					if(extracted_string.size() == 2)
+					if(string_stack.size() == 2)
 					{
 						y->add_to_list_task(account_name
 											, string_stack[0]
