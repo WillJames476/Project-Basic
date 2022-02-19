@@ -6,7 +6,9 @@
 #include <fstream>
 
 #include "generic_file.h"
-#include "../src/Account/account_model.h"
+#include "generic_file_s.h"
+
+#include "../src/Account/Account_view.h"
 #include "../src/Commline/Commline_model.h"
 #include "../src/Todolist/Todolist_model.h"
 
@@ -14,7 +16,7 @@
 
 struct File_agregate
 {
-    Generic_file<Account_model> account;
+    Generic_file_s<Account_view> account;
     Generic_file<Commline_model> commline;
     Generic_file<Todolist_model> todolist;
 

@@ -34,7 +34,7 @@ std::ostringstream Account_view::send_as_stream() const
     return to_return;
 }
 
-void Account_view::read_from_stream(std::istringstream& to_read) const
+void Account_view::read_from_stream(std::istream& to_read) const
 {
     std::array<std::string, 2> output;
 

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <sstream>
+#include <istream>
 
 #include "account_model.h"
 #include "../Interfaces/View_interface.h"
@@ -16,7 +17,7 @@ class Account_view
 
         std::ostringstream send_as_stream() const;
 
-        void read_from_stream(std::istringstream& to_read) const;
+        void read_from_stream(std::istream& to_read) const;
 
     private:
         std::shared_ptr<Account_model> model_ptr;
