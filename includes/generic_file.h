@@ -1,68 +1,64 @@
-#ifndef GENERIC_FILE_H
-#define GENERIC_FILE_H
+#ifndef GENERIC_FILE
+#define GENERIC_FILE
 
-#include <string>
-#include <type_traits>
-#include <memory>
 #include <fstream>
+#include <string>
+#include <memory>
 #include <iostream>
 
-template<typename T>
+template <typename T>
 struct Generic_file
 {
-    public:
-        Generic_file(const std::shared_ptr<T>& target
-                    , const std::string& file_name);
+	public:
+		Generic_file(const T& viewer_object
+					, const std::string& file_target);
 
-        template<typename X, typename write_func>
-        friend void save_file(const X& object
-                        , const write_func& function);
+		void read_file() const;
+		void save_file() const;
 
-        template<typename Y, typename read_func>
-        friend void read_file(Y& to_modify
-                        , const read_func& function);
-
-    private:
-        std::shared_ptr<T> object;
-        std::string file_path{};
+	private:
+		std::shared_ptr<T> viewer;
+		std::string file_target_str;
 };
 
+template<typename T>
+Generic_file<T>::Generic_file(const T& viewer_object
+								, const std::string& file_target)
+	: viewer{std::make_shared<T>(viewer_object)}
+	, file_target_str{file_target}
+{
+}
+
 template <typename T>
-Generic_file<T>::Generic_file(const std::shared_ptr<T>& target
-                            , const std::string& file_name)
-    : object{target}, file_path{file_name}
+void Generic_file<T>::read_file() const
 {
+	try
+	{
+		std::ifstream file_to_read{file_target_str};
+
+		viewer->read_from_stream(file_to_read);
+		file_to_read.close();
+	}
+	catch(const std::exception& excpt)
+	{
+		std::cerr << excpt.what() << '\n';
+	}
 }
 
-template <typename X, typename write_func>
-void save_file(const X& object, const write_func& function)
+template <typename T>
+void Generic_file<T>::save_file() const
 {
-    try
-    {
-        auto file_to_use{std::ofstream(object.file_path)};
-        file_to_use << function(object.object);
-        file_to_use.close();
-    }
-    catch(const std::exception &excpt)
-    {
-        std::cout << excpt.what() << " " << object.file_path << '\n';
-    }
-}
+	try
+	{
+		std::ofstream file_to_save {file_target_str};
 
-template <typename Y, typename read_func>
-void read_file(Y& to_modify, const read_func& function)
-{
-    try
-    {
-        auto file_to_use{std::ifstream(to_modify.file_path)};
-        function(file_to_use, to_modify.object);
-        file_to_use.close();
-    }
-    catch(const std::exception &excpt)
-    {
-        std::cout << excpt.what() << " " << to_modify.file_path << '\n';
-    }
+		file_to_save << viewer->send_as_stream().str();
+		file_to_save.close();
+	}
+	catch(const std::exception& excpt)
+	{
+		std::cerr <<  excpt.what() << '\n';
+	}
 }
-
 
 #endif
