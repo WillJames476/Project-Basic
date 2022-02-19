@@ -9,7 +9,7 @@
 #include "generic_file_s.h"
 
 #include "../src/Account/Account_view.h"
-#include "../src/Commline/Commline_model.h"
+#include "../src/Commline/Commline_view.h"
 #include "../src/Todolist/Todolist_model.h"
 
 #include "model_agregate.h"
@@ -17,7 +17,7 @@
 struct File_agregate
 {
     Generic_file_s<Account_view> account;
-    Generic_file<Commline_model> commline;
+    Generic_file_s<Commline_view> commline;
     Generic_file<Todolist_model> todolist;
 
     File_agregate(const Model_agregate& models);

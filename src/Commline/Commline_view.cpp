@@ -39,3 +39,54 @@ std::string Commline_view::send_formatted(const std::string& account) const
 
 	return to_return_string.str();
 }
+
+std::ostringstream Commline_view::send_as_stream () const
+{
+	std::ostringstream to_send_stream{};
+
+	for(const auto& y : model_ptr->get_commlines())
+	{
+		to_send_stream << y.first << '\n';
+
+		for(const auto& z : y.second->get_table())
+		{
+			to_send_stream << z.first << " " << std::to_string(z.second) << '\n';
+		}
+
+		to_send_stream << "END\n";
+	}
+
+	return to_send_stream;
+}
+
+void Commline_view::read_from_stream(std::istream& to_read) const
+{
+	std::vector<std::string> string_stack{};
+	std::string extracted_string{}, account_name{};
+
+	while(to_read >> extracted_string)
+	{
+		model_ptr->add_to_list(extracted_string);
+		account_name = extracted_string;
+
+		while(extracted_string != "END")
+		{
+			to_read >> extracted_string;
+
+			if(extracted_string != "END")
+			{
+				string_stack.push_back(extracted_string);
+			}
+
+			if(string_stack.size() == 2)
+			{
+				model_ptr->add_to_list_acess(account_name
+											, string_stack[0]
+											, std::stoi(string_stack[1]));
+
+				string_stack.erase(std::begin(string_stack)
+									, std::end(string_stack));
+			}
+		}
+	}
+}
