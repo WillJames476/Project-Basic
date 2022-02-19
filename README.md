@@ -20,13 +20,10 @@
     Boost/LICENSE, https://github.com/boostorg/boost.git or www.boost.org
 
 # Build instructions
-1. clone the repository
-2. goto the directory of the repository,
-   optional. enter the absolute path of boost library from your pc to the specified
-   comment on the makefile 
-3. type make install on your terminal
-4. type make on your terminal
-5. enjoy
+1. clone the repository 
+2. type make install on your terminal
+3. type make on your terminal
+4. enjoy
  
 # Uninstalling
 1. type make uninstall on the terminal

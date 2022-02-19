@@ -40,8 +40,8 @@ endef
 all:
 	make $(programs)
 
-install: 
-	mkdir users $(BIN) $(OBJ) && touch users/users.txt 
+install:
+	mkdir $(BIN) $(OBJ) data
 
 uninstall:
 	rm -rf $(SRC) && $(Clean)
