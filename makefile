@@ -46,6 +46,9 @@ install:
 uninstall:
 	rm -rf $(SRC) && $(Clean)
 
+dist:
+	$(shell tar -zcf Project-Basic.tar.gz *)
+
 move_obj:
 	$(shell mv *.o $(OBJ))
 
