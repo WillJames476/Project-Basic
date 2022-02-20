@@ -63,6 +63,10 @@ void communication_handler(boost::asio::io_context& io_context
 
         std::cout << received;
         client.close();
-        break;
+
+		if(received == "END")
+		{
+			break;
+		}
     }
 }

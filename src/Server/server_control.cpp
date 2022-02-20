@@ -36,6 +36,10 @@ std::string server_control(const std::string& message)
     {
         to_return = put_control(method_extract,controls);
     }
+	else if(method == "END")
+	{
+		to_return = "END";
+	}
 
     file_control("WRITE", files);
 
