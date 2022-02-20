@@ -34,3 +34,16 @@
 
 * Server(executable as bin/server)
   - the server side application of the program
+  - it has the following applications:
+	1. Account application
+		- manages all the account opeartions:
+		creation, deletion, and credential
+		verifications.
+
+	2. Communication line application:
+		- manages all the permissions and accesses the user can have:
+		can grant, and can add a user to access.
+
+	3. Todolist application]
+		- manages all the task given to the user by 
+		himself or other permitted users.
