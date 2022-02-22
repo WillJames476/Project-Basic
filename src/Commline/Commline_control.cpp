@@ -48,7 +48,7 @@ std::string Commline_control::modify_permission(const std::initializer_list<std:
 
     model_ptr->modify_permission(*(strings_ptr + 1)
                             , *(strings_ptr + 0)
-                            , true);
+                            , std::stoi(*(strings_ptr + 2)));
 
     return std::string{};
 }

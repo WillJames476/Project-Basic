@@ -11,9 +11,10 @@ namespace ARGS_REGEX
     using namespace REGEX_PREDICATES;
 
     std::initializer_list<std::regex>
-        ACCOUNT    {ALPHA_NOSPACE, ALPHA_NOSPACE}
-        , COMMLINE {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE}
-		, TASK     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE_S};
+        ACCOUNT        {ALPHA_NOSPACE, ALPHA_NOSPACE}
+        , COMMLINE     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE}
+		, COMMLINE_PUT {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, BOOLEAN}
+		, TASK         {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE_S};
 }
 
 std::vector<std::string> extract_args(std::istringstream& message)
@@ -225,16 +226,16 @@ std::string put_control(std::istringstream& message
     if(application == "--commline")
     {
         application = apply_function(application, args
-                        , ARGS_REGEX::COMMLINE
-                        , 3, controls
+                        , ARGS_REGEX::COMMLINE_PUT
+                        , 4, controls
                         , [](const auto& x, const auto& y)
                             {
                                 bool is_logged_in{x.account.get_from_list({y[0], y[1]})
                                         != "unsuccessfull operation"}
                                     , is_user_existing{x.account.is_user_existing(y[2])};
 
-                                return is_logged_in && is_user_existing ? 
-                                    x.commline.modify_permission({y[0], y[2]}) 
+                                return is_logged_in && is_user_existing ?
+                                    x.commline.modify_permission({y[0], y[2], y[3]}) 
                                     : "fail";
                             });
     }
