@@ -44,6 +44,6 @@
 		- manages all the permissions and accesses the user can have:
 		can grant, and can add a user to access.
 
-	3. Todolist application]
+	3. Todolist application:
 		- manages all the task given to the user by 
 		himself or other permitted users.

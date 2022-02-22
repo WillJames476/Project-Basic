@@ -18,6 +18,7 @@ Tester_files = $(wildcard $(SRC)/Tester/*.cpp)
 Account_files = $(wildcard $(SRC)/Account/*.cpp)
 Commline_files = $(wildcard $(SRC)/Commline/*.cpp)
 Todolist_files = $(wildcard $(SRC)/Todolist/*.cpp)
+Operations_files = $(wildcard $(SRC)/Operations/*.cpp)
 
 Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
 Server_obj = $(patsubst $(SRC)/Server/%.cpp, $(OBJ)/%.o, $(Server_files))
@@ -27,6 +28,7 @@ Tester_obj = $(patsubst $(SRC)/Tester/%.cpp, $(OBJ)/%.o, $(Tester_files))
 Account_obj = $(patsubst $(SRC)/Account/%.cpp, $(OBJ)/%.o, $(Account_files))
 Commline_obj = $(patsubst $(SRC)/Commline/%.cpp, $(OBJ)/%.o, $(Commline_files))
 Todolist_obj = $(patsubst $(SRC)/Todolist/%.cpp, $(OBJ)/%.o, $(Todolist_files))
+Operations_obj = $(patsubst $(SRC)/Operations/%.cpp, $(OBJ)/%.o, $(Operations_files))
 
 Server_program = $(BIN)/server
 Client_program = $(BIN)/client
