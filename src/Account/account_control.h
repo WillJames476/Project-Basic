@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <array>
 #include "account_model.h"
 
 class Account_control
@@ -17,6 +18,8 @@ class Account_control
         std::string get_from_list(const std::initializer_list<std::string>& fields) const;
 
         bool is_user_existing(const std::string& username) const;
+
+		bool is_login_verified(const std::array<std::string, 2>& fields) const;
 
     private:
         std::shared_ptr<Account_model>model;

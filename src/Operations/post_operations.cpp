@@ -15,7 +15,23 @@ std::string add_new_account(const Control_agregate& control,
 	{
 		control.commline.add_to_list({fields[0]});
 		control.todolist.add_to_list({fields[1]});
-		string_to_return = "opeartion done\n";
+		string_to_return = "operation done\n";
+	}
+
+	return string_to_return;
+}
+
+std::string add_new_commline(const Control_agregate& control,
+							const std::vector<std::string>& fields)
+{
+	std::string string_to_return{"failure\n"};
+	bool is_login_verified  {control.account.is_login_verified({fields[0], fields[1]})},
+		 is_target_existing {control.account.is_user_existing(fields[2])};
+
+	if(is_login_verified && is_target_existing)
+	{
+		control.commline.add_to_list_access({fields[0], fields[2], "0"});
+		string_to_return = "operation done\n";
 	}
 
 	return string_to_return;

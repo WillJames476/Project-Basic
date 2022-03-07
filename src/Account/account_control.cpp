@@ -64,3 +64,8 @@ bool Account_control::is_user_existing(const std::string& username) const
 {
     return model->get_is_account_existing(username);
 }
+
+bool Account_control::is_login_verified(const std::array<std::string, 2>& fields) const
+{
+	return model->get_item_from_list(fields[0], fields[1]);
+}

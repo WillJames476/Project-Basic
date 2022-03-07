@@ -107,16 +107,7 @@ std::string post_control(std::istringstream& message
         application = apply_function(application, args
                         , ARGS_REGEX::COMMLINE
                         , 3 ,controls
-                        , [](const auto& x, const auto& y)
-                            {
-                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
-                                        != "unsuccessfull operation"}
-                                    , is_user_existing{x.account.is_user_existing(y[2])};
-
-                                return is_loged_in && is_user_existing ?
-                                    x.commline.add_to_list_access({y[0], y[2], "0"})
-                                    : std::string{"failure"};
-                            });
+                        , [](const auto& x, const auto& y){return add_new_commline(x, y);});
     }
 	else if(application == "--todolist")
 	{
