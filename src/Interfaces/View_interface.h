@@ -3,14 +3,39 @@
 
 #include <sstream>
 #include <string>
+#include <istream>
 
+template <typename T>
 class View_interface
 {
-	virtual std::string send_formatted(const std::string& account_name) const = 0;
+	public:
+		
+		std::string view_formatted() const;
 
-	virtual std::ostringstream send_as_stream() const = 0;
+		std::stringstream send_as_stream() const;
 
-	virtual void read_from_stream(std::istringstream& to_read) const = 0;
+		void read_from_stream(std::istream& to_read) const;
+
+	private:
+
 };
+
+template <typename T>
+std::string View_interface<T>::view_formatted() const
+{
+	return static_cast<T*>(this)->view_formatted();
+}
+
+template <typename T>
+std::stringstream View_interface<T>::send_as_stream() const
+{
+	return static_cast<T*>(this)->send_as_stream();
+}
+
+template <typename T>
+void View_interface<T>::read_from_stream(std::istream& to_read) const
+{
+	static_cast<T*>(this)->read_from_stream(to_read);
+}
 
 #endif

@@ -57,7 +57,7 @@ move_obj:
 $(Clean):
 	rm -rf $(BIN)/* $(OBJ)/*
 
-$(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
+$(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj) $(Operations_obj)
 	$(CXX) $^ -o $@
 
 $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
@@ -85,4 +85,7 @@ $(Commline_obj): $(Commline_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
 
 $(Todolist_obj): $(Todolist_files)
+	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+
+$(Operations_obj): $(Operations_files)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
