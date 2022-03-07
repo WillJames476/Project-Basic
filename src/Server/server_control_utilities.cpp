@@ -5,6 +5,7 @@
 #include "file_agregates.h"
 #include "server_control_utilities.h"
 #include "view_agregate.h"
+#include "../Operations/post_operations.h"
 
 namespace ARGS_REGEX
 {
@@ -99,21 +100,7 @@ std::string post_control(std::istringstream& message
         application = apply_function(application, args
                         , ARGS_REGEX::ACCOUNT
                         , 2, controls 
-                        , [](const auto& x, const auto& y)
-                            {
-                                std::string feedback_string
-                                        {x.account.add_to_list({y[0], y[1]})};
-                                bool is_register_verified{feedback_string 
-                                    == "succesfull operation"};
-
-                                    if(is_register_verified)
-                                    {
-                                        x.commline.add_to_list({y[0]});
-                                        x.todolist.add_to_list({y[0]});
-                                    }
-
-                                return feedback_string;
-                            });
+                        , [](const auto& x, const auto& y){return add_new_account(x, y);});
     }
     else if(application == "--commline")
     {
