@@ -16,11 +16,11 @@ std::string Todolist_control::add_to_list_task(const std::initializer_list<std::
 {
 	auto extracted_strings_ptr{std::data(fields)};
 
-	model_ptr->add_to_list_task(*(extracted_strings_ptr + 2)
-							, *(extracted_strings_ptr + 1)
-							, *(extracted_strings_ptr + 0));
+	model_ptr->add_to_list_task(*(extracted_strings_ptr + 0)
+							  , *(extracted_strings_ptr + 1)
+							  , *(extracted_strings_ptr + 2));
 
-	return "done";
+	return "done\n";
 }
 
 void Todolist_control::remove_from_list(const std::initializer_list<std::string>& fields) const

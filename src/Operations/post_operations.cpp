@@ -51,7 +51,7 @@ std::string add_new_task(const Control_agregate& control,
 
 		if(is_user_permitted)
 		{
-			control.todolist.add_to_list_task({fields[0], fields[3], fields[2]});
+			control.todolist.add_to_list_task({fields[2], fields[0], fields[3]});
 			string_to_return = "operation done\n";
 		}
 	}

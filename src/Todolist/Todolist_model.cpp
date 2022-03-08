@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "Todolist_model.h"
+#include <iostream>
 
 void Todolist_model::add_to_list(const std::string& account_name)
 {
@@ -7,10 +8,15 @@ void Todolist_model::add_to_list(const std::string& account_name)
 }
 
 void Todolist_model::add_to_list_task(const std::string& account_target
-                                    , const std::string& task_name
-                                    , const std::string& account_source)
+                                    , const std::string& account_source
+									, const std::string& task_name)
 {
-    tasks.find(account_target)->second.push_back(Task{task_name, account_source});
+	auto target_location {tasks.find(account_target)};
+
+	if(target_location != std::end(tasks))
+	{
+		target_location->second.push_back(Task{task_name, account_source});
+	}
 }
 
 void Todolist_model::remove_from_list_task(const std::string& account_target
