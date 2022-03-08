@@ -36,3 +36,25 @@ std::string add_new_commline(const Control_agregate& control,
 
 	return string_to_return;
 }
+
+std::string add_new_task(const Control_agregate& control,
+						const std::vector<std::string>& fields)
+{
+	std::string string_to_return{"failure\n"};
+
+	bool is_login_verified {control.account.is_login_verified({fields[0], fields[1]})},
+		 is_target_existent {control.account.is_user_existing(fields[2])};
+	
+	if(is_login_verified && is_target_existent)
+	{
+		bool is_user_permitted{control.commline.is_user_permitted({fields[0], fields[2]})};
+
+		if(is_user_permitted)
+		{
+			control.todolist.add_to_list_task({fields[0], fields[3], fields[2]});
+			string_to_return = "operation done\n";
+		}
+	}
+
+	return string_to_return;
+}
