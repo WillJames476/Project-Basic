@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+
+#include "control_agregate.h"
+
+std::string delete_account(const Control_agregate& controls,
+						  const std::vector<std::string>& fields)
+{
+	std::string string_to_return{"failure\n"};
+
+	bool is_user_loged_in {controls.account.is_login_verified({fields[0], fields[1]})};
+
+	if(is_user_loged_in)
+	{
+		controls.account.remove_from_list({fields[0], fields[1]});
+		controls.commline.remove_from_list({fields[0]});
+		controls.todolist.remove_from_list({fields[0]});
+		string_to_return = "done\n";
+	}
+
+	return string_to_return;
+}

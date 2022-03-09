@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "Control_agregate.h"
+#include "control_agregate.h"
 
 std::string delete_account(const Control_agregate& control
 						, const std::vector<std::string>& fields);
@@ -11,7 +11,7 @@ std::string delete_account(const Control_agregate& control
 std::string delete_a_line(const Control_agregate& control
 						, const std::vector<std::string>& fields);
 
-std::string delete_a_task(const Control_agrgate& control
+std::string delete_a_task(const Control_agregate& control
 						, const std::vector<std::string>& fields);
 
 #endif
