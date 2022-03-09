@@ -141,15 +141,7 @@ std::string delete_control(std::istringstream& message
         application = apply_function(application, args
                         , ARGS_REGEX::COMMLINE
                         , 3 ,controls
-                        , [](const auto& x, const auto& y)
-                            {
-                                bool is_loged_in{x.account.get_from_list({y[0], y[1]}) 
-                                        != "unsuccessfull operation"};
-
-                                return is_loged_in ?
-                                    x.commline.remove_from_list_access({y[0], y[2], "0"})
-                                    : std::string{"failure"};
-                            });
+                        , [](const auto& x, const auto& y){return delete_a_line(x, y);});
     }
 	else if(application == "--todolist")
 	{

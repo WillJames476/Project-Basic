@@ -1,7 +1,5 @@
 #include "Commline_control.h"
 
-#include <iostream>
-
 Commline_control::Commline_control(const std::shared_ptr<Commline_model>& model)
     : model_ptr{model}
 {
