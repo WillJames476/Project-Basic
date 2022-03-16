@@ -8,6 +8,7 @@
 
 #include "../Operations/post_operations.h"
 #include "../Operations/delete_operations.h"
+#include "../Operations/get_operations.h"
 
 namespace ARGS_REGEX
 {
@@ -16,8 +17,8 @@ namespace ARGS_REGEX
     std::initializer_list<std::regex>
         ACCOUNT        {ALPHA_NOSPACE, ALPHA_NOSPACE}
         , COMMLINE     {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE}
-		, COMMLINE_PUT {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, BOOLEAN}
-		, TASK         {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE_S};
+	, COMMLINE_PUT {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, BOOLEAN}
+	, TASK         {ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE, ALPHA_NOSPACE_S};
 }
 
 std::vector<std::string> extract_args(std::istringstream& message)
@@ -39,22 +40,15 @@ std::string get_control(std::istringstream& message
 {
     std::string application{};
     message >> application;
-	auto args{extract_args(message)};
+    auto args{extract_args(message)};
 
     if(application == "--account")
-    {
-		application = apply_function(application, args
-									, ARGS_REGEX::ACCOUNT
-									, 2, view
-									, [&](const auto& x, const auto& y)
-										{
-											bool is_user_verified{control.account.get_from_list({y[0], y[1]})
-													!= "unsuccessfull operation"};
-
-											return is_user_verified ?
-													x.account.send_formatted(y[0])
-													: std::string{"failure"};
-										});
+      {
+	application = apply_function(application, args,
+				     ARGS_REGEX::ACCOUNT,
+				     2, view,
+				     [&](const auto& x, const auto& y)
+				     {return get_account_info(x, control, y);});
     }
     else if(application == "--commline")
     {
