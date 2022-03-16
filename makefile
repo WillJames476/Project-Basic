@@ -1,5 +1,7 @@
 CXX = g++
-CXXFLAGS = -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
+CXXFLAGS = -lpthread -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
+
+LDFLAGS = -pthread -o
 
 BIN = bin
 SRC = src
@@ -61,10 +63,7 @@ $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(T
 	$(CXX) $^ -o $@
 
 $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
-	$(CXX) $^ -o $@
-
-$(Tester_program): $(Tester_obj) $(Todolist_obj)
-	$(CXX) $^ -o $@
+	$(CXX) $^ $(LDFLAGS) $@
 
 $(Utils_obj): $(Utils)
 	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
