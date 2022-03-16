@@ -60,7 +60,7 @@ $(Clean):
 	rm -rf $(BIN)/* $(OBJ)/*
 
 $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj) $(Operations_obj)
-	$(CXX) $^ -o $@
+	$(CXX) $^ $(LDFLAGS) $@
 
 $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj)
 	$(CXX) $^ $(LDFLAGS) $@
