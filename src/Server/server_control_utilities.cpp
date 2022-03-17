@@ -34,9 +34,9 @@ std::vector<std::string> extract_args(std::istringstream& message)
     return to_return;
 }
 
-std::string get_control(std::istringstream& message
-					   , const View_agregate& view
-					   , const Control_agregate& control)
+std::string get_control(std::istringstream& message,
+			const View_agregate& view,
+			const Control_agregate& control)
 {
     std::string application{};
     message >> application;
@@ -49,28 +49,21 @@ std::string get_control(std::istringstream& message
 				     2, view,
 				     [&](const auto& x, const auto& y)
 				     {return get_account_info(x, control, y);});
-    }
+      }
     else if(application == "--commline")
-    {
-		application = apply_function(application, args
-									, ARGS_REGEX::ACCOUNT
-									, 2 , view
-									, [&](const auto& x, const auto& y)
-										{
-											bool is_user_verified{control.account.get_from_list({y[0], y[1]})
-													!= "unsuccessfull operation"};
-
-											return is_user_verified ?
-													x.commline.send_formatted(y[0])
-													: std::string{"failure"};
-										});
-    }
+      {
+	application = apply_function(application, args,
+				     ARGS_REGEX::ACCOUNT,
+				     2 , view,
+				     [&](const auto& x, const auto& y)
+				     {return get_commline_table(x, control,y);});
+      }
     else if(application == "--todolist")
-    {
-		application = apply_function(application, args
-									, ARGS_REGEX::ACCOUNT
-									, 2 , view
-									, [&](const auto& x, const auto& y)
+      {
+	application = apply_function(application, args,
+				     ARGS_REGEX::ACCOUNT,
+				     2 , view,
+				     [&](const auto& x, const auto& y)
 										{
 											bool is_user_verified{control.account.get_from_list({y[0], y[1]})
 													!= "unsuccessfull operation"};
@@ -92,26 +85,26 @@ std::string post_control(std::istringstream& message
     auto args{extract_args(message)};
 
     if(application == "--account")
-    {
-        application = apply_function(application, args
-                        , ARGS_REGEX::ACCOUNT
-                        , 2, controls 
-                        , [](const auto& x, const auto& y){return add_new_account(x, y);});
-    }
+      {
+        application = apply_function(application, args,
+				     ARGS_REGEX::ACCOUNT,
+				     2, controls ,
+				     [](const auto& x, const auto& y){return add_new_account(x, y);});
+      }
     else if(application == "--commline")
-    {
-        application = apply_function(application, args
-                        , ARGS_REGEX::COMMLINE
-                        , 3 ,controls
-                        , [](const auto& x, const auto& y){return add_new_commline(x, y);});
-    }
-	else if(application == "--todolist")
-	{
-		application = apply_function(application, args
-						, ARGS_REGEX::TASK
-						, 4, controls
-						, [](const auto& x, const auto& y){return add_new_task(x, y);});
-	}
+      {
+        application = apply_function(application, args,
+				     ARGS_REGEX::COMMLINE,
+				     3 ,controls,
+				     [](const auto& x, const auto& y){return add_new_commline(x, y);});
+      }
+    else if(application == "--todolist")
+      {
+	application = apply_function(application, args,
+				     ARGS_REGEX::TASK,
+				     4, controls,
+				     [](const auto& x, const auto& y){return add_new_task(x, y);});
+      }
 
     return application;
 }
@@ -188,11 +181,11 @@ void file_control(const std::string& mode
                 , File_agregate& file)
 {
     if(mode == "READ")
-    {
-        file.read_all();
-    }
+      {
+	file.read_all();
+      }
     else if(mode == "WRITE")
-    {
-        file.save_all();
-    }
+      {
+	file.save_all();
+      }
 }

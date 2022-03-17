@@ -35,3 +35,19 @@ std::string get_commline_table(const View_agregate& view,
   
   return string_to_return;
 }
+
+std::string get_todolist_list(const View_agregate& view,
+			     const Control_agregate& control,
+			     const std::vector<std::string>& fields)
+{
+  std::string string_to_return{"failure\n"};
+
+  bool is_login_verified{control.account.is_login_verified({fields[0], fields[1]})};
+
+  if(is_login_verified)
+    {
+      string_to_return = view.todolist.send_formatted(fields[0]);
+    }
+  
+  return string_to_return;
+}
