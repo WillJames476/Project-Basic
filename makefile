@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -lpthread -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -I -g
+CXXFLAGS = -lpthread -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -g -I
 
 LDFLAGS = -pthread -o
 
@@ -66,25 +66,25 @@ $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(T
 	$(CXX) $^ $(LDFLAGS) $@
 
 $(Utils_obj): $(Utils)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Server_obj): $(Server_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Client_obj): $(Client_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Tester_obj): $(Tester_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Account_obj): $(Account_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Commline_obj): $(Commline_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Todolist_obj): $(Todolist_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Operations_obj): $(Operations_files)
-	$(CXX) $(CXXFLAGS) -I $(HDR) -c $^ && $(move_obj)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
