@@ -34,7 +34,6 @@ Operations_obj = $(patsubst $(SRC)/Operations/%.cpp, $(OBJ)/%.o, $(Operations_fi
 
 Server_program = $(BIN)/server
 Client_program = $(BIN)/client
-Tester_program = $(BIN)/tester
 
 define programs
 	$(Server_program) \

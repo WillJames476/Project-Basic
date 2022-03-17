@@ -31,6 +31,9 @@
 # Applications on this repo
 * Client(executable as bin/client)
   - the client side application of the program
+  - communicates with the server
+    Operations are the following:
+    GET, DELETE, POST, PUT.
 
 * Server(executable as bin/server)
   - the server side application of the program
