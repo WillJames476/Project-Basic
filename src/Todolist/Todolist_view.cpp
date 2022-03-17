@@ -18,11 +18,11 @@ std::string Todolist_view::send_formatted(const std::string& account_name) const
 					% "task giver";
 
 	for(const auto& task : task_list)
-	{
-		to_return_string << boost::format("|%-20s%10s|\n")
-						% task.task_name_str
-						% task.task_giver_str;
-	}
+	  {
+	    to_return_string << boost::format("|%-20s%10s|\n")
+	      % task.task_name_str
+	      % task.task_giver_str;
+	  }
 
 	return to_return_string.str();
 }
