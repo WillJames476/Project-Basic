@@ -9,6 +9,7 @@
 #include "../Operations/post_operations.h"
 #include "../Operations/delete_operations.h"
 #include "../Operations/get_operations.h"
+#include "../Operations/put_operations.h"
 
 namespace ARGS_REGEX
 {
@@ -143,28 +144,20 @@ std::string delete_control(std::istringstream& message
 std::string put_control(std::istringstream& message
                         , const Control_agregate& controls)
 {
-    std::string application{};
-    message >> application;
-    auto args{extract_args(message)};
+  std::string application{};
+  message >> application;
+  auto args{extract_args(message)};
 
-    if(application == "--commline")
+  if(application == "--commline")
     {
-        application = apply_function(application, args
-                        , ARGS_REGEX::COMMLINE_PUT
-                        , 4, controls
-                        , [](const auto& x, const auto& y)
-                            {
-                                bool is_logged_in{x.account.get_from_list({y[0], y[1]})
-                                        != "unsuccessfull operation"}
-                                    , is_user_existing{x.account.is_user_existing(y[2])};
-
-                                return is_logged_in && is_user_existing ?
-                                    x.commline.modify_permission({y[0], y[2], y[3]}) 
-                                    : "fail";
-                            });
+      application = apply_function(application, args,
+				   ARGS_REGEX::COMMLINE_PUT,
+				   4, controls,
+				   [](const auto& x, const auto& y)
+				   {return change_commline_permission(x, y);});
     }
 
-    return application;
+  return application;
 }
 
 void file_control(const std::string& mode
