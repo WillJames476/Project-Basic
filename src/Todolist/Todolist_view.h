@@ -7,20 +7,23 @@
 #include <istream>
 
 #include "Todolist_model.h"
+#include "../Interfaces/View_interface.h"
 
-class Todolist_view
+class Todolist_view : public View_interface<Todolist_view>
 {
-    public:
-        Todolist_view(const std::shared_ptr<Todolist_model>& model);
+public:
 
-		std::string send_formatted(const std::string& account_name) const;
+  Todolist_view(const std::shared_ptr<Todolist_model>& model);
 
-		std::ostringstream send_as_stream() const;
+  std::string send_formatted(const std::string& account_name) const;
 
-		void read_from_stream(std::istream& to_read) const;
+  std::ostringstream send_as_stream() const;
 
-    private:
-        std::shared_ptr<Todolist_model> model_ptr;
+  void read_from_stream(std::istream& to_read) const;
+
+private:
+
+  std::shared_ptr<Todolist_model> model_ptr;
 };
 
 #endif

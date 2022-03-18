@@ -8,34 +8,34 @@
 template <typename T>
 class View_interface
 {
-	public:
-		
-		std::string view_formatted() const;
+public:
 
-		std::stringstream send_as_stream() const;
+  std::string view_formatted() const;
 
-		void read_from_stream(std::istream& to_read) const;
+  std::stringstream send_as_stream() const;
 
-	private:
+  void read_from_stream(std::istream& to_read) const;
+
+private:
 
 };
 
 template <typename T>
 std::string View_interface<T>::view_formatted() const
 {
-	return static_cast<T*>(this)->view_formatted();
+  return static_cast<T*>(this)->view_formatted();
 }
 
 template <typename T>
 std::stringstream View_interface<T>::send_as_stream() const
 {
-	return static_cast<T*>(this)->send_as_stream();
+  return static_cast<T*>(this)->send_as_stream();
 }
 
 template <typename T>
 void View_interface<T>::read_from_stream(std::istream& to_read) const
 {
-	static_cast<T*>(this)->read_from_stream(to_read);
+  static_cast<T*>(this)->read_from_stream(to_read);
 }
 
 #endif
