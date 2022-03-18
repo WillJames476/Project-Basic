@@ -13,7 +13,7 @@ std::string add_new_account(const Control_agregate& control,
   if(is_creation_verified)
     {
       control.commline.add_to_list({fields[0]});
-      control.todolist.add_to_list({fields[1]});
+      control.todolist.add_to_list({fields[0]});
       string_to_return = "operation done\n";
     }
 
