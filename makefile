@@ -7,8 +7,6 @@ BIN = bin
 SRC = src
 OBJ = obj
 HDR = includes
-Clean = clean
-CLIENT = client
 
 move_obj = mv *.o $(OBJ)
 
@@ -55,7 +53,7 @@ dist:
 move_obj:
 	$(shell mv *.o $(OBJ))
 
-$(Clean):
+clean:
 	rm -rf $(BIN)/* $(OBJ)/*
 
 $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj) $(Operations_obj)
