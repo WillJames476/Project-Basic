@@ -32,11 +32,11 @@ void Todolist_control::remove_from_list(const std::initializer_list<std::string>
 
 std::string Todolist_control::remove_from_list_task(const std::initializer_list<std::string>& fields) const
 {
-	auto extracted_strings_ptr{std::data(fields)};
+  auto extracted_strings_ptr{std::data(fields)};
 
-	model_ptr->remove_from_list_task(*(extracted_strings_ptr + 0)
-									, *(extracted_strings_ptr + 1)
-									, *(extracted_strings_ptr + 2));
+  model_ptr->remove_from_list_task(*(extracted_strings_ptr + 0),
+				   *(extracted_strings_ptr + 1),
+				   *(extracted_strings_ptr + 2));
 
-	return "done";
+  return "done";
 }
