@@ -1,8 +1,16 @@
 #include "Commline_model.h"
 
-void Commline_model::add_to_list(const std::string& account_name)
+bool Commline_model::add_to_list(const std::string& account_name)
 {
-    commlines.emplace(account_name, std::make_shared<Permission_table>(Permission_table{}));
+  if(commlines.find(account_name) == std::end(commlines))
+    {
+      commlines.emplace(account_name,
+			std::make_shared<Permission_table>(Permission_table{}));
+
+      return true;
+    }
+
+  return false;
 }
 
 void Commline_model::add_to_list_acess(const std::string& account_name
@@ -17,9 +25,15 @@ void Commline_model::add_to_list_acess(const std::string& account_name
     }
 }
 
-void Commline_model::remove_from_list(const std::string& account_name)
+bool Commline_model::remove_from_list(const std::string& account_name)
 {
-    commlines.erase(account_name);
+  if(commlines.find(account_name) != std::end(commlines))
+    {
+      commlines.erase(account_name);
+      return true;
+    }
+
+  return false;
 }
 
 void Commline_model::remove_from_list_acess(const std::string& account_name

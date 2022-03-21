@@ -12,10 +12,15 @@ std::string delete_account(const Control_agregate& controls,
 
   if(is_user_loged_in)
     {
-      controls.account.remove_from_list({fields[0], fields[1]});
-      controls.commline.remove_from_list({fields[0]});
-      controls.todolist.remove_from_list({fields[0]});
-      string_to_return = "done\n";
+      bool is_deletion_succes{
+	controls.account.remove_from_list({fields[0], fields[1]})
+	&& controls.commline.remove_from_list({fields[0]})};
+
+      if(is_deletion_succes)
+	{
+	  controls.todolist.remove_from_list({fields[0]});
+	  string_to_return = "done\n";
+	}
     }
 
   return string_to_return;

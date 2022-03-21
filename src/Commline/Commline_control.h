@@ -3,26 +3,30 @@
 
 #include <memory>
 #include "Commline_model.h"
+#include "../Interfaces/Control_interface.h"
 
-class Commline_control
+class Commline_control : public Control_interface<Commline_control>
 {
-    public:
-        Commline_control(const std::shared_ptr<Commline_model>& model);
+public:
 
-        void add_to_list(const std::initializer_list<std::string>& fields) const;
-        
-        std::string add_to_list_access(const std::initializer_list<std::string>& fields) const;
+  Commline_control(const std::shared_ptr<Commline_model>& model);
 
-        void remove_from_list(const std::initializer_list<std::string>& fields) const;
+  bool add_to_list(const std::initializer_list<std::string>& fields) const;
 
-        std::string remove_from_list_access(const std::initializer_list<std::string>& fields) const;
+  std::string add_to_list_access(const std::initializer_list<std::string>& fields) const;
 
-        std::string modify_permission(const std::initializer_list<std::string>& fields) const;
+  bool remove_from_list(const std::initializer_list<std::string>& fields) const;
 
-		bool is_user_permitted(const std::initializer_list<std::string>& fields) const;
-       
-    private:
-        std::shared_ptr<Commline_model> model_ptr;
+  std::string remove_from_list_access(const std::initializer_list<std::string>& fields) const;
+
+  std::string modify_permission(const std::initializer_list<std::string>& fields) const;
+
+  bool is_user_permitted(const std::initializer_list<std::string>& fields) const;
+
+private:
+
+  std::shared_ptr<Commline_model> model_ptr;
+
 };
 
 #endif
