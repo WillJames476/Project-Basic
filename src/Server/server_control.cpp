@@ -7,41 +7,35 @@
 #include "file_agregates.h"
 #include "server_control_utilities.h"
 
-std::string server_control(const std::string& message)
+std::string server_control(const std::string& message,
+			   const Control_agregate& control,
+			   const View_agregate& view)
 {
-    Model_agregate models     {};
-    Control_agregate controls {models};
-	View_agregate view        {models};
-    File_agregate files       {models};
+  std::istringstream method_extract(message);
+  std::string method    {};
+  std::string to_return {message};
+  method_extract >> method;
 
-    file_control("READ", files);
-
-    std::istringstream method_extract(message);
-    std::string method{}, to_return{message};
-    method_extract >> method;
-
-    if(method == "GET")
+  if(method == "GET")
     {
-        to_return = get_control(method_extract, view, controls);
+      to_return = get_control(method_extract, view, control);
     }
-    else if(method == "POST")
+  else if(method == "POST")
     {
-        to_return = post_control(method_extract, controls);
+      to_return = post_control(method_extract, control);
     }
-    else if(method == "DELETE")
+  else if(method == "DELETE")
     {
-        to_return = delete_control(method_extract, controls);
+      to_return = delete_control(method_extract, control);
     }
-    else if(method == "PUT")
+  else if(method == "PUT")
     {
-        to_return = put_control(method_extract,controls);
+      to_return = put_control(method_extract, control);
     }
-	else if(method == "END")
-	{
-		to_return = "END";
-	}
+  else if(method == "END")
+    {
+      to_return = "END";
+    }
 
-    file_control("WRITE", files);
-
-    return to_return;
+  return to_return;
 }

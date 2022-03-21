@@ -12,14 +12,14 @@ File_agregate::File_agregate(const Model_agregate& models)
 
 void File_agregate::save_all()
 {
-    account.save_file();
-    commline.save_file();
-    todolist.save_file();
+  account.save_file();
+  commline.save_file();
+  todolist.save_file();
 }
 
 void File_agregate::read_all()
 {
-    account.read_file();
-    commline.read_file();
-    todolist.read_file();
+  account.read_file();
+  commline.read_file();
+  todolist.read_file();
 }
