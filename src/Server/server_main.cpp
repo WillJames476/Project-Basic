@@ -21,7 +21,8 @@ void communication_handler(boost::asio::io_context& io_context,
 
 void execute_server(char** argv);
 
-int main(int32_t argc, char** argv)
+int main(int32_t argc,
+	 char** argv)
 {
   std::ios_base::sync_with_stdio(false);
 

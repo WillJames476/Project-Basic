@@ -12,7 +12,7 @@ public:
 
   bool remove_from_list(const std::initializer_list<std::string>& fields) const;
 
-  std::string get_item_from_list(const std::initializer_list<std::string>& fields) const;
+  std::string get_from_list(const std::initializer_list<std::string>& fields) const;
 
 private:
 

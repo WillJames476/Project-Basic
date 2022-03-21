@@ -5,24 +5,28 @@
 #include <string>
 #include <array>
 #include "account_model.h"
+#include "../Interfaces/Control_interface.h"
 
-class Account_control
+class Account_control : public Control_interface<Account_control>
 {
-    public:
-        Account_control(const std::shared_ptr<Account_model>& model);
+public:
 
-        std::string add_to_list(const std::initializer_list<std::string>& fields) const;
+  Account_control(const std::shared_ptr<Account_model>& model);
 
-        std::string remove_from_list(const std::initializer_list<std::string>& fields) const;
+  bool add_to_list(const std::initializer_list<std::string>& fields) const;
 
-        std::string get_from_list(const std::initializer_list<std::string>& fields) const;
+  bool remove_from_list(const std::initializer_list<std::string>& fields) const;
 
-        bool is_user_existing(const std::string& username) const;
+  std::string get_from_list(const std::initializer_list<std::string>& fields) const;
 
-		bool is_login_verified(const std::array<std::string, 2>& fields) const;
+  bool is_user_existing(const std::string& username) const;
 
-    private:
-        std::shared_ptr<Account_model>model;
+  bool is_login_verified(const std::array<std::string, 2>& fields) const;
+
+private:
+
+  std::shared_ptr<Account_model>model;
+  
 };
 
 #endif

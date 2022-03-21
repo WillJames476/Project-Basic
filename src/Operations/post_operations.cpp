@@ -7,8 +7,7 @@ std::string add_new_account(const Control_agregate& control,
 			    const std::vector<std::string>& fields)
 {
   std::string string_to_return {"failure\n"};
-  bool is_creation_verified    {control.account.add_to_list({fields[0], fields[1]})
-    != "unsuccessfull operation"};
+  bool is_creation_verified    {control.account.add_to_list({fields[0], fields[1]})};
 
   if(is_creation_verified)
     {
