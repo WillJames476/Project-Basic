@@ -15,13 +15,13 @@ public:
 
   bool add_to_list(const std::string& name);
 
-  void add_to_list_acess(const std::string& name,
+  bool add_to_list_acess(const std::string& name,
 			 const std::string& to_acess,
 			 const bool permission);
 
   bool remove_from_list(const std::string& name);
 
-  void remove_from_list_acess(const std::string& name,
+  bool remove_from_list_acess(const std::string& name,
 			      const std::string& to_acess);
 
   bool is_permitted(const std::string& acessor,

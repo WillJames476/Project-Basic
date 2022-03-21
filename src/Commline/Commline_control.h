@@ -13,11 +13,11 @@ public:
 
   bool add_to_list(const std::initializer_list<std::string>& fields) const;
 
-  std::string add_to_list_access(const std::initializer_list<std::string>& fields) const;
+  bool add_to_list_access(const std::initializer_list<std::string>& fields) const;
 
   bool remove_from_list(const std::initializer_list<std::string>& fields) const;
 
-  std::string remove_from_list_access(const std::initializer_list<std::string>& fields) const;
+  bool remove_from_list_access(const std::initializer_list<std::string>& fields) const;
 
   std::string modify_permission(const std::initializer_list<std::string>& fields) const;
 

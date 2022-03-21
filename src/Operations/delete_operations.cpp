@@ -34,8 +34,12 @@ std::string delete_a_line(const Control_agregate& controls,
 
   if(is_user_loged_in)
     {
-      controls.commline.remove_from_list_access({fields[0], fields[2]});
-      string_to_return = "done\n";
+      bool is_line_deleted {controls.commline.remove_from_list_access({fields[0], fields[2]})};
+
+      if(is_line_deleted)
+	{
+	  string_to_return = "done\n";
+	}
     }
 
   return string_to_return;
