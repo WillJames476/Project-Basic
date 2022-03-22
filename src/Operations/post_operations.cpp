@@ -11,11 +11,11 @@ std::string add_new_account(const Control_agregate& control,
 
   if(is_creation_verified)
     {
-      bool is_entries_created{control.commline.add_to_list({fields[0]})};
+      bool is_entries_created{control.commline.add_to_list({fields[0]})
+	&& control.todolist.add_to_list({fields[0]})};
 
       if(is_entries_created)
 	{
-	  control.todolist.add_to_list({fields[0]});
 	  string_to_return = "operation done\n";
 	}
     }
@@ -55,8 +55,12 @@ std::string add_new_task(const Control_agregate& control,
       bool is_user_permitted{control.commline.is_user_permitted({fields[0], fields[2]})};
       if(is_user_permitted)
 	{
-	  control.todolist.add_to_list_task({fields[2], fields[0], fields[3]});
-	  string_to_return = "operation done\n";
+	  bool is_task_added {control.todolist.add_to_list_task({fields[2], fields[0], fields[3]})};
+
+	  if(is_task_added)
+	    {
+	      string_to_return = "operation done\n";
+	    }
 	}
     }
 

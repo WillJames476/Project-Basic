@@ -14,11 +14,11 @@ std::string delete_account(const Control_agregate& controls,
     {
       bool is_deletion_succes{
 	controls.account.remove_from_list({fields[0], fields[1]})
-	&& controls.commline.remove_from_list({fields[0]})};
+	&& controls.commline.remove_from_list({fields[0]})
+	&& controls.todolist.remove_from_list({fields[0]})};
 
       if(is_deletion_succes)
 	{
-	  controls.todolist.remove_from_list({fields[0]});
 	  string_to_return = "done\n";
 	}
     }
@@ -54,8 +54,12 @@ std::string delete_a_task(const Control_agregate& control,
 
   if(is_user_loged_in)
     {
-      control.todolist.remove_from_list_task({fields[0], fields[3], fields[2]});
-      string_to_return = "done\n";
+      bool is_task_deleted {control.todolist.remove_from_list_task({fields[0], fields[3], fields[2]})};
+
+      if(is_task_deleted)
+	{
+	  string_to_return = "done\n";
+	}
     }
     
   return string_to_return;

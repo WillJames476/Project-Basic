@@ -2,12 +2,19 @@
 #include "Todolist_model.h"
 #include <iostream>
 
-void Todolist_model::add_to_list(const std::string& account_name)
+bool Todolist_model::add_to_list(const std::string& account_name)
 {
-  tasks.emplace(std::make_pair(account_name, std::vector<Task>{}));
+
+  if(tasks.find(account_name) == std::end(tasks))
+    {
+      tasks.emplace(std::make_pair(account_name, std::vector<Task>{}));
+      return true;
+    }
+
+  return false;
 }
 
-void Todolist_model::add_to_list_task(const std::string& account_target,
+bool Todolist_model::add_to_list_task(const std::string& account_target,
 				      const std::string& account_source,
 				      const std::string& task_name)
 {
@@ -16,10 +23,25 @@ void Todolist_model::add_to_list_task(const std::string& account_target,
   if(target_location != std::end(tasks))
     {
       target_location->second.push_back(Task{task_name, account_source});
+
+      return true;
     }
+
+  return false;
 }
 
-void Todolist_model::remove_from_list_task(const std::string& account_target,
+bool Todolist_model::remove_from_list(const std::string& account_name)
+{
+  if(tasks.find(account_name) != std::end(tasks))
+    {
+      tasks.erase(account_name);
+      return true;
+    }
+
+  return false;
+}
+
+bool Todolist_model::remove_from_list_task(const std::string& account_target,
 					   const std::string& task_name,
 					   const std::string& account_source)
 {
@@ -38,12 +60,10 @@ void Todolist_model::remove_from_list_task(const std::string& account_target,
 
 			  return is_account_same && is_task_name_same;
 			}));
+      return true;
     }
-}
 
-void Todolist_model::remove_from_list(const std::string& account_name)
-{
-  tasks.erase(account_name);
+  return false;
 }
 
 std::vector<Task> Todolist_model::get_item_from_list(const std::string& account_name) const
