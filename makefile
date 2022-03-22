@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -lpthread -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -g -I
 
-LDFLAGS = -pthread -o
+LDFLAGS = -lpthread -o
 
 BIN = bin
 SRC = src
