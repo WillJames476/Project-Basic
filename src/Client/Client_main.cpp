@@ -3,24 +3,28 @@
 #include <string>
 #include <cstdlib>
 #include <cstdint>
+#include <array>
 
 #include <boost/asio.hpp>
+#include <input_output/io.h>
+
 #include "../includes/server_utilities.h"
 
-std::string argv_flatener(int argc,
-			  char** argv);
+const std::string APPLICATION {"client"};
 
-void execute_client(int32_t argc,
-		    char** argv);
+void execute_client(char** argv);
+
+void client_runtime(boost::asio::ip::tcp::socket& socket,
+		    boost::system::error_code& error_code);
 
 int main(int32_t argc,
 	 char** argv)
 {
   std::ios_base::sync_with_stdio(false);
 
-  if(argc > 2)
+  if(argc == 3)
     {
-      execute_client(argc, argv);
+      execute_client(argv);
     }
   else
     {
@@ -31,8 +35,7 @@ int main(int32_t argc,
     return EXIT_SUCCESS;
 }
 
-void execute_client(int32_t argc,
-		    char** argv)
+void execute_client(char** argv)
 {
   using namespace boost::asio;
   std::ios_base::sync_with_stdio(false);
@@ -40,17 +43,15 @@ void execute_client(int32_t argc,
   try
     {
       const std::string IP_ADDR {*(argv + 1)};
+      const int32_t     PORT{std::stoi(*(argv + 2))};
       std::string       message {};
 
       boost::system::error_code error_code {};
       io_context                io_context {};
 
       ip::tcp::socket socket{io_context, ip::tcp::v4()};
-      socket.connect(make_endpoint(IP_ADDR, 80));
-      send_message(socket, error_code, argv_flatener(argc, argv));
-      message = get_message(socket, error_code);
-      
-      std::cout << message;
+      socket.connect(make_endpoint(IP_ADDR, PORT));
+      client_runtime(socket, error_code);
       socket.close();
     }
   catch(std::exception& excpt)
@@ -59,16 +60,16 @@ void execute_client(int32_t argc,
     }
 }
 
-std::string argv_flatener(int32_t argc,
-			  char** argv)
+void client_runtime(boost::asio::ip::tcp::socket& socket,
+		    boost::system::error_code& error_code)
 {
-  std::vector<std::string>arguments(argv + 2, argv + argc);
-  std::string flattened_args{};
+  std::ios_base::sync_with_stdio(false);
+  std::string message{};
 
-  for(const auto& args : arguments)
+  while(message != "END")
     {
-      flattened_args += args + " ";
+      message = get_string("\nClient runtime> ", REGEX_PREDICATES::COMMAND);
+      send_message(socket, error_code,message, APPLICATION);
+      std::cout << get_message(socket, error_code, APPLICATION);
     }
-
-  return flattened_args;
 }

@@ -4,10 +4,10 @@
 #include <sstream>
 #include <vector>
 
-#include "io.h"
-#include "control_agregate.h"
+#include <input_output/io.h>
+#include <server/control_agregate.h>
 #include "file_agregates.h"
-#include "view_agregate.h"
+#include <server/view_agregate.h>
 
 std::string get_control(std::istringstream& message
                 , const View_agregate& view

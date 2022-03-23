@@ -2,16 +2,19 @@
 #include <string>
 #include <cstdlib>
 #include <cstdint>
+#include <thread>
 
 #include <boost/asio.hpp>
+#include <input_output/io.h>
+#include <server/control_agregate.h>
+#include <server/view_agregate.h>
 
-#include "../includes/io.h"
 #include "../includes/server_utilities.h"
 #include "server_control.h"
-#include "control_agregate.h"
-#include "view_agregate.h"
 #include "file_agregates.h"
 #include "model_agregate.h"
+
+const std::string APPLICATION{"Server"};
 
 void communication_handler(boost::asio::io_context& io_context,
 			   boost::system::error_code& err_codes,
@@ -80,19 +83,17 @@ void communication_handler(boost::asio::io_context& io_context,
 {
   std::ios_base::sync_with_stdio(false);
   std::string received{};
-
+  
   while(true)
     {
       boost::asio::ip::tcp::socket client{io_context};
       acceptor.accept(client);
-
-      received = get_message(client, err_codes);
+      received = get_message(client, err_codes, APPLICATION);
       std::cout << received << '\n';
       
       received = server_control(received, control,view);
-      send_message(client, err_codes, received);
-      client.close();
-
+      send_message(client, err_codes, received, APPLICATION);
+      
       if(received == "END")
 	{
 	  break;

@@ -2,8 +2,8 @@
 #include <sstream>
 
 #include "model_agregate.h"
-#include "control_agregate.h"
-#include "view_agregate.h"
+#include <server/control_agregate.h>
+#include <server/view_agregate.h>
 #include "file_agregates.h"
 #include "server_control_utilities.h"
 

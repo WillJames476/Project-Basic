@@ -1,10 +1,9 @@
 #include <sstream>
 #include <vector>
 
-#include "control_agregate.h"
 #include "file_agregates.h"
 #include "server_control_utilities.h"
-#include "view_agregate.h"
+#include <server/view_agregate.h>
 
 #include "../Operations/post_operations.h"
 #include "../Operations/delete_operations.h"
