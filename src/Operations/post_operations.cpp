@@ -2,11 +2,12 @@
 #include <vector>
 
 #include "control_agregate.h"
+#include "io.h"
 
 std::string add_new_account(const Control_agregate& control,
 			    const std::vector<std::string>& fields)
-{
-  std::string string_to_return {"failure\n"};
+{ 
+  std::string string_to_return {FEEDBACK_COLORS::OPERATION_FAILURE};
   bool is_creation_verified    {control.account.add_to_list({fields[0], fields[1]})};
 
   if(is_creation_verified)
@@ -16,7 +17,7 @@ std::string add_new_account(const Control_agregate& control,
 
       if(is_entries_created)
 	{
-	  string_to_return = "operation done\n";
+	  string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	}
     }
 
@@ -26,7 +27,7 @@ std::string add_new_account(const Control_agregate& control,
 std::string add_new_commline(const Control_agregate& control,
 			     const std::vector<std::string>& fields)
 {
-  std::string string_to_return {"failure\n"};
+  std::string string_to_return {FEEDBACK_COLORS::OPERATION_FAILURE};
   bool is_login_verified       {control.account.is_login_verified({fields[0], fields[1]})};
   bool is_target_existing      {control.account.is_user_existing(fields[2])};
 
@@ -35,7 +36,7 @@ std::string add_new_commline(const Control_agregate& control,
       bool is_line_added {control.commline.add_to_list_access({fields[0], fields[2], "0"})};
       if(is_line_added)
 	{
-	  string_to_return = "operation done\n";
+	  string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	}
     }
 
@@ -45,7 +46,7 @@ std::string add_new_commline(const Control_agregate& control,
 std::string add_new_task(const Control_agregate& control,
 			 const std::vector<std::string>& fields)
 {
-  std::string string_to_return{"failure\n"};
+  std::string string_to_return{FEEDBACK_COLORS::OPERATION_FAILURE};
 
   bool is_login_verified {control.account.is_login_verified({fields[0], fields[1]})};
   bool is_target_existent {control.account.is_user_existing(fields[2])};
@@ -59,7 +60,7 @@ std::string add_new_task(const Control_agregate& control,
 
 	  if(is_task_added)
 	    {
-	      string_to_return = "operation done\n";
+	      string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	    }
 	}
     }

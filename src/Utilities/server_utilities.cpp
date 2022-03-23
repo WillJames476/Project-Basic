@@ -5,17 +5,21 @@
 
 #include "../includes/io.h"
 
-void error_check(const boost::system::error_code& error_codes)
+void error_check(const boost::system::error_code& error_codes,
+		 const std::string& location_function,
+		 const std::string& location_application)
 {
     using namespace FEEDBACK_COLORS;
 
     if(error_codes)
     {
         std::cout.sync_with_stdio(false);
-        std::cout << boost::format("%s%s%s\n")
-            % BAD
-            % error_codes.message()
-            % RESET;
+        std::cout << boost::format("%s%s-%s: %s%s\n")
+	  % BAD
+	  % location_application
+	  % location_function
+	  % error_codes.message()
+	  % RESET;
     }
 }
 
@@ -29,8 +33,9 @@ boost::asio::ip::tcp::endpoint make_endpoint(const std::string& ip_addr
     return endpoint;
 }
 
-std::string get_message(boost::asio::ip::tcp::socket& socket
-                        , boost::system::error_code& error_codes)
+std::string get_message(boost::asio::ip::tcp::socket& socket,
+			boost::system::error_code& error_codes,
+			const std::string& location)
 {
     socket.wait(socket.wait_read);
     size_t bytes{socket.available()};
@@ -40,14 +45,15 @@ std::string get_message(boost::asio::ip::tcp::socket& socket
         , boost::asio::buffer(buffer, bytes)
         , error_codes);
 
-    error_check(error_codes);
+    error_check(error_codes, location, "read socket");
 
     return std::string{buffer.begin(), buffer.end()};
 }
 
-void send_message(boost::asio::ip::tcp::socket& socket
-                , boost::system::error_code& error_codes
-                , const std::string& message)
+void send_message(boost::asio::ip::tcp::socket& socket,
+		  boost::system::error_code& error_codes,
+		  const std::string& message,
+		  const std::string& location)
 {
     socket.wait(socket.wait_write);
 
@@ -55,5 +61,5 @@ void send_message(boost::asio::ip::tcp::socket& socket
         , boost::asio::buffer(message, message.size())
         , error_codes);
     
-    error_check(error_codes);
+    error_check(error_codes, location, "write socket");
 }
