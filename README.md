@@ -6,7 +6,6 @@
 
 # Prerequisites
 * g++ 11.2 and up to compile the source code
-* groff for documentation viewing
 * make to build the project
 * boost c++ library
 
@@ -15,6 +14,7 @@
 1. Boost c++ library
    - boost::asio
    - boost::format
+   - boost::gregorian
 
   * the Boost c++ library have their own license. Please see:
     Boost/LICENSE, https://github.com/boostorg/boost.git or www.boost.org
@@ -45,7 +45,7 @@
 
 	2. Communication line application:
 		- manages all the permissions and accesses the user can have:
-		can grant, and can add a user to access.
+		can grant, revoke, delete, and can add a user to access.
 
 	3. Todolist application:
 		- manages all the task given to the user by 
