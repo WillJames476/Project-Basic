@@ -9,16 +9,14 @@
 
 struct Control_agregate
 {
-    Account_control account;
-    Commline_control commline;
-    Todolist_control todolist;
+public:
 
-    Control_agregate(const Model_agregate& models)
-        : account{models.account}
-        , commline{models.commline}
-        , todolist{models.todolist}
-    {
-    }   
+  Control_agregate(const Model_agregate& models);   
+  
+  Account_control account;
+  Commline_control commline;
+  Todolist_control todolist;
+  
 };
 
 #endif

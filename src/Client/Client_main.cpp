@@ -8,7 +8,7 @@
 #include <boost/asio.hpp>
 #include <input_output/io.h>
 
-#include "../includes/server_utilities.h"
+#include <server/server_utilities.h>
 
 const std::string APPLICATION {"client"};
 

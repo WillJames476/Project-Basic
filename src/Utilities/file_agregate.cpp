@@ -1,12 +1,12 @@
 #include <sstream>
 #include <vector>
 
-#include "../includes/file_agregates.h"
+#include <server/file_agregates.h>
 
 File_agregate::File_agregate(const Model_agregate& models)
-        : account{Generic_file<Account_view>{models.account, "data/accounts.txt"}}
-        , commline{Generic_file<Commline_view>{models.commline, "data/commline.txt"}}
-        , todolist{Generic_file<Todolist_view>{models.todolist, "data/todolist.txt"}}
+        : account{Generic_file<Account_view>{models.account, "data/accounts.txt"}},
+	  commline{Generic_file<Commline_view>{models.commline, "data/commline.txt"}},
+	  todolist{Generic_file<Todolist_view>{models.todolist, "data/todolist.txt"}}
 {
 }
 

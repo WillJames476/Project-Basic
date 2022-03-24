@@ -8,11 +8,12 @@
 #include <input_output/io.h>
 #include <server/control_agregate.h>
 #include <server/view_agregate.h>
+#include <server/model_agregate.h>
+#include <server/file_agregates.h>
 
-#include "../includes/server_utilities.h"
+#include <server/server_utilities.h>
 #include "server_control.h"
-#include "file_agregates.h"
-#include "model_agregate.h"
+
 
 const std::string APPLICATION{"Server"};
 
