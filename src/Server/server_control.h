@@ -2,8 +2,8 @@
 #define SERVER_CONTROL_H
 
 #include <string>
-#include <server/control_agregate.h>
-#include <server/view_agregate.h>
+#include <application_agregates/control_agregate.h>
+#include <application_agregates/view_agregate.h>
 
 std::string server_control(const std::string& message,
 			   const Control_agregate& control,

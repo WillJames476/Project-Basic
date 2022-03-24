@@ -1,7 +1,6 @@
 #include <sstream>
 #include <vector>
-
-#include <server/file_agregates.h>
+#include <application_agregates/file_agregates.h>
 
 File_agregate::File_agregate(const Model_agregate& models)
         : account{Generic_file<Account_view>{models.account, "data/accounts.txt"}},

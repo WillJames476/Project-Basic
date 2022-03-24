@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include <server/control_agregate.h>
-#include <server/view_agregate.h>
+#include <application_agregates/control_agregate.h>
+#include <application_agregates/view_agregate.h>
 
 std::string get_account_info(const View_agregate& view,
 			     const Control_agregate& control,

@@ -5,9 +5,9 @@
 #include <vector>
 
 #include <input_output/io.h>
-#include <server/control_agregate.h>
-#include <server/file_agregates.h>
-#include <server/view_agregate.h>
+#include <application_agregates/control_agregate.h>
+#include <application_agregates/file_agregates.h>
+#include <application_agregates/view_agregate.h>
 
 std::string get_control(std::istringstream& message,
 			const View_agregate& view,

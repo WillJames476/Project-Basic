@@ -1,10 +1,10 @@
 #include <string>
 #include <sstream>
 
-#include <server/model_agregate.h>
-#include <server/control_agregate.h>
-#include <server/view_agregate.h>
-#include <server/file_agregates.h>
+#include <application_agregates/model_agregate.h>
+#include <application_agregates/control_agregate.h>
+#include <application_agregates/view_agregate.h>
+#include <application_agregates/file_agregates.h>
 #include "server_control_utilities.h"
 
 std::string server_control(const std::string& message,

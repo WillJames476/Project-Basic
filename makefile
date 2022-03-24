@@ -8,12 +8,9 @@ SRCDIR = src
 OBJDIR = obj
 HDR = inc
 
-Util_input_output_dir = $(SRCDIR)/Server/input_output
-
 move_obj = mv *.o $(OBJDIR)
 
 Utils = $(wildcard $(SRCDIR)/Utilities/*.cpp)
-Util_input_output_file = $(wildcard $(Util_input_output_dir)*.cpp)
 
 Client_files = $(wildcard $(SRCDIR)/Client/*.cpp)
 Server_files = $(wildcard $(SRCDIR)/Server/*.cpp)
@@ -25,8 +22,6 @@ Todolist_files = $(wildcard $(SRCDIR)/Todolist/*.cpp)
 Operations_files = $(wildcard $(SRCDIR)/Operations/*.cpp)
 
 Utils_obj = $(patsubst $(SRCDIR)/Utilities/%.cpp, $(OBJDIR)/%.o, $(Utils))
-Util_input_output_obj = $(patsubst $(Utile_input_output_dir)/%.cpp, $(OBJDIR)/%.o, $(Utile_input_output_file))
-
 Server_obj = $(patsubst $(SRCDIR)/Server/%.cpp, $(OBJDIR)/%.o, $(Server_files))
 Client_obj = $(patsubst $(SRCDIR)/Client/%.cpp, $(OBJDIR)/%.o, $(Client_files))
 Tester_obj = $(patsubst $(SRCDIR)/Tester/%.cpp, $(OBJDIR)/%.o, $(Tester_files))

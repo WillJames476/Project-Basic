@@ -1,5 +1,5 @@
-#include <server/control_agregate.h>
-#include <server/model_agregate.h>
+#include <application_agregates/control_agregate.h>
+#include <application_agregates/model_agregate.h>
 
 #include "../src/Account/account_control.h"
 #include "../src/Commline/Commline_control.h"
