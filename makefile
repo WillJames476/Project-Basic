@@ -3,35 +3,41 @@ CXXFLAGS = -lpthread -pipe -Wall -Werror -Wextra -Wpedantic -O3 -std=c++20 -g -I
 
 LDFLAGS = -lpthread -o
 
-BIN = bin
-SRC = src
-OBJ = obj
-HDR = includes
+BINDIR = bin
+SRCDIR = src
+OBJDIR = obj
+HDR = inc
 
-move_obj = mv *.o $(OBJ)
+Util_input_output_dir = $(SRCDIR)/Server/input_output
 
-Utils = $(wildcard $(SRC)/Utilities/*.cpp)
-Client_files = $(wildcard $(SRC)/Client/*.cpp)
-Server_files = $(wildcard $(SRC)/Server/*.cpp)
-Tester_files = $(wildcard $(SRC)/Tester/*.cpp)
+move_obj = mv *.o $(OBJDIR)
 
-Account_files = $(wildcard $(SRC)/Account/*.cpp)
-Commline_files = $(wildcard $(SRC)/Commline/*.cpp)
-Todolist_files = $(wildcard $(SRC)/Todolist/*.cpp)
-Operations_files = $(wildcard $(SRC)/Operations/*.cpp)
+Utils = $(wildcard $(SRCDIR)/Utilities/*.cpp)
+Util_input_output_file = $(wildcard $(Util_input_output_dir)*.cpp)
 
-Utils_obj = $(patsubst $(SRC)/Utilities/%.cpp, $(OBJ)/%.o, $(Utils))
-Server_obj = $(patsubst $(SRC)/Server/%.cpp, $(OBJ)/%.o, $(Server_files))
-Client_obj = $(patsubst $(SRC)/Client/%.cpp, $(OBJ)/%.o, $(Client_files))
-Tester_obj = $(patsubst $(SRC)/Tester/%.cpp, $(OBJ)/%.o, $(Tester_files))
+Client_files = $(wildcard $(SRCDIR)/Client/*.cpp)
+Server_files = $(wildcard $(SRCDIR)/Server/*.cpp)
+Tester_files = $(wildcard $(SRCDIR)/Tester/*.cpp)
 
-Account_obj = $(patsubst $(SRC)/Account/%.cpp, $(OBJ)/%.o, $(Account_files))
-Commline_obj = $(patsubst $(SRC)/Commline/%.cpp, $(OBJ)/%.o, $(Commline_files))
-Todolist_obj = $(patsubst $(SRC)/Todolist/%.cpp, $(OBJ)/%.o, $(Todolist_files))
-Operations_obj = $(patsubst $(SRC)/Operations/%.cpp, $(OBJ)/%.o, $(Operations_files))
+Account_files = $(wildcard $(SRCDIR)/Account/*.cpp)
+Commline_files = $(wildcard $(SRCDIR)/Commline/*.cpp)
+Todolist_files = $(wildcard $(SRCDIR)/Todolist/*.cpp)
+Operations_files = $(wildcard $(SRCDIR)/Operations/*.cpp)
 
-Server_program = $(BIN)/server
-Client_program = $(BIN)/client
+Utils_obj = $(patsubst $(SRCDIR)/Utilities/%.cpp, $(OBJDIR)/%.o, $(Utils))
+Util_input_output_obj = $(patsubst $(Utile_input_output_dir)/%.cpp, $(OBJDIR)/%.o, $(Utile_input_output_file))
+
+Server_obj = $(patsubst $(SRCDIR)/Server/%.cpp, $(OBJDIR)/%.o, $(Server_files))
+Client_obj = $(patsubst $(SRCDIR)/Client/%.cpp, $(OBJDIR)/%.o, $(Client_files))
+Tester_obj = $(patsubst $(SRCDIR)/Tester/%.cpp, $(OBJDIR)/%.o, $(Tester_files))
+
+Account_obj = $(patsubst $(SRCDIR)/Account/%.cpp, $(OBJDIR)/%.o, $(Account_files))
+Commline_obj = $(patsubst $(SRCDIR)/Commline/%.cpp, $(OBJDIR)/%.o, $(Commline_files))
+Todolist_obj = $(patsubst $(SRCDIR)/Todolist/%.cpp, $(OBJDIR)/%.o, $(Todolist_files))
+Operations_obj = $(patsubst $(SRCDIR)/Operations/%.cpp, $(OBJDIR)/%.o, $(Operations_files))
+
+Server_program = $(BINDIR)/server
+Client_program = $(BINDIR)/client
 
 define programs
 	$(Server_program) \
@@ -42,19 +48,19 @@ all:
 	make $(programs)
 
 install:
-	mkdir $(BIN) $(OBJ) data
+	mkdir $(BINDIR) $(OBJDIR) data
 
 uninstall:
-	rm -rf $(SRC) && $(Clean)
+	rm -rf $(SRCDIR) && $(Clean)
 
 dist:
 	$(shell tar -zcf Project-Basic.tar.gz *)
 
 move_obj:
-	$(shell mv *.o $(OBJ))
+	$(shell mv *.o $(OBJDIR))
 
 clean:
-	rm -rf $(BIN)/* $(OBJ)/*
+	rm -rf $(BINDIR)/* $(OBJDIR)/*
 
 $(Server_program): $(Server_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(Todolist_obj) $(Operations_obj)
 	$(CXX) $^ $(LDFLAGS) $@
@@ -63,6 +69,9 @@ $(Client_program): $(Client_obj) $(Utils_obj) $(Account_obj) $(Commline_obj) $(T
 	$(CXX) $^ $(LDFLAGS) $@
 
 $(Utils_obj): $(Utils)
+	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
+
+$(Util_input_ouput_obj): $(Util_input_output_file)
 	$(CXX) $(CXXFLAGS) $(HDR) -c $^ && $(move_obj)
 
 $(Server_obj): $(Server_files)
