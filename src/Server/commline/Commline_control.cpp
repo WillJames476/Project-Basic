@@ -5,52 +5,58 @@ Commline_control::Commline_control(const std::shared_ptr<Commline_model>& model)
 {
 }
 
-bool Commline_control::add_to_list(const std::initializer_list<std::string>& fields) const
+bool
+Commline_control::add_to_list(const std::initializer_list<std::string>& fields) const
 {
-  auto strings_ptr{std::data(fields)};
+  const auto& strings_ptr{std::begin(fields)};
 
-  return model_ptr->add_to_list(*(strings_ptr + 0));
+  return model_ptr->add_to_list(strings_ptr[0]);
 }
 
-bool Commline_control::add_to_list_access(const std::initializer_list<std::string>& fields) const
+bool
+Commline_control::add_to_list_access(const std::initializer_list<std::string>& fields) const
 {
-  auto strings_ptr{std::data(fields)};
+  const auto& strings_ptr{std::begin(fields)};
 
-  return model_ptr->add_to_list_acess(*(strings_ptr + 0),
-				      *(strings_ptr + 1),
-				      std::stoi(*(strings_ptr + 2)));
+  return model_ptr->add_to_list_acess(strings_ptr[0],
+				      strings_ptr[1],
+				      std::stoi(strings_ptr[2]));
 }
 
-bool Commline_control::remove_from_list(const std::initializer_list<std::string>& fields) const
+bool
+Commline_control::remove_from_list(const std::initializer_list<std::string>& fields) const
 {
-  auto strings_ptr{std::data(fields)};
+  const auto& strings_ptr{std::begin(fields)};
 
-  return model_ptr->remove_from_list(*(strings_ptr + 0));
+  return model_ptr->remove_from_list(strings_ptr[0]);
 }
 
-bool Commline_control::remove_from_list_access(const std::initializer_list<std::string>& fields) const
+bool
+Commline_control::remove_from_list_access(const std::initializer_list<std::string>& fields) const
 {
-  auto strings_ptr{std::data(fields)};
+  const auto& strings_ptr{std::begin(fields)};
 
   return model_ptr->remove_from_list_acess(*(strings_ptr + 0),
 					   *(strings_ptr + 1));
 }
 
-std::string Commline_control::modify_permission(const std::initializer_list<std::string>& fields) const
+std::string
+Commline_control::modify_permission(const std::initializer_list<std::string>& fields) const
 {
-    auto strings_ptr{std::data(fields)};
+    const auto& strings_ptr{std::begin(fields)};
 
-    model_ptr->modify_permission(*(strings_ptr + 1)
-                            , *(strings_ptr + 0)
-                            , std::stoi(*(strings_ptr + 2)));
+    model_ptr->modify_permission(strings_ptr[1],
+				 strings_ptr[0],
+				 std::stoi(strings_ptr[2]));
 
     return std::string{};
 }
 
-bool Commline_control::is_user_permitted(const std::initializer_list<std::string>& fields) const
+bool
+Commline_control::is_user_permitted(const std::initializer_list<std::string>& fields) const
 {
-  auto strings_ptr{std::data(fields)};
+  const auto& strings_ptr{std::begin(fields)};
 
-  return model_ptr->is_permitted(*(strings_ptr + 0),
-				 *(strings_ptr + 1));
+  return model_ptr->is_permitted(strings_ptr[0],
+				strings_ptr[1]);
 }

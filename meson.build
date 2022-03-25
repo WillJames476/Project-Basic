@@ -5,6 +5,7 @@ project('Project-Tasker',
 	license : 'GPLV3')
 
 boost_dep = dependency('boost')
+
 thread_dep = dependency('threads')
 
 commons = include_directories('inc')
@@ -15,3 +16,4 @@ commons_input_output = library('input_output',
 			       include_directories : commons)
 
 subdir('src/Client')
+subdir('src/Server')

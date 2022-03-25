@@ -12,7 +12,7 @@ bool Account_control::add_to_list(const std::initializer_list<std::string>& fiel
 {
   if(fields.size() == 2)
     {
-      auto datas = std::data(fields);
+      const auto datas = std::data(fields);
 
       if(model->add_to_list(*datas, *(datas + 1)))
 	{
