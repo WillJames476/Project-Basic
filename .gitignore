@@ -1,9 +1,10 @@
 #compiled objects and executables dirs
 bin/
 obj/
-
+build/
+src/test/
 #sample docs
 data/
 
-#misc
-.vscode
+#meson file to migrate the project
+meson*
