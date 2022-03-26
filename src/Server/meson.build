@@ -81,3 +81,23 @@ operations_lib = library('operations',
 				      commline_lib,
 				      todolist_lib])
 
+executable('server',
+	   sources : server_main_sources,
+	   include_directories : [input_output_hdr,
+				  server_main_hdr,
+				  agregates_hdr,
+				  account_hdr,
+				  commline_hdr,
+				  todolist_hdr,
+				  operations_hdr],
+	   link_with : [agregates_lib,
+			input_output_lib,
+			account_lib,
+			commline_lib,
+			todolist_lib,
+			operations_lib],
+	   dependencies : [thread_dep,
+			   boost_dep])
+
+
+
