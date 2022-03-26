@@ -31,6 +31,15 @@ operation_sources = ['operations/delete_operations.cpp',
 		     'operations/post_operations.cpp',
 		     'operations/put_operations.cpp']
 
+agregates_sources = ['agregates/model_agregate.cpp',
+		     'agregates/control_agregate.cpp',
+		     'agregates/file_agregate.cpp',
+		     'agregates/view_agregate.cpp']
+
+server_main_soucres = ['main/server_control.cpp',
+		       'main/server_control_utilities.cpp',
+		       'main/server_main.cpp']
+
 account_lib = library('account',
 		      sources : account_sources,
 		      include_directories : [account_hdr,
@@ -47,11 +56,8 @@ todolist_lib = library('todolist',
 					      interfaces_hdr])
 
 agregates_lib = library('agregates',
-			sources : ['agregates/model_agregate.cpp',
-				   'agregates/control_agregate.cpp',
-				   'agregates/file_agregate.cpp',
-				   'agregates/view_agregate.cpp'],
-			include_directories : [commons,
+			sources : agregates_sources,
+			include_directories : [input_output_hdr,
 					       account_hdr,
 					       commline_hdr,
 					       todolist_hdr,
@@ -59,5 +65,6 @@ agregates_lib = library('agregates',
 					       agregates_hdr],
 			link_with : [account_lib,
 				     todolist_lib,
-				     commline_lib])
+				     commline_lib,
+				     input_output_lib])
 

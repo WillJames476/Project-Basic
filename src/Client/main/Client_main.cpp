@@ -6,8 +6,8 @@
 #include <array>
 
 #include <boost/asio.hpp>
-#include <input_output/io.h>
-#include <input_output/server_utilities.h>
+#include <io.h>
+#include <server_utilities.h>
 
 const std::string APPLICATION {"client"};
 
