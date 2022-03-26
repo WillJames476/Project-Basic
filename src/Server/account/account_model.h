@@ -7,25 +7,32 @@
 
 class Account_model
 {
-    public:
-        
-        bool add_to_list(const std::string& username
-                        , const std::string password);
+public:
 
-        bool remove_from_list(const std::string& username
-                            , const std::string password);
+  bool
+  add_to_list(const std::string& username,
+	      const std::string password);
 
-        bool get_is_account_existing(const std::string& username) const;
+  bool
+  remove_from_list(const std::string& username
+		   , const std::string password);
 
-        bool get_item_from_list(const std::string& username
-                            , const std::string password) const;
+  bool
+  get_is_account_existing(const std::string& username) const;
 
-        std::pair<std::string, std::string>get_account(const std::string& username) const;
+  bool get_item_from_list(const std::string& username,
+			  const std::string password) const;
 
-        std::unordered_map<std::string, std::string> get_accounts() const;
-        
-    private:
-        std::unordered_map<std::string, std::string>accounts;
+  std::pair<std::string, std::string>
+  get_account(const std::string& username) const;
+
+  std::unordered_map<std::string, std::string>
+  get_accounts() const;
+
+private:
+
+  std::unordered_map<std::string, std::string>accounts;
+
 };
 
 #endif

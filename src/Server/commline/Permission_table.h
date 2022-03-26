@@ -6,24 +6,33 @@
 
 class Permission_table
 {
-    public:
-        Permission_table() = default;
-        
-        void add_to_table(const std::string& name
-                        , const bool permission);
+public:
 
-        std::pair<std::string, bool> get_from_table(const std::string& name) const;
+  Permission_table() = default;
 
-        void remove_from_table(const std::string& name);
+  void
+  add_to_table(const std::string& name,
+	       const bool permission);
 
-        std::unordered_map<std::string, bool>get_table() const;
+  std::pair<std::string, bool>
+  get_from_table(const std::string& name) const;
 
-        bool is_permitted(const std::string& name) const;
+  void
+  remove_from_table(const std::string& name);
 
-        bool modify_permission(const std::string& name, const bool new_value);
+  std::unordered_map<std::string, bool>
+  get_table() const;
 
-    private:
-        std::unordered_map<std::string, bool> permission_table;
+  bool
+  is_permitted(const std::string& name) const;
+
+  bool
+  modify_permission(const std::string& name, const bool new_value);
+
+private:
+
+  std::unordered_map<std::string, bool> permission_table;
+
 };
 
 #endif

@@ -14,8 +14,8 @@ thread_dep = dependency('threads')
 commons = include_directories('inc')
 
 commons_input_output = library('input_output',
-			       ['src/Utilities/io.cpp',
-				'src/Utilities/server_utilities.cpp'],
+			       sources : ['src/Utilities/io.cpp',
+					  'src/Utilities/server_utilities.cpp'],
 			       include_directories : commons)
 
 subdir('src/Client')

@@ -1,17 +1,19 @@
-#ifndef ACCOUNT_VIEW_H
-#define ACCOUNT_VIEW_H
+#ifndef TODOLIST_VIEW_H
+#define TODOLIST_VIEW_H
 
 #include <memory>
+#include <string>
 #include <sstream>
 #include <istream>
 #include <interfaces/View_interface.hpp>
-#include "account_model.h"
 
-class Account_view : public View_interface<Account_view>
+#include "Todolist_model.h"
+
+class Todolist_view : public View_interface<Todolist_view>
 {
 public:
 
-  Account_view(const std::shared_ptr<Account_model>& model);
+  Todolist_view(const std::shared_ptr<Todolist_model>& model);
 
   std::string
   send_formatted(const std::string& account_name) const;
@@ -24,7 +26,7 @@ public:
 
 private:
 
-  std::shared_ptr<Account_model> model_ptr;
+  std::shared_ptr<Todolist_model> model_ptr;
 };
 
 #endif

@@ -1,67 +1,71 @@
 #include "account_model.h"
 
-bool Account_model::add_to_list(const std::string& username
-                                , const std::string password)
+bool
+Account_model::add_to_list(const std::string& username,
+			   const std::string password)
 {
-    if(accounts.find(username) == std::end(accounts))
+  if(accounts.find(username) == std::end(accounts))
     {
-        accounts.emplace(std::make_pair(username, password));
-        
-        return true;
+      accounts.emplace(std::make_pair(username, password));
+      return true;
     }
 
-    return false;
+  return false;
 }
 
-bool Account_model::remove_from_list(const std::string& username
-                                    , const std::string password)
+bool
+Account_model::remove_from_list(const std::string& username,
+				const std::string password)
 {
-    const auto extracted_account {accounts.find(username)};
+  const auto& extracted_account {accounts.find(username)};
 
-    if(extracted_account != std::end(accounts))
+  if(extracted_account != std::end(accounts))
     {
-        bool is_match{password == extracted_account->second};
+      bool is_match{password == extracted_account->second};
 
-        if(is_match)
-        {
-            accounts.erase(username);
-            
-            return true;
+      if(is_match)
+	{
+	  accounts.erase(username);
+	  return true;
         }
     }
 
-    return false;
+  return false;
 }   
 
-bool Account_model::get_is_account_existing(const std::string& username) const
+bool
+Account_model::get_is_account_existing(const std::string& username) const
 {
-    return accounts.find(username) == std::end(accounts) ? false : true;
+  return accounts.find(username) == std::end(accounts) ? false : true;
 }
 
-bool Account_model::get_item_from_list(const std::string& username
-                                        , const std::string password) const
+bool
+Account_model::get_item_from_list(const std::string& username,
+				  const std::string password) const
 {
-    const auto extracted_account {accounts.find(username)};
+  const auto& extracted_account {accounts.find(username)};
 
-    if(extracted_account != std::end(accounts))
+  if(extracted_account != std::end(accounts))
     {
-        bool is_match{password == extracted_account->second};
+      bool is_match{password == extracted_account->second};
 
-        if(is_match)
-        {
-            return true;
-        }
+      if(is_match)
+	{
+	  return true;
+	}
     }
-    
-    return false;
+
+  return false;
 }
 
-std::pair<std::string, std::string> Account_model::get_account(const std::string& username) const
+std::pair<std::string, std::string>
+Account_model::get_account(const std::string& username) const
 {
-    return *accounts.find(username);
+  return *accounts.find(username);
 }
 
-std::unordered_map<std::string, std::string> Account_model::get_accounts() const
+std::unordered_map<std::string, std::string>
+Account_model::get_accounts() const
 {
-    return accounts;
+  return accounts;
 }
