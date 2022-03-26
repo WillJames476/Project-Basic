@@ -4,34 +4,40 @@
 #include <sstream>
 #include <vector>
 
-#include <input_output/io.h>
-#include <application_agregates/control_agregate.h>
-#include <application_agregates/file_agregates.h>
-#include <application_agregates/view_agregate.h>
+#include <io.h>
+#include <agregates/control_agregate.h>
+#include <agregates/file_agregate.h>
+#include <agregates/view_agregate.h>
 
-std::string get_control(std::istringstream& message,
-			const View_agregate& view,
-			const Control_agregate& controls);
+std::string
+get_control(std::istringstream& message,
+	    const View_agregate& view,
+	    const Control_agregate& controls);
 
-std::string post_control(std::istringstream& message,
-			 const Control_agregate& controls);
+std::string
+post_control(std::istringstream& message,
+	     const Control_agregate& controls);
 
-std::string delete_control(std::istringstream& message,
-			   const Control_agregate& controls);
+std::string
+delete_control(std::istringstream& message,
+	       const Control_agregate& controls);
 
-std::string put_control(std::istringstream& message,
-			const Control_agregate& view);
+std::string
+put_control(std::istringstream& message,
+	    const Control_agregate& view);
 
-void file_control(const std::string& mode,
-		  File_agregate& file);
+void
+file_control(const std::string& mode,
+	     File_agregate& file);
 
 template <typename T, typename X, typename V, typename Z>
-std::string apply_function(const X& application,
-			   const std::vector<std::string>& list,
-			   const V& regex_predicates,
-			   size_t expected_size,
-			   const Z& controls,
-			   const T& function)
+std::string
+apply_function(const X& application,
+	       const std::vector<std::string>& list,
+	       const V& regex_predicates,
+	       size_t expected_size,
+	       const Z& controls,
+	       const T& function)
 {
   std::string feedback{};
 

@@ -5,12 +5,12 @@
 #include <thread>
 
 #include <boost/asio.hpp>
-#include <input_output/io.h>
-#include <application_agregates/control_agregate.h>
-#include <application_agregates/view_agregate.h>
-#include <application_agregates/model_agregate.h>
-#include <application_agregates/file_agregates.h>
-#include <input_output/server_utilities.h>
+#include <io.h>
+#include <control_agregate.h>
+#include <agregates/view_agregate.h>
+#include <agregates/model_agregate.h>
+#include <agregates/file_agregate.h>
+#include <server_utilities.h>
 
 #include "server_control.h"
 

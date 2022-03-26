@@ -1,9 +1,10 @@
 #include <string>
 #include <vector>
-#include <application_agregates/control_agregate.h>
+#include <agregates/control_agregate.h>
 
-std::string change_commline_permission(const Control_agregate& control,
-				       const std::vector<std::string>& fields)
+std::string
+change_commline_permission(const Control_agregate& control,
+			   const std::vector<std::string>& fields)
 {
   std::string string_to_return{"failure\n"};
 

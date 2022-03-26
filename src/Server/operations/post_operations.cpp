@@ -1,10 +1,11 @@
 #include <string>
 #include <vector>
-#include <input_output/io.h>
-#include <application_agregates/control_agregate.h>
+#include <io.h>
+#include <agregates/control_agregate.h>
 
-std::string add_new_account(const Control_agregate& control,
-			    const std::vector<std::string>& fields)
+std::string
+add_new_account(const Control_agregate& control,
+		const std::vector<std::string>& fields)
 { 
   std::string string_to_return {FEEDBACK_COLORS::OPERATION_FAILURE};
   bool is_creation_verified    {control.account.add_to_list({fields[0], fields[1]})};
@@ -23,8 +24,9 @@ std::string add_new_account(const Control_agregate& control,
   return string_to_return;
 }
 
-std::string add_new_commline(const Control_agregate& control,
-			     const std::vector<std::string>& fields)
+std::string
+add_new_commline(const Control_agregate& control,
+		 const std::vector<std::string>& fields)
 {
   std::string string_to_return {FEEDBACK_COLORS::OPERATION_FAILURE};
   bool is_login_verified       {control.account.is_login_verified({fields[0], fields[1]})};
@@ -42,8 +44,9 @@ std::string add_new_commline(const Control_agregate& control,
   return string_to_return;
 }
 
-std::string add_new_task(const Control_agregate& control,
-			 const std::vector<std::string>& fields)
+std::string
+add_new_task(const Control_agregate& control,
+	     const std::vector<std::string>& fields)
 {
   std::string string_to_return{FEEDBACK_COLORS::OPERATION_FAILURE};
 

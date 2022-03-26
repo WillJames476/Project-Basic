@@ -36,7 +36,7 @@ agregates_sources = ['agregates/model_agregate.cpp',
 		     'agregates/file_agregate.cpp',
 		     'agregates/view_agregate.cpp']
 
-server_main_soucres = ['main/server_control.cpp',
+server_main_sources = ['main/server_control.cpp',
 		       'main/server_control_utilities.cpp',
 		       'main/server_main.cpp']
 
@@ -67,4 +67,17 @@ agregates_lib = library('agregates',
 				     todolist_lib,
 				     commline_lib,
 				     input_output_lib])
+
+operations_lib = library('operations',
+			 sources : operation_sources,
+			 include_directories : [agregates_hdr,
+						input_output_hdr,
+						account_hdr,
+						commline_hdr,
+						todolist_hdr],
+			 link_with : [agregates_lib,
+				      input_output_lib,
+				      account_lib,
+				      commline_lib,
+				      todolist_lib])
 

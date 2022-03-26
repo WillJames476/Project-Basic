@@ -1,14 +1,14 @@
 #include <sstream>
 #include <vector>
 
-#include <application_agregates/file_agregates.h>
+#include <agregates/view_agregate.h>
+#include <agregates/file_agregate.h>
 #include "server_control_utilities.h"
-#include <application_agregates/view_agregate.h>
 
-#include "../Operations/post_operations.h"
-#include "../Operations/delete_operations.h"
-#include "../Operations/get_operations.h"
-#include "../Operations/put_operations.h"
+#include <operations/post_operations.h>
+#include <operations/delete_operations.h>
+#include <operations/get_operations.h>
+#include <operations/put_operations.h>
 
 namespace ARGS_REGEX
 {
