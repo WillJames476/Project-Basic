@@ -1,8 +1,0 @@
-#include <server/control_agregate.h>
-
-Control_agregate::Control_agregate(const Model_agregate& models)
-        : account{models.account},
-	  commline{models.commline},
-	  todolist{models.todolist}
-{
-}

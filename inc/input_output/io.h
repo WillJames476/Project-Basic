@@ -38,19 +38,26 @@ namespace REGEX_PREDICATES
                      COMMAND         ("^[A-Za-z-0-9"" -]+");
 }
 
-std::string get_string(const std::string& request
-                    , std::regex pattern);
+std::string
+get_string(const std::string& request,
+	   std::regex pattern);
 
-std::string invalid_argument_error(const std::string& command);
+std::string
+invalid_argument_error(const std::string& command);
 
-bool arguments_verify(const std::vector<std::string>& arguments
-                    , const std::initializer_list<std::regex>& predicates);
+bool arguments_verify(const std::vector<std::string>& arguments,
+		      const std::initializer_list<std::regex>& predicates);
 
-std::string invalid_argument_quantity_error(const std::string& command
-                                    , int expected_size);
+std::string
+invalid_argument_quantity_error(const std::string& command,
+				int expected_size);
 
-void replace_char_with(std::string& to_modify
-                    , char to_replace
-                    , char replacement);
+void
+replace_char_with(std::string& to_modify,
+		  char to_replace,
+		  char replacement);
+
+std::string
+get_current_time();
 
 #endif

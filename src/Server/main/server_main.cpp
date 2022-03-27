@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <thread>
-
+#include <chrono>
 #include <boost/asio.hpp>
 #include <io.h>
 #include <control_agregate.h>
@@ -84,16 +84,19 @@ void communication_handler(boost::asio::io_context& io_context,
 {
   std::ios_base::sync_with_stdio(false);
   std::string received{};
+  std::string to_send{};
+  boost::asio::ip::tcp::socket client{io_context};
+  acceptor.accept(client);
   
   while(true)
     {
-      boost::asio::ip::tcp::socket client{io_context};
-      acceptor.accept(client);
       received = get_message(client, err_codes, APPLICATION);
-      std::cout << received << '\n';
+      to_send = server_control(received, control,view);
+      send_message(client, err_codes, to_send, APPLICATION);
       
-      received = server_control(received, control,view);
-      send_message(client, err_codes, received, APPLICATION);
+      std::cout << boost::format("%s %s\n")
+	% get_current_time()
+	% received;
       
       if(received == "END")
 	{
