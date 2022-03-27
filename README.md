@@ -6,7 +6,7 @@
 
 # Prerequisites
 * g++ 11.2 and up to compile the source code
-* make to build the project
+* meson to build and compile the binaries
 * boost c++ library
 
 # Third party libraries used
@@ -21,23 +21,39 @@
 
 # Build instructions
 1. clone the repository 
-2. type make install on your terminal
-3. type make on your terminal
+2. create data folder on the project's root directory
+3. type make build
+4. type make compile -C build
 4. enjoy
  
 # Uninstalling
-1. type make uninstall on the terminal
+1. delete the project folder
 
 # Applications on this repo
-* Client(executable as bin/client)
+
+* Client(executable as build/srcClient/client)
+
+  - expects an ip address and a port as the program
+  arguments
+  
   - the client side application of the program
+  
   - communicates with the server
     Operations are the following:
     GET, DELETE, POST, PUT.
 
-* Server(executable as bin/server)
+* Server(executable as build/src/Server/server)
+
+  - expects an ip address and a port as the program
+  arguments.
+
+  - must be run under administrator/ super user
+  priviledges
+
   - the server side application of the program
+  
   - it has the following applications:
+  
 	1. Account application
 		- manages all the account opeartions:
 		creation, deletion, and credential
@@ -50,3 +66,5 @@
 	3. Todolist application:
 		- manages all the task given to the user by 
 		himself or other permitted users.
+
+
