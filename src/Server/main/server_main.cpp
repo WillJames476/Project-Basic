@@ -88,19 +88,36 @@ void communication_handler(boost::asio::io_context& io_context,
   boost::asio::ip::tcp::socket client{io_context};
   acceptor.accept(client);
   
-  while(true)
-    {
-      received = get_message(client, err_codes, APPLICATION);
-      to_send = server_control(received, control,view);
-      send_message(client, err_codes, to_send, APPLICATION);
-      
-      std::cout << boost::format("%s %s\n")
-	% get_current_time()
-	% received;
-      
-      if(received == "END")
-	{
-	  break;
-	}
-    }
+  std::thread io_operation {[&]()
+  {    
+    while(true)
+      {
+	received = get_message(client, err_codes, APPLICATION);
+	to_send = server_control(received, control,view);
+	send_message(client, err_codes, to_send, APPLICATION);
+
+	if(received == "END")
+	  {
+	    break;
+	  }
+      }
+  }};
+
+  std::thread log_operation{[&]()
+  {
+    while(true)
+      {
+	std::cout << boost::format("%s %s\n")
+	  % get_current_time()
+	  % received;
+	
+	if(received == "END")
+	  {
+	    break;
+	  }
+      }
+  }};
+
+  io_operation.join();
+  log_operation.join();
 }

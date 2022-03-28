@@ -37,7 +37,7 @@
   arguments
   
   - the client side application of the program
-  
+ 
   - communicates with the server
     Operations are the following:
     GET, DELETE, POST, PUT.
