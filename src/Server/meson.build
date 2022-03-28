@@ -38,7 +38,8 @@ agregates_sources = ['agregates/model_agregate.cpp',
 
 server_main_sources = ['main/server_control.cpp',
 		       'main/server_control_utilities.cpp',
-		       'main/server_main.cpp']
+		       'main/server_main.cpp',
+		       'main/server_runtime.cpp']
 
 account_lib = library('account',
 		      sources : account_sources,

@@ -1,0 +1,33 @@
+#include <boost/asio.hpp>
+
+{
+  using namespace boost::asio;
+  std::ios_base::sync_with_stdio(false);
+  
+  try
+    {
+      Model_agregate model     {};
+      Control_agregate control {model};
+      View_agregate view       {model};
+      File_agregate files      {model};
+      
+      files.read_all();
+      
+      const int32_t      PORT    {std::stoi(*(argv + 2))};
+      const std::string  IP_ADDR {*(argv + 1)};
+      std::string        message {};
+      io_context         context {};
+
+      ip::tcp::acceptor server   {context, make_endpoint(IP_ADDR, PORT)};
+
+      boost::system::error_code error_code;
+      communication_handler(context, error_code, server, control, view);
+
+      server.close();
+      files.save_all();
+    }
+  catch(std::exception& excpt)
+    {
+      std::cerr << excpt.what() << '\n';
+    }
+}
