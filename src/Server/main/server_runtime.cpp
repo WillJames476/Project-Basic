@@ -44,10 +44,21 @@ log_operations(std::mutex& syncer,
       syncer.lock();
 
       std::cout << boost::format("%s %s\n")
-	% get_current_time()
-	% received;
-
+	    % get_current_time()
+	    % received;
+      
       syncer.unlock();
+    }
+}
+
+void
+accept_client(boost::asio::ip::tcp::acceptor& acceptor,
+	      boost::system::error_code& error_code,
+	      const std::string& request)
+{
+  while(request != "END")
+    {
+      acceptor.listen(10, error_code);
     }
 }
 
@@ -63,8 +74,14 @@ communication_handler(boost::asio::io_context& io_context,
   std::string to_send{};
   boost::asio::ip::tcp::socket client{io_context};
   std::mutex syncer{};
-  acceptor.accept(client);
 
+  std::thread listen(accept_client,
+		     std::ref(acceptor),
+		     std::ref(err_codes),
+		     std::ref(received));
+
+  acceptor.accept(client);
+  
   std::thread io_operation(io_operations,
 			   std::ref(client),
 			   std::ref(err_codes),
