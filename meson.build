@@ -5,7 +5,7 @@ project('Project-Tasker',
 			   'debug=true',
 			   'cpp_std=c++17'],
 	version : '0.0',
-	license : 'GPLV3')
+	license : 'GPL-3.0-or-later')
 
 boost_dep = dependency('boost')
 

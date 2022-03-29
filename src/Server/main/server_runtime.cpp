@@ -2,7 +2,6 @@
 #include <thread>
 #include <string>
 #include <iomanip>
-#include <ctime>
 #include <agregates/control_agregate.h>
 #include <agregates/view_agregate.h>
 #include <agregates/model_agregate.h>
@@ -12,8 +11,45 @@
 #include <io.h>
 #include <boost/format.hpp>
 #include <boost/asio.hpp>
+#include <mutex>
+#include <atomic>
 
 const std::string APPLICATION{"server"};
+
+void
+io_operations(boost::asio::ip::tcp::socket& client,
+	      boost::system::error_code& err_codes,
+	      std::mutex& syncer,
+	      const Control_agregate& control,
+	      const View_agregate& view,
+	      std::string& received,
+	      std::string& to_send)
+{
+  while(received != "END")
+    {
+      syncer.lock();
+      received = get_message(client, err_codes, APPLICATION);
+      syncer.unlock();
+      to_send = server_control(received, control,view);
+      send_message(client, err_codes, to_send, APPLICATION);      
+    }
+}
+
+void
+log_operations(std::mutex& syncer,
+	       const std::string& received)
+{
+  while(received != "END")
+    {
+      syncer.lock();
+
+      std::cout << boost::format("%s %s\n")
+	% get_current_time()
+	% received;
+
+      syncer.unlock();
+    }
+}
 
 void
 communication_handler(boost::asio::io_context& io_context,
@@ -26,37 +62,21 @@ communication_handler(boost::asio::io_context& io_context,
   std::string received{};
   std::string to_send{};
   boost::asio::ip::tcp::socket client{io_context};
+  std::mutex syncer{};
   acceptor.accept(client);
+
+  std::thread io_operation(io_operations,
+			   std::ref(client),
+			   std::ref(err_codes),
+			   std::ref(syncer),
+			   std::ref(control),
+			   std::ref(view),
+			   std::ref(received),
+			   std::ref(to_send));
   
-  std::thread io_operation {[&]()
-  {    
-    while(true)
-      {
-	received = get_message(client, err_codes, APPLICATION);
-	to_send = server_control(received, control,view);
-	send_message(client, err_codes, to_send, APPLICATION);
-
-	if(received == "END")
-	  {
-	    break;
-	  }
-      }
-  }};
-
-  std::thread log_operation{[&]()
-  {
-    while(true)
-      {
-	std::cout << boost::format("%s %s\n")
-	  % get_current_time()
-	  % received;
-	
-	if(received == "END")
-	  {
-	    break;
-	  }
-      }
-  }};
+  std::thread log_operation(log_operations,
+			    std::ref(syncer),
+			    std::ref(received));
 
   io_operation.join();
   log_operation.join();
