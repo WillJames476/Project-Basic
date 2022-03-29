@@ -1,12 +1,13 @@
 #include <string>
 #include <vector>
+#include <io.h>
 #include <agregates/control_agregate.h>
 
 std::string
 delete_account(const Control_agregate& controls,
 	       const std::vector<std::string>& fields)
 {
-  std::string string_to_return{"failure\n"};
+  std::string string_to_return{FEEDBACK_COLORS::OPERATION_FAILURE};
 
   bool is_user_loged_in {controls.account.is_login_verified({fields[0], fields[1]})};
 
@@ -19,7 +20,7 @@ delete_account(const Control_agregate& controls,
 
       if(is_deletion_succes)
 	{
-	  string_to_return = "done\n";
+	  string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	}
     }
 
@@ -30,7 +31,7 @@ std::string
 delete_a_line(const Control_agregate& controls,
 	      const std::vector<std::string>& fields)
 {
-  std::string string_to_return {"failure\n"};
+  std::string string_to_return {FEEDBACK_COLORS::OPERATION_FAILURE};
   bool is_user_loged_in {controls.account.is_login_verified({fields[0], fields[1]})};
 
   if(is_user_loged_in)
@@ -39,7 +40,7 @@ delete_a_line(const Control_agregate& controls,
 
       if(is_line_deleted)
 	{
-	  string_to_return = "done\n";
+	  string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	}
     }
 
@@ -50,7 +51,7 @@ std::string
 delete_a_task(const Control_agregate& control,
 	      const std::vector<std::string>& fields)
 {
-  std::string string_to_return{"failure\n"};
+  std::string string_to_return{FEEDBACK_COLORS::OPERATION_FAILURE};
 
   bool is_user_loged_in {control.account.is_login_verified({fields[0], fields[1]})};
 
@@ -60,7 +61,7 @@ delete_a_task(const Control_agregate& control,
 
       if(is_task_deleted)
 	{
-	  string_to_return = "done\n";
+	  string_to_return = FEEDBACK_COLORS::OPERATION_SUCESS;
 	}
     }
     
